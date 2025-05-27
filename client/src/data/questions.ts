@@ -515,5 +515,18 @@ export const questions: Question[] = [
       { text: "That your sacrifice will be meaningless.", archetype: "Martyr" },
       { text: "That you'll always be alone.", archetype: "Inner Child" }
     ]
+  },
+  {
+    text: "When you feel deeply misunderstood, you…",
+    options: [
+      { text: "Become more determined to prove them wrong.", archetype: "Avenger" },
+      { text: "Withdraw and build higher walls.", archetype: "Controller" },
+      { text: "Use their misunderstanding to your advantage.", archetype: "Manipulator" },
+      { text: "Accept that no one really gets anyone.", archetype: "Cynic" },
+      { text: "Embrace being an outsider.", archetype: "Rebel" },
+      { text: "Try harder to make them see your appeal.", archetype: "Seducer" },
+      { text: "Blame yourself for not explaining better.", archetype: "Martyr" },
+      { text: "Feel invisible and more alone than ever.", archetype: "Inner Child" }
+    ]
   }
 ];
