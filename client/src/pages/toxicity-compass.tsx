@@ -108,7 +108,7 @@ export default function ToxicityCompass() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentQuestionIndex}
-              className="question-card rounded-2xl p-8 md:p-12 mb-8"
+              className="question-card rounded-2xl p-4 md:p-8 mb-6"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
@@ -120,15 +120,15 @@ export default function ToxicityCompass() {
                 </span>
               </div>
               
-              <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[hsl(var(--silver-glow))] mb-8 leading-relaxed">
+              <h2 className="font-serif text-lg md:text-2xl font-semibold text-[hsl(var(--silver-glow))] mb-6 leading-relaxed">
                 {currentQuestion.text}
               </h2>
               
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {currentQuestion.options.map((option, index) => (
                   <motion.div
                     key={index}
-                    className={`answer-option p-4 rounded-xl cursor-pointer ${
+                    className={`answer-option p-3 rounded-xl cursor-pointer ${
                       selectedOption === index ? 'selected' : ''
                     }`}
                     onClick={() => selectOption(index)}

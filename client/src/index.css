@@ -115,13 +115,11 @@
 }
 
 @keyframes shine {
-  0%, 80% { 
+  0%, 90% { 
     opacity: 0; 
-    text-shadow: none; 
   }
-  10%, 70% { 
+  5%, 85% { 
     opacity: 1; 
-    text-shadow: 0 0 20px hsl(var(--metallic-silver) / 0.8), 0 0 30px hsl(var(--silver-glow) / 0.5); 
   }
 }
 

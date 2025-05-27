@@ -56,7 +56,7 @@ export default function Landing() {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center pt-0">
         {/* Eight Archetype Silhouettes - moved inside hero content */}
         <div className="container mx-auto px-4 mb-8">
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-2 md:gap-4 lg:gap-6 max-w-6xl mx-auto">
             {archetypeNames.map((name, index) => (
               <ArchetypeSilhouette
                 key={name}
@@ -123,6 +123,18 @@ export default function Landing() {
           </motion.div>
         </motion.div>
       </div>
+      
+      {/* Footer */}
+      <motion.footer 
+        className="relative z-10 text-center py-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+      >
+        <p className="text-[hsl(var(--metallic-silver))] text-sm font-light">
+          Ponad milion przeprowadzonych testów
+        </p>
+      </motion.footer>
     </div>
   );
 }
