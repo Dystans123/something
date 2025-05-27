@@ -62,7 +62,7 @@ export default function Test() {
     <div className="min-h-screen relative">
       <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
       
-      <div className="relative z-10 container mx-auto px-4 py-12">
+      <div className="relative z-10 container mx-auto px-4 py-6">
         {/* Header with Back to Home button */}
         <motion.div 
           className="flex justify-between items-center mb-8"

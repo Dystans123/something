@@ -21,7 +21,7 @@ export default function Archetypes() {
     <div className="min-h-screen relative">
       <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
       
-      <div className="relative z-10 container mx-auto px-4 py-12">
+      <div className="relative z-10 container mx-auto px-4 py-6">
         <div className="max-w-6xl mx-auto">
           <motion.div 
             className="text-center mb-12"
