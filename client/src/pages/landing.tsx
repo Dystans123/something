@@ -33,10 +33,11 @@ export default function Landing() {
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-radial from-[hsl(var(--dark-gray))] via-[hsl(var(--deep-black))] to-[hsl(var(--deep-black))]" />
       
-      {/* Eight Archetype Silhouettes */}
-      <div className="relative z-10 pt-12 pb-8">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4 mb-16">
+      {/* Hero Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
+        {/* Eight Archetype Silhouettes - moved inside hero content */}
+        <div className="container mx-auto px-4 mb-8">
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
             {archetypeNames.map((name, index) => (
               <ArchetypeSilhouette
                 key={name}
@@ -46,10 +47,6 @@ export default function Landing() {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
         <motion.div 
           className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 30 }}

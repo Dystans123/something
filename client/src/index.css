@@ -114,6 +114,12 @@
   100% { background-position: 0% 50%; }
 }
 
+@keyframes shine {
+  0% { text-shadow: 0 0 5px hsl(var(--metallic-silver) / 0.3); }
+  50% { text-shadow: 0 0 20px hsl(var(--metallic-silver) / 0.8), 0 0 30px hsl(var(--silver-glow) / 0.5); }
+  100% { text-shadow: 0 0 5px hsl(var(--metallic-silver) / 0.3); }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -136,6 +142,10 @@
 
 .animate-gradient-shift {
   animation: gradient-shift 3s ease infinite;
+}
+
+.animate-shine {
+  animation: shine 1.5s ease-in-out infinite;
 }
 
 .question-card {

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Home } from "lucide-react";
 import { questions } from "@/data/questions";
 import { TestAnswer, calculateDominantArchetype, getProgress, canProceed } from "@/lib/test-logic";
 
@@ -54,17 +54,40 @@ export default function Test() {
     }
   };
 
+  const goHome = () => {
+    setLocation("/");
+  };
+
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
       
       <div className="relative z-10 container mx-auto px-4 py-12">
+        {/* Header with Back to Home button */}
+        <motion.div 
+          className="flex justify-between items-center mb-8"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Button
+            variant="outline"
+            onClick={goHome}
+            className="px-4 py-2 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+          >
+            <Home className="mr-2 h-4 w-4" />
+            Back to Home
+          </Button>
+          <h1 className="font-serif text-2xl text-[hsl(var(--silver-glow))]">Shadow Test</h1>
+          <div className="w-32" /> {/* Spacer for centering */}
+        </motion.div>
+
         {/* Progress Bar */}
         <motion.div 
           className="max-w-2xl mx-auto mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         >
           <div className="flex justify-between items-center mb-4">
             <span className="text-[hsl(var(--metallic-silver))] font-medium">
