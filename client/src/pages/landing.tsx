@@ -33,8 +33,27 @@ export default function Landing() {
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-radial from-[hsl(var(--dark-gray))] via-[hsl(var(--deep-black))] to-[hsl(var(--deep-black))]" />
       
+      {/* Navigation Bar */}
+      <motion.nav 
+        className="relative z-20 flex justify-between items-center p-6"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h1 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))]">
+          Shadow Test
+        </h1>
+        <Button
+          onClick={() => setLocation("/toxicity-compass")}
+          variant="outline"
+          className="px-4 py-2 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+        >
+          Toxicity Compass
+        </Button>
+      </motion.nav>
+      
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center pt-0">
         {/* Eight Archetype Silhouettes - moved inside hero content */}
         <div className="container mx-auto px-4 mb-8">
           <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
