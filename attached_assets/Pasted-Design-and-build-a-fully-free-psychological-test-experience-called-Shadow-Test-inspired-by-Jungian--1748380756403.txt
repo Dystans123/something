@@ -1,0 +1,93 @@
+Design and build a fully free psychological test experience called Shadow Test, inspired by Jungian psychology. The purpose of the site is to help users uncover their unconscious Shadow archetype through 40 projection-based questions. The final result reveals one dominant archetype from a set of 8.
+
+🌑 Aesthetic and Design
+Color Palette: Deep black and metalic silver (more metalic silver)
+Use gradients from black to silver, soft glows, rich shadows. Prioritize a mysterious and elegant contrast.
+
+Background:
+Dark gradient (black to silver) with micro-animations - floating smoke effect 
+Typography:
+Modern serif or sleek sans-serif fonts. White or silver text on a dark background.
+
+Mood:
+Mysterious, cinematic, psychologically intense — should evoke introspection and curiosity.
+
+💥 Hero Section (Landing Page)
+Visual Element (above the headline):
+Instead of a single figure, place eight shadowy human silhouettes across the top of the page — each subtly representing one of the 8 archetypes.
+
+These figures should be:
+
+Faceless or partially obscured
+
+Rendered in matte black, standing against the silver-black gradient
+
+Slightly different in posture or gesture to reflect their archetype's energy (e.g. one defiant, one withdrawn, one seductive, etc.)
+
+Optionally animated with slow fading, subtle movement, or glitch effects to enhance psychological depth
+
+Their arrangement should evoke mystery and psychological multiplicity — as if they are parts of a fragmented psyche.
+
+Headline Text (copy as-is):
+
+You are more than who you appear to be.
+Beneath the surface lies your Shadow — parts of you you deny, fear, or hide.
+Answer 40 projection questions to reveal your Shadow archetype.
+But beware — once you see it, you can’t unsee it.
+
+Buttons:
+
+Start the test
+
+View Archetypes
+
+🧪 The Test Page
+Include exactly 40 projection-based questions (provided in the document questions).
+
+Each question has 8 answer choices — the user must select one.
+
+Important:
+Do not display the archetype mappings or point values in the UI. These are for internal result calculations only.
+
+Style:
+Minimalist black interface. Use smooth animated transitions between questions. Subtle motion (e.g. background shimmer or soft flicker) is encouraged.
+
+🧠 Results Page
+After the test, determine which of the 8 archetypes the user matched most closely based on their answers.
+
+Display:
+
+The name of the dominant archetype
+
+Its full psychological description (from the archetypes document)
+
+A dynamic visual (symbol, silhouette, or minimalist animation) that represents the archetype
+
+CTA:
+Share your shadow — button to share result on social media with the archetype’s name and symbol.
+
+🔮 Archetypes Page (Accessible from "View Archetypes" Button)
+Available anytime via a separate button on the landing page.
+
+Display all 8 archetypes, each with:
+
+Full uncut psychological description
+
+An optional icon, symbol, or visual motif that represents it
+
+Allow users to explore and compare the archetypes freely.
+
+🛠 Technical / UX Requirements
+The entire test and experience must be 100% free — no sign-up or login required.
+
+Must be fully responsive and work smoothly on desktop and mobile.
+
+Prioritize:
+
+Fast loading
+
+Clean, cinematic transitions
+
+Immersive user experience
+
+Archetype logic and descriptions will be provided — you only need to implement the logic invisibly and display the final result.
