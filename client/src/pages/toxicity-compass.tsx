@@ -73,10 +73,11 @@ export default function ToxicityCompass() {
           <Button
             variant="outline"
             onClick={goHome}
-            className="px-4 py-2 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+            className="px-3 py-2 text-sm bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
           >
-            <Home className="mr-2 h-4 w-4" />
-            Back to Home
+            <Home className="mr-1 h-4 w-4" />
+            <span className="hidden sm:inline">Back to Home</span>
+            <span className="sm:hidden">Home</span>
           </Button>
           <h1 className="font-serif text-2xl text-[hsl(var(--silver-glow))]">Toxicity Compass</h1>
           <div className="w-32" /> {/* Spacer for centering */}

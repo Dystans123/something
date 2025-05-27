@@ -126,14 +126,53 @@ export default function Landing() {
       
       {/* Footer */}
       <motion.footer 
-        className="relative z-10 text-center py-8"
+        className="relative z-10 text-center py-12 border-t border-[hsl(var(--metallic-silver)/0.1)]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}
       >
-        <p className="text-[hsl(var(--metallic-silver))] text-sm font-light">
-          Ponad milion przeprowadzonych testów
-        </p>
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="mb-6">
+            <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-2">
+              Shadow Test
+            </h3>
+            <p className="text-[hsl(var(--metallic-silver))] text-sm">
+              Uncover the hidden aspects of your psyche through psychological assessment
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-8 text-sm">
+            <div>
+              <h4 className="font-semibold text-[hsl(var(--metallic-silver))] mb-3">About</h4>
+              <p className="text-[hsl(var(--metallic-silver)/0.8)] leading-relaxed">
+                Based on Jungian psychology, our assessments help you explore the unconscious aspects of your personality.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-[hsl(var(--metallic-silver))] mb-3">Our Tests</h4>
+              <ul className="text-[hsl(var(--metallic-silver)/0.8)] space-y-1">
+                <li>Shadow Archetype Assessment</li>
+                <li>Toxicity Compass</li>
+                <li>Relationship Dynamics</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-[hsl(var(--metallic-silver))] mb-3">Privacy</h4>
+              <p className="text-[hsl(var(--metallic-silver)/0.8)] leading-relaxed">
+                Your responses are completely anonymous. We believe in safe psychological exploration.
+              </p>
+            </div>
+          </div>
+          
+          <div className="border-t border-[hsl(var(--metallic-silver)/0.1)] pt-6">
+            <p className="text-[hsl(var(--metallic-silver))] text-sm mb-2">
+              Over 1 million assessments completed worldwide
+            </p>
+            <p className="text-[hsl(var(--metallic-silver)/0.6)] text-xs">
+              © 2024 Shadow Test. Professional psychological insights for personal growth.
+            </p>
+          </div>
+        </div>
       </motion.footer>
     </div>
   );
