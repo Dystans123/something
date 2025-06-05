@@ -40,6 +40,35 @@ export default function Results() {
     setLocation("/test");
   };
 
+  const continueJourney = () => {
+    // Mark shadow test as completed and redirect to journey
+    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
+    progress.shadowTest = true;
+    localStorage.setItem('psychTestProgress', JSON.stringify(progress));
+    
+    // Store result for comprehensive summary
+    const results = JSON.parse(localStorage.getItem('psychTestResults') || '[]');
+    const existingIndex = results.findIndex((r: any) => r.testId === 'shadow-test');
+    const newResult = {
+      testId: 'shadow-test',
+      result: { archetype: archetypeName },
+      completedAt: new Date().toISOString()
+    };
+    
+    if (existingIndex >= 0) {
+      results[existingIndex] = newResult;
+    } else {
+      results.push(newResult);
+    }
+    localStorage.setItem('psychTestResults', JSON.stringify(results));
+    
+    setLocation("/journey");
+  };
+
+  const backToJourney = () => {
+    setLocation("/journey");
+  };
+
   // Format description into sections
   const formatDescription = (text: string) => {
     const sections = text.split('\n\n');
@@ -121,11 +150,23 @@ export default function Results() {
               transition={{ delay: 1.4, duration: 0.6 }}
             >
               <Button
+                onClick={continueJourney}
+                size="lg"
+                className="px-10 py-4 text-lg font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 transition-all duration-300 hover:scale-105"
+              >
+                Continue Journey
+                <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5-5 5M6 12h12" />
+                </svg>
+              </Button>
+
+              <Button
                 onClick={handleShare}
-                className="px-8 py-4 bg-gradient-to-r from-[hsl(var(--metallic-silver))] to-[hsl(var(--silver-glow))] text-[hsl(var(--deep-black))] font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+                variant="outline"
+                className="px-8 py-4 bg-transparent border-2 border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] font-semibold rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
               >
                 <Share className="mr-2 h-5 w-5" />
-                Share Your Shadow
+                Share Result
               </Button>
               
               <Button
@@ -134,7 +175,23 @@ export default function Results() {
                 className="px-8 py-4 bg-transparent border-2 border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] font-semibold rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
               >
                 <RotateCcw className="mr-2 h-5 w-5" />
-                Take Test Again
+                Retake Test
+              </Button>
+            </motion.div>
+
+            {/* Back to Journey Navigation */}
+            <motion.div 
+              className="mt-8 text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.6, duration: 0.6 }}
+            >
+              <Button
+                onClick={backToJourney}
+                variant="ghost"
+                className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))]"
+              >
+                ← Back to Journey
               </Button>
             </motion.div>
           </motion.div>

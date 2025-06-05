@@ -93,8 +93,33 @@ export default function ToxicityResults() {
     setLocation("/toxicity-compass");
   };
 
-  const goHome = () => {
-    setLocation("/");
+  const continueJourney = () => {
+    // Mark toxicity compass as completed and redirect to journey
+    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
+    progress.toxicityCompass = true;
+    localStorage.setItem('psychTestProgress', JSON.stringify(progress));
+    
+    // Store result for comprehensive summary
+    const results = JSON.parse(localStorage.getItem('psychTestResults') || '[]');
+    const existingIndex = results.findIndex((r: any) => r.testId === 'toxicity-compass');
+    const newResult = {
+      testId: 'toxicity-compass',
+      result: { zone, score, percentage },
+      completedAt: new Date().toISOString()
+    };
+    
+    if (existingIndex >= 0) {
+      results[existingIndex] = newResult;
+    } else {
+      results.push(newResult);
+    }
+    localStorage.setItem('psychTestResults', JSON.stringify(results));
+    
+    setLocation("/journey");
+  };
+
+  const backToJourney = () => {
+    setLocation("/journey");
   };
 
   return (
@@ -196,11 +221,23 @@ export default function ToxicityResults() {
               transition={{ delay: 2.0, duration: 0.6 }}
             >
               <Button
+                onClick={continueJourney}
+                size="lg"
+                className="px-10 py-4 text-lg font-semibold bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white border-0 transition-all duration-300 hover:scale-105"
+              >
+                Continue Journey
+                <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5-5 5M6 12h12" />
+                </svg>
+              </Button>
+
+              <Button
                 onClick={handleShare}
-                className="px-6 py-3 bg-gradient-to-r from-[hsl(var(--metallic-silver))] to-[hsl(var(--silver-glow))] text-[hsl(var(--deep-black))] font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+                variant="outline"
+                className="px-6 py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] font-semibold rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
               >
                 <Share className="mr-2 h-4 w-4" />
-                Share Your Result
+                Share Result
               </Button>
               
               <Button
@@ -209,16 +246,23 @@ export default function ToxicityResults() {
                 className="px-6 py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] font-semibold rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
               >
                 <RotateCcw className="mr-2 h-4 w-4" />
-                Take Test Again
+                Retake Test
               </Button>
-              
+            </motion.div>
+
+            {/* Back to Journey Navigation */}
+            <motion.div 
+              className="mt-8 text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.2, duration: 0.6 }}
+            >
               <Button
-                variant="outline"
-                onClick={goHome}
-                className="px-6 py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] font-semibold rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                onClick={backToJourney}
+                variant="ghost"
+                className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))]"
               >
-                <Home className="mr-2 h-4 w-4" />
-                Back to Home
+                ← Back to Journey
               </Button>
             </motion.div>
           </motion.div>
