@@ -36,23 +36,25 @@ export default function IntelligenceType() {
       value: option.value
     };
 
+    const newAnswers = [...state.answers.filter(a => a.questionIndex !== state.currentQuestionIndex), answer];
+    
     setState(prev => ({
       ...prev,
-      answers: [...prev.answers.filter(a => a.questionIndex !== state.currentQuestionIndex), answer]
+      answers: newAnswers
     }));
-  };
 
-  const handleNext = () => {
-    if (state.currentQuestionIndex < intelligenceTypeQuestions.length - 1) {
-      setState(prev => ({
-        ...prev,
-        currentQuestionIndex: prev.currentQuestionIndex + 1
-      }));
-    } else {
-      // Test complete
-      const finalAnswer: IntelligenceTypeAnswer = state.answers[state.answers.length - 1];
-      setLocation(`/intelligence-type-results?answers=${encodeURIComponent(JSON.stringify(state.answers))}`);
-    }
+    // Automatically proceed to next question after a short delay
+    setTimeout(() => {
+      if (state.currentQuestionIndex < intelligenceTypeQuestions.length - 1) {
+        setState(prev => ({
+          ...prev,
+          currentQuestionIndex: prev.currentQuestionIndex + 1
+        }));
+      } else {
+        // Test complete, go to results
+        setLocation(`/intelligence-type-results?answers=${encodeURIComponent(JSON.stringify(newAnswers))}`);
+      }
+    }, 800);
   };
 
   const handlePrevious = () => {
@@ -187,29 +189,31 @@ export default function IntelligenceType() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <Button
-            variant="outline"
-            onClick={handlePrevious}
-            disabled={state.currentQuestionIndex === 0}
-            className="border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))]"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Previous
-          </Button>
+          {state.currentQuestionIndex > 0 ? (
+            <Button
+              variant="ghost"
+              onClick={handlePrevious}
+              className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))]"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Poprzednie
+            </Button>
+          ) : (
+            <div></div>
+          )}
 
           <div className="flex items-center space-x-2 text-sm text-[hsl(var(--metallic-silver))]">
             <Lightbulb className="h-4 w-4" />
-            <span>Choose the response that feels most natural to you</span>
+            <span>Wybierz odpowiedź, która najlepiej Cię opisuje</span>
+            {selectedAnswer && (
+              <div className="flex items-center space-x-2 ml-4 text-blue-400">
+                <ArrowRight className="h-4 w-4" />
+                <span>Automatyczne przejście...</span>
+              </div>
+            )}
           </div>
 
-          <Button
-            onClick={handleNext}
-            disabled={!canProceed}
-            className="bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50"
-          >
-            {state.currentQuestionIndex === intelligenceTypeQuestions.length - 1 ? 'See Results' : 'Next'}
-            <ArrowRight className="h-4 w-4 ml-2" />
-          </Button>
+          <div></div>
         </motion.div>
 
         {/* Motivational Quote */}

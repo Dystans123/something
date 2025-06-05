@@ -25,29 +25,30 @@ export interface IntelligenceTypeResult {
 }
 
 export function calculateIntelligenceTypeResult(answers: IntelligenceTypeAnswer[]): IntelligenceTypeResult {
-  // Calculate scores for each intelligence type
+  // Calculate raw scores for each intelligence type
   const intelligenceScores: Record<string, number> = {};
-  const intelligenceCounts: Record<string, number> = {};
-
+  
   // Initialize scores
   Object.keys(intelligenceTypes).forEach(intelligence => {
     intelligenceScores[intelligence] = 0;
-    intelligenceCounts[intelligence] = 0;
   });
 
   // Sum up scores for each intelligence type
   answers.forEach(answer => {
     if (intelligenceScores[answer.intelligence] !== undefined) {
       intelligenceScores[answer.intelligence] += answer.value;
-      intelligenceCounts[answer.intelligence] += 1;
     }
   });
 
-  // Calculate average scores
+  // Find max possible score and actual max score for normalization
+  const maxPossibleScore = answers.length * 5; // Maximum if all answers were 5
+  const actualMaxScore = Math.max(...Object.values(intelligenceScores));
+  
+  // Normalize scores to 1-5 scale with proper distribution
   Object.keys(intelligenceScores).forEach(intelligence => {
-    if (intelligenceCounts[intelligence] > 0) {
-      intelligenceScores[intelligence] = intelligenceScores[intelligence] / intelligenceCounts[intelligence];
-    }
+    // Convert to percentage of max score, then scale to 1-5
+    const percentage = intelligenceScores[intelligence] / actualMaxScore;
+    intelligenceScores[intelligence] = Math.max(1, Math.min(5, 1 + (percentage * 4)));
   });
 
   // Find dominant intelligence
