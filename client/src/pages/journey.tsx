@@ -337,18 +337,20 @@ export default function Journey() {
                           {completed ? (
                             <Button
                               onClick={() => viewResult(test.id)}
-                              variant="outline"
-                              className={`${test.color} border-current hover:bg-current hover:text-[hsl(var(--deep-black))]`}
+                              size="lg"
+                              className={`px-6 py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300`}
                             >
                               View Results
+                              <ChevronUp className="ml-2 h-5 w-5" />
                             </Button>
                           ) : (
                             <Button
                               onClick={() => startTest(test.route)}
-                              className={`bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0`}
+                              size="lg"
+                              className={`px-6 py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300`}
                             >
                               {index === 0 ? 'Begin Journey' : 'Start Level'}
-                              <ArrowRight className="ml-2 h-4 w-4" />
+                              <ArrowRight className="ml-2 h-5 w-5" />
                             </Button>
                           )}
                         </div>
@@ -369,9 +371,9 @@ export default function Journey() {
           </div>
         </div>
 
-        {/* Comprehensive Summary Section */}
+        {/* Progress Summary Section */}
         <AnimatePresence>
-          {showSummary && (
+          {Object.values(progress).some(Boolean) && (
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -383,16 +385,26 @@ export default function Journey() {
                 
                 <CardHeader className="text-center relative z-10">
                   <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center">
-                      <Trophy className="h-8 w-8 text-white" />
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                      showSummary 
+                        ? 'bg-gradient-to-br from-yellow-400 to-orange-400' 
+                        : 'bg-gradient-to-br from-purple-400 to-blue-400'
+                    }`}>
+                      {showSummary ? (
+                        <Trophy className="h-8 w-8 text-white" />
+                      ) : (
+                        <Star className="h-8 w-8 text-white" />
+                      )}
                     </div>
                   </div>
                   <h2 className="font-serif text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-4">
-                    Journey Complete!
+                    {showSummary ? 'Journey Complete!' : 'Journey in Progress'}
                   </h2>
                   <p className="text-lg text-[hsl(var(--metallic-silver))] max-w-2xl mx-auto">
-                    Congratulations! You've completed all four psychological assessments. 
-                    Here's your comprehensive psychological profile and personalized insights.
+                    {showSummary 
+                      ? 'Congratulations! You\'ve completed all four psychological assessments. Here\'s your comprehensive psychological profile and personalized insights.'
+                      : 'You\'re making great progress on your psychological journey. Continue completing assessments to unlock your comprehensive profile.'
+                    }
                   </p>
                 </CardHeader>
 
@@ -400,52 +412,83 @@ export default function Journey() {
                   {/* Achievement Stats */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-purple-400 mb-2">100%</div>
-                      <p className="text-[hsl(var(--metallic-silver))] text-sm">Journey Complete</p>
+                      <div className="text-3xl font-bold text-purple-400 mb-2">{Math.round(getCompletionPercentage())}%</div>
+                      <p className="text-[hsl(var(--metallic-silver))] text-sm">Progress Complete</p>
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-blue-400 mb-2">{totalPoints}</div>
                       <p className="text-[hsl(var(--metallic-silver))] text-sm">Total Points</p>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-emerald-400 mb-2">4/4</div>
+                      <div className="text-3xl font-bold text-emerald-400 mb-2">
+                        {Object.values(progress).filter(Boolean).length}/4
+                      </div>
                       <p className="text-[hsl(var(--metallic-silver))] text-sm">Tests Complete</p>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-amber-400 mb-2">⭐</div>
-                      <p className="text-[hsl(var(--metallic-silver))] text-sm">Self-Discovery Master</p>
+                      <div className="text-3xl font-bold text-amber-400 mb-2">
+                        {showSummary ? '⭐' : '🔓'}
+                      </div>
+                      <p className="text-[hsl(var(--metallic-silver))] text-sm">
+                        {showSummary ? 'Self-Discovery Master' : 'Unlocking Insights'}
+                      </p>
                     </div>
                   </div>
 
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button
-                      onClick={() => setLocation('/comprehensive-summary')}
-                      size="lg"
-                      className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0"
-                    >
-                      View Comprehensive Summary
-                      <Target className="ml-2 h-5 w-5" />
-                    </Button>
-                    
-                    <Button
-                      onClick={shareProgress}
-                      variant="outline"
-                      size="lg"
-                      className="px-8 py-4 text-lg border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-                    >
-                      Share Achievement
-                      <Share2 className="ml-2 h-5 w-5" />
-                    </Button>
-                    
-                    <Button
-                      onClick={restartJourney}
-                      variant="outline"
-                      size="lg"
-                      className="px-8 py-4 text-lg border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
-                    >
-                      Restart Journey
-                    </Button>
+                    {showSummary ? (
+                      <>
+                        <Button
+                          onClick={() => setLocation('/comprehensive-summary')}
+                          size="lg"
+                          className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0"
+                        >
+                          View Comprehensive Summary
+                          <Target className="ml-2 h-5 w-5" />
+                        </Button>
+                        
+                        <Button
+                          onClick={shareProgress}
+                          variant="outline"
+                          size="lg"
+                          className="px-8 py-4 text-lg border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                        >
+                          Share Achievement
+                          <Share2 className="ml-2 h-5 w-5" />
+                        </Button>
+                        
+                        <Button
+                          onClick={restartJourney}
+                          variant="outline"
+                          size="lg"
+                          className="px-8 py-4 text-lg border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+                        >
+                          Restart Journey
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button
+                          onClick={shareProgress}
+                          variant="outline"
+                          size="lg"
+                          className="px-8 py-4 text-lg border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                        >
+                          Share Progress
+                          <Share2 className="ml-2 h-5 w-5" />
+                        </Button>
+                        
+                        <Button
+                          onClick={restartJourney}
+                          variant="outline"
+                          size="lg"
+                          className="px-8 py-4 text-lg border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+                        >
+                          Restart Journey
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -453,24 +496,7 @@ export default function Journey() {
           )}
         </AnimatePresence>
 
-        {/* Progress Sharing */}
-        {!showSummary && Object.values(progress).some(Boolean) && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-12 text-center"
-          >
-            <Button
-              onClick={shareProgress}
-              variant="outline"
-              className="border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-            >
-              Share Progress
-              <Share2 className="ml-2 h-4 w-4" />
-            </Button>
-          </motion.div>
-        )}
+
       </div>
     </div>
   );
