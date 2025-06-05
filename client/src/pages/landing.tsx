@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight, Brain, Shield, Users, Lightbulb, Clock, CheckCircle, Target, Heart, Eye, Zap, Compass } from "lucide-react";
 import { SmokeParticles } from "@/components/smoke-particles";
 
-interface ToolCard {
+interface ToolCardData {
   id: string;
   title: string;
   subtitle: string;
@@ -21,7 +21,7 @@ interface ToolCard {
   duration: string;
 }
 
-const tools: ToolCard[] = [
+const tools: ToolCardData[] = [
   {
     id: "intelligence-type",
     title: "Intelligence Type Assessment",
@@ -112,6 +112,73 @@ const tools: ToolCard[] = [
   }
 ];
 
+interface ToolCardProps {
+  tool: ToolCard;
+  index: number;
+  setLocation: (location: string) => void;
+}
+
+function ToolCard({ tool, index, setLocation }: ToolCardProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      whileHover={{ scale: 1.02 }}
+      viewport={{ once: true }}
+      className="group"
+    >
+      <Card className={`h-full bg-gradient-to-br ${tool.bgGradient} border-[hsl(var(--border))] hover:border-[hsl(var(--metallic-silver)/0.5)] transition-all duration-300 hover:shadow-glow`}>
+        <CardHeader className="pb-4">
+          <div className="flex items-center justify-between mb-4">
+            <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${tool.bgGradient} flex items-center justify-center ${tool.color} group-hover:scale-110 transition-transform duration-300`}>
+              {tool.icon}
+            </div>
+            <Badge variant="outline" className={`${tool.color} border-current`}>
+              {tool.subtitle}
+            </Badge>
+          </div>
+          <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-2">
+            {tool.title}
+          </h3>
+        </CardHeader>
+        
+        <CardContent className="space-y-6">
+          <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
+            {tool.description}
+          </p>
+          
+          <div className="space-y-3">
+            {tool.features.map((feature, featureIndex) => (
+              <div key={featureIndex} className="flex items-center space-x-3">
+                <CheckCircle className={`h-4 w-4 ${tool.color} flex-shrink-0`} />
+                <span className="text-[hsl(var(--metallic-silver))] text-sm">
+                  {feature}
+                </span>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex items-center justify-between pt-4 border-t border-[hsl(var(--border))]">
+            <div className="flex items-center space-x-2 text-[hsl(var(--metallic-silver))] text-sm">
+              <Clock className="h-4 w-4" />
+              <span>{tool.duration}</span>
+            </div>
+            
+            <Button
+              onClick={() => setLocation(tool.route)}
+              className={`bg-gradient-to-r ${tool.bgGradient} hover:opacity-90 text-white border-0 group-hover:scale-105 transition-all duration-300`}
+            >
+              {tool.buttonText}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
+
 export default function Landing() {
   const [, setLocation] = useLocation();
 
@@ -119,6 +186,7 @@ export default function Landing() {
     <div className="min-h-screen bg-[hsl(var(--deep-black))] relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
+      <SmokeParticles />
       
       {/* Navigation */}
       <motion.nav 
@@ -276,7 +344,7 @@ export default function Landing() {
         >
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-6">
-              Four Scientifically-Backed Assessment Tools
+              Five Scientifically-Backed Assessment Tools
             </h2>
             <p className="text-lg text-[hsl(var(--metallic-silver))] max-w-4xl mx-auto leading-relaxed">
               Each tool reveals different aspects of your psychological landscape, providing a comprehensive 
@@ -284,67 +352,66 @@ export default function Landing() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {tools.map((tool, index) => (
-              <motion.div
-                key={tool.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <Card className={`h-full bg-gradient-to-br ${tool.bgGradient} border-[hsl(var(--border))] hover:border-[hsl(var(--metallic-silver)/0.5)] transition-all duration-300 hover:shadow-glow`}>
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${tool.bgGradient} flex items-center justify-center ${tool.color} group-hover:scale-110 transition-transform duration-300`}>
-                        {tool.icon}
-                      </div>
-                      <Badge variant="outline" className={`${tool.color} border-current`}>
-                        {tool.subtitle}
-                      </Badge>
-                    </div>
-                    <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-2">
-                      {tool.title}
-                    </h3>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-6">
-                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                      {tool.description}
-                    </p>
-                    
-                    <div className="space-y-3">
-                      {tool.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-center space-x-3">
-                          <CheckCircle className={`h-4 w-4 ${tool.color} flex-shrink-0`} />
-                          <span className="text-[hsl(var(--metallic-silver))] text-sm">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div className="flex items-center justify-between pt-4 border-t border-[hsl(var(--border))]">
-                      <div className="flex items-center space-x-2 text-[hsl(var(--metallic-silver))] text-sm">
-                        <Clock className="h-4 w-4" />
-                        <span>{tool.duration}</span>
-                      </div>
-                      
-                      <Button
-                        onClick={() => setLocation(tool.route)}
-                        className={`bg-gradient-to-r ${tool.bgGradient} hover:opacity-90 text-white border-0 group-hover:scale-105 transition-all duration-300`}
-                      >
-                        {tool.buttonText}
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          <Tabs defaultValue="all" className="w-full">
+            <TabsList className="grid w-full grid-cols-6 mb-8 bg-[hsl(var(--dark-gray))] border border-[hsl(var(--border))] h-12">
+              <TabsTrigger value="all" className="text-[hsl(var(--metallic-silver))] data-[state=active]:text-[hsl(var(--silver-glow))] data-[state=active]:bg-blue-500/20">
+                All Tools
+              </TabsTrigger>
+              <TabsTrigger value="cognitive" className="text-[hsl(var(--metallic-silver))] data-[state=active]:text-blue-400 data-[state=active]:bg-blue-500/20">
+                Cognitive
+              </TabsTrigger>
+              <TabsTrigger value="shadow" className="text-[hsl(var(--metallic-silver))] data-[state=active]:text-purple-400 data-[state=active]:bg-purple-500/20">
+                Shadow
+              </TabsTrigger>
+              <TabsTrigger value="relationship" className="text-[hsl(var(--metallic-silver))] data-[state=active]:text-red-400 data-[state=active]:bg-red-500/20">
+                Toxicity
+              </TabsTrigger>
+              <TabsTrigger value="patterns" className="text-[hsl(var(--metallic-silver))] data-[state=active]:text-emerald-400 data-[state=active]:bg-emerald-500/20">
+                Patterns
+              </TabsTrigger>
+              <TabsTrigger value="integration" className="text-[hsl(var(--metallic-silver))] data-[state=active]:text-amber-400 data-[state=active]:bg-amber-500/20">
+                Integration
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="all" className="mt-0">
+              <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {tools.map((tool, index) => (
+                  <ToolCard key={tool.id} tool={tool} index={index} setLocation={setLocation} />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="cognitive">
+              <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
+                <ToolCard tool={tools[0]} index={0} setLocation={setLocation} />
+              </div>
+            </TabsContent>
+
+            <TabsContent value="shadow">
+              <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
+                <ToolCard tool={tools[1]} index={0} setLocation={setLocation} />
+              </div>
+            </TabsContent>
+
+            <TabsContent value="relationship">
+              <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
+                <ToolCard tool={tools[2]} index={0} setLocation={setLocation} />
+              </div>
+            </TabsContent>
+
+            <TabsContent value="patterns">
+              <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
+                <ToolCard tool={tools[3]} index={0} setLocation={setLocation} />
+              </div>
+            </TabsContent>
+
+            <TabsContent value="integration">
+              <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
+                <ToolCard tool={tools[4]} index={0} setLocation={setLocation} />
+              </div>
+            </TabsContent>
+          </Tabs>
         </motion.section>
 
         {/* Testimonials Section */}

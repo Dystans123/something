@@ -7,6 +7,8 @@ import Landing from "@/pages/landing";
 import Test from "@/pages/test";
 import Results from "@/pages/results";
 import Archetypes from "@/pages/archetypes";
+import IntelligenceType from "@/pages/intelligence-type";
+import IntelligenceTypeResults from "@/pages/intelligence-type-results";
 import ToxicityCompass from "@/pages/toxicity-compass";
 import ToxicityResults from "@/pages/toxicity-results";
 import RelationshipPatterns from "@/pages/relationship-patterns";
@@ -18,6 +20,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Landing} />
+      <Route path="/intelligence-type" component={IntelligenceType} />
+      <Route path="/intelligence-type-results" component={IntelligenceTypeResults} />
       <Route path="/test" component={Test} />
       <Route path="/results" component={Results} />
       <Route path="/archetypes" component={Archetypes} />
