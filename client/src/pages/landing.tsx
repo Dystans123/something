@@ -113,12 +113,12 @@ const tools: ToolCardData[] = [
 ];
 
 interface ToolCardProps {
-  tool: ToolCard;
+  tool: ToolCardData;
   index: number;
   setLocation: (location: string) => void;
 }
 
-function ToolCard({ tool, index, setLocation }: ToolCardProps) {
+function ToolCardComponent({ tool, index, setLocation }: ToolCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -149,7 +149,7 @@ function ToolCard({ tool, index, setLocation }: ToolCardProps) {
           </p>
           
           <div className="space-y-3">
-            {tool.features.map((feature, featureIndex) => (
+            {tool.features.map((feature: string, featureIndex: number) => (
               <div key={featureIndex} className="flex items-center space-x-3">
                 <CheckCircle className={`h-4 w-4 ${tool.color} flex-shrink-0`} />
                 <span className="text-[hsl(var(--metallic-silver))] text-sm">
@@ -377,38 +377,38 @@ export default function Landing() {
             <TabsContent value="all" className="mt-0">
               <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 {tools.map((tool, index) => (
-                  <ToolCard key={tool.id} tool={tool} index={index} setLocation={setLocation} />
+                  <ToolCardComponent key={tool.id} tool={tool} index={index} setLocation={setLocation} />
                 ))}
               </div>
             </TabsContent>
 
             <TabsContent value="cognitive">
               <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
-                <ToolCard tool={tools[0]} index={0} setLocation={setLocation} />
+                <ToolCardComponent tool={tools[0]} index={0} setLocation={setLocation} />
               </div>
             </TabsContent>
 
             <TabsContent value="shadow">
               <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
-                <ToolCard tool={tools[1]} index={0} setLocation={setLocation} />
+                <ToolCardComponent tool={tools[1]} index={0} setLocation={setLocation} />
               </div>
             </TabsContent>
 
             <TabsContent value="relationship">
               <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
-                <ToolCard tool={tools[2]} index={0} setLocation={setLocation} />
+                <ToolCardComponent tool={tools[2]} index={0} setLocation={setLocation} />
               </div>
             </TabsContent>
 
             <TabsContent value="patterns">
               <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
-                <ToolCard tool={tools[3]} index={0} setLocation={setLocation} />
+                <ToolCardComponent tool={tools[3]} index={0} setLocation={setLocation} />
               </div>
             </TabsContent>
 
             <TabsContent value="integration">
               <div className="grid lg:grid-cols-1 max-w-2xl mx-auto">
-                <ToolCard tool={tools[4]} index={0} setLocation={setLocation} />
+                <ToolCardComponent tool={tools[4]} index={0} setLocation={setLocation} />
               </div>
             </TabsContent>
           </Tabs>
