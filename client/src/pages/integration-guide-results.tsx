@@ -69,8 +69,33 @@ export default function IntegrationGuideResults() {
     setLocation("/integration-guide");
   };
 
-  const goHome = () => {
-    setLocation("/");
+  const continueJourney = () => {
+    // Mark integration guide as completed and redirect to journey
+    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
+    progress.integrationGuide = true;
+    localStorage.setItem('psychTestProgress', JSON.stringify(progress));
+    
+    // Store result for comprehensive summary
+    const results = JSON.parse(localStorage.getItem('psychTestResults') || '[]');
+    const existingIndex = results.findIndex((r: any) => r.testId === 'integration-guide');
+    const newResult = {
+      testId: 'integration-guide',
+      result: { level, score, categoryScores, strengths, growthAreas, guidance },
+      completedAt: new Date().toISOString()
+    };
+    
+    if (existingIndex >= 0) {
+      results[existingIndex] = newResult;
+    } else {
+      results.push(newResult);
+    }
+    localStorage.setItem('psychTestResults', JSON.stringify(results));
+    
+    setLocation("/journey");
+  };
+
+  const backToJourney = () => {
+    setLocation("/journey");
   };
 
   const getLevelColor = (levelKey: string) => {

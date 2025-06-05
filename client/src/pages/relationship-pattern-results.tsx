@@ -57,8 +57,33 @@ export default function RelationshipPatternResults() {
     setLocation("/relationship-patterns");
   };
 
-  const goHome = () => {
-    setLocation("/");
+  const continueJourney = () => {
+    // Mark relationship patterns as completed and redirect to journey
+    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
+    progress.relationshipPatterns = true;
+    localStorage.setItem('psychTestProgress', JSON.stringify(progress));
+    
+    // Store result for comprehensive summary
+    const results = JSON.parse(localStorage.getItem('psychTestResults') || '[]');
+    const existingIndex = results.findIndex((r: any) => r.testId === 'relationship-patterns');
+    const newResult = {
+      testId: 'relationship-patterns',
+      result: { pattern, patternScores, insights, recommendations },
+      completedAt: new Date().toISOString()
+    };
+    
+    if (existingIndex >= 0) {
+      results[existingIndex] = newResult;
+    } else {
+      results.push(newResult);
+    }
+    localStorage.setItem('psychTestResults', JSON.stringify(results));
+    
+    setLocation("/journey");
+  };
+
+  const backToJourney = () => {
+    setLocation("/journey");
   };
 
   const getPatternColor = (patternKey: string) => {

@@ -132,17 +132,26 @@ export default function Journey() {
   const getTestStatus = (testIndex: number) => {
     if (testIndex === 0) return 'available';
     
-    const previousTests = gameTests.slice(0, testIndex);
-    const allPreviousCompleted = previousTests.every((test, idx) => {
-      const progressKey = test.id.replace('-', '') as keyof TestProgress;
-      return progress[progressKey] || progress.shadowTest;
-    });
+    // Check if all previous tests are completed
+    const progressKeys: (keyof TestProgress)[] = ['shadowTest', 'toxicityCompass', 'relationshipPatterns', 'integrationGuide'];
     
-    return allPreviousCompleted ? 'available' : 'locked';
+    for (let i = 0; i < testIndex; i++) {
+      if (!progress[progressKeys[i]]) {
+        return 'locked';
+      }
+    }
+    
+    return 'available';
   };
 
   const isTestCompleted = (testId: string) => {
-    const progressKey = testId.replace('-', '') as keyof TestProgress;
+    const progressMap: Record<string, keyof TestProgress> = {
+      'shadow-test': 'shadowTest',
+      'toxicity-compass': 'toxicityCompass',
+      'relationship-patterns': 'relationshipPatterns',
+      'integration-guide': 'integrationGuide'
+    };
+    const progressKey = progressMap[testId];
     return progress[progressKey];
   };
 
