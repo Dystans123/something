@@ -200,11 +200,11 @@ export default function RelationshipPatternResults() {
                 </Button>
                 
                 <Button
-                  onClick={goHome}
+                  onClick={() => setLocation('/journey')}
                   className="px-6 py-3 bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] font-semibold rounded-lg transition-all duration-300 hover:scale-105"
                 >
                   <Home className="mr-2 h-4 w-4" />
-                  Back to Home
+                  Back to Journey
                 </Button>
               </motion.div>
             </motion.div>
