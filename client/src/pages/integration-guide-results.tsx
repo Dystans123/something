@@ -56,7 +56,34 @@ export default function IntegrationGuideResults() {
         console.error('Error parsing guidance:', e);
       }
     }
-  }, []);
+
+    // Automatically save results when component loads
+    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
+    progress.integrationGuide = true;
+    localStorage.setItem('psychTestProgress', JSON.stringify(progress));
+    
+    const results = JSON.parse(localStorage.getItem('psychTestResults') || '[]');
+    const existingIndex = results.findIndex((r: any) => r.testId === 'integration-guide');
+    const newResult = {
+      testId: 'integration-guide',
+      result: { 
+        integrationLevel: levelParam || level,
+        averageScore: scoreParam ? parseFloat(scoreParam) : score,
+        categoryScores: categoryScoresParam ? JSON.parse(categoryScoresParam) : categoryScores,
+        strengths: strengthsParam ? JSON.parse(strengthsParam) : strengths,
+        growthAreas: growthAreasParam ? JSON.parse(growthAreasParam) : growthAreas,
+        personalizedGuidance: guidanceParam ? JSON.parse(guidanceParam) : guidance
+      },
+      completedAt: new Date().toISOString()
+    };
+    
+    if (existingIndex >= 0) {
+      results[existingIndex] = newResult;
+    } else {
+      results.push(newResult);
+    }
+    localStorage.setItem('psychTestResults', JSON.stringify(results));
+  }, [level, score, categoryScores, strengths, growthAreas, guidance]);
 
   const levelInfo = Object.entries(integrationLevels).find(([key]) => key === level);
   const levelData = levelInfo ? levelInfo[1] : integrationLevels["emerging-awareness"];
@@ -208,8 +235,17 @@ export default function IntegrationGuideResults() {
                 </Button>
                 
                 <Button
+                  onClick={continueJourney}
+                  className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
+                >
+                  Continue Journey
+                  <Target className="ml-2 h-5 w-5" />
+                </Button>
+                
+                <Button
                   onClick={() => setLocation('/journey')}
-                  className="px-6 py-3 bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+                  variant="outline"
+                  className="px-6 py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
                 >
                   <Home className="mr-2 h-4 w-4" />
                   Back to Journey

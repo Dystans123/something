@@ -442,10 +442,10 @@ export default function Journey() {
                         <Button
                           onClick={() => setLocation('/comprehensive-summary')}
                           size="lg"
-                          className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0"
+                          className="px-10 py-5 text-xl font-bold bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 hover:from-purple-600 hover:via-blue-600 hover:to-emerald-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-110"
                         >
-                          View Comprehensive Summary
-                          <Target className="ml-2 h-5 w-5" />
+                          🎉 View Complete Summary 🎉
+                          <Target className="ml-3 h-6 w-6" />
                         </Button>
                         
                         <Button
