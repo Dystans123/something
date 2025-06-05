@@ -9,6 +9,10 @@ import Results from "@/pages/results";
 import Archetypes from "@/pages/archetypes";
 import ToxicityCompass from "@/pages/toxicity-compass";
 import ToxicityResults from "@/pages/toxicity-results";
+import RelationshipPatterns from "@/pages/relationship-patterns";
+import RelationshipPatternResults from "@/pages/relationship-pattern-results";
+import IntegrationGuide from "@/pages/integration-guide";
+import IntegrationGuideResults from "@/pages/integration-guide-results";
 
 function Router() {
   return (
@@ -19,6 +23,10 @@ function Router() {
       <Route path="/archetypes" component={Archetypes} />
       <Route path="/toxicity-compass" component={ToxicityCompass} />
       <Route path="/toxicity-results" component={ToxicityResults} />
+      <Route path="/relationship-patterns" component={RelationshipPatterns} />
+      <Route path="/relationship-pattern-results" component={RelationshipPatternResults} />
+      <Route path="/integration-guide" component={IntegrationGuide} />
+      <Route path="/integration-guide-results" component={IntegrationGuideResults} />
     </Switch>
   );
 }

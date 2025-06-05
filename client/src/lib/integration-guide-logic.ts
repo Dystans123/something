@@ -203,9 +203,8 @@ export function canIntegrationGuideProceed(answers: IntegrationGuideAnswer[], cu
 }
 
 export function shareIntegrationGuideResult(level: string): void {
-  const levelName = (level in integrationLevels) 
-    ? integrationLevels[level as keyof typeof integrationLevels].name 
-    : "Integration Journey";
+  const levelInfo = Object.entries(integrationLevels).find(([key]) => key === level);
+  const levelName = levelInfo ? levelInfo[1].name : "Integration Journey";
   const text = `I just completed the Personal Integration Guide and discovered I'm in the ${levelName}! Personal integration is the path to wholeness and authentic living.`;
   const url = window.location.origin;
   

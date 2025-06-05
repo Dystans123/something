@@ -120,9 +120,8 @@ export function canRelationshipPatternProceed(answers: RelationshipPatternAnswer
 }
 
 export function shareRelationshipPatternResult(pattern: string): void {
-  const patternName = (pattern in relationshipPatterns) 
-    ? relationshipPatterns[pattern as keyof typeof relationshipPatterns].name 
-    : "Unknown Pattern";
+  const patternInfo = Object.entries(relationshipPatterns).find(([key]) => key === pattern);
+  const patternName = patternInfo ? patternInfo[1].name : "Unknown Pattern";
   const text = `I just discovered my relationship pattern: ${patternName}! Understanding your relationship patterns can transform how you connect with others.`;
   const url = window.location.origin;
   

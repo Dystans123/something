@@ -406,11 +406,11 @@ export default function Landing() {
               </Card>
             </div>
 
-            <div className="text-center space-y-4 md:space-y-0 md:space-x-4 md:flex md:justify-center">
+            <div className="text-center space-y-4 md:space-y-0 md:space-x-4 md:flex md:justify-center flex-wrap">
               <Button
                 onClick={startTest}
                 size="lg"
-                className="px-8 py-4 text-lg font-semibold bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] rounded-lg transition-all duration-300 hover:scale-105"
+                className="px-8 py-4 text-lg font-semibold bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] rounded-lg transition-all duration-300 hover:scale-105 mb-4 md:mb-0"
               >
                 Explore Your Shadow Self
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -420,9 +420,27 @@ export default function Landing() {
                 onClick={() => setLocation("/toxicity-compass")}
                 variant="outline"
                 size="lg"
-                className="px-8 py-4 text-lg bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                className="px-8 py-4 text-lg bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))] mb-4 md:mb-0"
               >
                 Assess Relationship Health
+              </Button>
+              
+              <Button
+                onClick={() => setLocation("/relationship-patterns")}
+                variant="outline"
+                size="lg"
+                className="px-8 py-4 text-lg bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))] mb-4 md:mb-0"
+              >
+                Relationship Patterns
+              </Button>
+              
+              <Button
+                onClick={() => setLocation("/integration-guide")}
+                variant="outline"
+                size="lg"
+                className="px-8 py-4 text-lg bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+              >
+                Personal Integration
               </Button>
             </div>
           </motion.section>
