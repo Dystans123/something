@@ -36,6 +36,19 @@ export default function Test() {
       archetype: option.archetype
     });
     setAnswers(newAnswers);
+
+    // Auto-advance after a short delay
+    setTimeout(() => {
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Test complete, go to results
+        const dominantArchetype = calculateDominantArchetype([...newAnswers]);
+        setLocation(`/results?archetype=${dominantArchetype}`);
+      }
+    }, 600);
   };
 
   const nextQuestion = () => {
@@ -111,7 +124,7 @@ export default function Test() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentQuestionIndex}
-              className="question-card rounded-2xl p-3 md:p-8 mb-4 md:mb-6"
+              className="question-card rounded-2xl p-3 md:p-8 mb-4 md:mb-6 relative"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
@@ -121,7 +134,7 @@ export default function Test() {
                 {currentQuestion.text}
               </h2>
               
-              <div className="space-y-2 md:space-y-3">
+              <div className="space-y-2 md:space-y-3 mb-12">
                 {currentQuestion.options.map((option, index) => (
                   <motion.div
                     key={index}
@@ -147,35 +160,27 @@ export default function Test() {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Back Arrow in Bottom Left */}
+              {canGoPrev && (
+                <motion.div 
+                  className="absolute bottom-3 left-3 md:bottom-6 md:left-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                >
+                  <Button
+                    variant="outline"
+                    onClick={prevQuestion}
+                    size="sm"
+                    className="p-2 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-full transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                  </Button>
+                </motion.div>
+              )}
             </motion.div>
           </AnimatePresence>
-          
-          <motion.div 
-            className="flex justify-between items-center mt-4 md:mt-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-          >
-            <Button
-              variant="outline"
-              onClick={prevQuestion}
-              disabled={!canGoPrev}
-              className="px-3 py-2 md:px-6 md:py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))] disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
-            >
-              <ArrowLeft className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
-              <span className="hidden sm:inline">Previous</span>
-              <span className="sm:hidden">Prev</span>
-            </Button>
-            
-            <Button
-              onClick={nextQuestion}
-              disabled={!canGoNext}
-              className="px-4 py-2 md:px-6 md:py-3 bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] font-semibold rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
-            >
-              {currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next'}
-              <ArrowRight className="ml-1 md:ml-2 h-3 w-3 md:h-4 md:w-4" />
-            </Button>
-          </motion.div>
         </div>
       </div>
     </div>

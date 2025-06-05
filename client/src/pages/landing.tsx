@@ -346,7 +346,7 @@ export default function Landing() {
             </div>
           </motion.section>
 
-          {/* Recovery and Healing Section */}
+          {/* Comprehensive Assessment Suite Section */}
           <motion.section 
             className="py-20"
             initial={{ opacity: 0, y: 50 }}
@@ -355,92 +355,304 @@ export default function Landing() {
             viewport={{ once: true }}
           >
             <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-6 text-[hsl(var(--metallic-silver))] border-[hsl(var(--metallic-silver))]">
+                <Target className="mr-2 h-4 w-4" />
+                Comprehensive Assessment Suite
+              </Badge>
               <h2 className="font-serif text-3xl md:text-5xl font-bold text-[hsl(var(--silver-glow))] mb-6">
-                Reclaiming Your Authentic Self
+                Four Paths to Self-Discovery
               </h2>
               <p className="text-lg text-[hsl(var(--metallic-silver))] max-w-4xl mx-auto leading-relaxed">
-                Recovery from toxic relationships isn't just about ending harmful dynamics - it's about rediscovering 
-                who you are beneath the layers of conditioning, manipulation, and self-doubt. Understanding how these 
-                experiences have shaped your inner world is the first step toward genuine healing and authentic self-expression.
+                Our scientifically-backed assessment suite offers multiple perspectives on your psychological landscape. 
+                Each test reveals different aspects of your inner world, from unconscious archetypes to relationship patterns, 
+                providing a comprehensive understanding of your authentic self.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 mb-16">
-              <Card className="bg-gradient-to-br from-green-900/20 to-[hsl(var(--deep-black))] border-green-500/20">
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Lightbulb className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-green-400 mb-3">Recognition</h3>
-                  <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                    Identify how toxic patterns have influenced your self-perception, emotional responses, and 
-                    relationship expectations. Awareness is the foundation of all meaningful change.
-                  </p>
-                </CardContent>
-              </Card>
+            <div className="grid lg:grid-cols-2 gap-8 mb-16">
+              {/* Shadow Archetype Test */}
+              <motion.div
+                className="group"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="h-full bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.3)] hover:border-[hsl(var(--metallic-silver)/0.6)] transition-all duration-300">
+                  <CardContent className="p-8">
+                    <div className="flex items-center mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center mr-4">
+                        <Eye className="h-8 w-8 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-1">
+                          Shadow Archetype Test
+                        </h3>
+                        <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                          Core Assessment
+                        </Badge>
+                      </div>
+                    </div>
+                    
+                    <p className="text-[hsl(var(--metallic-silver))] mb-6 leading-relaxed">
+                      Discover your dominant shadow archetype through 40 psychological projection questions. 
+                      Uncover the hidden aspects of your personality that influence your decisions, relationships, 
+                      and life patterns in ways you never realized.
+                    </p>
 
-              <Card className="bg-gradient-to-br from-yellow-900/20 to-[hsl(var(--deep-black))] border-yellow-500/20">
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Heart className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-yellow-400 mb-3">Healing</h3>
-                  <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                    Begin the process of emotional healing through self-compassion, boundary setting, and 
-                    reconnecting with your authentic feelings, needs, and values.
-                  </p>
-                </CardContent>
-              </Card>
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">40 deep psychological questions</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">8 Jungian shadow archetypes</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Personalized archetype analysis</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <Clock className="h-5 w-5 text-[hsl(var(--metallic-silver))]" />
+                        <span className="text-[hsl(var(--metallic-silver))]">10-15 minutes</span>
+                      </div>
+                    </div>
 
-              <Card className="bg-gradient-to-br from-blue-900/20 to-[hsl(var(--deep-black))] border-blue-500/20">
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Target className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-blue-400 mb-3">Integration</h3>
-                  <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                    Integrate these insights into healthier relationship patterns with yourself and others, 
-                    breaking cycles of dysfunction and creating authentic connections.
-                  </p>
-                </CardContent>
-              </Card>
+                    <Button
+                      onClick={startTest}
+                      className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+                    >
+                      Begin Shadow Test
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Toxicity Compass */}
+              <motion.div
+                className="group"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="h-full bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.3)] hover:border-[hsl(var(--metallic-silver)/0.6)] transition-all duration-300">
+                  <CardContent className="p-8">
+                    <div className="flex items-center mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-xl flex items-center justify-center mr-4">
+                        <Shield className="h-8 w-8 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-1">
+                          Toxicity Compass
+                        </h3>
+                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">
+                          Relationship Health
+                        </Badge>
+                      </div>
+                    </div>
+                    
+                    <p className="text-[hsl(var(--metallic-silver))] mb-6 leading-relaxed">
+                      Assess the psychological impact of toxic relationships on your identity and well-being. 
+                      Understand how harmful patterns have shaped your emotional landscape and receive 
+                      personalized insights for healing and recovery.
+                    </p>
+
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Comprehensive toxicity assessment</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Three-zone impact analysis</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Recovery guidance and resources</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <Clock className="h-5 w-5 text-[hsl(var(--metallic-silver))]" />
+                        <span className="text-[hsl(var(--metallic-silver))]">5-8 minutes</span>
+                      </div>
+                    </div>
+
+                    <Button
+                      onClick={() => setLocation("/toxicity-compass")}
+                      className="w-full px-6 py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/25"
+                    >
+                      Take Toxicity Compass
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Relationship Patterns */}
+              <motion.div
+                className="group"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="h-full bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.3)] hover:border-[hsl(var(--metallic-silver)/0.6)] transition-all duration-300">
+                  <CardContent className="p-8">
+                    <div className="flex items-center mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center mr-4">
+                        <Users className="h-8 w-8 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-1">
+                          Relationship Patterns
+                        </h3>
+                        <Badge className="bg-green-500/20 text-green-300 border-green-500/30">
+                          Behavioral Analysis
+                        </Badge>
+                      </div>
+                    </div>
+                    
+                    <p className="text-[hsl(var(--metallic-silver))] mb-6 leading-relaxed">
+                      Identify your dominant relationship patterns and understand how they influence your 
+                      connections with others. Discover recurring themes in your romantic, familial, 
+                      and professional relationships.
+                    </p>
+
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Pattern recognition analysis</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Attachment style insights</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Relationship improvement strategies</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <Clock className="h-5 w-5 text-[hsl(var(--metallic-silver))]" />
+                        <span className="text-[hsl(var(--metallic-silver))]">7-10 minutes</span>
+                      </div>
+                    </div>
+
+                    <Button
+                      onClick={() => setLocation("/relationship-patterns")}
+                      className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25"
+                    >
+                      Analyze Patterns
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Integration Guide */}
+              <motion.div
+                className="group"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="h-full bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.3)] hover:border-[hsl(var(--metallic-silver)/0.6)] transition-all duration-300">
+                  <CardContent className="p-8">
+                    <div className="flex items-center mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-xl flex items-center justify-center mr-4">
+                        <Lightbulb className="h-8 w-8 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-1">
+                          Integration Guide
+                        </h3>
+                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
+                          Personal Growth
+                        </Badge>
+                      </div>
+                    </div>
+                    
+                    <p className="text-[hsl(var(--metallic-silver))] mb-6 leading-relaxed">
+                      Receive personalized guidance for integrating your shadow aspects into conscious awareness. 
+                      Learn practical strategies for emotional healing, authentic self-expression, 
+                      and creating healthier relationships.
+                    </p>
+
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Personalized integration roadmap</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Practical growth exercises</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-400" />
+                        <span className="text-[hsl(var(--metallic-silver))]">Ongoing development strategies</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <Clock className="h-5 w-5 text-[hsl(var(--metallic-silver))]" />
+                        <span className="text-[hsl(var(--metallic-silver))]">8-12 minutes</span>
+                      </div>
+                    </div>
+
+                    <Button
+                      onClick={() => setLocation("/integration-guide")}
+                      className="w-full px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/25"
+                    >
+                      Start Integration
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </div>
 
-            <div className="text-center space-y-4 md:space-y-0 md:space-x-4 md:flex md:justify-center flex-wrap">
+            {/* Interactive Stats Section */}
+            <motion.div 
+              className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] rounded-3xl p-8 border border-[hsl(var(--metallic-silver)/0.2)] mb-16"
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="text-center mb-8">
+                <h3 className="font-serif text-2xl md:text-3xl font-bold text-[hsl(var(--silver-glow))] mb-4">
+                  Trusted by Thousands Worldwide
+                </h3>
+                <p className="text-[hsl(var(--metallic-silver))] text-lg">
+                  Join a global community of individuals committed to authentic self-discovery
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-4 gap-6 text-center">
+                <div className="group hover:scale-105 transition-transform duration-300">
+                  <div className="text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-2">1M+</div>
+                  <div className="text-[hsl(var(--metallic-silver))]">Assessments Completed</div>
+                </div>
+                <div className="group hover:scale-105 transition-transform duration-300">
+                  <div className="text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-2">150+</div>
+                  <div className="text-[hsl(var(--metallic-silver))]">Countries Reached</div>
+                </div>
+                <div className="group hover:scale-105 transition-transform duration-300">
+                  <div className="text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-2">96%</div>
+                  <div className="text-[hsl(var(--metallic-silver))]">Report Valuable Insights</div>
+                </div>
+                <div className="group hover:scale-105 transition-transform duration-300">
+                  <div className="text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-2">4.8/5</div>
+                  <div className="text-[hsl(var(--metallic-silver))]">Average User Rating</div>
+                </div>
+              </div>
+            </motion.div>
+
+            <div className="text-center">
+              <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-4">
+                Ready to Begin Your Journey?
+              </h3>
+              <p className="text-[hsl(var(--metallic-silver))] text-lg mb-8 max-w-2xl mx-auto">
+                Start with any assessment that resonates with you. Each provides unique insights into different 
+                aspects of your psychological landscape.
+              </p>
               <Button
                 onClick={startTest}
                 size="lg"
-                className="px-8 py-4 text-lg font-semibold bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] rounded-lg transition-all duration-300 hover:scale-105 mb-4 md:mb-0"
+                className="px-10 py-4 text-lg font-semibold bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
-                Explore Your Shadow Self
+                Start with Shadow Test
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              
-              <Button
-                onClick={() => setLocation("/toxicity-compass")}
-                variant="outline"
-                size="lg"
-                className="px-8 py-4 text-lg bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))] mb-4 md:mb-0"
-              >
-                Assess Relationship Health
-              </Button>
-              
-              <Button
-                onClick={() => setLocation("/relationship-patterns")}
-                variant="outline"
-                size="lg"
-                className="px-8 py-4 text-lg bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))] mb-4 md:mb-0"
-              >
-                Relationship Patterns
-              </Button>
-              
-              <Button
-                onClick={() => setLocation("/integration-guide")}
-                variant="outline"
-                size="lg"
-                className="px-8 py-4 text-lg bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-              >
-                Personal Integration
               </Button>
             </div>
           </motion.section>

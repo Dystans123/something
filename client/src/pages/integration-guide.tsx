@@ -41,10 +41,29 @@ export default function IntegrationGuide() {
     };
 
     // Update answers array
-    setAnswers(prev => {
-      const filtered = prev.filter(a => a.questionIndex !== currentQuestionIndex);
-      return [...filtered, answer];
-    });
+    const newAnswers = answers.filter(a => a.questionIndex !== currentQuestionIndex);
+    newAnswers.push(answer);
+    setAnswers(newAnswers);
+
+    // Auto-advance after a short delay
+    setTimeout(() => {
+      if (currentQuestionIndex < integrationGuideQuestions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Test complete, go to results
+        const result = calculateIntegrationGuideResult([...newAnswers]);
+        const params = new URLSearchParams({
+          level: result.integrationLevel,
+          score: result.averageScore.toString(),
+          categoryScores: JSON.stringify(result.categoryScores),
+          strengths: JSON.stringify(result.strengths),
+          growthAreas: JSON.stringify(result.growthAreas),
+          guidance: JSON.stringify(result.personalizedGuidance)
+        });
+        setLocation(`/integration-guide-results?${params.toString()}`);
+      }
+    }, 600);
   };
 
   const nextQuestion = () => {

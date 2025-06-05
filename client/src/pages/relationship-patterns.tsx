@@ -41,10 +41,27 @@ export default function RelationshipPatterns() {
     };
 
     // Update answers array
-    setAnswers(prev => {
-      const filtered = prev.filter(a => a.questionIndex !== currentQuestionIndex);
-      return [...filtered, answer];
-    });
+    const newAnswers = answers.filter(a => a.questionIndex !== currentQuestionIndex);
+    newAnswers.push(answer);
+    setAnswers(newAnswers);
+
+    // Auto-advance after a short delay
+    setTimeout(() => {
+      if (currentQuestionIndex < relationshipPatternQuestions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Test complete, go to results
+        const result = calculateRelationshipPatternResult([...newAnswers]);
+        const params = new URLSearchParams({
+          pattern: result.dominantPattern,
+          scores: JSON.stringify(result.patternScores),
+          insights: JSON.stringify(result.insights),
+          recommendations: JSON.stringify(result.recommendations)
+        });
+        setLocation(`/relationship-pattern-results?${params.toString()}`);
+      }
+    }, 600);
   };
 
   const nextQuestion = () => {

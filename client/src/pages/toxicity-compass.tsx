@@ -36,6 +36,18 @@ export default function ToxicityCompass() {
       value: option.value
     });
     setAnswers(newAnswers);
+
+    // Auto-advance after a short delay
+    setTimeout(() => {
+      if (currentQuestionIndex < toxicityQuestions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Test complete, go to results
+        const result = calculateToxicityResult([...newAnswers]);
+        setLocation(`/toxicity-results?zone=${result.zone}&score=${result.score}&percentage=${result.percentage.toFixed(1)}`);
+      }
+    }, 600);
   };
 
   const nextQuestion = () => {
@@ -109,7 +121,7 @@ export default function ToxicityCompass() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentQuestionIndex}
-              className="question-card rounded-2xl p-4 md:p-8 mb-6"
+              className="question-card rounded-2xl p-4 md:p-8 mb-6 relative"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
@@ -125,7 +137,7 @@ export default function ToxicityCompass() {
                 {currentQuestion.text}
               </h2>
               
-              <div className="space-y-3">
+              <div className="space-y-3 mb-12">
                 {currentQuestion.options.map((option, index) => (
                   <motion.div
                     key={index}
@@ -151,34 +163,27 @@ export default function ToxicityCompass() {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Back Arrow in Bottom Left */}
+              {canGoPrev && (
+                <motion.div 
+                  className="absolute bottom-4 left-4 md:bottom-6 md:left-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                >
+                  <Button
+                    variant="outline"
+                    onClick={prevQuestion}
+                    size="sm"
+                    className="p-2 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-full transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                  </Button>
+                </motion.div>
+              )}
             </motion.div>
           </AnimatePresence>
-          
-          <motion.div 
-            className="flex justify-between items-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-          >
-            <Button
-              variant="outline"
-              onClick={prevQuestion}
-              disabled={!canGoPrev}
-              className="px-6 py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))] disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Previous
-            </Button>
-            
-            <Button
-              onClick={nextQuestion}
-              disabled={!canGoNext}
-              className="px-6 py-3 bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] font-semibold rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {currentQuestionIndex === toxicityQuestions.length - 1 ? 'Finish' : 'Next'}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </motion.div>
         </div>
       </div>
     </div>
