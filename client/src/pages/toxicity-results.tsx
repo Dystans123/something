@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Share, RotateCcw, Home } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Share, RotateCcw, Home, Brain, Shield, AlertTriangle, TrendingUp, Heart } from "lucide-react";
 import { shareToxicityResult } from "@/lib/toxicity-logic";
 
 interface ZoneInfo {
@@ -122,6 +124,15 @@ export default function ToxicityResults() {
     setLocation("/journey");
   };
 
+  const getToxicityExplanation = (zone: string) => {
+    const explanations = {
+      green: "You demonstrate strong emotional resilience and healthy relationship patterns. Your boundaries are well-established, and you maintain psychological stability even in challenging situations.",
+      yellow: "You show moderate resilience with some areas of vulnerability. While you generally maintain healthy relationships, certain situations or people may still impact your emotional wellbeing significantly.",
+      red: "You may be experiencing significant impact from toxic relationship patterns. This suggests a need for immediate attention to boundary setting, self-care, and potentially professional support."
+    };
+    return explanations[zone as keyof typeof explanations] || explanations.red;
+  };
+
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0 bg-gradient-radial from-[hsl(var(--dark-gray))] via-[hsl(var(--deep-black))] to-[hsl(var(--deep-black))]" />
@@ -215,7 +226,7 @@ export default function ToxicityResults() {
             </motion.div>
             
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.0, duration: 0.6 }}
@@ -248,6 +259,220 @@ export default function ToxicityResults() {
                 <RotateCcw className="mr-2 h-4 w-4" />
                 Retake Test
               </Button>
+            </motion.div>
+
+            {/* Detailed Psychological Analysis */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.2, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-amber-900/20 to-[hsl(var(--deep-black))] border-amber-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-amber-400 border-amber-400">
+                    <Brain className="mr-2 h-4 w-4" />
+                    Understanding Toxicity Impact
+                  </Badge>
+                  <div className="space-y-4">
+                    <div className="p-4 bg-amber-900/10 rounded-lg">
+                      <h4 className="font-semibold text-amber-300 mb-2">Your Toxicity Zone: {zone.toUpperCase()}</h4>
+                      <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
+                        {getToxicityExplanation(zone)}
+                      </p>
+                    </div>
+                    <div className="p-4 bg-amber-900/10 rounded-lg">
+                      <h4 className="font-semibold text-amber-300 mb-2">Psychological Resilience</h4>
+                      <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
+                        Your resilience score of {percentage}% indicates how well you maintain emotional stability 
+                        and psychological health when exposed to toxic relationship patterns and environmental stressors.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Recovery & Healing Strategies */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.4, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-emerald-900/20 to-[hsl(var(--deep-black))] border-emerald-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-emerald-400 border-emerald-400">
+                    <Shield className="mr-2 h-4 w-4" />
+                    Healing & Recovery Practices
+                  </Badge>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="p-4 bg-emerald-900/10 rounded-lg">
+                      <h4 className="font-semibold text-emerald-300 mb-3">Emotional Detox</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Practice daily emotional release through journaling</li>
+                        <li>• Set firm boundaries with toxic individuals</li>
+                        <li>• Engage in regular physical exercise for stress relief</li>
+                        <li>• Use breathing techniques for emotional regulation</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-emerald-900/10 rounded-lg">
+                      <h4 className="font-semibold text-emerald-300 mb-3">Relationship Boundaries</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Learn to say "no" without guilt or explanation</li>
+                        <li>• Identify and exit toxic relationship patterns</li>
+                        <li>• Practice assertive communication techniques</li>
+                        <li>• Surround yourself with supportive people</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-emerald-900/10 rounded-lg">
+                      <h4 className="font-semibold text-emerald-300 mb-3">Mental Protection</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Develop a strong sense of self-worth</li>
+                        <li>• Practice mindfulness to stay grounded</li>
+                        <li>• Challenge negative self-talk patterns</li>
+                        <li>• Create safe spaces for emotional processing</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-emerald-900/10 rounded-lg">
+                      <h4 className="font-semibold text-emerald-300 mb-3">Energy Management</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Limit exposure to negative media and people</li>
+                        <li>• Practice energy-protecting visualization</li>
+                        <li>• Engage in activities that restore your spirit</li>
+                        <li>• Maintain healthy sleep and nutrition habits</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Warning Signs & Red Flags */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.6, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-red-900/20 to-[hsl(var(--deep-black))] border-red-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-red-400 border-red-400">
+                    <AlertTriangle className="mr-2 h-4 w-4" />
+                    Toxicity Warning Signs
+                  </Badge>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="p-4 bg-red-900/10 rounded-lg">
+                      <h4 className="font-semibold text-red-300 mb-3">Relationship Red Flags</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Constant criticism and put-downs</li>
+                        <li>• Manipulation and guilt-tripping</li>
+                        <li>• Controlling behavior and isolation tactics</li>
+                        <li>• Gaslighting and reality distortion</li>
+                        <li>• Emotional or physical intimidation</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-red-900/10 rounded-lg">
+                      <h4 className="font-semibold text-red-300 mb-3">Personal Impact Signs</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Chronic anxiety and stress symptoms</li>
+                        <li>• Loss of self-confidence and identity</li>
+                        <li>• Isolation from friends and family</li>
+                        <li>• Physical symptoms without medical cause</li>
+                        <li>• Difficulty making decisions independently</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Recovery Timeline */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.8, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-purple-900/20 to-[hsl(var(--deep-black))] border-purple-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-purple-400 border-purple-400">
+                    <TrendingUp className="mr-2 h-4 w-4" />
+                    30-Day Recovery Plan
+                  </Badge>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="p-4 bg-purple-900/10 rounded-lg">
+                      <h4 className="font-semibold text-purple-300 mb-3">Week 1-2: Awareness</h4>
+                      <ul className="space-y-1 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Identify toxic patterns and triggers</li>
+                        <li>• Start daily emotional check-ins</li>
+                        <li>• Begin boundary-setting practice</li>
+                        <li>• Document your experiences</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-purple-900/10 rounded-lg">
+                      <h4 className="font-semibold text-purple-300 mb-3">Week 3-4: Action</h4>
+                      <ul className="space-y-1 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Implement protective strategies</li>
+                        <li>• Practice assertive communication</li>
+                        <li>• Seek support from trusted friends</li>
+                        <li>• Develop self-care routines</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-purple-900/10 rounded-lg">
+                      <h4 className="font-semibold text-purple-300 mb-3">Ongoing: Healing</h4>
+                      <ul className="space-y-1 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Continue therapy and support groups</li>
+                        <li>• Build healthy relationship skills</li>
+                        <li>• Maintain strong personal boundaries</li>
+                        <li>• Practice ongoing self-compassion</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Support Resources */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 3.0, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-cyan-900/20 to-[hsl(var(--deep-black))] border-cyan-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-cyan-400 border-cyan-400">
+                    <Heart className="mr-2 h-4 w-4" />
+                    Support & Resources
+                  </Badge>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold text-cyan-300 mb-3">Professional Help</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Trauma-informed therapy specialists</li>
+                        <li>• Support groups for toxic relationship survivors</li>
+                        <li>• Domestic violence hotlines and resources</li>
+                        <li>• Mental health crisis intervention services</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-cyan-300 mb-3">Self-Help Resources</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• "Why Does He Do That?" by Lundy Bancroft</li>
+                        <li>• "The Verbally Abusive Relationship" by Patricia Evans</li>
+                        <li>• "Trauma and Recovery" by Judith Herman</li>
+                        <li>• Online support communities and forums</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="mt-6 p-4 bg-cyan-900/10 rounded-lg">
+                    <p className="text-[hsl(var(--metallic-silver))] text-sm text-center">
+                      <strong className="text-cyan-300">Remember:</strong> Recovery is a journey, not a destination. 
+                      Be patient with yourself and seek professional help when needed. You deserve healthy, respectful relationships.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
 
 
