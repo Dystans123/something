@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArchetypeSilhouette } from "@/components/archetype-silhouette";
 import { SmokeParticles } from "@/components/smoke-particles";
@@ -20,6 +21,7 @@ const archetypeNames = [
 
 export default function Landing() {
   const [, setLocation] = useLocation();
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const startTest = () => {
     setLocation("/test");
@@ -27,6 +29,31 @@ export default function Landing() {
 
   const viewArchetypes = () => {
     setLocation("/archetypes");
+  };
+
+  // Floating animation variants
+  const floatingVariants = {
+    initial: { y: 0 },
+    animate: {
+      y: [-10, 10, -10],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const pulseVariants = {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
   };
 
   return (
@@ -138,81 +165,145 @@ export default function Landing() {
             viewport={{ once: true }}
           >
             <div className="text-center mb-16">
-              <Badge variant="outline" className="mb-6 text-[hsl(var(--metallic-silver))] border-[hsl(var(--metallic-silver))]">
-                <Brain className="mr-2 h-4 w-4" />
-                Psychology & Self-Discovery
-              </Badge>
-              <h2 className="font-serif text-3xl md:text-5xl font-bold text-[hsl(var(--silver-glow))] mb-6">
-                The Psychology of Your Inner Self
-              </h2>
-              <p className="text-lg text-[hsl(var(--metallic-silver))] max-w-4xl mx-auto leading-relaxed">
-                Carl Jung's revolutionary work revealed that our psyche contains vast unexplored territories. 
-                The "shadow" represents the parts of ourselves we've repressed, denied, or never fully acknowledged. 
-                These hidden aspects profoundly influence our decisions, relationships, and life trajectory in ways 
-                we rarely recognize.
-              </p>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <Badge variant="outline" className="mb-6 text-[hsl(var(--metallic-silver))] border-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver)/0.1)] transition-all duration-300">
+                  <Brain className="mr-2 h-4 w-4" />
+                  Nieświadome Archetypy
+                </Badge>
+              </motion.div>
+              
+              <motion.h2 
+                className="font-serif text-3xl md:text-5xl font-bold text-[hsl(var(--silver-glow))] mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                Odkryj Ukryte Oblicza Swojej Psychiki
+              </motion.h2>
+              
+              <motion.p 
+                className="text-lg text-[hsl(var(--metallic-silver))] max-w-4xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                Każdy z nas nosi w sobie ukryte archetypy - wzorce zachowań i reakcji, które kształtują nasze relacje, 
+                decyzje i sposób postrzegania świata. Te nieświadome siły mogą być źródłem zarówno mocy, jak i destrukcji. 
+                Czas poznać swoje prawdziwe oblicze.
+              </motion.p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-              <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.2)]">
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-[hsl(var(--metallic-silver))] rounded-full flex items-center justify-center mb-4">
-                    <Eye className="h-6 w-6 text-[hsl(var(--deep-black))]" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))] mb-3">
-                    Unconscious Patterns
-                  </h3>
-                  <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                    Your shadow contains the behavioral patterns that operate beneath conscious awareness. 
-                    These automatic responses, formed in childhood and reinforced through life experiences, 
-                    drive many of your actions without you realizing it.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.2)]">
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-[hsl(var(--metallic-silver))] rounded-full flex items-center justify-center mb-4">
-                    <Users className="h-6 w-6 text-[hsl(var(--deep-black))]" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))] mb-3">
-                    Relationship Dynamics
-                  </h3>
-                  <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                    Your shadow archetype determines how you unconsciously interact with others. 
-                    Understanding these patterns helps you recognize why certain relationships feel 
-                    familiar, why conflicts arise, and how to break destructive cycles.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.2)]">
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-[hsl(var(--metallic-silver))] rounded-full flex items-center justify-center mb-4">
-                    <Shield className="h-6 w-6 text-[hsl(var(--deep-black))]" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))] mb-3">
-                    Personal Integration
-                  </h3>
-                  <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                    When you become aware of your shadow, you gain the power to integrate these aspects 
-                    consciously. This process leads to greater authenticity, emotional resilience, 
-                    and the ability to make choices aligned with your true self.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="text-center">
-              <Button
-                onClick={startTest}
-                size="lg"
-                className="px-8 py-4 text-lg font-semibold bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] rounded-lg transition-all duration-300 hover:scale-105"
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                Discover Your Shadow Archetype
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+                <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.2)] hover:border-[hsl(var(--metallic-silver)/0.4)] transition-all duration-300 h-full group cursor-pointer">
+                  <CardContent className="p-6">
+                    <motion.div 
+                      className="w-12 h-12 bg-[hsl(var(--metallic-silver))] rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <Eye className="h-6 w-6 text-[hsl(var(--deep-black))]" />
+                    </motion.div>
+                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))] mb-3 group-hover:text-white transition-colors duration-300">
+                      Nieświadome Wzorce
+                    </h3>
+                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed group-hover:text-[hsl(var(--metallic-silver)/0.9)] transition-colors duration-300">
+                      Twoje ukryte reakcje i automatyczne zachowania, które sterują Tobą bez Twojej świadomości. 
+                      Poznaj mechanizmy, które kształtowały Cię przez lata i odkryj, jak możesz je przekształcić.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.2)] hover:border-[hsl(var(--metallic-silver)/0.4)] transition-all duration-300 h-full group cursor-pointer">
+                  <CardContent className="p-6">
+                    <motion.div 
+                      className="w-12 h-12 bg-[hsl(var(--metallic-silver))] rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <Users className="h-6 w-6 text-[hsl(var(--deep-black))]" />
+                    </motion.div>
+                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))] mb-3 group-hover:text-white transition-colors duration-300">
+                      Dynamika Relacji
+                    </h3>
+                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed group-hover:text-[hsl(var(--metallic-silver)/0.9)] transition-colors duration-300">
+                      Sposób, w jaki Twój archetyp wpływa na relacje z innymi. Zrozum, dlaczego przyciągasz określone 
+                      osoby, jakie konflikty się powtarzają i jak przerwać destrukcyjne cykle.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--metallic-silver)/0.2)] hover:border-[hsl(var(--metallic-silver)/0.4)] transition-all duration-300 h-full group cursor-pointer">
+                  <CardContent className="p-6">
+                    <motion.div 
+                      className="w-12 h-12 bg-[hsl(var(--metallic-silver))] rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <Shield className="h-6 w-6 text-[hsl(var(--deep-black))]" />
+                    </motion.div>
+                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))] mb-3 group-hover:text-white transition-colors duration-300">
+                      Integracja Cienia
+                    </h3>
+                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed group-hover:text-[hsl(var(--metallic-silver)/0.9)] transition-colors duration-300">
+                      Gdy poznasz swój cień, zyskujesz moc świadomego wyboru. Proces integracji prowadzi do 
+                      autentyczności, odporności emocjonalnej i życia zgodnego z prawdziwym sobą.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </div>
+
+            <motion.div 
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  onClick={startTest}
+                  size="lg"
+                  className="px-8 py-4 text-lg font-semibold bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] rounded-lg transition-all duration-300 hover:bg-white hover:shadow-lg hover:shadow-[hsl(var(--metallic-silver)/0.3)]"
+                >
+                  Odkryj Swój Archetyp Cienia
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.section>
 
           {/* Toxicity Compass Section */}
