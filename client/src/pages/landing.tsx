@@ -159,7 +159,7 @@ export default function Landing() {
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <Button
-              onClick={() => setLocation("/test")}
+              onClick={() => setLocation("/journey")}
               size="lg"
               className="px-10 py-6 text-xl font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 transition-all duration-300 hover:scale-105 shadow-glow"
             >
@@ -504,7 +504,7 @@ export default function Landing() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
               <Button
-                onClick={() => setLocation("/test")}
+                onClick={() => setLocation("/journey")}
                 size="lg"
                 className="px-10 py-6 text-xl font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 transition-all duration-300 hover:scale-105 shadow-glow"
               >
