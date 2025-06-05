@@ -436,7 +436,7 @@ export default function Journey() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
                     {showSummary ? (
                       <>
                         <Button

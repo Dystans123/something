@@ -4,7 +4,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Share2, RefreshCw, Home, Users, Heart, Target } from "lucide-react";
+import { Share2, RefreshCw, ArrowLeft, Users, Heart, Target } from "lucide-react";
 import { relationshipPatterns } from "@/data/relationship-pattern-questions";
 import { shareRelationshipPatternResult } from "@/lib/relationship-pattern-logic";
 
@@ -285,7 +285,7 @@ export default function RelationshipPatternResults() {
                   variant="outline"
                   className="px-6 py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
                 >
-                  <Home className="mr-2 h-4 w-4" />
+                  <ArrowLeft className="mr-2 h-4 w-4" />
                   Back to Journey
                 </Button>
               </motion.div>

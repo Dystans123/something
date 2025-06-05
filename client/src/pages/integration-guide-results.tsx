@@ -4,7 +4,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Share2, RefreshCw, Home, Brain, Target, Star, TrendingUp } from "lucide-react";
+import { Share2, RefreshCw, ArrowLeft, Brain, Target, Star, TrendingUp } from "lucide-react";
 import { integrationLevels } from "@/data/integration-guide-questions";
 import { shareIntegrationGuideResult } from "@/lib/integration-guide-logic";
 
@@ -247,7 +247,7 @@ export default function IntegrationGuideResults() {
                   variant="outline"
                   className="px-6 py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
                 >
-                  <Home className="mr-2 h-4 w-4" />
+                  <ArrowLeft className="mr-2 h-4 w-4" />
                   Back to Journey
                 </Button>
               </motion.div>
