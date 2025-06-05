@@ -4,6 +4,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Landing from "@/pages/landing";
+import Journey from "@/pages/journey";
+import ComprehensiveSummary from "@/pages/comprehensive-summary";
 import Test from "@/pages/test";
 import Results from "@/pages/results";
 import Archetypes from "@/pages/archetypes";
@@ -18,6 +20,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Landing} />
+      <Route path="/journey" component={Journey} />
+      <Route path="/comprehensive-summary" component={ComprehensiveSummary} />
       <Route path="/test" component={Test} />
       <Route path="/results" component={Results} />
       <Route path="/archetypes" component={Archetypes} />
