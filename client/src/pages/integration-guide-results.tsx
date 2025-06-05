@@ -140,6 +140,45 @@ export default function IntegrationGuideResults() {
     return Math.round(((5 - score) / 4) * 100);
   };
 
+  const getCategoryInsight = (category: string, score: number) => {
+    const percentage = Math.round(score * 20);
+    
+    const insights = {
+      'self-awareness': {
+        high: 'You demonstrate strong self-awareness and understanding of your inner world.',
+        medium: 'You have developing self-awareness with room for deeper self-understanding.',
+        low: 'Building self-awareness through reflection and mindfulness would benefit your growth.'
+      },
+      'emotional-regulation': {
+        high: 'You show excellent emotional regulation and stability in challenging situations.',
+        medium: 'Your emotional regulation is developing with occasional challenges to work through.',
+        low: 'Developing emotional regulation skills will significantly enhance your wellbeing.'
+      },
+      'shadow-integration': {
+        high: 'You actively engage with and integrate your shadow aspects constructively.',
+        medium: 'You are making progress in shadow work with continued opportunities for integration.',
+        low: 'Shadow work presents an important area for psychological growth and healing.'
+      },
+      'authentic-expression': {
+        high: 'You express yourself authentically and align your actions with your values.',
+        medium: 'You are developing authentic expression with some areas still emerging.',
+        low: 'Cultivating authentic self-expression will enhance your relationships and fulfillment.'
+      },
+      'spiritual-connection': {
+        high: 'You maintain a strong spiritual connection that guides your personal growth.',
+        medium: 'Your spiritual connection is developing and offers growing support for integration.',
+        low: 'Exploring spiritual practices could provide valuable support for your integration journey.'
+      }
+    };
+
+    const categoryData = insights[category as keyof typeof insights];
+    if (!categoryData) return 'This area offers opportunities for continued growth and development.';
+
+    if (percentage >= 70) return categoryData.high;
+    if (percentage >= 40) return categoryData.medium;
+    return categoryData.low;
+  };
+
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0 bg-gradient-radial from-[hsl(var(--dark-gray))] via-[hsl(var(--deep-black))] to-[hsl(var(--deep-black))]" />
@@ -328,6 +367,7 @@ export default function IntegrationGuideResults() {
             {/* Personalized Guidance */}
             {guidance.length > 0 && (
               <motion.div 
+                className="mb-8"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 2.2, duration: 0.6 }}
@@ -350,6 +390,212 @@ export default function IntegrationGuideResults() {
                 </Card>
               </motion.div>
             )}
+
+            {/* Detailed Psychological Analysis */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.4, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-amber-900/20 to-[hsl(var(--deep-black))] border-amber-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-amber-400 border-amber-400">
+                    <Brain className="mr-2 h-4 w-4" />
+                    Psychological Insights
+                  </Badge>
+                  <div className="space-y-4">
+                    <div className="p-4 bg-amber-900/10 rounded-lg">
+                      <h4 className="font-semibold text-amber-300 mb-2">Understanding Your Integration Level</h4>
+                      <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
+                        Your {level.replace('-', ' ')} level indicates your current capacity for psychological wholeness and self-awareness. 
+                        This reflects how well you integrate different aspects of your personality, emotions, and experiences into a coherent sense of self.
+                      </p>
+                    </div>
+                    <div className="p-4 bg-amber-900/10 rounded-lg">
+                      <h4 className="font-semibold text-amber-300 mb-2">Psychological Integration Process</h4>
+                      <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
+                        Integration involves bringing together conscious and unconscious elements of your psyche. This process includes 
+                        accepting your shadow aspects, understanding your emotional patterns, and developing authentic self-expression.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Practical Exercises */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.6, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-emerald-900/20 to-[hsl(var(--deep-black))] border-emerald-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-emerald-400 border-emerald-400">
+                    <Target className="mr-2 h-4 w-4" />
+                    Daily Integration Practices
+                  </Badge>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="p-4 bg-emerald-900/10 rounded-lg">
+                      <h4 className="font-semibold text-emerald-300 mb-3">Mindfulness & Reflection</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Daily 10-minute meditation practice</li>
+                        <li>• Evening self-reflection journaling</li>
+                        <li>• Body awareness exercises</li>
+                        <li>• Emotion tracking and naming</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-emerald-900/10 rounded-lg">
+                      <h4 className="font-semibold text-emerald-300 mb-3">Shadow Work Exercises</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Identify triggers and reactions</li>
+                        <li>• Explore rejected aspects of self</li>
+                        <li>• Practice self-compassion</li>
+                        <li>• Dialogue with inner critic</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-emerald-900/10 rounded-lg">
+                      <h4 className="font-semibold text-emerald-300 mb-3">Relationship Integration</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Practice authentic communication</li>
+                        <li>• Set healthy boundaries</li>
+                        <li>• Express needs and feelings</li>
+                        <li>• Listen without judgment</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-emerald-900/10 rounded-lg">
+                      <h4 className="font-semibold text-emerald-300 mb-3">Creative Expression</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Art therapy and creative projects</li>
+                        <li>• Dream journaling and analysis</li>
+                        <li>• Movement and dance</li>
+                        <li>• Music and sound healing</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Category Breakdown */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.8, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-indigo-900/20 to-[hsl(var(--deep-black))] border-indigo-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-indigo-400 border-indigo-400">
+                    <TrendingUp className="mr-2 h-4 w-4" />
+                    Detailed Category Analysis
+                  </Badge>
+                  <div className="space-y-4">
+                    {Object.entries(categoryScores).map(([category, categoryScore], index) => (
+                      <div key={index} className="p-4 bg-indigo-900/10 rounded-lg">
+                        <div className="flex justify-between items-center mb-2">
+                          <h4 className="font-semibold text-indigo-300 capitalize">{category.replace('-', ' ')}</h4>
+                          <span className="text-indigo-400 font-bold">{Math.round(categoryScore * 20)}%</span>
+                        </div>
+                        <div className="w-full bg-[hsl(var(--deep-black))] rounded-full h-2 mb-3">
+                          <div 
+                            className="bg-gradient-to-r from-indigo-400 to-purple-400 h-2 rounded-full transition-all duration-500"
+                            style={{ width: `${categoryScore * 20}%` }}
+                          />
+                        </div>
+                        <p className="text-[hsl(var(--metallic-silver))] text-sm">
+                          {getCategoryInsight(category, categoryScore)}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Next Steps Action Plan */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 3.0, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-rose-900/20 to-[hsl(var(--deep-black))] border-rose-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-rose-400 border-rose-400">
+                    <Target className="mr-2 h-4 w-4" />
+                    30-Day Integration Action Plan
+                  </Badge>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="p-4 bg-rose-900/10 rounded-lg">
+                      <h4 className="font-semibold text-rose-300 mb-3">Week 1-2: Foundation</h4>
+                      <ul className="space-y-1 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Establish daily mindfulness practice</li>
+                        <li>• Begin emotion tracking journal</li>
+                        <li>• Identify core values and beliefs</li>
+                        <li>• Start shadow work exercises</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-rose-900/10 rounded-lg">
+                      <h4 className="font-semibold text-rose-300 mb-3">Week 3-4: Integration</h4>
+                      <ul className="space-y-1 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Practice authentic self-expression</li>
+                        <li>• Work on boundary setting</li>
+                        <li>• Explore creative outlets</li>
+                        <li>• Address relationship patterns</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-rose-900/10 rounded-lg">
+                      <h4 className="font-semibold text-rose-300 mb-3">Ongoing: Mastery</h4>
+                      <ul className="space-y-1 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Deepen spiritual practices</li>
+                        <li>• Mentor others on their journey</li>
+                        <li>• Continuous self-reflection</li>
+                        <li>• Integrate learnings into daily life</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Resources & Support */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 3.2, duration: 0.6 }}
+            >
+              <Card className="bg-gradient-to-br from-cyan-900/20 to-[hsl(var(--deep-black))] border-cyan-500/20">
+                <CardContent className="p-6">
+                  <Badge variant="outline" className="mb-4 text-cyan-400 border-cyan-400">
+                    <Brain className="mr-2 h-4 w-4" />
+                    Recommended Resources
+                  </Badge>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold text-cyan-300 mb-3">Essential Reading</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• "Man and His Symbols" - Carl Jung</li>
+                        <li>• "The Hero with a Thousand Faces" - Joseph Campbell</li>
+                        <li>• "Meeting the Shadow" - Connie Zweig</li>
+                        <li>• "The Gifts of Imperfection" - Brené Brown</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-cyan-300 mb-3">Professional Support</h4>
+                      <ul className="space-y-2 text-[hsl(var(--metallic-silver))] text-sm">
+                        <li>• Jungian analysis and therapy</li>
+                        <li>• Depth psychology practitioners</li>
+                        <li>• Integration-focused coaching</li>
+                        <li>• Support groups and communities</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           </motion.div>
         </div>
       </div>
