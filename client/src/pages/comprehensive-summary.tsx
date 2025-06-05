@@ -73,6 +73,30 @@ export default function ComprehensiveSummary() {
   const [showDetails, setShowDetails] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const getToxicityLevelColor = (level: string) => {
+    const normalizedLevel = level.toLowerCase();
+    if (normalizedLevel === 'green') return "text-emerald-400";
+    if (normalizedLevel === 'yellow') return "text-yellow-400";
+    if (normalizedLevel === 'red') return "text-red-400";
+    return "text-red-400";
+  };
+
+  const getToxicityLevelBg = (level: string) => {
+    const normalizedLevel = level.toLowerCase();
+    if (normalizedLevel === 'green') return "from-emerald-500/20 to-green-500/20";
+    if (normalizedLevel === 'yellow') return "from-yellow-500/20 to-amber-500/20";
+    if (normalizedLevel === 'red') return "from-red-500/20 to-orange-500/20";
+    return "from-red-500/20 to-orange-500/20";
+  };
+
+  const getToxicityLevelBorder = (level: string) => {
+    const normalizedLevel = level.toLowerCase();
+    if (normalizedLevel === 'green') return "border-emerald-400/30";
+    if (normalizedLevel === 'yellow') return "border-yellow-400/30";
+    if (normalizedLevel === 'red') return "border-red-400/30";
+    return "border-red-400/30";
+  };
+
   const generateComprehensiveProfile = (results: TestResult[]): ComprehensiveProfile => {
     const shadowResult = results.find(r => r.testId === 'shadow-test')?.result;
     const toxicityResult = results.find(r => r.testId === 'toxicity-compass')?.result;
@@ -398,6 +422,8 @@ ${profile.nextSteps.map(item => `• ${item}`).join('\n')}
     return "Areas of concern requiring attention";
   };
 
+
+
   return (
     <div className="min-h-screen bg-[hsl(var(--deep-black))] relative overflow-hidden">
       {/* Background gradient */}
@@ -514,13 +540,13 @@ ${profile.nextSteps.map(item => `• ${item}`).join('\n')}
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-red-500/20 to-orange-500/20 border-red-400/30">
+            <Card className={`bg-gradient-to-br ${getToxicityLevelBg(profile.toxicityLevel)} ${getToxicityLevelBorder(profile.toxicityLevel)}`}>
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-3">
-                  <Shield className="h-8 w-8 text-red-400" />
+                  <Shield className={`h-8 w-8 ${getToxicityLevelColor(profile.toxicityLevel)}`} />
                   <div>
                     <h3 className="font-semibold text-[hsl(var(--silver-glow))]">Toxicity Level</h3>
-                    <p className="text-red-400 font-medium">{profile.toxicityLevel}</p>
+                    <p className={`${getToxicityLevelColor(profile.toxicityLevel)} font-medium`}>{profile.toxicityLevel}</p>
                   </div>
                 </div>
               </CardHeader>
