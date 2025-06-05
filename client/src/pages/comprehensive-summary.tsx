@@ -635,7 +635,106 @@ ${profile.nextSteps.map(item => `• ${item}`).join('\n')}
               </CardContent>
             </Card>
 
-            {/* Personalized Recommendations */}
+            {/* Detailed Analysis Sections */}
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Shadow Work Analysis */}
+              <Card className="bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border-purple-400/30">
+                <CardHeader>
+                  <div className="flex items-center space-x-3">
+                    <Brain className="h-6 w-6 text-purple-400" />
+                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
+                      Shadow Work Insights
+                    </h3>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {profile.detailedAnalysis.shadowWork.map((insight, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <Eye className="h-4 w-4 text-purple-400 flex-shrink-0 mt-1" />
+                        <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
+                          {insight}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Emotional Health Analysis */}
+              <Card className="bg-gradient-to-br from-red-500/10 to-orange-500/10 border-red-400/30">
+                <CardHeader>
+                  <div className="flex items-center space-x-3">
+                    <Heart className="h-6 w-6 text-red-400" />
+                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
+                      Emotional Health
+                    </h3>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {profile.detailedAnalysis.emotionalHealth.map((insight, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <Shield className="h-4 w-4 text-red-400 flex-shrink-0 mt-1" />
+                        <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
+                          {insight}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Relationship Dynamics */}
+              <Card className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border-emerald-400/30">
+                <CardHeader>
+                  <div className="flex items-center space-x-3">
+                    <Users className="h-6 w-6 text-emerald-400" />
+                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
+                      Relationship Dynamics
+                    </h3>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {profile.detailedAnalysis.relationshipDynamics.map((insight, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <Users className="h-4 w-4 text-emerald-400 flex-shrink-0 mt-1" />
+                        <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
+                          {insight}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Personal Growth */}
+              <Card className="bg-gradient-to-br from-amber-500/10 to-yellow-500/10 border-amber-400/30">
+                <CardHeader>
+                  <div className="flex items-center space-x-3">
+                    <Target className="h-6 w-6 text-amber-400" />
+                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
+                      Personal Growth
+                    </h3>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {profile.detailedAnalysis.personalGrowth.map((insight, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <Lightbulb className="h-4 w-4 text-amber-400 flex-shrink-0 mt-1" />
+                        <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
+                          {insight}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Action Plan */}
             <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--border))]">
               <CardHeader>
                 <div className="flex items-center space-x-3">
@@ -647,7 +746,7 @@ ${profile.nextSteps.map(item => `• ${item}`).join('\n')}
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {profile.recommendations.map((recommendation, index) => (
+                  {profile.actionPlan.map((action, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
@@ -659,7 +758,37 @@ ${profile.nextSteps.map(item => `• ${item}`).join('\n')}
                         <span className="text-blue-400 text-sm font-bold">{index + 1}</span>
                       </div>
                       <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                        {recommendation}
+                        {action}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Next Steps */}
+            <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--border))]">
+              <CardHeader>
+                <div className="flex items-center space-x-3">
+                  <ChevronRight className="h-6 w-6 text-green-400" />
+                  <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
+                    Next Steps for Continued Growth
+                  </h3>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {profile.nextSteps.map((step, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="flex items-start space-x-3 p-4 rounded-lg bg-green-500/10 border border-green-500/20"
+                    >
+                      <Compass className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5" />
+                      <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
+                        {step}
                       </p>
                     </motion.div>
                   ))}
@@ -691,7 +820,8 @@ ${profile.nextSteps.map(item => `• ${item}`).join('\n')}
                       size="lg"
                       className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0"
                     >
-                      Retake Assessments
+                      <Home className="mr-2 h-4 w-4" />
+                      Back to Journey
                     </Button>
                     <Button
                       onClick={shareResults}
@@ -701,6 +831,15 @@ ${profile.nextSteps.map(item => `• ${item}`).join('\n')}
                     >
                       Share Your Journey
                       <Share2 className="ml-2 h-4 w-4" />
+                    </Button>
+                    <Button
+                      onClick={restartJourney}
+                      variant="outline"
+                      size="lg"
+                      className="px-8 py-4 border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+                    >
+                      <RotateCcw className="mr-2 h-4 w-4" />
+                      Restart Journey
                     </Button>
                   </div>
                 </CardContent>
