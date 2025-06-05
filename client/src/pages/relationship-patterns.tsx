@@ -154,7 +154,7 @@ export default function RelationshipPatterns() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] rounded-3xl p-8 md:p-12 border border-[hsl(var(--metallic-silver)/0.2)] mb-8">
+          <div className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] rounded-3xl p-8 md:p-12 border border-[hsl(var(--metallic-silver)/0.2)] mb-8 relative">
             <div className="text-center mb-8">
               <div className="text-sm text-[hsl(var(--metallic-silver))] mb-2">
                 {currentQuestion.category}
@@ -164,7 +164,7 @@ export default function RelationshipPatterns() {
               </h2>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 mb-12">
               <AnimatePresence mode="wait">
                 {currentQuestion.options.map((option, index) => (
                   <motion.button
@@ -192,34 +192,26 @@ export default function RelationshipPatterns() {
                 ))}
               </AnimatePresence>
             </div>
-          </div>
 
-          {/* Navigation */}
-          <motion.div 
-            className="flex justify-between items-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <Button
-              variant="outline"
-              onClick={prevQuestion}
-              disabled={!canGoPrev}
-              className="px-6 py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))] disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Previous
-            </Button>
-            
-            <Button
-              onClick={nextQuestion}
-              disabled={!canGoNext}
-              className="px-6 py-3 bg-[hsl(var(--metallic-silver))] text-[hsl(var(--deep-black))] font-semibold rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {currentQuestionIndex === relationshipPatternQuestions.length - 1 ? 'Finish' : 'Next'}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </motion.div>
+            {/* Back Arrow in Bottom Left */}
+            {canGoPrev && (
+              <motion.div 
+                className="absolute bottom-8 left-8 md:bottom-12 md:left-12"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+              >
+                <Button
+                  variant="outline"
+                  onClick={prevQuestion}
+                  size="sm"
+                  className="p-2 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-full transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                </Button>
+              </motion.div>
+            )}
+          </div>
         </motion.div>
       </div>
     </div>
