@@ -250,21 +250,7 @@ export default function ToxicityResults() {
               </Button>
             </motion.div>
 
-            {/* Back to Journey Navigation */}
-            <motion.div 
-              className="mt-8 text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2.2, duration: 0.6 }}
-            >
-              <Button
-                onClick={backToJourney}
-                variant="ghost"
-                className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))]"
-              >
-                ← Back to Journey
-              </Button>
-            </motion.div>
+
           </motion.div>
         </div>
       </div>

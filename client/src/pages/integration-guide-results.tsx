@@ -242,14 +242,7 @@ export default function IntegrationGuideResults() {
                   <Target className="ml-2 h-5 w-5" />
                 </Button>
                 
-                <Button
-                  onClick={() => setLocation('/journey')}
-                  variant="outline"
-                  className="px-6 py-3 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-                >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Journey
-                </Button>
+
               </motion.div>
             </motion.div>
 
