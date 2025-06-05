@@ -3,7 +3,9 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Brain, Shield, Users, Lightbulb, Clock, CheckCircle, Target, Heart, Eye } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowRight, Brain, Shield, Users, Lightbulb, Clock, CheckCircle, Target, Heart, Eye, Zap, Compass } from "lucide-react";
+import { SmokeParticles } from "@/components/smoke-particles";
 
 interface ToolCard {
   id: string;
@@ -21,17 +23,36 @@ interface ToolCard {
 
 const tools: ToolCard[] = [
   {
+    id: "intelligence-type",
+    title: "Intelligence Type Assessment",
+    subtitle: "Cognitive Profile",
+    description: "Discover your dominant intelligence type based on Howard Gardner's multiple intelligence theory. Understand how your mind processes information and unlock your cognitive superpowers through 30 comprehensive questions.",
+    icon: <Brain className="h-6 w-6" />,
+    color: "text-blue-400",
+    bgGradient: "from-blue-500/20 to-cyan-500/20",
+    features: [
+      "30 scientifically-based questions",
+      "8 types of intelligence analysis",
+      "Personalized cognitive strengths profile",
+      "Career and development recommendations"
+    ],
+    buttonText: "Discover Your Intelligence Type",
+    route: "/intelligence-type",
+    duration: "8-12 minutes"
+  },
+  {
     id: "shadow-test",
     title: "Shadow Archetype Test",
     subtitle: "Core Assessment",
     description: "Discover your dominant shadow archetype through 40 psychological projection questions. Uncover the hidden aspects of your personality that influence your decisions, relationships, and life patterns in ways you never realized.",
-    icon: <Brain className="h-6 w-6" />,
+    icon: <Target className="h-6 w-6" />,
     color: "text-purple-400",
     bgGradient: "from-purple-500/20 to-indigo-500/20",
     features: [
       "40 deep psychological questions",
       "8 Jungian shadow archetypes",
-      "Personalized archetype analysis"
+      "Personalized archetype analysis",
+      "Transformation guidance"
     ],
     buttonText: "Begin Shadow Test",
     route: "/test",
@@ -48,7 +69,8 @@ const tools: ToolCard[] = [
     features: [
       "Comprehensive toxicity assessment",
       "Three-zone impact analysis",
-      "Recovery guidance and resources"
+      "Recovery guidance and resources",
+      "Healing pathway recommendations"
     ],
     buttonText: "Take Toxicity Compass",
     route: "/toxicity-compass",
@@ -111,7 +133,7 @@ export default function Landing() {
           </Badge>
         </div>
         <h1 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))]">
-          Four Paths to Self-Discovery
+          Five Paths to Self-Discovery
         </h1>
         <div className="w-48"></div> {/* Spacer for centering */}
       </motion.nav>
