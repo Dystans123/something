@@ -21,44 +21,42 @@ import {
   Heart,
   Zap,
   BookOpen,
-  Download
+  Download,
+  RotateCcw,
+  Home,
+  ChevronRight,
+  Award,
+  Eye,
+  Compass
 } from "lucide-react";
 
 interface ComprehensiveProfile {
   dominantArchetype: string;
+  archetypeDescription: string;
   toxicityLevel: string;
+  toxicityScore: number;
   relationshipPattern: string;
   integrationLevel: string;
   overallScore: number;
+  detailedAnalysis: {
+    shadowWork: string[];
+    emotionalHealth: string[];
+    relationshipDynamics: string[];
+    personalGrowth: string[];
+  };
   strengths: string[];
   growthAreas: string[];
-  recommendations: string[];
+  actionPlan: string[];
+  nextSteps: string[];
+  completionDate: string;
+  totalPoints: number;
 }
 
-const mockProfile: ComprehensiveProfile = {
-  dominantArchetype: "The Sage",
-  toxicityLevel: "Green Zone",
-  relationshipPattern: "Secure Connector",
-  integrationLevel: "Advanced Integration",
-  overallScore: 85,
-  strengths: [
-    "Strong emotional intelligence and self-awareness",
-    "Healthy relationship boundaries and communication",
-    "Effective integration of shadow aspects",
-    "Resilient to toxic relationship patterns"
-  ],
-  growthAreas: [
-    "Perfectionism tendencies that may limit spontaneity",
-    "Occasional over-analysis leading to decision paralysis",
-    "Need for more self-compassion during setbacks"
-  ],
-  recommendations: [
-    "Practice mindfulness meditation to balance analytical thinking",
-    "Engage in creative activities to embrace imperfection",
-    "Build stronger support networks for emotional validation",
-    "Continue shadow work through journaling and reflection"
-  ]
-};
+interface TestResult {
+  testId: string;
+  result: any;
+  completedAt: string;
+}
 
 const strengthsMap = {
   "Strong emotional intelligence": { icon: <Brain className="h-5 w-5" />, color: "text-purple-400" },
@@ -71,16 +69,198 @@ const strengthsMap = {
 
 export default function ComprehensiveSummary() {
   const [, setLocation] = useLocation();
-  const [profile, setProfile] = useState<ComprehensiveProfile>(mockProfile);
+  const [profile, setProfile] = useState<ComprehensiveProfile | null>(null);
   const [showDetails, setShowDetails] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const generateComprehensiveProfile = (results: TestResult[]): ComprehensiveProfile => {
+    const shadowResult = results.find(r => r.testId === 'shadow-test')?.result;
+    const toxicityResult = results.find(r => r.testId === 'toxicity-compass')?.result;
+    const relationshipResult = results.find(r => r.testId === 'relationship-patterns')?.result;
+    const integrationResult = results.find(r => r.testId === 'integration-guide')?.result;
+
+    // Calculate overall score based on test results
+    let overallScore = 0;
+    if (shadowResult) overallScore += 25;
+    if (toxicityResult) {
+      if (toxicityResult.zone === 'green') overallScore += 30;
+      else if (toxicityResult.zone === 'yellow') overallScore += 20;
+      else overallScore += 10;
+    }
+    if (relationshipResult) overallScore += 25;
+    if (integrationResult) overallScore += 20;
+
+    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
+    let totalPoints = 0;
+    if (progress.shadowTest) totalPoints += 250;
+    if (progress.toxicityCompass) totalPoints += 200;
+    if (progress.relationshipPatterns) totalPoints += 300;
+    if (progress.integrationGuide) totalPoints += 350;
+
+    return {
+      dominantArchetype: shadowResult?.archetype || "Unknown",
+      archetypeDescription: getArchetypeDescription(shadowResult?.archetype),
+      toxicityLevel: toxicityResult?.zone || "Unknown",
+      toxicityScore: toxicityResult?.percentage || 0,
+      relationshipPattern: relationshipResult?.dominantPattern || "Unknown",
+      integrationLevel: integrationResult?.integrationLevel || "Unknown",
+      overallScore,
+      detailedAnalysis: {
+        shadowWork: generateShadowAnalysis(shadowResult),
+        emotionalHealth: generateEmotionalAnalysis(toxicityResult),
+        relationshipDynamics: generateRelationshipAnalysis(relationshipResult),
+        personalGrowth: generateGrowthAnalysis(integrationResult)
+      },
+      strengths: generateStrengths(shadowResult, toxicityResult, relationshipResult, integrationResult),
+      growthAreas: generateGrowthAreas(shadowResult, toxicityResult, relationshipResult, integrationResult),
+      actionPlan: generateActionPlan(shadowResult, toxicityResult, relationshipResult, integrationResult),
+      nextSteps: generateNextSteps(shadowResult, toxicityResult, relationshipResult, integrationResult),
+      completionDate: new Date().toLocaleDateString(),
+      totalPoints
+    };
+  };
+
+  const getArchetypeDescription = (archetype: string): string => {
+    const descriptions: Record<string, string> = {
+      "The Innocent": "You seek harmony and happiness, preferring to see the good in people and situations.",
+      "The Sage": "You are driven by the desire to understand the world and share wisdom with others.",
+      "The Explorer": "You have a deep need for freedom and authenticity, always seeking new experiences.",
+      "The Outlaw": "You challenge the status quo and fight for change, often disrupting conventional thinking.",
+      "The Magician": "You believe in transformation and have the power to make dreams come true.",
+      "The Hero": "You are courageous and determined, always rising to meet challenges head-on.",
+      "The Lover": "You seek connection, intimacy, and are motivated by love and relationships.",
+      "The Jester": "You bring joy and lightness to situations, using humor to navigate life's challenges."
+    };
+    return descriptions[archetype] || "A unique personality with distinct characteristics and motivations.";
+  };
+
+  const generateShadowAnalysis = (shadowResult: any): string[] => {
+    if (!shadowResult) return ["Shadow work assessment not completed"];
+    
+    return [
+      `Your dominant archetype reveals core motivations and behavioral patterns`,
+      `Shadow integration requires acknowledging both light and dark aspects of your personality`,
+      `Your archetype suggests specific areas for psychological development`,
+      `Understanding your shadow helps prevent projection onto others`
+    ];
+  };
+
+  const generateEmotionalAnalysis = (toxicityResult: any): string[] => {
+    if (!toxicityResult) return ["Emotional health assessment not completed"];
+    
+    const zoneAnalysis: Record<string, string[]> = {
+      'green': [
+        "You demonstrate healthy emotional boundaries and resilience",
+        "Your relationships appear balanced and supportive",
+        "You show good awareness of toxic patterns and avoid them",
+        "Continue maintaining these healthy relationship dynamics"
+      ],
+      'yellow': [
+        "Some relationship patterns may be causing emotional stress",
+        "You're aware of potential toxicity but may struggle with boundaries",
+        "Working on communication skills could improve your relationships",
+        "Consider seeking support for relationship challenges"
+      ],
+      'red': [
+        "Your emotional well-being may be significantly impacted by toxic relationships",
+        "Priority should be given to establishing healthy boundaries",
+        "Professional support may be beneficial for relationship healing",
+        "Focus on self-care and building a support network"
+      ]
+    };
+    
+    return zoneAnalysis[toxicityResult.zone] || ["Emotional health assessment needs review"];
+  };
+
+  const generateRelationshipAnalysis = (relationshipResult: any): string[] => {
+    if (!relationshipResult) return ["Relationship pattern assessment not completed"];
+    
+    return [
+      `Your dominant relationship pattern influences how you connect with others`,
+      `Understanding these patterns helps improve communication and intimacy`,
+      `Relationship dynamics are learnable skills that can be developed`,
+      `Awareness of your patterns is the first step toward positive change`
+    ];
+  };
+
+  const generateGrowthAnalysis = (integrationResult: any): string[] => {
+    if (!integrationResult) return ["Personal growth assessment not completed"];
+    
+    return [
+      `Integration work involves bringing unconscious aspects into conscious awareness`,
+      `Personal growth is an ongoing journey requiring patience and self-compassion`,
+      `Your assessment reveals specific areas for continued development`,
+      `Regular self-reflection and practice support psychological integration`
+    ];
+  };
+
+  const generateStrengths = (...results: any[]): string[] => {
+    const strengths = [];
+    
+    if (results[0]) strengths.push("Self-awareness through archetype understanding");
+    if (results[1]?.zone === 'green') strengths.push("Healthy relationship boundaries");
+    if (results[2]) strengths.push("Understanding of relationship dynamics");
+    if (results[3]) strengths.push("Commitment to personal growth");
+    
+    return strengths.length > 0 ? strengths : ["Completion of comprehensive psychological assessment"];
+  };
+
+  const generateGrowthAreas = (...results: any[]): string[] => {
+    const growthAreas = [];
+    
+    if (results[1]?.zone !== 'green') growthAreas.push("Developing stronger emotional boundaries");
+    if (results[2]) growthAreas.push("Enhancing communication skills");
+    if (results[3]) growthAreas.push("Continuing shadow integration work");
+    
+    return growthAreas.length > 0 ? growthAreas : ["Maintaining current psychological health"];
+  };
+
+  const generateActionPlan = (...results: any[]): string[] => {
+    return [
+      "Continue regular self-reflection and journaling",
+      "Practice mindfulness and emotional awareness exercises",
+      "Engage in meaningful relationships with healthy boundaries",
+      "Seek professional support when needed",
+      "Read books on psychology and personal development"
+    ];
+  };
+
+  const generateNextSteps = (...results: any[]): string[] => {
+    return [
+      "Schedule regular check-ins with yourself about emotional well-being",
+      "Consider working with a therapist or counselor for deeper exploration",
+      "Join support groups or communities focused on personal growth",
+      "Practice the insights gained from this assessment in daily life",
+      "Retake assessments periodically to track your growth"
+    ];
+  };
 
   useEffect(() => {
-    // In a real implementation, this would combine results from all four tests
-    // For now, we'll use the mock profile
-    setTimeout(() => setShowDetails(true), 1000);
+    // Load and process actual test results
+    const savedResults = localStorage.getItem('psychTestResults');
+    const savedProgress = localStorage.getItem('psychTestProgress');
+    
+    if (savedResults && savedProgress) {
+      const results: TestResult[] = JSON.parse(savedResults);
+      const progress = JSON.parse(savedProgress);
+      
+      // Only generate profile if all tests are completed
+      const allCompleted = progress.shadowTest && progress.toxicityCompass && 
+                          progress.relationshipPatterns && progress.integrationGuide;
+      
+      if (allCompleted) {
+        const comprehensiveProfile = generateComprehensiveProfile(results);
+        setProfile(comprehensiveProfile);
+        setTimeout(() => setShowDetails(true), 1000);
+      }
+    }
+    
+    setLoading(false);
   }, []);
 
   const shareResults = () => {
+    if (!profile) return;
+    
     const text = `I've completed my comprehensive psychological assessment! My profile shows ${profile.dominantArchetype} archetype with ${profile.integrationLevel}. 🧠✨`;
     
     if (navigator.share) {
@@ -94,10 +274,117 @@ export default function ComprehensiveSummary() {
     }
   };
 
-  const downloadReport = () => {
-    // In a real implementation, this would generate a PDF report
-    console.log('Downloading comprehensive report...');
+  const restartJourney = () => {
+    if (confirm('Are you sure you want to restart your journey? This will clear all progress and results.')) {
+      localStorage.removeItem('psychTestProgress');
+      localStorage.removeItem('psychTestResults');
+      localStorage.removeItem('shadowTestResult');
+      localStorage.removeItem('toxicityResult');
+      localStorage.removeItem('relationshipPatternResult');
+      localStorage.removeItem('integrationGuideResult');
+      setLocation('/journey');
+    }
   };
+
+  const downloadReport = () => {
+    if (!profile) return;
+    
+    // Generate a comprehensive text report
+    const report = `
+COMPREHENSIVE PSYCHOLOGICAL ASSESSMENT REPORT
+Generated: ${profile.completionDate}
+Total Points: ${profile.totalPoints}
+
+DOMINANT ARCHETYPE: ${profile.dominantArchetype}
+${profile.archetypeDescription}
+
+EMOTIONAL HEALTH: ${profile.toxicityLevel} (${profile.toxicityScore}%)
+RELATIONSHIP PATTERN: ${profile.relationshipPattern}
+INTEGRATION LEVEL: ${profile.integrationLevel}
+OVERALL SCORE: ${profile.overallScore}/100
+
+DETAILED ANALYSIS:
+
+Shadow Work Insights:
+${profile.detailedAnalysis.shadowWork.map(item => `• ${item}`).join('\n')}
+
+Emotional Health Assessment:
+${profile.detailedAnalysis.emotionalHealth.map(item => `• ${item}`).join('\n')}
+
+Relationship Dynamics:
+${profile.detailedAnalysis.relationshipDynamics.map(item => `• ${item}`).join('\n')}
+
+Personal Growth Opportunities:
+${profile.detailedAnalysis.personalGrowth.map(item => `• ${item}`).join('\n')}
+
+STRENGTHS:
+${profile.strengths.map(item => `• ${item}`).join('\n')}
+
+GROWTH AREAS:
+${profile.growthAreas.map(item => `• ${item}`).join('\n')}
+
+ACTION PLAN:
+${profile.actionPlan.map(item => `• ${item}`).join('\n')}
+
+NEXT STEPS:
+${profile.nextSteps.map(item => `• ${item}`).join('\n')}
+    `;
+    
+    const blob = new Blob([report], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `psychological-assessment-${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[hsl(var(--deep-black))] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-[hsl(var(--metallic-silver))]">Loading your comprehensive profile...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <div className="min-h-screen bg-[hsl(var(--deep-black))] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
+        
+        <div className="relative z-10 container mx-auto px-6 py-12 max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center"
+          >
+            <AlertTriangle className="h-16 w-16 text-amber-400 mx-auto mb-6" />
+            <h1 className="font-serif text-3xl font-bold text-[hsl(var(--silver-glow))] mb-4">
+              Assessment Incomplete
+            </h1>
+            <p className="text-[hsl(var(--metallic-silver))] mb-8 max-w-2xl mx-auto">
+              You need to complete all four psychological assessments to view your comprehensive summary.
+            </p>
+            
+            <div className="flex gap-4 justify-center">
+              <Button
+                onClick={() => setLocation('/journey')}
+                className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Return to Journey
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return "text-emerald-400";

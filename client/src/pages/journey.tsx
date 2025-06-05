@@ -120,12 +120,17 @@ export default function Journey() {
   }, []);
 
   useEffect(() => {
-    // Calculate total points and check if all tests completed
-    const completedTests = Object.values(progress).filter(Boolean).length;
-    const points = completedTests * 275; // Average points per test
+    // Calculate total points based on actual test values
+    let points = 0;
+    if (progress.shadowTest) points += 250;
+    if (progress.toxicityCompass) points += 200;
+    if (progress.relationshipPatterns) points += 300;
+    if (progress.integrationGuide) points += 350;
     setTotalPoints(points);
     
-    const allCompleted = Object.values(progress).every(Boolean);
+    // Only show summary when ALL 4 tests are completed
+    const allCompleted = progress.shadowTest && progress.toxicityCompass && 
+                        progress.relationshipPatterns && progress.integrationGuide;
     setShowSummary(allCompleted);
   }, [progress]);
 
@@ -188,6 +193,29 @@ export default function Journey() {
     } else {
       // Fallback to clipboard
       navigator.clipboard.writeText(`${text} ${window.location.href}`);
+    }
+  };
+
+  const restartJourney = () => {
+    if (confirm('Are you sure you want to restart your journey? This will clear all progress and results.')) {
+      // Clear all stored data
+      localStorage.removeItem('psychTestProgress');
+      localStorage.removeItem('psychTestResults');
+      localStorage.removeItem('shadowTestResult');
+      localStorage.removeItem('toxicityResult');
+      localStorage.removeItem('relationshipPatternResult');
+      localStorage.removeItem('integrationGuideResult');
+      
+      // Reset state
+      setProgress({
+        shadowTest: false,
+        toxicityCompass: false,
+        relationshipPatterns: false,
+        integrationGuide: false
+      });
+      setResults([]);
+      setTotalPoints(0);
+      setShowSummary(false);
     }
   };
 
@@ -408,6 +436,15 @@ export default function Journey() {
                     >
                       Share Achievement
                       <Share2 className="ml-2 h-5 w-5" />
+                    </Button>
+                    
+                    <Button
+                      onClick={restartJourney}
+                      variant="outline"
+                      size="lg"
+                      className="px-8 py-4 text-lg border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+                    >
+                      Restart Journey
                     </Button>
                   </div>
                 </CardContent>
