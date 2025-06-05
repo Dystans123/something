@@ -19,7 +19,8 @@ import {
   Star,
   ChevronUp,
   Award,
-  Target
+  Target,
+  Home
 } from "lucide-react";
 
 interface TestProgress {
@@ -436,57 +437,71 @@ export default function Journey() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
+                  <div className="flex flex-col gap-3 justify-center px-6 sm:px-8">
                     {showSummary ? (
                       <>
                         <Button
                           onClick={() => setLocation('/comprehensive-summary')}
                           size="lg"
-                          className="px-10 py-5 text-xl font-bold bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 hover:from-purple-600 hover:via-blue-600 hover:to-emerald-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-110"
+                          className="w-full sm:w-auto px-6 py-4 text-base sm:text-lg font-bold bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 hover:from-purple-600 hover:via-blue-600 hover:to-emerald-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
                         >
-                          🎉 View Complete Summary 🎉
-                          <Target className="ml-3 h-6 w-6" />
+                          <span className="truncate">🎉 View Complete Summary 🎉</span>
+                          <Target className="ml-2 h-5 w-5 flex-shrink-0" />
                         </Button>
                         
-                        <Button
-                          onClick={shareProgress}
-                          variant="outline"
-                          size="lg"
-                          className="px-8 py-4 text-lg border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-                        >
-                          Share Achievement
-                          <Share2 className="ml-2 h-5 w-5" />
-                        </Button>
-                        
-                        <Button
-                          onClick={restartJourney}
-                          variant="outline"
-                          size="lg"
-                          className="px-8 py-4 text-lg border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
-                        >
-                          Restart Journey
-                        </Button>
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                          <Button
+                            onClick={shareProgress}
+                            variant="outline"
+                            size="lg"
+                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                          >
+                            Share Achievement
+                            <Share2 className="ml-2 h-4 w-4" />
+                          </Button>
+                          
+                          <Button
+                            onClick={restartJourney}
+                            variant="outline"
+                            size="lg"
+                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+                          >
+                            Restart Journey
+                          </Button>
+                        </div>
                       </>
                     ) : (
                       <>
-                        <Button
-                          onClick={shareProgress}
-                          variant="outline"
-                          size="lg"
-                          className="px-8 py-4 text-lg border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-                        >
-                          Share Progress
-                          <Share2 className="ml-2 h-5 w-5" />
-                        </Button>
-                        
-                        <Button
-                          onClick={restartJourney}
-                          variant="outline"
-                          size="lg"
-                          className="px-8 py-4 text-lg border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
-                        >
-                          Restart Journey
-                        </Button>
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                          <Button
+                            onClick={() => setLocation('/')}
+                            variant="outline"
+                            size="lg"
+                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                          >
+                            <Home className="mr-2 h-4 w-4" />
+                            Home
+                          </Button>
+                          
+                          <Button
+                            onClick={shareProgress}
+                            variant="outline"
+                            size="lg"
+                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                          >
+                            Share Progress
+                            <Share2 className="ml-2 h-4 w-4" />
+                          </Button>
+                          
+                          <Button
+                            onClick={restartJourney}
+                            variant="outline"
+                            size="lg"
+                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+                          >
+                            Restart Journey
+                          </Button>
+                        </div>
                       </>
                     )}
                   </div>
