@@ -193,6 +193,140 @@ export default function Landing() {
           </motion.div>
         </motion.div>
 
+        {/* Two Paths Section */}
+        <motion.section 
+          className="mb-20"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-6">
+              Choose Your Path to Self-Discovery
+            </h2>
+            <p className="text-lg text-[hsl(var(--metallic-silver))] max-w-4xl mx-auto leading-relaxed mb-8">
+              You have two ways to explore your psychological landscape. Choose the path that best fits your needs and goals.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Individual Tests Path */}
+            <motion.div 
+              className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-[hsl(var(--border))] hover:border-blue-400/50 transition-all duration-300"
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Target className="h-8 w-8 text-blue-400" />
+                </div>
+                <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-3">
+                  Individual Tests
+                </h3>
+                <p className="text-[hsl(var(--metallic-silver))] mb-6">
+                  Take any single assessment to gain specific insights into one aspect of your personality. 
+                  Perfect for targeted self-discovery and immediate actionable results.
+                </p>
+              </div>
+              
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <span className="text-[hsl(var(--metallic-silver))] text-sm">
+                    Choose any of the four assessments
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <span className="text-[hsl(var(--metallic-silver))] text-sm">
+                    Get immediate personalized results
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <span className="text-[hsl(var(--metallic-silver))] text-sm">
+                    Focus on specific areas of growth
+                  </span>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <p className="text-sm text-blue-400 font-semibold mb-3">Best for: Quick insights & targeted discovery</p>
+                <Button
+                  onClick={() => setLocation("/test")}
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0"
+                >
+                  Start Individual Test
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </motion.div>
+
+            {/* Complete Journey Path */}
+            <motion.div 
+              className="bg-gradient-to-br from-emerald-500/10 to-amber-500/10 rounded-2xl p-8 border border-[hsl(var(--border))] hover:border-emerald-400/50 transition-all duration-300 relative"
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-gradient-to-r from-emerald-500 to-amber-500 text-white border-0 px-4 py-1">
+                  RECOMMENDED
+                </Badge>
+              </div>
+              
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500/20 to-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Eye className="h-8 w-8 text-emerald-400" />
+                </div>
+                <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-3">
+                  Complete Journey
+                </h3>
+                <p className="text-[hsl(var(--metallic-silver))] mb-6">
+                  Take all four assessments in a guided sequence to unlock a comprehensive psychological profile 
+                  with deep insights and personalized integration strategies.
+                </p>
+              </div>
+              
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                  <span className="text-[hsl(var(--metallic-silver))] text-sm">
+                    Complete all four assessments
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                  <span className="text-[hsl(var(--metallic-silver))] text-sm">
+                    Unlock comprehensive summary report
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                  <span className="text-[hsl(var(--metallic-silver))] text-sm">
+                    Get personalized action plan
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                  <span className="text-[hsl(var(--metallic-silver))] text-sm">
+                    Access detailed growth roadmap
+                  </span>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <p className="text-sm text-emerald-400 font-semibold mb-3">Best for: Deep transformation & holistic growth</p>
+                <Button
+                  onClick={() => setLocation("/journey")}
+                  className="w-full bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-600 hover:to-amber-600 text-white border-0"
+                >
+                  Begin Complete Journey
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
+
         {/* Why Self-Discovery Matters Section */}
         <motion.section 
           className="mb-20"
@@ -524,18 +658,7 @@ export default function Landing() {
           </div>
         </motion.section>
 
-        {/* AdSense placeholder areas - strategically placed for good user experience */}
-        <div className="mt-16 space-y-8">
-          {/* Top banner ad space */}
-          <div className="w-full h-24 bg-[hsl(var(--dark-gray))] border border-[hsl(var(--border))] rounded-lg flex items-center justify-center opacity-50">
-            <span className="text-[hsl(var(--metallic-silver))] text-sm">Advertisement Space</span>
-          </div>
-          
-          {/* Side banner ad spaces for desktop */}
-          <div className="hidden lg:block fixed right-4 top-1/2 transform -translate-y-1/2 w-32 h-96 bg-[hsl(var(--dark-gray))] border border-[hsl(var(--border))] rounded-lg flex items-center justify-center opacity-50 z-30">
-            <span className="text-[hsl(var(--metallic-silver))] text-xs transform -rotate-90">Ad Space</span>
-          </div>
-        </div>
+
       </div>
     </div>
   );
