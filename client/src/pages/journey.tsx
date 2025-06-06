@@ -277,7 +277,11 @@ export default function Journey() {
       'shadow-test': '/results',
       'toxicity-compass': '/toxicity-results',
       'relationship-patterns': '/relationship-pattern-results',
-      'integration-guide': '/integration-guide-results'
+      'integration-guide': '/integration-guide-results',
+      'intelligence-map': '/intelligence-map-results',
+      'attachment-style': '/attachment-style-results',
+      'identity-compass': '/identity-compass-results',
+      'inner-driver': '/inner-driver-results'
     };
     setLocation(resultRoutes[testId]);
   };

@@ -236,24 +236,54 @@ export const intelligenceMapQuestions: IntelligenceMapQuestion[] = [
 export const intelligenceTypes = {
   analytical: {
     name: "Analytical Intelligence",
-    description: "You excel at logical reasoning, data analysis, and systematic problem-solving. Your mind naturally breaks down complex problems into manageable components.",
-    traits: ["Logical reasoning", "Data analysis", "Critical thinking", "Systematic approach", "Fact-based decisions"],
-    strengths: ["Problem decomposition", "Objective analysis", "Research skills", "Quality control", "Evidence-based thinking"],
-    careers: ["Research scientist", "Data analyst", "Engineer", "Financial analyst", "Quality assurance specialist"]
+    description: "Your mind operates like a precision instrument, naturally breaking down complexity into clear, logical components. You possess the rare ability to see through surface-level chaos to the underlying patterns and structures that govern reality. This intelligence type drives you to seek truth through evidence, making you a natural detective of information and a guardian of logical consistency.",
+    detailedAnalysis: "Your analytical intelligence manifests as an almost instinctive need to understand 'why' and 'how' before accepting any conclusion. You process information sequentially, building robust mental models through careful examination of cause and effect. This methodical approach often makes you the person others turn to when they need to verify facts or untangle complex problems. Your brain naturally seeks contradictions and inconsistencies, making you excellent at quality control and risk assessment.",
+    traits: ["Logical reasoning mastery", "Data synthesis expertise", "Critical thinking precision", "Systematic problem decomposition", "Evidence-based decision making", "Pattern recognition in data", "Quality assurance mindset"],
+    strengths: ["Breaking complex problems into solvable parts", "Identifying logical fallacies and inconsistencies", "Creating systematic approaches to challenges", "Maintaining objectivity under pressure", "Conducting thorough research and analysis", "Building reliable decision-making frameworks"],
+    applications: ["Research and development projects", "Financial analysis and modeling", "Quality control and process improvement", "Data-driven strategy development", "Technical problem solving", "Risk assessment and mitigation"],
+    developmentAreas: ["Embracing creative ambiguity", "Considering emotional factors in decisions", "Communicating complex ideas simply", "Balancing analysis with action", "Developing intuitive decision-making"],
+    careerSuggestions: ["Data Scientist", "Research Analyst", "Quality Assurance Manager", "Process Engineer", "Financial Modeler", "Business Intelligence Analyst", "Systems Analyst", "Forensic Accountant"],
+    growthTips: [
+      "Practice explaining complex concepts in simple terms to develop communication skills",
+      "Engage with creative activities to balance your analytical nature",
+      "Learn to trust your intuition alongside your analytical process",
+      "Collaborate with emotionally intelligent people to broaden your perspective",
+      "Set time limits for analysis to avoid over-thinking"
+    ]
   },
   emotional: {
     name: "Emotional Intelligence",
-    description: "You have exceptional ability to understand, manage, and work with human emotions - both your own and others'. You excel in interpersonal relationships.",
-    traits: ["Empathy", "Social awareness", "Relationship building", "Emotional regulation", "Communication"],
-    strengths: ["Understanding people", "Conflict resolution", "Team building", "Motivating others", "Creating harmony"],
-    careers: ["Counselor", "HR manager", "Teacher", "Social worker", "Team leader"]
+    description: "You possess the remarkable ability to navigate the complex landscape of human emotions with intuitive skill and profound understanding. Your intelligence operates in the realm of feelings, motivations, and interpersonal dynamics, allowing you to connect deeply with others and create meaningful relationships. You understand that emotions are not obstacles to logic—they are a sophisticated information system about human needs and motivations.",
+    detailedAnalysis: "Your emotional intelligence allows you to read between the lines of human interaction, picking up on subtle cues that others miss. You naturally understand that behind every behavior is an emotional state, and behind every emotion is a human need. This gives you the ability to influence, motivate, and heal in ways that purely logical approaches cannot achieve. You serve as an emotional translator, helping others understand their own feelings and the feelings of those around them.",
+    traits: ["Deep empathetic understanding", "Social awareness mastery", "Relationship building expertise", "Emotional regulation skills", "Nonverbal communication reading", "Motivational insight", "Conflict de-escalation ability"],
+    strengths: ["Understanding underlying emotional motivations", "Creating psychological safety for others", "Building trust and rapport quickly", "Facilitating difficult conversations", "Inspiring and motivating teams", "Recognizing and managing emotional patterns"],
+    applications: ["Team leadership and management", "Counseling and coaching", "Customer relationship management", "Organizational culture development", "Conflict resolution and mediation", "Training and development programs"],
+    developmentAreas: ["Setting emotional boundaries", "Balancing empathy with objectivity", "Using data to support emotional insights", "Managing emotional overwhelm", "Developing strategic thinking skills"],
+    careerSuggestions: ["Therapist/Counselor", "Human Resources Director", "Team Lead/Manager", "Social Worker", "Customer Success Manager", "Organizational Development Consultant", "Executive Coach", "Sales Professional"],
+    growthTips: [
+      "Learn to separate your emotions from others' to avoid emotional exhaustion",
+      "Develop data analysis skills to support your emotional insights with facts",
+      "Practice setting healthy boundaries while maintaining empathy",
+      "Study conflict resolution techniques to enhance your natural abilities",
+      "Combine your emotional insights with strategic planning skills"
+    ]
   },
   creative: {
     name: "Creative Intelligence",
-    description: "You think outside the box, generate original ideas, and see possibilities that others miss. Your mind thrives on innovation and artistic expression.",
-    traits: ["Originality", "Innovation", "Artistic vision", "Flexibility", "Divergent thinking"],
-    strengths: ["Generating new ideas", "Problem reframing", "Artistic expression", "Adaptability", "Inspiration"],
-    careers: ["Artist", "Designer", "Writer", "Entrepreneur", "Creative director"]
+    description: "Your mind operates as a boundless generator of possibilities, constantly making novel connections between seemingly unrelated concepts. You possess the extraordinary ability to transcend conventional thinking patterns and birth new realities from the realm of imagination. Your intelligence thrives in ambiguity and uncertainty, transforming chaos into beauty and problems into opportunities for innovation.",
+    detailedAnalysis: "Your creative intelligence manifests as a natural ability to see what others cannot—potential where others see limitations, beauty where others see mundane reality, solutions where others see impossibilities. You think in metaphors, visualize in colors and forms, and approach problems from angles that surprise even yourself. This intelligence type makes you a natural innovator, constantly pushing boundaries and challenging the status quo through original thinking and artistic expression.",
+    traits: ["Innovative thinking mastery", "Artistic vision and expression", "Divergent problem-solving", "Metaphorical and abstract reasoning", "Aesthetic sensitivity", "Risk-taking in ideas", "Pattern synthesis from chaos"],
+    strengths: ["Generating breakthrough ideas from nowhere", "Reframing problems to reveal hidden solutions", "Creating beauty and meaning through artistic expression", "Adapting quickly to changing circumstances", "Inspiring others with original vision", "Synthesizing disparate concepts into cohesive wholes"],
+    applications: ["Product innovation and design", "Marketing and brand development", "Content creation and storytelling", "Problem-solving for complex challenges", "Artistic and cultural projects", "Entrepreneurial ventures"],
+    developmentAreas: ["Implementing ideas systematically", "Working within structured constraints", "Communicating abstract concepts clearly", "Managing practical details", "Collaborating with analytical thinkers"],
+    careerSuggestions: ["Creative Director", "Product Designer", "Artist/Musician", "Entrepreneur", "Marketing Creative", "Content Creator", "Innovation Consultant", "UX/UI Designer"],
+    growthTips: [
+      "Partner with detail-oriented people to help implement your ideas",
+      "Learn project management skills to bring creative visions to life",
+      "Practice articulating abstract concepts in concrete terms",
+      "Develop business skills to commercialize your creative insights",
+      "Create systems to capture and organize your creative inspirations"
+    ]
   },
   strategic: {
     name: "Strategic Intelligence",
