@@ -165,18 +165,18 @@ function generatePersonalizedGuidance(integrationLevel: string, categoryScores: 
   
   // Add level-specific guidance
   if (integrationLevel in integrationLevels) {
-    guidance.push(...integrationLevels[integrationLevel as keyof typeof integrationLevels].guidance);
+    guidance.push(...integrationLevels[integrationLevel as keyof typeof integrationLevels].recommendations);
   }
   
   // Add category-specific guidance for areas needing attention
   Object.entries(categoryScores).forEach(([category, score]) => {
-    if (score >= 4.0) {
+    if (score < 3.0) {
       switch (category) {
         case "Self-Awareness":
           guidance.push("Begin a daily mindfulness or meditation practice to increase self-awareness");
           break;
-        case "Self-Acceptance":
-          guidance.push("Practice self-compassion exercises and loving-kindness meditation");
+        case "Communication Skills":
+          guidance.push("Practice active listening and expressing emotions clearly");
           break;
         case "Shadow Integration":
           guidance.push("Explore shadow work through journaling or working with a therapist");

@@ -71,8 +71,7 @@ export default function RelationshipPatternResults() {
     localStorage.setItem('psychTestResults', JSON.stringify(results));
   }, [pattern, patternScores, insights, recommendations]);
 
-  const patternInfo = Object.entries(relationshipPatterns).find(([key]) => key === pattern);
-  const patternData = patternInfo ? patternInfo[1] : relationshipPatterns["secure-attachment"];
+  const patternData = relationshipPatterns[pattern as keyof typeof relationshipPatterns] || relationshipPatterns.secure;
 
   const handleShare = () => {
     shareRelationshipPatternResult(pattern);
@@ -227,7 +226,7 @@ export default function RelationshipPatternResults() {
                 {patternData.description}
               </motion.p>
 
-              {/* Pattern Characteristics */}
+              {/* Pattern Traits */}
               <motion.div 
                 className="mb-8"
                 initial={{ opacity: 0, y: 20 }}
@@ -235,13 +234,13 @@ export default function RelationshipPatternResults() {
                 transition={{ delay: 1.2, duration: 0.6 }}
               >
                 <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))] mb-4 text-center">
-                  Key Characteristics
+                  Key Traits
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {patternData.characteristics.map((characteristic, index) => (
+                  {patternData.traits?.map((trait: string, index: number) => (
                     <div key={index} className="flex items-center space-x-3 p-3 bg-[hsl(var(--deep-black)/0.5)] rounded-lg">
                       <Heart className="h-5 w-5 text-[hsl(var(--metallic-silver))]" />
-                      <span className="text-[hsl(var(--metallic-silver))]">{characteristic}</span>
+                      <span className="text-[hsl(var(--metallic-silver))]">{trait}</span>
                     </div>
                   ))}
                 </div>
