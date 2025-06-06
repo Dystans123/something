@@ -11,288 +11,313 @@ export interface RelationshipPatternQuestion {
 }
 
 export const relationshipPatternQuestions: RelationshipPatternQuestion[] = [
-  // Attachment Patterns
+  // Attachment & Bonding (5 questions)
   {
-    text: "When someone I care about doesn't respond to my messages quickly, I usually:",
-    category: "Attachment Patterns",
+    text: "When facing relationship conflicts, I tend to...",
+    category: "Attachment & Bonding",
     options: [
-      { text: "Feel anxious and worry they're upset with me", pattern: "anxious-attachment", value: 5 },
-      { text: "Feel slightly concerned but try to stay calm", pattern: "anxious-attachment", value: 3 },
-      { text: "Understand they might be busy and wait patiently", pattern: "secure-attachment", value: 1 },
-      { text: "Feel annoyed but don't show it", pattern: "avoidant-attachment", value: 3 },
-      { text: "Prefer it when people take their time to respond", pattern: "avoidant-attachment", value: 5 }
+      { text: "Withdraw and avoid discussing the issue", pattern: "avoidant", value: 5 },
+      { text: "Become anxious and need immediate resolution", pattern: "anxious", value: 5 },
+      { text: "Stay calm and work through it systematically", pattern: "secure", value: 5 },
+      { text: "Become controlling or demanding", pattern: "dismissive", value: 5 }
     ]
   },
   {
-    text: "In romantic relationships, I tend to:",
-    category: "Attachment Patterns",
+    text: "In intimate relationships, I feel most comfortable when...",
+    category: "Attachment & Bonding",
     options: [
-      { text: "Need constant reassurance about my partner's feelings", pattern: "anxious-attachment", value: 5 },
-      { text: "Sometimes seek reassurance when feeling insecure", pattern: "anxious-attachment", value: 3 },
-      { text: "Feel secure without needing frequent validation", pattern: "secure-attachment", value: 1 },
-      { text: "Prefer to keep some emotional distance", pattern: "avoidant-attachment", value: 3 },
-      { text: "Feel uncomfortable with too much emotional closeness", pattern: "avoidant-attachment", value: 5 }
+      { text: "I maintain my independence and space", pattern: "avoidant", value: 4 },
+      { text: "My partner and I are very close and connected", pattern: "anxious", value: 4 },
+      { text: "There's a balance of closeness and autonomy", pattern: "secure", value: 4 },
+      { text: "I can maintain control over the relationship dynamics", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "When conflicts arise in my relationships, I:",
-    category: "Conflict Resolution",
+    text: "When my partner seems distant, I usually...",
+    category: "Attachment & Bonding",
     options: [
-      { text: "Become very emotional and need immediate resolution", pattern: "anxious-attachment", value: 5 },
-      { text: "Feel stressed but try to work through it together", pattern: "secure-attachment", value: 2 },
-      { text: "Stay calm and focus on finding solutions", pattern: "secure-attachment", value: 1 },
-      { text: "Tend to withdraw and avoid confrontation", pattern: "avoidant-attachment", value: 4 },
-      { text: "Shut down emotionally and distance myself", pattern: "avoidant-attachment", value: 5 }
+      { text: "Give them space and wait for them to come around", pattern: "avoidant", value: 3 },
+      { text: "Feel anxious and try to reconnect immediately", pattern: "anxious", value: 5 },
+      { text: "Gently check in while respecting their needs", pattern: "secure", value: 4 },
+      { text: "Feel frustrated and withdraw my attention", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "I express my needs in relationships by:",
-    category: "Communication Patterns",
+    text: "My approach to vulnerability in relationships is...",
+    category: "Attachment & Bonding",
     options: [
-      { text: "Hoping others will notice without me having to ask", pattern: "passive-communication", value: 5 },
-      { text: "Dropping hints and expecting them to understand", pattern: "passive-communication", value: 4 },
-      { text: "Communicating directly but respectfully", pattern: "assertive-communication", value: 1 },
-      { text: "Being very direct, sometimes too blunt", pattern: "aggressive-communication", value: 3 },
-      { text: "Demanding that my needs be met immediately", pattern: "aggressive-communication", value: 5 }
+      { text: "I prefer to keep my deeper feelings private", pattern: "avoidant", value: 4 },
+      { text: "I share everything and expect the same in return", pattern: "anxious", value: 4 },
+      { text: "I share gradually as trust builds", pattern: "secure", value: 5 },
+      { text: "I see vulnerability as weakness", pattern: "dismissive", value: 5 }
     ]
   },
   {
-    text: "When someone sets boundaries with me, I:",
-    category: "Boundary Recognition",
+    text: "When it comes to commitment, I...",
+    category: "Attachment & Bonding",
     options: [
-      { text: "Respect them immediately and adjust my behavior", pattern: "healthy-boundaries", value: 1 },
-      { text: "Try to respect them but sometimes struggle", pattern: "boundary-challenges", value: 3 },
-      { text: "Feel rejected and take it personally", pattern: "boundary-violation", value: 4 },
-      { text: "Test the boundaries to see if they're serious", pattern: "boundary-violation", value: 5 },
-      { text: "Ignore them because I know what's best", pattern: "boundary-violation", value: 5 }
+      { text: "Often feel trapped by serious commitments", pattern: "avoidant", value: 5 },
+      { text: "Crave deep commitment but fear abandonment", pattern: "anxious", value: 5 },
+      { text: "Welcome commitment when it feels right", pattern: "secure", value: 5 },
+      { text: "Prefer to keep my options open", pattern: "dismissive", value: 4 }
+    ]
+  },
+
+  // Communication Styles (5 questions)
+  {
+    text: "During disagreements, I typically...",
+    category: "Communication Styles",
+    options: [
+      { text: "Shut down or leave the conversation", pattern: "avoidant", value: 4 },
+      { text: "Become emotional and need to talk it through", pattern: "anxious", value: 4 },
+      { text: "Stay present and work toward understanding", pattern: "secure", value: 5 },
+      { text: "Focus on being right and winning", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "In friendships, I typically:",
-    category: "Social Dynamics",
+    text: "When expressing my needs, I...",
+    category: "Communication Styles",
     options: [
-      { text: "Give more than I receive", pattern: "people-pleasing", value: 5 },
-      { text: "Try to maintain a balance of give and take", pattern: "balanced-relationships", value: 1 },
-      { text: "Expect others to reach out to me first", pattern: "passive-engagement", value: 4 },
-      { text: "Keep most friendships at a surface level", pattern: "emotional-distance", value: 4 },
-      { text: "Have difficulty trusting friends completely", pattern: "trust-issues", value: 5 }
+      { text: "Struggle to articulate what I really need", pattern: "avoidant", value: 4 },
+      { text: "Sometimes express them indirectly or emotionally", pattern: "anxious", value: 3 },
+      { text: "Communicate them clearly and directly", pattern: "secure", value: 5 },
+      { text: "Expect my partner to figure them out", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "When I feel hurt by someone's actions, I:",
-    category: "Emotional Processing",
+    text: "My listening style in relationships is...",
+    category: "Communication Styles",
     options: [
-      { text: "Talk to them directly about how I feel", pattern: "direct-communication", value: 1 },
-      { text: "Give them the silent treatment until they apologize", pattern: "passive-aggressive", value: 5 },
-      { text: "Vent to others but avoid confronting the person", pattern: "indirect-communication", value: 4 },
-      { text: "Pretend it doesn't bother me and move on", pattern: "emotional-suppression", value: 4 },
-      { text: "End the relationship rather than work through it", pattern: "avoidance-pattern", value: 5 }
+      { text: "I listen but often stay emotionally detached", pattern: "avoidant", value: 3 },
+      { text: "I listen intently and get emotionally involved", pattern: "anxious", value: 3 },
+      { text: "I listen with presence and empathy", pattern: "secure", value: 5 },
+      { text: "I listen to respond and correct", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "I choose romantic partners who:",
-    category: "Partner Selection",
+    text: "When my partner is upset, I...",
+    category: "Communication Styles",
     options: [
-      { text: "Need me to take care of them", pattern: "codependent-attraction", value: 5 },
-      { text: "Are emotionally unavailable or distant", pattern: "avoidant-attraction", value: 5 },
-      { text: "Share similar values and life goals", pattern: "healthy-selection", value: 1 },
-      { text: "Are very different from me to create excitement", pattern: "drama-seeking", value: 4 },
-      { text: "Remind me of familiar family dynamics", pattern: "trauma-bonding", value: 5 }
+      { text: "Feel uncomfortable and want to fix it quickly", pattern: "avoidant", value: 4 },
+      { text: "Take it personally and get emotional too", pattern: "anxious", value: 4 },
+      { text: "Stay calm and offer support", pattern: "secure", value: 5 },
+      { text: "Think they're being overly dramatic", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "When someone criticizes me, I:",
-    category: "Feedback Reception",
+    text: "My approach to difficult conversations is...",
+    category: "Communication Styles",
     options: [
-      { text: "Listen carefully and consider their perspective", pattern: "growth-mindset", value: 1 },
-      { text: "Feel defensive but try to stay open", pattern: "defensive-but-aware", value: 3 },
-      { text: "Immediately become defensive and argue back", pattern: "defensive-reaction", value: 5 },
-      { text: "Shut down and withdraw from the conversation", pattern: "withdrawal-response", value: 4 },
-      { text: "Take it very personally and feel devastated", pattern: "rejection-sensitivity", value: 5 }
+      { text: "I avoid them or postpone them indefinitely", pattern: "avoidant", value: 5 },
+      { text: "I approach them with anxiety but push through", pattern: "anxious", value: 3 },
+      { text: "I initiate them when necessary with care", pattern: "secure", value: 5 },
+      { text: "I approach them as battles to be won", pattern: "dismissive", value: 4 }
+    ]
+  },
+
+  // Emotional Patterns (5 questions)
+  {
+    text: "When I feel hurt in relationships, I...",
+    category: "Emotional Patterns",
+    options: [
+      { text: "Withdraw and process my feelings alone", pattern: "avoidant", value: 4 },
+      { text: "Seek immediate comfort and reassurance", pattern: "anxious", value: 4 },
+      { text: "Express my hurt and work through it together", pattern: "secure", value: 5 },
+      { text: "Build resentment and emotional walls", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "I maintain my independence in relationships by:",
-    category: "Autonomy Management",
+    text: "My emotional regulation in relationships is...",
+    category: "Emotional Patterns",
     options: [
-      { text: "Keeping my own interests and friendships", pattern: "healthy-independence", value: 1 },
-      { text: "Occasionally doing things on my own", pattern: "moderate-independence", value: 2 },
-      { text: "Feeling guilty when I want time alone", pattern: "independence-guilt", value: 4 },
-      { text: "Losing myself in my partner's interests", pattern: "identity-fusion", value: 5 },
-      { text: "Avoiding commitment to maintain freedom", pattern: "commitment-avoidance", value: 5 }
+      { text: "I suppress emotions to maintain control", pattern: "avoidant", value: 4 },
+      { text: "My emotions can be intense and overwhelming", pattern: "anxious", value: 4 },
+      { text: "I feel and express emotions in healthy ways", pattern: "secure", value: 5 },
+      { text: "I see strong emotions as inconvenient", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "When my partner or friend is going through a difficult time, I:",
-    category: "Support Patterns",
+    text: "When my partner expresses strong emotions, I...",
+    category: "Emotional Patterns",
     options: [
-      { text: "Offer support while maintaining my own well-being", pattern: "balanced-support", value: 1 },
-      { text: "Drop everything to help them through it", pattern: "over-supporting", value: 4 },
-      { text: "Feel overwhelmed by their emotions", pattern: "emotional-overwhelm", value: 5 },
-      { text: "Try to fix their problems for them", pattern: "rescuing-behavior", value: 5 },
-      { text: "Feel uncomfortable and distance myself", pattern: "support-avoidance", value: 4 }
+      { text: "Feel overwhelmed and want to escape", pattern: "avoidant", value: 4 },
+      { text: "Mirror their intensity and get caught up", pattern: "anxious", value: 3 },
+      { text: "Stay grounded and offer emotional support", pattern: "secure", value: 5 },
+      { text: "Become critical or dismissive", pattern: "dismissive", value: 5 }
     ]
   },
   {
-    text: "I handle jealousy in relationships by:",
-    category: "Jealousy Management",
+    text: "My relationship with jealousy is...",
+    category: "Emotional Patterns",
     options: [
-      { text: "Communicating my feelings openly and honestly", pattern: "healthy-jealousy", value: 1 },
-      { text: "Trying to control my partner's interactions", pattern: "controlling-jealousy", value: 5 },
-      { text: "Feeling insecure but keeping it to myself", pattern: "internalized-jealousy", value: 4 },
-      { text: "Acting out passive-aggressively", pattern: "passive-aggressive-jealousy", value: 5 },
-      { text: "Pretending I don't feel jealous at all", pattern: "jealousy-denial", value: 3 }
+      { text: "I rarely feel jealous but may become distant", pattern: "avoidant", value: 3 },
+      { text: "I struggle with jealousy and need reassurance", pattern: "anxious", value: 5 },
+      { text: "I feel secure and trust my partner", pattern: "secure", value: 5 },
+      { text: "I don't get jealous because I don't get too attached", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "In group social situations, I tend to:",
-    category: "Social Dynamics",
+    text: "When it comes to emotional intimacy, I...",
+    category: "Emotional Patterns",
     options: [
-      { text: "Feel comfortable and engage naturally", pattern: "social-confidence", value: 1 },
-      { text: "Take on the role of peacekeeper or mediator", pattern: "mediator-role", value: 3 },
-      { text: "Focus on making sure everyone else is comfortable", pattern: "people-pleasing", value: 4 },
-      { text: "Feel anxious and worry about being judged", pattern: "social-anxiety", value: 5 },
-      { text: "Prefer to observe rather than actively participate", pattern: "social-withdrawal", value: 4 }
+      { text: "Find it challenging and prefer surface-level connection", pattern: "avoidant", value: 5 },
+      { text: "Crave it intensely but fear being too much", pattern: "anxious", value: 4 },
+      { text: "Enjoy deep emotional connection naturally", pattern: "secure", value: 5 },
+      { text: "See it as unnecessary drama", pattern: "dismissive", value: 5 }
+    ]
+  },
+
+  // Relationship Dynamics (5 questions)
+  {
+    text: "In relationships, I tend to...",
+    category: "Relationship Dynamics",
+    options: [
+      { text: "Maintain my independence at all costs", pattern: "avoidant", value: 5 },
+      { text: "Lose myself in the relationship", pattern: "anxious", value: 4 },
+      { text: "Balance my needs with my partner's", pattern: "secure", value: 5 },
+      { text: "Expect my partner to adapt to me", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "When making decisions that affect my relationships, I:",
-    category: "Decision Making",
+    text: "My pattern with relationship boundaries is...",
+    category: "Relationship Dynamics",
     options: [
-      { text: "Consider both my needs and others' feelings", pattern: "balanced-decisions", value: 1 },
-      { text: "Always put others' needs before my own", pattern: "self-sacrificing", value: 5 },
-      { text: "Make decisions based solely on what I want", pattern: "self-centered", value: 5 },
-      { text: "Avoid making decisions that might upset anyone", pattern: "decision-avoidance", value: 4 },
-      { text: "Ask others to make the decision for me", pattern: "decision-dependency", value: 5 }
+      { text: "I have rigid boundaries that keep people at distance", pattern: "avoidant", value: 4 },
+      { text: "My boundaries are fluid and change based on emotions", pattern: "anxious", value: 3 },
+      { text: "I maintain healthy, flexible boundaries", pattern: "secure", value: 5 },
+      { text: "I expect others to respect my boundaries without reciprocating", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "I trust new people by:",
-    category: "Trust Development",
+    text: "When relationships end, I typically...",
+    category: "Relationship Dynamics",
     options: [
-      { text: "Starting with basic trust and building gradually", pattern: "healthy-trust", value: 1 },
-      { text: "Trusting completely from the beginning", pattern: "over-trusting", value: 4 },
-      { text: "Requiring extensive proof before trusting anyone", pattern: "trust-resistance", value: 5 },
-      { text: "Pretending to trust while remaining guarded", pattern: "false-trust", value: 4 },
-      { text: "Avoiding situations where trust is necessary", pattern: "trust-avoidance", value: 5 }
+      { text: "Move on quickly without processing the loss", pattern: "avoidant", value: 4 },
+      { text: "Struggle to let go and may pursue reconciliation", pattern: "anxious", value: 4 },
+      { text: "Grieve healthily and learn from the experience", pattern: "secure", value: 5 },
+      { text: "Focus on what was wrong with my partner", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "When relationships end, I typically:",
-    category: "Relationship Endings",
+    text: "My approach to relationship growth is...",
+    category: "Relationship Dynamics",
     options: [
-      { text: "Process the emotions and learn from the experience", pattern: "healthy-processing", value: 1 },
-      { text: "Blame myself for everything that went wrong", pattern: "self-blame", value: 5 },
-      { text: "Blame the other person entirely", pattern: "external-blame", value: 5 },
-      { text: "Immediately jump into a new relationship", pattern: "rebound-pattern", value: 4 },
-      { text: "Avoid dating for extended periods", pattern: "relationship-avoidance", value: 4 }
+      { text: "I prefer relationships to stay comfortable and predictable", pattern: "avoidant", value: 3 },
+      { text: "I want growth but fear it might threaten the relationship", pattern: "anxious", value: 3 },
+      { text: "I embrace growth and change as natural", pattern: "secure", value: 5 },
+      { text: "I expect my partner to do most of the changing", pattern: "dismissive", value: 4 }
     ]
   },
   {
-    text: "I show love and affection by:",
-    category: "Love Expression",
+    text: "In terms of relationship support, I...",
+    category: "Relationship Dynamics",
     options: [
-      { text: "Expressing it in ways that feel natural to me", pattern: "authentic-expression", value: 1 },
-      { text: "Doing whatever I think the other person wants", pattern: "performative-love", value: 4 },
-      { text: "Having difficulty expressing feelings directly", pattern: "expression-difficulty", value: 4 },
-      { text: "Showing love through acts of service only", pattern: "action-based-love", value: 3 },
-      { text: "Expecting others to know without me saying it", pattern: "unexpressed-love", value: 5 }
-    ]
-  },
-  {
-    text: "When I feel overwhelmed in relationships, I:",
-    category: "Stress Response",
-    options: [
-      { text: "Communicate my needs and ask for space", pattern: "healthy-communication", value: 1 },
-      { text: "Withdraw without explanation", pattern: "withdrawal-pattern", value: 4 },
-      { text: "Become more clingy and demanding", pattern: "anxious-response", value: 5 },
-      { text: "Lash out and then feel guilty", pattern: "emotional-reactivity", value: 5 },
-      { text: "Pretend everything is fine", pattern: "emotional-suppression", value: 4 }
-    ]
-  },
-  {
-    text: "I handle power dynamics in relationships by:",
-    category: "Power Dynamics",
-    options: [
-      { text: "Striving for equality and mutual respect", pattern: "balanced-power", value: 1 },
-      { text: "Preferring to be in control of most decisions", pattern: "dominant-power", value: 4 },
-      { text: "Usually letting others take the lead", pattern: "submissive-power", value: 4 },
-      { text: "Struggling with feeling powerless", pattern: "powerlessness", value: 5 },
-      { text: "Using manipulation to get what I want", pattern: "manipulative-power", value: 5 }
-    ]
-  },
-  {
-    text: "My approach to emotional intimacy is:",
-    category: "Intimacy Patterns",
-    options: [
-      { text: "I'm comfortable with gradual emotional closeness", pattern: "healthy-intimacy", value: 1 },
-      { text: "I crave intense emotional connection immediately", pattern: "intimacy-seeking", value: 4 },
-      { text: "I feel scared of emotional vulnerability", pattern: "intimacy-fear", value: 5 },
-      { text: "I share everything but struggle with boundaries", pattern: "over-sharing", value: 4 },
-      { text: "I keep most of my feelings to myself", pattern: "emotional-guarding", value: 5 }
+      { text: "Prefer to handle my problems independently", pattern: "avoidant", value: 4 },
+      { text: "Rely heavily on my partner for emotional support", pattern: "anxious", value: 4 },
+      { text: "Give and receive support in balanced ways", pattern: "secure", value: 5 },
+      { text: "Expect support but struggle to provide it", pattern: "dismissive", value: 4 }
     ]
   }
 ];
 
 export const relationshipPatterns = {
-  "anxious-attachment": {
-    name: "Anxious Attachment",
-    description: "You tend to seek closeness but worry about rejection and abandonment.",
-    characteristics: [
-      "Need frequent reassurance in relationships",
-      "Fear of abandonment or rejection",
-      "Tendency to overthink partner's behavior",
-      "Difficulty self-soothing when distressed"
-    ]
-  },
-  "avoidant-attachment": {
-    name: "Avoidant Attachment", 
-    description: "You value independence but may struggle with emotional intimacy.",
-    characteristics: [
-      "Preference for emotional distance",
-      "Discomfort with vulnerability",
-      "Tendency to minimize emotions",
-      "Difficulty depending on others"
-    ]
-  },
-  "secure-attachment": {
+  secure: {
     name: "Secure Attachment",
-    description: "You generally feel comfortable with intimacy and independence.",
-    characteristics: [
-      "Comfortable with emotional closeness",
-      "Able to communicate needs effectively",
-      "Trusting and reliable in relationships",
-      "Good balance of autonomy and connection"
+    description: "You have a healthy, balanced approach to relationships with good emotional regulation and communication skills.",
+    traits: [
+      "Comfortable with intimacy and independence",
+      "Effective communication skills",
+      "Healthy emotional regulation",
+      "Trusting and trustworthy",
+      "Resilient in face of relationship challenges"
+    ],
+    strengths: [
+      "Natural ability to maintain healthy relationships",
+      "Good balance between closeness and autonomy",
+      "Effective conflict resolution skills",
+      "Emotional stability and maturity",
+      "Ability to support partner's growth"
+    ],
+    growthAreas: [
+      "Continue modeling healthy relationship behaviors",
+      "Help partners develop secure attachment",
+      "Maintain awareness of your own needs",
+      "Stay patient with less secure partners"
     ]
   },
-  "people-pleasing": {
-    name: "People-Pleasing Pattern",
-    description: "You prioritize others' needs and approval over your own well-being.",
-    characteristics: [
-      "Difficulty saying no to requests",
-      "Fear of disappointing others",
-      "Tendency to ignore own needs",
-      "Seeking validation through giving"
+  anxious: {
+    name: "Anxious Attachment",
+    description: "You crave deep connection but often experience relationship anxiety and fear of abandonment.",
+    traits: [
+      "High emotional sensitivity",
+      "Strong desire for closeness",
+      "Fear of abandonment",
+      "Tendency to seek reassurance",
+      "Emotional intensity in relationships"
+    ],
+    strengths: [
+      "Deep capacity for love and connection",
+      "High emotional intelligence",
+      "Commitment to working through problems",
+      "Ability to create intimate bonds",
+      "Sensitivity to partner's needs"
+    ],
+    growthAreas: [
+      "Develop self-soothing techniques",
+      "Build secure sense of self-worth",
+      "Practice tolerating uncertainty",
+      "Learn to communicate needs clearly",
+      "Cultivate independence within relationships"
     ]
   },
-  "codependent-attraction": {
-    name: "Codependent Attraction",
-    description: "You're drawn to relationships where you can rescue or be needed.",
-    characteristics: [
-      "Attraction to partners who need fixing",
-      "Feeling responsible for others' emotions",
-      "Loss of identity in relationships",
-      "Difficulty with healthy boundaries"
+  avoidant: {
+    name: "Avoidant Attachment",
+    description: "You value independence and may struggle with emotional intimacy and vulnerability.",
+    traits: [
+      "High value on independence",
+      "Discomfort with emotional intensity",
+      "Tendency to withdraw when stressed",
+      "Self-reliant approach to problems",
+      "Difficulty expressing vulnerability"
+    ],
+    strengths: [
+      "Strong sense of autonomy",
+      "Calm under pressure",
+      "Rational problem-solving approach",
+      "Respect for personal boundaries",
+      "Ability to maintain perspective"
+    ],
+    growthAreas: [
+      "Practice emotional expression",
+      "Develop comfort with vulnerability",
+      "Learn to stay present during conflict",
+      "Build tolerance for partner's emotions",
+      "Cultivate emotional intimacy skills"
     ]
   },
-  "boundary-violation": {
-    name: "Boundary Challenges",
-    description: "You struggle with recognizing and respecting personal boundaries.",
-    characteristics: [
-      "Difficulty accepting others' limits",
-      "Taking rejection personally",
-      "Tendency to push when told no",
-      "Unclear personal boundaries"
+  dismissive: {
+    name: "Dismissive Pattern",
+    description: "You tend to minimize the importance of relationships and may struggle with empathy and emotional connection.",
+    traits: [
+      "Minimizes relationship importance",
+      "Difficulty with empathy",
+      "Tendency to be critical",
+      "Emotional detachment",
+      "Focus on self over partnership"
+    ],
+    strengths: [
+      "Strong individual identity",
+      "Ability to maintain objectivity",
+      "Self-sufficiency",
+      "Direct communication style",
+      "Resilience to emotional turmoil"
+    ],
+    growthAreas: [
+      "Develop empathy and emotional awareness",
+      "Practice valuing relationships",
+      "Learn to consider partner's perspective",
+      "Build emotional connection skills",
+      "Cultivate appreciation for interdependence"
     ]
   }
 };

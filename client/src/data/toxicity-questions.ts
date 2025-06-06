@@ -10,7 +10,7 @@ export interface ToxicityQuestion {
 }
 
 export const toxicityQuestions: ToxicityQuestion[] = [
-  // Boundaries & Independence
+  // Boundaries & Independence (5 questions)
   {
     text: "I feel guilty when I need time for myself.",
     category: "Boundaries & Independence",
@@ -56,7 +56,7 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "My partner gets upset when I spend time on my hobbies.",
+    text: "I avoid pursuing my own interests because they might upset my partner.",
     category: "Boundaries & Independence",
     options: [
       { text: "Strongly No", value: 1 },
@@ -66,44 +66,11 @@ export const toxicityQuestions: ToxicityQuestion[] = [
       { text: "Strongly Yes", value: 5 }
     ]
   },
-  {
-    text: "I feel like I've lost my sense of identity in this relationship.",
-    category: "Boundaries & Independence",
-    options: [
-      { text: "Strongly No", value: 1 },
-      { text: "Rather No", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather Yes", value: 4 },
-      { text: "Strongly Yes", value: 5 }
-    ]
-  },
-  {
-    text: "I change my plans to avoid my partner's disapproval.",
-    category: "Boundaries & Independence",
-    options: [
-      { text: "Strongly No", value: 1 },
-      { text: "Rather No", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather Yes", value: 4 },
-      { text: "Strongly Yes", value: 5 }
-    ]
-  },
-  {
-    text: "I feel comfortable maintaining friendships outside our relationship.",
-    category: "Boundaries & Independence",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
 
-  // Communication & Respect
+  // Emotional Health (5 questions)
   {
-    text: "Our arguments often include name-calling or mocking.",
-    category: "Communication & Respect",
+    text: "I often feel emotionally drained after spending time with my partner.",
+    category: "Emotional Health",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -113,8 +80,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "I feel like my emotions are frequently dismissed.",
-    category: "Communication & Respect",
+    text: "I feel like I'm walking on eggshells around my partner.",
+    category: "Emotional Health",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -124,8 +91,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "It's hard for us to resolve issues without drama.",
-    category: "Communication & Respect",
+    text: "My partner often dismisses my feelings or concerns.",
+    category: "Emotional Health",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -135,30 +102,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "My partner listens to my concerns without getting defensive.",
-    category: "Communication & Respect",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "I feel heard and understood when we communicate.",
-    category: "Communication & Respect",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "My partner raises their voice or yells during disagreements.",
-    category: "Communication & Respect",
+    text: "I suppress my emotions to avoid arguments.",
+    category: "Emotional Health",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -168,19 +113,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "I feel safe expressing my opinions, even when they differ.",
-    category: "Communication & Respect",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "My partner interrupts me or talks over me frequently.",
-    category: "Communication & Respect",
+    text: "I feel anxious or stressed more often since being in this relationship.",
+    category: "Emotional Health",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -190,10 +124,10 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
 
-  // Jealousy & Control
+  // Communication Patterns (5 questions)
   {
-    text: "My partner often asks who I've been texting.",
-    category: "Jealousy & Control",
+    text: "My partner uses silent treatment or withdrawal as punishment.",
+    category: "Communication Patterns",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -203,8 +137,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "I have to explain even the smallest decisions.",
-    category: "Jealousy & Control",
+    text: "I feel like my partner doesn't really listen to what I'm saying.",
+    category: "Communication Patterns",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -214,8 +148,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "Jealousy in our relationship is seen as a sign of love.",
-    category: "Jealousy & Control",
+    text: "Conversations often turn into arguments where I'm blamed for everything.",
+    category: "Communication Patterns",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -225,8 +159,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "My partner checks my phone or social media without permission.",
-    category: "Jealousy & Control",
+    text: "My partner interrupts or talks over me frequently.",
+    category: "Communication Patterns",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -236,41 +170,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "I feel like I'm being monitored or watched.",
-    category: "Jealousy & Control",
-    options: [
-      { text: "Strongly No", value: 1 },
-      { text: "Rather No", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather Yes", value: 4 },
-      { text: "Strongly Yes", value: 5 }
-    ]
-  },
-  {
-    text: "My partner trusts me to make my own choices.",
-    category: "Jealousy & Control",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "I'm accused of flirting when I'm just being friendly.",
-    category: "Jealousy & Control",
-    options: [
-      { text: "Strongly No", value: 1 },
-      { text: "Rather No", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather Yes", value: 4 },
-      { text: "Strongly Yes", value: 5 }
-    ]
-  },
-  {
-    text: "My partner gets angry when I don't respond to texts immediately.",
-    category: "Jealousy & Control",
+    text: "I avoid bringing up important topics because of how my partner might react.",
+    category: "Communication Patterns",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -280,10 +181,10 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
 
-  // Emotional Manipulation
+  // Control & Manipulation (5 questions)
   {
-    text: "I feel emotionally blackmailed ('If you love me, then...').",
-    category: "Emotional Manipulation",
+    text: "My partner checks my phone, emails, or social media without permission.",
+    category: "Control & Manipulation",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -293,8 +194,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "My partner often makes me feel guilty, even when they were clearly at fault.",
-    category: "Emotional Manipulation",
+    text: "I feel like my partner tries to control how I spend my money.",
+    category: "Control & Manipulation",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -304,8 +205,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "I often feel like I'm walking on eggshells.",
-    category: "Emotional Manipulation",
+    text: "My partner makes me question my own memory or perception of events.",
+    category: "Control & Manipulation",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -315,8 +216,8 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "My partner threatens to leave during arguments.",
-    category: "Emotional Manipulation",
+    text: "I feel like I have to justify my actions or whereabouts constantly.",
+    category: "Control & Manipulation",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
@@ -326,137 +227,14 @@ export const toxicityQuestions: ToxicityQuestion[] = [
     ]
   },
   {
-    text: "I feel like I have to apologize for things that aren't my fault.",
-    category: "Emotional Manipulation",
+    text: "My partner threatens to leave or harm themselves when we disagree.",
+    category: "Control & Manipulation",
     options: [
       { text: "Strongly No", value: 1 },
       { text: "Rather No", value: 2 },
       { text: "Not Sure", value: 3 },
       { text: "Rather Yes", value: 4 },
       { text: "Strongly Yes", value: 5 }
-    ]
-  },
-  {
-    text: "My partner uses my insecurities against me during fights.",
-    category: "Emotional Manipulation",
-    options: [
-      { text: "Strongly No", value: 1 },
-      { text: "Rather No", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather Yes", value: 4 },
-      { text: "Strongly Yes", value: 5 }
-    ]
-  },
-  {
-    text: "I feel like my emotions are used to control me.",
-    category: "Emotional Manipulation",
-    options: [
-      { text: "Strongly No", value: 1 },
-      { text: "Rather No", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather Yes", value: 4 },
-      { text: "Strongly Yes", value: 5 }
-    ]
-  },
-  {
-    text: "My partner gives me the silent treatment as punishment.",
-    category: "Emotional Manipulation",
-    options: [
-      { text: "Strongly No", value: 1 },
-      { text: "Rather No", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather Yes", value: 4 },
-      { text: "Strongly Yes", value: 5 }
-    ]
-  },
-
-  // Emotional Safety & Trust
-  {
-    text: "I feel comfortable talking about how I feel.",
-    category: "Emotional Safety & Trust",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "I'm not afraid that my secrets will be used against me.",
-    category: "Emotional Safety & Trust",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "I know I can rely on my partner during hard times.",
-    category: "Emotional Safety & Trust",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "I feel supported in my goals and dreams.",
-    category: "Emotional Safety & Trust",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "I trust my partner with my vulnerabilities.",
-    category: "Emotional Safety & Trust",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "I feel accepted for who I am, not who my partner wants me to be.",
-    category: "Emotional Safety & Trust",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "I feel emotionally safe in this relationship.",
-    category: "Emotional Safety & Trust",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
-    ]
-  },
-  {
-    text: "My partner celebrates my successes with me.",
-    category: "Emotional Safety & Trust",
-    options: [
-      { text: "Strongly Yes", value: 1 },
-      { text: "Rather Yes", value: 2 },
-      { text: "Not Sure", value: 3 },
-      { text: "Rather No", value: 4 },
-      { text: "Strongly No", value: 5 }
     ]
   }
 ];

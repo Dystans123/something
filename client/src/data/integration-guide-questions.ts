@@ -11,308 +11,278 @@ export interface IntegrationGuideQuestion {
 }
 
 export const integrationGuideQuestions: IntegrationGuideQuestion[] = [
-  // Self-Awareness
+  // Self-Awareness (5 questions)
   {
-    text: "When I notice negative emotions arising, I:",
+    text: "How well do you understand your emotional patterns in relationships?",
     category: "Self-Awareness",
     options: [
-      { text: "Immediately try to suppress or ignore them", integration: "resistance", value: 5 },
-      { text: "Feel overwhelmed and react impulsively", integration: "reactive", value: 4 },
-      { text: "Notice them but struggle to understand their source", integration: "emerging-awareness", value: 3 },
-      { text: "Acknowledge them and try to understand what triggered them", integration: "developing-awareness", value: 2 },
-      { text: "Welcome them as information about my inner state", integration: "integrated-awareness", value: 1 }
+      { text: "I rarely notice or understand my emotional reactions", integration: "emerging", value: 1 },
+      { text: "I sometimes recognize my patterns after they happen", integration: "developing", value: 2 },
+      { text: "I'm usually aware of my emotions as they arise", integration: "integrated", value: 4 },
+      { text: "I deeply understand my emotional triggers and responses", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "When I recognize patterns I don't like about myself, I:",
-    category: "Self-Acceptance",
+    text: "When you receive feedback about your behavior, you typically...",
+    category: "Self-Awareness",
     options: [
-      { text: "Harshly criticize myself for having these patterns", integration: "self-rejection", value: 5 },
-      { text: "Feel ashamed and try to hide these aspects", integration: "shame-based", value: 4 },
-      { text: "Acknowledge them but feel frustrated", integration: "struggling-acceptance", value: 3 },
-      { text: "Accept them as part of my current growth process", integration: "compassionate-awareness", value: 2 },
-      { text: "Embrace them as valuable information for my development", integration: "integrated-acceptance", value: 1 }
+      { text: "Feel defensive and resist the feedback", integration: "emerging", value: 1 },
+      { text: "Accept it intellectually but struggle to change", integration: "developing", value: 2 },
+      { text: "Consider it carefully and work on improvement", integration: "integrated", value: 4 },
+      { text: "Welcome it as valuable insight for growth", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "My relationship with my 'darker' impulses (anger, jealousy, selfishness) is:",
-    category: "Shadow Integration",
+    text: "How clearly can you identify your core values and needs?",
+    category: "Self-Awareness",
     options: [
-      { text: "I deny having these feelings entirely", integration: "complete-denial", value: 5 },
-      { text: "I judge myself harshly when they appear", integration: "judgmental", value: 4 },
-      { text: "I notice them but feel guilty about having them", integration: "guilt-based", value: 3 },
-      { text: "I recognize them as normal human experiences", integration: "normalizing", value: 2 },
-      { text: "I see them as messengers with valuable information", integration: "integrated-wisdom", value: 1 }
+      { text: "I'm often unclear about what I really want or need", integration: "emerging", value: 1 },
+      { text: "I have some sense but it changes frequently", integration: "developing", value: 2 },
+      { text: "I know my values and needs fairly well", integration: "integrated", value: 4 },
+      { text: "I have deep clarity on my authentic self", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "When someone points out a blind spot or flaw in me, I:",
-    category: "Feedback Integration",
+    text: "When reflecting on past relationship challenges, you...",
+    category: "Self-Awareness",
     options: [
-      { text: "Become defensive and reject their observation", integration: "defensive-rejection", value: 5 },
-      { text: "Feel hurt and withdraw from the interaction", integration: "wounded-withdrawal", value: 4 },
-      { text: "Consider it but struggle with feeling criticized", integration: "conflicted-consideration", value: 3 },
-      { text: "Thank them and reflect on the validity of their point", integration: "open-reflection", value: 2 },
-      { text: "Appreciate the gift of external perspective", integration: "grateful-integration", value: 1 }
+      { text: "Focus mainly on what others did wrong", integration: "emerging", value: 1 },
+      { text: "See some of your own contribution but blame others more", integration: "developing", value: 2 },
+      { text: "Recognize your role while still seeing the full picture", integration: "integrated", value: 4 },
+      { text: "Take full responsibility for your part and learn from it", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "When I feel envious of others' success or happiness, I:",
-    category: "Shadow Emotions",
+    text: "How well do you understand your attachment style and its impact?",
+    category: "Self-Awareness",
     options: [
-      { text: "Pretend I'm not envious and feel guilty about it", integration: "suppression-guilt", value: 5 },
-      { text: "Try to diminish their achievement in my mind", integration: "defensive-devaluation", value: 4 },
-      { text: "Feel bad about myself for having these feelings", integration: "self-condemnation", value: 3 },
-      { text: "Recognize envy as information about my own desires", integration: "information-gathering", value: 2 },
-      { text: "Use it as motivation to pursue my own goals", integration: "transformative-energy", value: 1 }
+      { text: "I haven't really thought about attachment patterns", integration: "emerging", value: 1 },
+      { text: "I know some theory but don't see it in my relationships", integration: "developing", value: 2 },
+      { text: "I recognize my patterns and how they affect relationships", integration: "integrated", value: 4 },
+      { text: "I actively work with my attachment style for healthier connections", integration: "mastery", value: 5 }
     ]
   },
+
+  // Communication Skills (5 questions)
   {
-    text: "My approach to personal growth is:",
-    category: "Growth Mindset",
+    text: "When expressing difficult emotions, you...",
+    category: "Communication Skills",
     options: [
-      { text: "I believe I should already be perfect", integration: "perfectionist-resistance", value: 5 },
-      { text: "I get frustrated when progress is slow", integration: "impatient-growth", value: 4 },
-      { text: "I want to grow but struggle with self-criticism", integration: "conflicted-growth", value: 3 },
-      { text: "I see growth as a lifelong journey with ups and downs", integration: "process-oriented", value: 2 },
-      { text: "I embrace all experiences as opportunities for learning", integration: "holistic-learning", value: 1 }
+      { text: "Often explode, shut down, or communicate reactively", integration: "emerging", value: 1 },
+      { text: "Try to communicate but it often comes out wrong", integration: "developing", value: 2 },
+      { text: "Usually express yourself clearly and calmly", integration: "integrated", value: 4 },
+      { text: "Communicate with skill even in highly charged situations", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "When I make mistakes or fail at something important, I:",
-    category: "Failure Integration",
+    text: "Your listening skills in intimate conversations are...",
+    category: "Communication Skills",
     options: [
-      { text: "Berate myself and feel like a complete failure", integration: "catastrophic-thinking", value: 5 },
-      { text: "Avoid thinking about it and distract myself", integration: "avoidant-coping", value: 4 },
-      { text: "Analyze what went wrong but still feel bad", integration: "analytical-guilt", value: 3 },
-      { text: "Learn from the experience and adjust my approach", integration: "adaptive-learning", value: 2 },
-      { text: "See it as valuable data for my development", integration: "wisdom-integration", value: 1 }
+      { text: "I often interrupt or think about my response while others talk", integration: "emerging", value: 1 },
+      { text: "I try to listen but get distracted or defensive", integration: "developing", value: 2 },
+      { text: "I listen well most of the time and ask clarifying questions", integration: "integrated", value: 4 },
+      { text: "I listen with full presence and deep empathy", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "My relationship with vulnerability is:",
-    category: "Emotional Integration",
+    text: "When setting boundaries, you...",
+    category: "Communication Skills",
     options: [
-      { text: "I see vulnerability as weakness to be avoided", integration: "vulnerability-avoidance", value: 5 },
-      { text: "I struggle with being vulnerable even when I want to", integration: "conflicted-vulnerability", value: 4 },
-      { text: "I can be vulnerable but it feels scary", integration: "cautious-vulnerability", value: 3 },
-      { text: "I see vulnerability as necessary for authentic connection", integration: "valued-vulnerability", value: 2 },
-      { text: "I embrace vulnerability as a source of strength", integration: "empowered-vulnerability", value: 1 }
+      { text: "Struggle to set boundaries or set them aggressively", integration: "emerging", value: 1 },
+      { text: "Set boundaries inconsistently or with guilt", integration: "developing", value: 2 },
+      { text: "Set clear boundaries with kindness most of the time", integration: "integrated", value: 4 },
+      { text: "Set boundaries skillfully while maintaining connection", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "When I notice myself judging others harshly, I:",
-    category: "Projection Awareness",
+    text: "During conflicts, your communication style is...",
+    category: "Communication Skills",
     options: [
-      { text: "Justify my judgments and continue criticizing", integration: "projection-denial", value: 5 },
-      { text: "Feel guilty but continue the mental criticism", integration: "guilty-judging", value: 4 },
-      { text: "Try to stop but the judgments keep coming", integration: "struggling-awareness", value: 3 },
-      { text: "Wonder what this judgment reveals about me", integration: "self-inquiry", value: 2 },
-      { text: "Use it as an opportunity to explore my own shadows", integration: "shadow-exploration", value: 1 }
+      { text: "I blame, attack, defend, or withdraw", integration: "emerging", value: 1 },
+      { text: "I try to stay calm but often fall into old patterns", integration: "developing", value: 2 },
+      { text: "I focus on understanding and finding solutions", integration: "integrated", value: 4 },
+      { text: "I navigate conflicts with wisdom and create deeper connection", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "My relationship with my past traumas or difficult experiences is:",
-    category: "Trauma Integration",
+    text: "How well do you express appreciation and positive feelings?",
+    category: "Communication Skills",
     options: [
-      { text: "I try not to think about them at all", integration: "trauma-avoidance", value: 5 },
-      { text: "I feel like a victim of my past", integration: "victim-identity", value: 4 },
-      { text: "I'm working on healing but it's very difficult", integration: "healing-struggle", value: 3 },
-      { text: "I see them as experiences that shaped but don't define me", integration: "narrative-integration", value: 2 },
-      { text: "I've transformed them into sources of wisdom and compassion", integration: "transformative-integration", value: 1 }
+      { text: "I rarely express positive feelings or do so awkwardly", integration: "emerging", value: 1 },
+      { text: "I express appreciation but it feels forced or infrequent", integration: "developing", value: 2 },
+      { text: "I regularly express genuine appreciation and positive feelings", integration: "integrated", value: 4 },
+      { text: "I express love and appreciation in deeply meaningful ways", integration: "mastery", value: 5 }
     ]
   },
+
+  // Emotional Regulation (5 questions)
   {
-    text: "When I feel angry, I:",
-    category: "Anger Integration",
-    options: [
-      { text: "Suppress it because anger is bad", integration: "anger-suppression", value: 5 },
-      { text: "Express it destructively and regret it later", integration: "destructive-expression", value: 4 },
-      { text: "Feel conflicted about having angry feelings", integration: "anger-ambivalence", value: 3 },
-      { text: "Try to understand what boundary was crossed", integration: "anger-information", value: 2 },
-      { text: "Use it as energy for positive change", integration: "anger-transformation", value: 1 }
-    ]
-  },
-  {
-    text: "My approach to setting boundaries is:",
-    category: "Boundary Integration",
-    options: [
-      { text: "I rarely set boundaries to avoid conflict", integration: "boundary-avoidance", value: 5 },
-      { text: "I set boundaries but feel guilty about it", integration: "guilty-boundaries", value: 4 },
-      { text: "I'm learning to set boundaries but it's challenging", integration: "developing-boundaries", value: 3 },
-      { text: "I set clear boundaries while remaining compassionate", integration: "balanced-boundaries", value: 2 },
-      { text: "I see boundaries as acts of self-love and respect", integration: "loving-boundaries", value: 1 }
-    ]
-  },
-  {
-    text: "When I experience intense emotions, I:",
+    text: "When you feel triggered in relationships, you...",
     category: "Emotional Regulation",
     options: [
-      { text: "Try to control or stop them immediately", integration: "emotional-control", value: 5 },
-      { text: "Feel overwhelmed and act impulsively", integration: "emotional-chaos", value: 4 },
-      { text: "Struggle to stay present with them", integration: "emotional-struggle", value: 3 },
-      { text: "Allow them to flow while staying grounded", integration: "emotional-flow", value: 2 },
-      { text: "Welcome them as messengers from my inner wisdom", integration: "emotional-wisdom", value: 1 }
+      { text: "React immediately from the triggered state", integration: "emerging", value: 1 },
+      { text: "Notice the trigger but struggle to regulate", integration: "developing", value: 2 },
+      { text: "Usually pause and choose your response", integration: "integrated", value: 4 },
+      { text: "Transform triggers into opportunities for deeper connection", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "My relationship with my body and physical sensations is:",
-    category: "Embodied Integration",
+    text: "Your ability to self-soothe during relationship stress is...",
+    category: "Emotional Regulation",
     options: [
-      { text: "I'm disconnected from my body most of the time", integration: "body-disconnection", value: 5 },
-      { text: "I notice my body mainly when something hurts", integration: "pain-focused", value: 4 },
-      { text: "I'm learning to pay attention to bodily signals", integration: "developing-awareness", value: 3 },
-      { text: "I regularly check in with my body's wisdom", integration: "body-dialogue", value: 2 },
-      { text: "I trust my body as a source of intelligence", integration: "embodied-wisdom", value: 1 }
+      { text: "I rely on my partner or external sources to feel better", integration: "emerging", value: 1 },
+      { text: "I have some strategies but they don't always work", integration: "developing", value: 2 },
+      { text: "I can usually calm myself down effectively", integration: "integrated", value: 4 },
+      { text: "I maintain inner peace even during relationship challenges", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "When I encounter parts of myself I don't like, I:",
-    category: "Self-Compassion",
+    text: "How do you handle jealousy or insecurity when it arises?",
+    category: "Emotional Regulation",
     options: [
-      { text: "Fight against them and try to eliminate them", integration: "self-warfare", value: 5 },
-      { text: "Feel disappointed in myself", integration: "self-disappointment", value: 4 },
-      { text: "Try to be understanding but still judge myself", integration: "conflicted-compassion", value: 3 },
-      { text: "Approach them with curiosity and kindness", integration: "compassionate-inquiry", value: 2 },
-      { text: "Embrace them as parts of my whole human experience", integration: "radical-acceptance", value: 1 }
+      { text: "I become controlling, accusatory, or withdraw completely", integration: "emerging", value: 1 },
+      { text: "I feel overwhelmed and communicate my fears poorly", integration: "developing", value: 2 },
+      { text: "I acknowledge my feelings and communicate my needs", integration: "integrated", value: 4 },
+      { text: "I use insecurity as information for deeper self-understanding", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "My approach to spiritual or transcendent experiences is:",
-    category: "Spiritual Integration",
+    text: "When your partner is emotional, your response is to...",
+    category: "Emotional Regulation",
     options: [
-      { text: "I dismiss them as not real or important", integration: "spiritual-denial", value: 5 },
-      { text: "I want them but they feel out of reach", integration: "spiritual-yearning", value: 4 },
-      { text: "I have them occasionally but struggle to integrate them", integration: "fragmented-spirituality", value: 3 },
-      { text: "I see them as natural parts of human experience", integration: "natural-spirituality", value: 2 },
-      { text: "I integrate them into my daily life and relationships", integration: "embodied-spirituality", value: 1 }
+      { text: "Get triggered and reactive or shut down emotionally", integration: "emerging", value: 1 },
+      { text: "Try to help but often make it about me", integration: "developing", value: 2 },
+      { text: "Stay present and offer appropriate support", integration: "integrated", value: 4 },
+      { text: "Hold space with deep compassion and wisdom", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "When facing uncertainty or the unknown, I:",
-    category: "Mystery Integration",
+    text: "Your relationship with your own shadow aspects is...",
+    category: "Emotional Regulation",
     options: [
-      { text: "Feel anxious and try to control everything", integration: "control-seeking", value: 5 },
-      { text: "Avoid situations with too much uncertainty", integration: "uncertainty-avoidance", value: 4 },
-      { text: "Tolerate uncertainty but don't like it", integration: "uncertainty-tolerance", value: 3 },
-      { text: "See uncertainty as part of life's adventure", integration: "uncertainty-acceptance", value: 2 },
-      { text: "Embrace the unknown as where growth happens", integration: "mystery-embrace", value: 1 }
+      { text: "I deny or project my shadow onto others", integration: "emerging", value: 1 },
+      { text: "I'm aware of my shadow but judge it harshly", integration: "developing", value: 2 },
+      { text: "I accept my shadow and work with it consciously", integration: "integrated", value: 4 },
+      { text: "I embrace my shadow as a source of power and wholeness", integration: "mastery", value: 5 }
+    ]
+  },
+
+  // Relationship Dynamics (5 questions)
+  {
+    text: "Your approach to relationship power dynamics is...",
+    category: "Relationship Dynamics",
+    options: [
+      { text: "I either dominate or submit without awareness", integration: "emerging", value: 1 },
+      { text: "I notice power struggles but don't know how to change them", integration: "developing", value: 2 },
+      { text: "I work toward balance and mutual empowerment", integration: "integrated", value: 4 },
+      { text: "I co-create relationships based on shared power and growth", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "My relationship with my inner critic is:",
-    category: "Inner Critic Integration",
+    text: "When your partner has different needs or wants, you...",
+    category: "Relationship Dynamics",
     options: [
-      { text: "I believe everything my inner critic says", integration: "critic-identification", value: 5 },
-      { text: "I fight against my inner critic constantly", integration: "critic-warfare", value: 4 },
-      { text: "I try to ignore my inner critic but it persists", integration: "critic-avoidance", value: 3 },
-      { text: "I dialogue with my inner critic to understand its concerns", integration: "critic-dialogue", value: 2 },
-      { text: "I've transformed my inner critic into a wise advisor", integration: "critic-transformation", value: 1 }
+      { text: "Feel threatened or try to convince them they're wrong", integration: "emerging", value: 1 },
+      { text: "Accept it intellectually but feel resentful", integration: "developing", value: 2 },
+      { text: "Honor their autonomy while expressing your own needs", integration: "integrated", value: 4 },
+      { text: "Celebrate differences as opportunities for mutual growth", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "When I think about my life purpose or meaning, I:",
-    category: "Purpose Integration",
+    text: "How do you handle your partner's growth and changes?",
+    category: "Relationship Dynamics",
     options: [
-      { text: "Feel lost and don't know what my purpose is", integration: "purpose-confusion", value: 5 },
-      { text: "Think my purpose should be something grand or special", integration: "purpose-inflation", value: 4 },
-      { text: "Am searching for my purpose but haven't found it", integration: "purpose-seeking", value: 3 },
-      { text: "Find meaning in being authentically myself", integration: "authentic-purpose", value: 2 },
-      { text: "See my purpose as serving the wholeness of life", integration: "unified-purpose", value: 1 }
+      { text: "I resist change and try to keep things the same", integration: "emerging", value: 1 },
+      { text: "I support growth in theory but feel threatened by changes", integration: "developing", value: 2 },
+      { text: "I encourage growth even when it's challenging for me", integration: "integrated", value: 4 },
+      { text: "I actively champion my partner's evolution and expansion", integration: "mastery", value: 5 }
     ]
   },
   {
-    text: "My overall approach to personal integration is:",
-    category: "Integration Approach",
+    text: "Your ability to maintain your identity in relationships is...",
+    category: "Relationship Dynamics",
     options: [
-      { text: "I want to fix what's wrong with me", integration: "fix-it-mentality", value: 5 },
-      { text: "I'm trying to become a better version of myself", integration: "improvement-focus", value: 4 },
-      { text: "I'm working on accepting all parts of myself", integration: "acceptance-work", value: 3 },
-      { text: "I see integration as honoring my wholeness", integration: "wholeness-honoring", value: 2 },
-      { text: "I trust that I am perfect as I am and always growing", integration: "paradoxical-integration", value: 1 }
+      { text: "I lose myself or become overly rigid to maintain identity", integration: "emerging", value: 1 },
+      { text: "I struggle to balance individual needs with relationship needs", integration: "developing", value: 2 },
+      { text: "I maintain my core self while adapting appropriately", integration: "integrated", value: 4 },
+      { text: "My authentic self actually emerges more fully in relationship", integration: "mastery", value: 5 }
+    ]
+  },
+  {
+    text: "When it comes to interdependence versus codependence, you...",
+    category: "Relationship Dynamics",
+    options: [
+      { text: "Either merge completely or remain totally separate", integration: "emerging", value: 1 },
+      { text: "Want healthy interdependence but fall into old patterns", integration: "developing", value: 2 },
+      { text: "Create relationships with healthy mutual support", integration: "integrated", value: 4 },
+      { text: "Model the art of conscious interdependence", integration: "mastery", value: 5 }
     ]
   }
 ];
 
 export const integrationLevels = {
-  "resistance": {
-    name: "Resistance Stage",
-    description: "You're in active resistance to parts of yourself, which is a natural starting point.",
+  emerging: {
+    name: "Emerging Integration",
+    description: "You are beginning your journey of conscious relationship development. There's great potential for growth.",
     characteristics: [
-      "Strong desire to eliminate unwanted aspects",
-      "Tendency to judge yourself harshly",
-      "Difficulty accepting negative emotions",
-      "Focus on fixing rather than understanding"
+      "Limited self-awareness in relationships",
+      "Reactive communication patterns",
+      "Difficulty with emotional regulation",
+      "Unconscious relationship dynamics"
     ],
-    guidance: [
-      "Practice noticing resistance without judging it",
-      "Begin with small acts of self-compassion",
-      "Explore what you're trying to protect yourself from",
-      "Consider that resistance itself serves a purpose"
+    recommendations: [
+      "Begin developing self-awareness through mindfulness",
+      "Practice pausing before reacting in conflicts",
+      "Learn basic communication skills",
+      "Start exploring your attachment style"
     ]
   },
-  "emerging-awareness": {
-    name: "Emerging Awareness Stage",
-    description: "You're beginning to notice patterns and unconscious behaviors with growing curiosity.",
-    characteristics: [
-      "Increased self-observation",
-      "Recognition of patterns without full understanding",
-      "Beginning to question automatic responses",
-      "Growing interest in self-exploration"
-    ],
-    guidance: [
-      "Keep a journal of patterns you notice",
-      "Practice mindfulness to strengthen awareness",
-      "Ask 'What is this trying to tell me?' about difficult emotions",
-      "Celebrate moments of clear seeing"
-    ]
-  },
-  "developing-awareness": {
+  developing: {
     name: "Developing Integration",
-    description: "You're actively working with your patterns and making conscious choices about your responses.",
+    description: "You have some awareness and skills but inconsistent application. You're building a foundation for healthier relationships.",
     characteristics: [
-      "Ability to pause before reacting",
-      "Growing understanding of triggers and patterns",
-      "Increased emotional regulation skills",
-      "Beginning to see wisdom in all experiences"
+      "Growing self-awareness but inconsistent application",
+      "Developing communication skills with room for growth",
+      "Some emotional regulation abilities",
+      "Beginning to recognize unhealthy patterns"
     ],
-    guidance: [
-      "Practice the pause between stimulus and response",
-      "Work with a therapist or coach if possible",
-      "Engage in regular self-reflection practices",
-      "Build a support network for your growth"
+    recommendations: [
+      "Practice consistent self-reflection",
+      "Work on expressing emotions more skillfully",
+      "Develop stronger boundaries",
+      "Continue learning about relationship dynamics"
     ]
   },
-  "compassionate-awareness": {
-    name: "Compassionate Integration",
-    description: "You approach yourself with kindness and see all parts of your experience as valuable.",
+  integrated: {
+    name: "Integrated Awareness",
+    description: "You demonstrate solid relationship skills and conscious awareness. You're able to navigate most challenges effectively.",
     characteristics: [
-      "Self-compassion in difficult moments",
-      "Ability to hold paradox and complexity",
-      "Seeing challenges as growth opportunities",
-      "Balanced relationship with strengths and shadows"
+      "Strong self-awareness and personal responsibility",
+      "Effective communication in most situations",
+      "Good emotional regulation abilities",
+      "Conscious participation in relationship dynamics"
     ],
-    guidance: [
-      "Deepen your compassion practices",
-      "Explore how your struggles have created wisdom",
-      "Share your journey to help others",
-      "Continue integrating body, mind, and spirit"
+    recommendations: [
+      "Deepen your capacity for vulnerability",
+      "Explore more advanced relationship concepts",
+      "Practice holding space for partner's growth",
+      "Continue refining your communication skills"
     ]
   },
-  "integrated-awareness": {
-    name: "Integrated Wholeness",
-    description: "You experience yourself as a whole being where all parts serve the larger self.",
+  mastery: {
+    name: "Relational Mastery",
+    description: "You demonstrate advanced relationship consciousness and skill. You likely serve as a model for others in creating healthy connections.",
     characteristics: [
-      "Deep self-acceptance and inner peace",
-      "Ability to transform challenges into wisdom",
-      "Natural compassion for self and others",
-      "Living from authentic wholeness"
+      "Deep self-awareness and wisdom",
+      "Masterful communication even in difficult situations",
+      "Excellent emotional regulation and presence",
+      "Conscious co-creation of relationship dynamics"
     ],
-    guidance: [
-      "Continue deepening your practice",
-      "Mentor others on their integration journey",
-      "Trust your inner wisdom completely",
-      "Serve the world from your wholeness"
+    recommendations: [
+      "Share your wisdom with others",
+      "Continue exploring the edges of growth",
+      "Mentor others in relationship development",
+      "Explore spiritual dimensions of relationship"
     ]
   }
 };
