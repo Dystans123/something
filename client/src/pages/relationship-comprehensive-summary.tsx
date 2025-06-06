@@ -19,6 +19,8 @@ export default function RelationshipComprehensiveSummary() {
   const [profileData, setProfileData] = useState<any>(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     // Load all test results from localStorage
     const savedResults = localStorage.getItem('psychTestResults');
     if (savedResults) {
@@ -145,65 +147,146 @@ export default function RelationshipComprehensiveSummary() {
   const generateGrowthOpportunities = (toxicity: any, patterns: any, integration: any) => {
     const opportunities = [];
 
-    if (toxicity?.zone === 'red' || toxicity?.zone === 'yellow') {
-      opportunities.push("Address toxic relationship patterns and establish healthier boundaries");
+    // Toxicity-based opportunities
+    if (toxicity?.zone === 'red') {
+      opportunities.push("Urgent Priority: Establish safety protocols and consider professional support to address toxic dynamics that may be compromising your well-being");
+      opportunities.push("Develop a comprehensive exit strategy and support network if you're in a harmful relationship pattern");
+    } else if (toxicity?.zone === 'yellow') {
+      opportunities.push("Focus on strengthening personal boundaries and developing assertiveness skills to prevent escalation of unhealthy dynamics");
+      opportunities.push("Learn to recognize early warning signs of toxic patterns and develop intervention strategies");
     }
 
+    // Attachment pattern growth opportunities
     if (patterns?.dominantPattern === 'anxious') {
-      opportunities.push("Develop self-soothing techniques and build secure self-worth");
+      opportunities.push("Master nervous system regulation through breathwork, meditation, and somatic practices to reduce anxiety-driven relationship behaviors");
+      opportunities.push("Develop secure self-worth that doesn't depend on your partner's validation or constant reassurance");
+      opportunities.push("Practice tolerating uncertainty in relationships without immediately seeking reassurance or creating conflict");
+      opportunities.push("Learn to differentiate between intuitive concerns and anxiety-based fears about your relationship");
     } else if (patterns?.dominantPattern === 'avoidant') {
-      opportunities.push("Practice emotional expression and vulnerability");
+      opportunities.push("Gradually expand your emotional vocabulary and practice expressing feelings in low-stakes situations");
+      opportunities.push("Explore the underlying fears that drive emotional withdrawal and work with them compassionately");
+      opportunities.push("Practice staying present during your partner's emotional expressions without shutting down or mentally checking out");
+      opportunities.push("Challenge yourself to share one vulnerable thought or feeling each week to build intimacy tolerance");
     } else if (patterns?.dominantPattern === 'dismissive') {
-      opportunities.push("Develop empathy and appreciation for emotional connection");
+      opportunities.push("Develop curiosity about emotional experiences - both your own and your partner's - rather than dismissing them as unnecessary");
+      opportunities.push("Practice empathetic listening without immediately offering solutions or logical analysis");
+      opportunities.push("Explore how emotional connection can actually enhance rather than threaten your sense of independence");
+    } else if (patterns?.dominantPattern === 'secure') {
+      opportunities.push("Continue deepening your capacity to hold space for more complex relationship dynamics and support others' growth");
+      opportunities.push("Explore advanced relationship skills like conflict alchemy and conscious communication");
     }
 
-    if (integration?.integrationLevel === 'emerging' || integration?.integrationLevel === 'developing') {
-      opportunities.push("Strengthen communication skills and emotional awareness");
-      opportunities.push("Practice mindfulness and self-reflection in relationships");
+    // Integration level opportunities
+    if (integration?.integrationLevel === 'emerging') {
+      opportunities.push("Build foundational emotional intelligence through mindfulness practices and self-reflection");
+      opportunities.push("Develop basic communication skills and learn to identify your relationship patterns");
+    } else if (integration?.integrationLevel === 'developing') {
+      opportunities.push("Strengthen your ability to catch and redirect unhealthy patterns in real-time");
+      opportunities.push("Practice holding paradox - being both independent and interdependent simultaneously");
+    } else if (integration?.integrationLevel === 'integrated') {
+      opportunities.push("Explore advanced relationship consciousness work and consider mentoring others in their relationship journey");
     }
 
-    return opportunities.slice(0, 3);
+    return opportunities.slice(0, 4);
   };
 
   const generateRelationshipGuidance = (patterns: any, integration: any, toxicity: any) => {
     const guidance = [];
 
+    // Safety-first guidance for high toxicity
     if (toxicity?.zone === 'red') {
-      guidance.push("Prioritize your safety and well-being. Consider professional support for toxic relationship dynamics.");
+      guidance.push("🚨 Safety Priority: Your assessment indicates concerning toxic patterns. Consider reaching out to a therapist, counselor, or trusted support network immediately. Remember that you deserve relationships that honor your dignity and well-being.");
+      guidance.push("Create a safety plan that includes trusted contacts, emergency resources, and clear steps for protecting yourself if dynamics escalate.");
     } else if (toxicity?.zone === 'yellow') {
-      guidance.push("Work on establishing clearer boundaries and improving communication patterns.");
+      guidance.push("Caution Advised: Some concerning patterns detected. Focus on strengthening your personal boundaries and developing assertiveness skills to prevent further deterioration of relationship health.");
+      guidance.push("Consider couples therapy or individual therapy to address these warning signs before they become more entrenched patterns.");
     }
 
+    // Attachment-specific guidance
     if (patterns?.dominantPattern === 'secure') {
-      guidance.push("Continue modeling healthy relationship behaviors and support your partner's growth.");
+      guidance.push("Your secure foundation is a gift not only to yourself but to your partners. Continue using your natural ability to create safety and model healthy relationship dynamics.");
+      guidance.push("Consider how you might support others in developing secure relationships - your influence can create positive ripple effects in your community.");
+      guidance.push("Focus on deepening intimacy through continued vulnerability and supporting your partner's individual growth alongside your shared journey.");
     } else if (patterns?.dominantPattern === 'anxious') {
-      guidance.push("Practice self-soothing and communicate your needs clearly without overwhelming your partner.");
+      guidance.push("Your intense capacity for love is beautiful, but learning to self-soothe will help you love from abundance rather than fear. Practice grounding techniques daily.");
+      guidance.push("When anxiety arises about your relationship, pause and ask: 'Is this my intuition or my activation?' This distinction will transform how you navigate concerns.");
+      guidance.push("Communicate your needs clearly using 'I' statements, and remember that asking for reassurance occasionally is normal - it's the frequency and intensity that matters.");
+      guidance.push("Develop secure self-worth through individual activities, friendships, and personal goals that exist independently of your romantic relationship.");
     } else if (patterns?.dominantPattern === 'avoidant') {
-      guidance.push("Challenge yourself to stay present during emotional moments and practice vulnerability.");
+      guidance.push("Your independence is a strength, but true intimacy requires showing up emotionally even when it feels uncomfortable. Start small and build your tolerance gradually.");
+      guidance.push("Practice staying present when your partner shares emotions. Resist the urge to problem-solve immediately - sometimes they just need to be heard and held.");
+      guidance.push("Remember that emotional closeness doesn't threaten your autonomy - it can actually enhance your sense of self when approached consciously.");
+      guidance.push("Challenge yourself to share one feeling or vulnerable thought each week. Notice that intimacy can coexist with independence.");
+    } else if (patterns?.dominantPattern === 'dismissive') {
+      guidance.push("Emotional connection isn't a weakness or distraction - it's a fundamental human need that, when honored, can actually support your other life goals.");
+      guidance.push("Practice curiosity about emotions rather than judgment. Ask yourself: 'What might this feeling be trying to tell me or my partner?'");
+      guidance.push("Experiment with small acts of emotional availability and notice how they impact your relationship satisfaction over time.");
     }
 
-    guidance.push("Focus on conscious communication and mutual growth in your relationships.");
-    guidance.push("Remember that healthy relationships require both individual wholeness and conscious partnership.");
+    // Integration-level guidance
+    if (integration?.integrationLevel === 'mastery') {
+      guidance.push("Your advanced relationship consciousness positions you to be a catalyst for healing not just in your own relationships, but in your broader community.");
+    } else if (integration?.integrationLevel === 'integrated') {
+      guidance.push("Continue deepening your practice of conscious relationship skills and consider how you might share your insights with others.");
+    } else if (integration?.integrationLevel === 'developing') {
+      guidance.push("You're building solid foundation skills - stay consistent with your growth practices and be patient with yourself as new patterns develop.");
+    } else {
+      guidance.push("Every step you take toward conscious relationship engagement creates positive change. Start with small, consistent practices and build from there.");
+    }
 
-    return guidance.slice(0, 4);
+    return guidance.slice(0, 5);
   };
 
   const generateIntegrationPractices = (integration: any, patterns: any) => {
-    const practices = [
-      "Daily mindfulness practice to increase emotional awareness",
-      "Regular self-reflection on relationship patterns and triggers",
-      "Practice expressing emotions clearly and listening with empathy",
-      "Work on maintaining your authentic self while being in relationship",
-      "Engage in activities that support both individual and relationship growth"
-    ];
+    const practices = [];
 
+    // Universal foundation practices
+    practices.push("Daily 10-minute mindfulness practice focused on emotional awareness and body sensations");
+    practices.push("Weekly relationship reflection: journal about patterns, triggers, and growth moments");
+    practices.push("Practice the 'pause and breathe' technique before responding during emotional conversations");
+
+    // Attachment-specific practices
     if (patterns?.dominantPattern === 'anxious') {
-      practices.push("Develop self-soothing techniques for relationship anxiety");
+      practices.push("Morning grounding practice: 5 minutes of deep breathing or body scan to regulate your nervous system");
+      practices.push("Self-soothing toolkit: create a list of activities that calm you without needing partner involvement");
+      practices.push("Practice the 24-hour rule: wait 24 hours before addressing relationship concerns to distinguish between anxiety and intuition");
+      practices.push("Develop secure self-affirmations that remind you of your inherent worth independent of relationship status");
     } else if (patterns?.dominantPattern === 'avoidant') {
-      practices.push("Practice staying present during emotional conversations");
+      practices.push("Daily emotion check-in: ask yourself 'What am I feeling right now?' three times per day");
+      practices.push("Vulnerability practice: share one authentic feeling or thought with your partner weekly");
+      practices.push("Presence practice: when your partner expresses emotion, count to 5 before responding to resist fixing mode");
+      practices.push("Intimacy tolerance building: gradually increase time spent in emotionally connected activities");
+    } else if (patterns?.dominantPattern === 'dismissive') {
+      practices.push("Curiosity cultivation: when emotions arise (yours or your partner's), ask 'What might this be trying to communicate?'");
+      practices.push("Empathy expansion: spend 5 minutes daily imagining how situations feel from your partner's perspective");
+      practices.push("Emotional vocabulary building: learn and use more specific feeling words in daily conversation");
+    } else if (patterns?.dominantPattern === 'secure') {
+      practices.push("Advanced communication practice: use reflective listening and emotional validation techniques");
+      practices.push("Relationship leadership: model healthy conflict resolution and emotional regulation for others");
+      practices.push("Depth exploration: engage in activities that deepen intimacy and mutual understanding");
     }
 
-    return practices.slice(0, 5);
+    // Integration-level specific practices
+    if (integration?.integrationLevel === 'emerging') {
+      practices.push("Basic communication skills practice: use 'I' statements and active listening daily");
+      practices.push("Pattern recognition: notice and name your relationship patterns when they occur");
+    } else if (integration?.integrationLevel === 'developing') {
+      practices.push("Real-time pattern interruption: practice catching unhealthy patterns and choosing different responses");
+      practices.push("Conscious communication: use intentional dialogue techniques during important conversations");
+    } else if (integration?.integrationLevel === 'integrated') {
+      practices.push("Conflict alchemy: transform disagreements into opportunities for deeper understanding and growth");
+      practices.push("Shadow work: explore and integrate the unconscious patterns that emerge in close relationships");
+    } else if (integration?.integrationLevel === 'mastery') {
+      practices.push("Relationship mentoring: share your wisdom and support others in their conscious relationship journey");
+      practices.push("Advanced practices: explore tantric communication, nonviolent communication, or other advanced relationship modalities");
+    }
+
+    // Universal growth practices
+    practices.push("Individual therapy or coaching to continue personal development alongside relationship growth");
+    practices.push("Couples practices: engage in shared activities that build connection and mutual understanding");
+    practices.push("Community connection: spend time with other couples who model healthy relationship dynamics");
+
+    return practices.slice(0, 6);
   };
 
   const shareProfile = () => {
@@ -242,8 +325,8 @@ export default function RelationshipComprehensiveSummary() {
     return (
       <div className="min-h-screen bg-[hsl(var(--deep-black))] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400 mx-auto mb-4"></div>
-          <p className="text-[hsl(var(--metallic-silver))]">Generating your comprehensive profile...</p>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[hsl(var(--silver-glow))] mx-auto mb-4"></div>
+          <p className="text-[hsl(var(--metallic-silver))]">Generating your comprehensive relationship profile...</p>
         </div>
       </div>
     );
@@ -251,8 +334,9 @@ export default function RelationshipComprehensiveSummary() {
 
   return (
     <div className="min-h-screen bg-[hsl(var(--deep-black))] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-purple-900/10 to-[hsl(var(--deep-black))]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
       
+      {/* Header */}
       <motion.header 
         className="relative z-20 p-6 border-b border-[hsl(var(--border))]"
         initial={{ opacity: 0, y: -20 }}
@@ -273,14 +357,15 @@ export default function RelationshipComprehensiveSummary() {
             
             <div className="text-center">
               <div className="flex items-center space-x-3 mb-2">
-                <Heart className="h-6 w-6 text-purple-400" />
+                <Heart className="h-6 w-6 text-red-400" />
                 <h1 className="font-serif text-xl md:text-2xl font-bold text-[hsl(var(--silver-glow))]">
-                  Relationship Profile
+                  Relationship Complete Profile
                 </h1>
+                <Heart className="h-6 w-6 text-red-400" />
               </div>
-              <Badge variant="outline" className="text-purple-400 border-purple-400">
-                Comprehensive Analysis Complete
-              </Badge>
+              <p className="text-sm text-[hsl(var(--metallic-silver))]">
+                Your Comprehensive Relationship Consciousness Analysis
+              </p>
             </div>
             
             <div className="flex space-x-2">
@@ -288,7 +373,7 @@ export default function RelationshipComprehensiveSummary() {
                 variant="outline"
                 size="sm"
                 onClick={shareProfile}
-                className="text-[hsl(var(--metallic-silver))] border-[hsl(var(--border))] hover:border-purple-400"
+                className="border-[hsl(var(--border))] hover:bg-[hsl(var(--dark-gray))]"
               >
                 <Share2 className="h-4 w-4 mr-2" />
                 Share
@@ -297,7 +382,7 @@ export default function RelationshipComprehensiveSummary() {
                 variant="outline"
                 size="sm"
                 onClick={retakeJourney}
-                className="text-[hsl(var(--metallic-silver))] border-[hsl(var(--border))] hover:border-purple-400"
+                className="border-[hsl(var(--border))] hover:bg-[hsl(var(--dark-gray))]"
               >
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Retake
@@ -307,85 +392,48 @@ export default function RelationshipComprehensiveSummary() {
         </div>
       </motion.header>
 
-      <div className="relative z-10 container mx-auto px-6 py-8 max-w-6xl">
-        {/* Overall Wellness Score */}
+      {/* Main Content */}
+      <div className="relative z-10 container mx-auto px-6 py-12 max-w-6xl">
+        {/* Wellness Overview */}
         <motion.div
-          className="mb-8"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
+          className="mb-12"
         >
-          <Card className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/30">
-            <CardContent className="p-8">
-              <div className="text-center">
-                <h2 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-2">
-                  Relationship Wellness Score
-                </h2>
-                <div className="text-4xl font-bold text-purple-400 mb-4">
-                  {profileData.overallWellness}/100
+          <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--border))]">
+            <CardHeader className="text-center pb-4">
+              <CardTitle className="flex items-center justify-center space-x-3 text-2xl font-serif text-[hsl(var(--silver-glow))]">
+                <Shield className="h-6 w-6 text-emerald-400" />
+                <span>Relationship Wellness Overview</span>
+                <Shield className="h-6 w-6 text-emerald-400" />
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="text-center space-y-2">
+                  <div className="text-3xl font-bold text-[hsl(var(--silver-glow))]">
+                    {profileData.overallWellness}%
+                  </div>
+                  <Progress value={profileData.overallWellness} className="h-2" />
+                  <p className="text-sm text-[hsl(var(--metallic-silver))]">Overall Wellness</p>
                 </div>
-                <Progress 
-                  value={profileData.overallWellness} 
-                  className="w-full max-w-md mx-auto h-3 bg-[hsl(var(--dark-gray))]"
-                />
-                <p className="text-[hsl(var(--metallic-silver))] mt-4">
-                  {profileData.overallWellness >= 80 ? "Excellent relationship health and consciousness" :
-                   profileData.overallWellness >= 60 ? "Good foundation with room for growth" :
-                   "Significant opportunities for relationship development"}
-                </p>
+                <div className="text-center space-y-2">
+                  <Badge variant="secondary" className="text-lg px-4 py-2 capitalize">
+                    {profileData.dominantPattern}
+                  </Badge>
+                  <p className="text-sm text-[hsl(var(--metallic-silver))]">Attachment Pattern</p>
+                </div>
+                <div className="text-center space-y-2">
+                  <Badge 
+                    variant={profileData.toxicityRisk === 'green' ? 'default' : profileData.toxicityRisk === 'yellow' ? 'secondary' : 'destructive'} 
+                    className="text-lg px-4 py-2 capitalize"
+                  >
+                    {profileData.toxicityRisk} Zone
+                  </Badge>
+                  <p className="text-sm text-[hsl(var(--metallic-silver))]">Toxicity Risk</p>
+                </div>
               </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* Test Results Overview */}
-        <motion.div
-          className="grid md:grid-cols-4 gap-6 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <Card className="bg-[hsl(var(--dark-gray))]/30 border-purple-400/30">
-            <CardContent className="p-6 text-center">
-              <Shield className="h-8 w-8 text-red-400 mx-auto mb-3" />
-              <h3 className="font-semibold text-[hsl(var(--silver-glow))] mb-2">Toxicity Assessment</h3>
-              <Badge className={`${
-                profileData.toxicityRisk === 'green' ? 'bg-green-500/20 text-green-300' :
-                profileData.toxicityRisk === 'yellow' ? 'bg-yellow-500/20 text-yellow-300' :
-                'bg-red-500/20 text-red-300'
-              }`}>
-                {profileData.toxicityRisk.charAt(0).toUpperCase() + profileData.toxicityRisk.slice(1)} Zone
-              </Badge>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-[hsl(var(--dark-gray))]/30 border-emerald-400/30">
-            <CardContent className="p-6 text-center">
-              <Users className="h-8 w-8 text-emerald-400 mx-auto mb-3" />
-              <h3 className="font-semibold text-[hsl(var(--silver-glow))] mb-2">Attachment Pattern</h3>
-              <Badge className="bg-emerald-500/20 text-emerald-300">
-                {profileData.dominantPattern.charAt(0).toUpperCase() + profileData.dominantPattern.slice(1)}
-              </Badge>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-[hsl(var(--dark-gray))]/30 border-amber-400/30">
-            <CardContent className="p-6 text-center">
-              <Compass className="h-8 w-8 text-amber-400 mx-auto mb-3" />
-              <h3 className="font-semibold text-[hsl(var(--silver-glow))] mb-2">Integration Level</h3>
-              <Badge className="bg-amber-500/20 text-amber-300">
-                {profileData.integrationLevel.charAt(0).toUpperCase() + profileData.integrationLevel.slice(1)}
-              </Badge>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-[hsl(var(--dark-gray))]/30 border-purple-400/30">
-            <CardContent className="p-6 text-center">
-              <Star className="h-8 w-8 text-purple-400 mx-auto mb-3" />
-              <h3 className="font-semibold text-[hsl(var(--silver-glow))] mb-2">Shadow Work</h3>
-              <Badge className="bg-purple-500/20 text-purple-300">
-                Completed
-              </Badge>
             </CardContent>
           </Card>
         </motion.div>
@@ -393,104 +441,93 @@ export default function RelationshipComprehensiveSummary() {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Core Insights */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Card className="bg-[hsl(var(--dark-gray))]/30 border-[hsl(var(--border))]">
+            <Card className="bg-[hsl(var(--dark-gray))] border-[hsl(var(--border))] h-full">
               <CardHeader>
-                <CardTitle className="text-[hsl(var(--silver-glow))] flex items-center">
-                  <Heart className="h-5 w-5 mr-2 text-purple-400" />
-                  Core Insights
+                <CardTitle className="flex items-center space-x-2 text-[hsl(var(--silver-glow))]">
+                  <Compass className="h-5 w-5 text-blue-400" />
+                  <span>Core Insights</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {profileData.coreInsights.map((insight: string, index: number) => (
-                    <li key={index} className="text-[hsl(var(--metallic-silver))] flex items-start">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0" />
-                      {insight}
-                    </li>
-                  ))}
-                </ul>
+              <CardContent className="space-y-4">
+                {profileData.coreInsights.map((insight: string, index: number) => (
+                  <div key={index} className="p-4 bg-[hsl(var(--deep-black))] rounded-lg border border-[hsl(var(--border))]">
+                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">{insight}</p>
+                  </div>
+                ))}
               </CardContent>
             </Card>
           </motion.div>
 
           {/* Strengths & Gifts */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <Card className="bg-[hsl(var(--dark-gray))]/30 border-[hsl(var(--border))]">
+            <Card className="bg-[hsl(var(--dark-gray))] border-[hsl(var(--border))] h-full">
               <CardHeader>
-                <CardTitle className="text-[hsl(var(--silver-glow))] flex items-center">
-                  <Star className="h-5 w-5 mr-2 text-emerald-400" />
-                  Relationship Strengths
+                <CardTitle className="flex items-center space-x-2 text-[hsl(var(--silver-glow))]">
+                  <Star className="h-5 w-5 text-yellow-400" />
+                  <span>Strengths & Gifts</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {profileData.strengthsAndGifts.map((strength: string, index: number) => (
-                    <li key={index} className="text-[hsl(var(--metallic-silver))] flex items-start">
-                      <div className="w-2 h-2 bg-emerald-400 rounded-full mt-2 mr-3 flex-shrink-0" />
-                      {strength}
-                    </li>
-                  ))}
-                </ul>
+              <CardContent className="space-y-3">
+                {profileData.strengthsAndGifts.map((strength: string, index: number) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <div className="h-2 w-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">{strength}</p>
+                  </div>
+                ))}
               </CardContent>
             </Card>
           </motion.div>
 
           {/* Growth Opportunities */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Card className="bg-[hsl(var(--dark-gray))]/30 border-[hsl(var(--border))]">
+            <Card className="bg-[hsl(var(--dark-gray))] border-[hsl(var(--border))] h-full">
               <CardHeader>
-                <CardTitle className="text-[hsl(var(--silver-glow))] flex items-center">
-                  <Compass className="h-5 w-5 mr-2 text-amber-400" />
-                  Growth Opportunities
+                <CardTitle className="flex items-center space-x-2 text-[hsl(var(--silver-glow))]">
+                  <Users className="h-5 w-5 text-emerald-400" />
+                  <span>Growth Opportunities</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {profileData.growthOpportunities.map((opportunity: string, index: number) => (
-                    <li key={index} className="text-[hsl(var(--metallic-silver))] flex items-start">
-                      <div className="w-2 h-2 bg-amber-400 rounded-full mt-2 mr-3 flex-shrink-0" />
-                      {opportunity}
-                    </li>
-                  ))}
-                </ul>
+              <CardContent className="space-y-4">
+                {profileData.growthOpportunities.map((opportunity: string, index: number) => (
+                  <div key={index} className="p-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-lg border border-emerald-500/20">
+                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">{opportunity}</p>
+                  </div>
+                ))}
               </CardContent>
             </Card>
           </motion.div>
 
           {/* Relationship Guidance */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <Card className="bg-[hsl(var(--dark-gray))]/30 border-[hsl(var(--border))]">
+            <Card className="bg-[hsl(var(--dark-gray))] border-[hsl(var(--border))] h-full">
               <CardHeader>
-                <CardTitle className="text-[hsl(var(--silver-glow))] flex items-center">
-                  <Users className="h-5 w-5 mr-2 text-pink-400" />
-                  Relationship Guidance
+                <CardTitle className="flex items-center space-x-2 text-[hsl(var(--silver-glow))]">
+                  <Heart className="h-5 w-5 text-red-400" />
+                  <span>Relationship Guidance</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {profileData.relationshipGuidance.map((guidance: string, index: number) => (
-                    <li key={index} className="text-[hsl(var(--metallic-silver))] flex items-start">
-                      <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 mr-3 flex-shrink-0" />
-                      {guidance}
-                    </li>
-                  ))}
-                </ul>
+              <CardContent className="space-y-4">
+                {profileData.relationshipGuidance.map((guidance: string, index: number) => (
+                  <div key={index} className="p-4 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-lg border border-red-500/20">
+                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">{guidance}</p>
+                  </div>
+                ))}
               </CardContent>
             </Card>
           </motion.div>
@@ -498,22 +535,29 @@ export default function RelationshipComprehensiveSummary() {
 
         {/* Integration Practices */}
         <motion.div
-          className="mt-8"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-8"
         >
-          <Card className="bg-gradient-to-r from-purple-500/10 to-emerald-500/10 border-purple-400/30">
+          <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--border))]">
             <CardHeader>
-              <CardTitle className="text-[hsl(var(--silver-glow))] text-center">
-                Daily Integration Practices
+              <CardTitle className="flex items-center justify-center space-x-2 text-2xl font-serif text-[hsl(var(--silver-glow))]">
+                <Compass className="h-6 w-6 text-purple-400" />
+                <span>Personalized Integration Practices</span>
+                <Compass className="h-6 w-6 text-purple-400" />
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid md:grid-cols-2 gap-6">
                 {profileData.integrationPractices.map((practice: string, index: number) => (
-                  <div key={index} className="bg-[hsl(var(--dark-gray))]/30 p-4 rounded-xl border border-[hsl(var(--border))]">
-                    <p className="text-[hsl(var(--metallic-silver))] text-sm">{practice}</p>
+                  <div key={index} className="p-4 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-lg border border-purple-500/20">
+                    <div className="flex items-start space-x-3">
+                      <div className="h-6 w-6 bg-purple-400 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                        {index + 1}
+                      </div>
+                      <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">{practice}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -521,40 +565,56 @@ export default function RelationshipComprehensiveSummary() {
           </Card>
         </motion.div>
 
-        {/* Call to Action */}
+        {/* Footer Actions */}
         <motion.div
-          className="mt-8 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="text-center mt-12 space-y-6"
         >
-          <Card className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-400/50">
-            <CardContent className="p-8">
-              <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))] mb-4">
-                Continue Your Relationship Journey
-              </h3>
-              <p className="text-[hsl(var(--metallic-silver))] mb-6">
-                Use these insights as a foundation for conscious relationship development. 
-                Remember that growth is a continuous process of awareness, practice, and integration.
-              </p>
-              <div className="space-x-4">
-                <Button
-                  onClick={() => setLocation("/journey")}
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0"
-                >
-                  Explore Other Tests
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={shareProfile}
-                  className="text-[hsl(var(--metallic-silver))] border-[hsl(var(--border))] hover:border-purple-400"
-                >
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share Results
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button
+              onClick={shareProfile}
+              className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
+            >
+              <Share2 className="h-4 w-4 mr-2" />
+              Share My Profile
+            </Button>
+            <Button
+              onClick={retakeJourney}
+              variant="outline"
+              className="border-[hsl(var(--border))] hover:bg-[hsl(var(--dark-gray))]"
+            >
+              <RefreshCw className="h-4 w-4 mr-2" />
+              Retake Journey
+            </Button>
+            <Button
+              onClick={() => setLocation("/journey")}
+              variant="outline"
+              className="border-[hsl(var(--border))] hover:bg-[hsl(var(--dark-gray))]"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Journey
+            </Button>
+          </div>
+          
+          <div className="text-center space-y-4">
+            <p className="text-[hsl(var(--metallic-silver))] max-w-2xl mx-auto">
+              Your relationship consciousness is a journey, not a destination. Use these insights as a compass 
+              for continued growth and deeper connection.
+            </p>
+            <div className="flex justify-center space-x-6 text-sm text-[hsl(var(--metallic-silver))]">
+              <button onClick={() => setLocation("/privacy-policy")} className="hover:text-[hsl(var(--silver-glow))] transition-colors">
+                Privacy Policy
+              </button>
+              <button onClick={() => setLocation("/terms-of-use")} className="hover:text-[hsl(var(--silver-glow))] transition-colors">
+                Terms of Use
+              </button>
+              <button onClick={() => setLocation("/cookie-policy")} className="hover:text-[hsl(var(--silver-glow))] transition-colors">
+                Cookie Policy
+              </button>
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>
