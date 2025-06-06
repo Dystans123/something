@@ -24,6 +24,9 @@ import IdentityCompass from "@/pages/identity-compass";
 import IdentityCompassResults from "@/pages/identity-compass-results";
 import InnerDriver from "@/pages/inner-driver";
 import InnerDriverResults from "@/pages/inner-driver-results";
+import PrivacyPolicy from "@/pages/privacy-policy";
+import TermsOfUse from "@/pages/terms-of-use";
+import CookiePolicy from "@/pages/cookie-policy";
 
 function Router() {
   return (
@@ -49,6 +52,9 @@ function Router() {
       <Route path="/identity-compass-results" component={IdentityCompassResults} />
       <Route path="/inner-driver" component={InnerDriver} />
       <Route path="/inner-driver-results" component={InnerDriverResults} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/terms-of-use" component={TermsOfUse} />
+      <Route path="/cookie-policy" component={CookiePolicy} />
     </Switch>
   );
 }
