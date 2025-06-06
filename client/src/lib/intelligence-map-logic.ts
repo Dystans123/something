@@ -44,20 +44,13 @@ export function calculateIntelligenceMapResult(answers: IntelligenceMapAnswer[])
     dominantIntelligence,
     intelligenceScores,
     strengths: dominantType.strengths,
-    applications: dominantType.traits,
-    developmentAreas: generateDevelopmentAreas(intelligenceScores, dominantIntelligence),
-    careerSuggestions: dominantType.careers
+    applications: dominantType.applications,
+    developmentAreas: dominantType.developmentAreas,
+    careerSuggestions: dominantType.careerSuggestions
   };
 }
 
-function generateDevelopmentAreas(scores: Record<string, number>, dominant: string): string[] {
-  const allTypes = Object.keys(intelligenceTypes);
-  const weakerAreas = allTypes
-    .filter(type => type !== dominant && scores[type] < scores[dominant] * 0.7)
-    .map(type => intelligenceTypes[type as keyof typeof intelligenceTypes].name);
-  
-  return weakerAreas.slice(0, 2); // Return top 2 development areas
-}
+
 
 export function getIntelligenceMapProgress(currentIndex: number): number {
   return Math.round((currentIndex / intelligenceMapQuestions.length) * 100);

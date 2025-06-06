@@ -287,16 +287,36 @@ export const intelligenceTypes = {
   },
   strategic: {
     name: "Strategic Intelligence",
-    description: "You excel at long-term planning, goal-setting, and seeing the big picture. You naturally think several steps ahead and position for future success.",
-    traits: ["Long-term thinking", "Goal orientation", "Planning", "Vision", "Leadership"],
-    strengths: ["Strategic planning", "Goal achievement", "Leadership", "Future focus", "Decision making"],
-    careers: ["Executive", "Consultant", "Project manager", "Business strategist", "Military officer"]
+    description: "Your mind operates like a master chess player, naturally thinking multiple moves ahead and positioning for long-term success. You possess the rare ability to see through present complexity to future possibilities, crafting pathways from current reality to desired outcomes. Your intelligence excels at identifying leverage points—those crucial decisions and actions that create maximum impact toward achieving ambitious goals.",
+    detailedAnalysis: "Your strategic intelligence manifests as an intuitive understanding of how actions today shape tomorrow's reality. You naturally see the interconnections between decisions, resources, and outcomes, allowing you to craft comprehensive plans that account for multiple scenarios. This intelligence type makes you a natural leader and visionary, capable of inspiring others with compelling pictures of possible futures while maintaining the practical wisdom to make those visions achievable.",
+    traits: ["Visionary long-term thinking", "Goal-oriented planning mastery", "Resource optimization", "Risk-reward calculation", "Leadership and influence", "Future scenario modeling", "Competitive advantage identification"],
+    strengths: ["Creating comprehensive long-term strategies", "Identifying and securing competitive advantages", "Making complex decisions under uncertainty", "Inspiring teams with compelling visions", "Optimizing resource allocation for maximum impact", "Anticipating market and industry trends"],
+    applications: ["Business strategy and planning", "Organizational leadership", "Market expansion initiatives", "Competitive positioning", "Investment and resource allocation", "Change management and transformation"],
+    developmentAreas: ["Paying attention to immediate details", "Considering emotional factors in planning", "Adapting when plans need rapid changes", "Including diverse perspectives in strategy", "Balancing vision with practical execution"],
+    careerSuggestions: ["CEO/Executive Leader", "Strategy Consultant", "Business Development Director", "Investment Manager", "Management Consultant", "Operations Director", "Strategic Planner", "Venture Capitalist"],
+    growthTips: [
+      "Develop skills in tactical execution to complement your strategic vision",
+      "Learn to communicate strategies in emotionally compelling ways",
+      "Practice rapid adaptation when circumstances change unexpectedly",
+      "Include diverse stakeholders in your strategic planning process",
+      "Balance long-term vision with short-term operational needs"
+    ]
   },
   systemic: {
     name: "Systemic Intelligence",
-    description: "You understand how complex systems work and how different parts interconnect. You see patterns and relationships that create the bigger picture.",
-    traits: ["Systems thinking", "Pattern recognition", "Holistic view", "Interconnectedness", "Synthesis"],
-    strengths: ["Understanding complexity", "Seeing connections", "Holistic problem solving", "Integration", "Systems design"],
-    careers: ["Systems analyst", "Organizational consultant", "Urban planner", "Ecosystem manager", "Process improvement specialist"]
+    description: "Your mind naturally perceives the intricate web of relationships that connect all things, seeing beyond individual components to understand how entire systems function and evolve. You possess the remarkable ability to hold multiple perspectives simultaneously while recognizing the underlying patterns that govern complex interactions. Your intelligence operates at the intersection of holistic thinking and practical understanding, making you a natural systems architect and organizational healer.",
+    detailedAnalysis: "Your systemic intelligence allows you to see the forest, the trees, and the entire ecosystem simultaneously. You understand that every action creates ripple effects throughout interconnected networks, and you can predict how changes in one area will impact the whole. This makes you invaluable in complex environments where linear thinking fails and holistic solutions are required. You serve as a bridge between different perspectives, helping others understand their role in larger systems.",
+    traits: ["Holistic systems thinking", "Pattern recognition across domains", "Interconnectedness awareness", "Multi-perspective integration", "Complexity navigation", "Ecosystem understanding", "Emergence and adaptation insight"],
+    strengths: ["Understanding complex interconnections", "Identifying leverage points in systems", "Designing holistic solutions", "Integrating diverse perspectives", "Navigating organizational complexity", "Predicting system-wide effects of changes"],
+    applications: ["Organizational design and development", "Process optimization and integration", "Complex problem solving", "Change management initiatives", "Ecosystem and environmental planning", "Technology systems integration"],
+    developmentAreas: ["Focusing on specific details", "Making quick decisions without full analysis", "Working within rigid structures", "Simplifying complex explanations", "Managing information overload"],
+    careerSuggestions: ["Systems Analyst", "Organizational Development Consultant", "Process Improvement Manager", "Urban Planner", "Ecosystem Manager", "Integration Architect", "Change Management Specialist", "Operations Research Analyst"],
+    growthTips: [
+      "Practice breaking down complex insights into actionable steps",
+      "Develop skills in rapid decision-making for urgent situations",
+      "Learn to communicate systems insights in simple, clear language",
+      "Work on prioritizing when dealing with multiple interconnected issues",
+      "Balance holistic thinking with focused execution on specific goals"
+    ]
   }
 };

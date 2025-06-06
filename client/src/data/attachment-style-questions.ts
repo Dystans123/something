@@ -216,11 +216,19 @@ export const attachmentStyleQuestions: AttachmentStyleQuestion[] = [
 export const attachmentStyles = {
   secure: {
     name: "Secure Attachment",
-    description: "You have a healthy, balanced approach to relationships. You're comfortable with intimacy and independence, communicate well, and trust others while maintaining good boundaries.",
-    traits: ["Comfortable with intimacy", "Good communication", "Healthy boundaries", "Trusting", "Emotionally stable"],
-    strengths: ["Balanced relationships", "Effective conflict resolution", "Emotional regulation", "Healthy independence", "Consistent love expression"],
-    growthAreas: ["Continue modeling healthy relationships", "Support others in their attachment growth"],
-    tips: ["Your secure style is a gift - use it to help others feel safe in relationships", "Continue practicing open communication"]
+    description: "You possess the psychological foundation for deeply fulfilling relationships, characterized by an innate ability to balance intimacy with independence. Your attachment system operates from a place of fundamental trust—both in your own worthiness of love and in others' capacity to provide consistent care. This secure base allows you to navigate the complexities of human connection with grace, authenticity, and resilience.",
+    detailedAnalysis: "Your secure attachment style reflects early experiences of consistent, responsive caregiving that taught you to expect relationships to be sources of comfort rather than anxiety. You approach connections with an open heart while maintaining a strong sense of self. This rare combination allows you to offer genuine support to others without losing yourself, and to receive care without feeling overwhelmed or suspicious. You serve as an emotional anchor for others, demonstrating what healthy love looks like.",
+    traits: ["Emotional security and stability", "Balanced intimacy and autonomy", "Effective communication skills", "Healthy boundary setting", "Consistent trust-building", "Conflict resolution abilities", "Emotional regulation mastery"],
+    strengths: ["Creating safe emotional spaces for deep connection", "Maintaining individual identity within relationships", "Communicating needs and feelings clearly and kindly", "Resolving conflicts constructively without defensiveness", "Building trust through consistent, reliable behavior", "Supporting others without sacrificing self-care"],
+    growthAreas: ["Recognizing when others need extra emotional support", "Developing patience with insecure attachment styles", "Learning to identify subtle relationship warning signs", "Balancing your natural giving with receiving from others"],
+    tips: [
+      "Your secure attachment is a rare gift that creates healing for others",
+      "Practice recognizing when partners or friends need extra reassurance",
+      "Use your natural communication skills to model healthy conflict resolution",
+      "Remember that not everyone had the secure foundation you did—be patient",
+      "Continue to prioritize both emotional intimacy and personal growth",
+      "Trust your instincts about relationship red flags while remaining open-hearted"
+    ]
   },
   anxious: {
     name: "Anxious Attachment",
