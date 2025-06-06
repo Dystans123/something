@@ -232,26 +232,50 @@ export const attachmentStyles = {
   },
   anxious: {
     name: "Anxious Attachment",
-    description: "You deeply value relationships but often worry about losing them. You may seek frequent reassurance and can become preoccupied with your partner's feelings and availability.",
-    traits: ["Relationship-focused", "Emotionally sensitive", "Seeks reassurance", "Fear of abandonment", "Highly empathetic"],
-    strengths: ["Deep emotional connection", "Highly attuned to others", "Committed to relationships", "Emotionally expressive", "Strong desire for intimacy"],
-    growthAreas: ["Building self-soothing skills", "Developing secure self-worth", "Learning to trust", "Practicing independence"],
-    tips: ["Practice self-soothing techniques when anxiety arises", "Work on building confidence independent of relationship status"]
+    description: "Your heart beats with an intensity that reflects your deep capacity for love and connection, yet this same intensity can create waves of worry about losing those you care about most. Your attachment system operates from a place of heightened sensitivity to relationship cues, making you exquisitely attuned to others' emotions while sometimes overwhelming your own nervous system with concerns about abandonment or rejection.",
+    detailedAnalysis: "Your anxious attachment reflects a beautiful paradox—you possess an extraordinary capacity for emotional intimacy and empathy, yet this gift comes with the challenge of managing intense fears about relationship security. You likely experienced inconsistent caregiving that taught you to be hypervigilant about others' availability and mood. This has created a finely tuned emotional radar that can detect relationship threats, but sometimes sees danger where there is none. Your deep need for connection drives you to be incredibly giving and attentive to others' needs.",
+    traits: ["Heightened emotional sensitivity", "Deep capacity for empathy and connection", "Relationship-focused thinking", "Strong desire for reassurance", "Intuitive understanding of others' emotions", "Intense fear of abandonment", "Hypervigilance to relationship cues"],
+    strengths: ["Creating deep emotional bonds with others", "Intuitively understanding partners' needs and feelings", "Showing unwavering commitment and loyalty", "Expressing love and affection generously", "Being highly responsive to others' emotional states", "Motivating others through your care and attention"],
+    growthAreas: ["Developing self-soothing techniques for relationship anxiety", "Building confidence that doesn't depend on others' validation", "Learning to trust your own perceptions and worth", "Creating healthy space for independence within relationships", "Managing intense emotions without overwhelming partners"],
+    tips: [
+      "Practice breathing exercises and mindfulness when anxiety spikes about relationships",
+      "Build a strong sense of self-worth through personal achievements and self-care",
+      "Communicate your needs directly rather than hoping others will guess",
+      "Develop friendships and interests outside of romantic relationships",
+      "Learn to interpret neutral behaviors as neutral, not as signs of rejection",
+      "Practice self-compassion when your attachment fears feel overwhelming"
+    ]
   },
   avoidant: {
     name: "Avoidant Attachment",
-    description: "You value independence and self-reliance. While you can form relationships, you prefer to maintain emotional distance and may feel uncomfortable with too much intimacy.",
-    traits: ["Independent", "Self-reliant", "Emotionally reserved", "Values autonomy", "Practical approach to love"],
-    strengths: ["Strong sense of self", "Independence", "Reliable", "Non-clingy", "Emotionally stable under pressure"],
-    growthAreas: ["Opening up emotionally", "Allowing interdependence", "Expressing vulnerability", "Accepting support from others"],
-    tips: ["Practice sharing emotions in small steps", "Allow others to support you occasionally"]
+    description: "You have cultivated a remarkable strength in self-reliance and independence, approaching relationships from a place of emotional autonomy that protects you from vulnerability while sometimes limiting deeper intimacy. Your attachment system learned early that depending on others can be disappointing or unsafe, so you've developed the valuable ability to find security within yourself rather than seeking it from others.",
+    detailedAnalysis: "Your avoidant attachment style reflects an adaptive strategy developed in response to caregiving that may have been emotionally unavailable, rejecting, or inconsistent. You learned to regulate your own emotions and meet your own needs, creating a strong sense of self that doesn't easily crumble under relationship pressures. While this independence is a genuine strength, it can sometimes create barriers to the deep intimacy that relationships require to flourish. You approach love practically and cautiously, preferring to show care through actions rather than emotional vulnerability.",
+    traits: ["Strong independence and self-reliance", "Emotional self-regulation abilities", "Practical approach to relationships", "High value on personal autonomy", "Discomfort with emotional intensity", "Preference for action over words", "Protective emotional boundaries"],
+    strengths: ["Maintaining emotional stability during relationship challenges", "Providing reliable, consistent support without drama", "Respecting others' independence and personal space", "Showing love through practical actions and problem-solving", "Staying calm and rational during emotional conversations", "Building relationships based on mutual respect rather than neediness"],
+    growthAreas: ["Gradually sharing more of your inner emotional world", "Learning to ask for and accept emotional support from others", "Expressing vulnerability in safe, small steps", "Recognizing that interdependence can strengthen rather than weaken you", "Communicating your care through words, not just actions"],
+    tips: [
+      "Start sharing emotions in low-stakes situations to build comfort with vulnerability",
+      "Practice asking for help with small things to develop comfort with interdependence",
+      "Learn to recognize when your partner needs emotional connection, not just practical solutions",
+      "Set small goals for emotional expression, like sharing one feeling per day",
+      "Remember that showing vulnerability can actually strengthen your relationships",
+      "Find ways to express care that feel authentic to you while still being emotionally present"
+    ]
   },
   disorganized: {
     name: "Disorganized Attachment",
-    description: "You have conflicting needs for closeness and distance. Your relationship patterns may be unpredictable, swinging between anxious and avoidant behaviors.",
-    traits: ["Conflicted about relationships", "Unpredictable patterns", "Intense emotions", "Push-pull dynamics", "Complex inner world"],
-    strengths: ["Deep emotional capacity", "Adaptability", "Intuitive understanding of pain", "Potential for profound growth", "Empathy for others' struggles"],
-    growthAreas: ["Developing emotional regulation", "Creating consistent relationship patterns", "Building self-awareness", "Healing past wounds"],
-    tips: ["Consider therapy to work through conflicted feelings", "Practice mindfulness to understand your emotional patterns"]
+    description: "You navigate relationships with a complex inner landscape where part of you deeply craves connection while another part fears getting too close. Your attachment system reflects the challenge of having experienced caregiving that was both a source of comfort and distress, creating an internal conflict between approaching and avoiding intimacy. This has gifted you with a nuanced understanding of human complexity, though it can make relationships feel simultaneously essential and overwhelming.",
+    detailedAnalysis: "Your disorganized attachment style reflects experiences where your primary caregivers were both your source of safety and your source of fear or confusion. This created an internal conflict in your attachment system—you learned that the people you need most can also be unpredictable or harmful. As a result, you may find yourself caught between intense desires for closeness and equally intense fears of vulnerability. This internal tension often manifests as unpredictable relationship patterns, but it also gives you a profound understanding of human complexity and emotional nuance.",
+    traits: ["Complex emotional landscape", "Simultaneous craving and fear of intimacy", "Unpredictable relationship patterns", "Deep understanding of human complexity", "Intense emotional experiences", "Push-pull relationship dynamics", "High sensitivity to emotional inconsistency"],
+    strengths: ["Experiencing profound emotional depth and intensity", "Understanding the complexity of human pain and healing", "Adapting to different relationship styles and needs", "Offering deep empathy to others who struggle", "Recognizing emotional inconsistencies that others might miss", "Having potential for significant personal growth and transformation"],
+    growthAreas: ["Learning emotional regulation techniques for intense feelings", "Creating more predictable relationship patterns", "Building consistent self-soothing practices", "Developing secure relationships through therapeutic work", "Understanding and healing underlying attachment wounds"],
+    tips: [
+      "Consider working with a trauma-informed therapist who understands attachment patterns",
+      "Practice grounding techniques when you feel overwhelmed by conflicting emotions",
+      "Keep a journal to identify patterns in your relationship reactions",
+      "Learn to pause and breathe when you feel the urge to push someone away or pull them closer",
+      "Find one consistent, safe relationship to practice secure attachment behaviors",
+      "Be patient with yourself—healing disorganized attachment takes time and compassion"
+    ]
   }
 };

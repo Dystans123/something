@@ -236,19 +236,21 @@ export const identityCompassQuestions: IdentityCompassQuestion[] = [
 export const identityTypes = {
   warrior: {
     name: "The Warrior",
-    description: "You are driven by courage, honor, and the desire to protect what matters. You face challenges head-on and fight for justice and truth.",
-    traits: ["Courageous", "Protective", "Determined", "Honorable", "Action-oriented"],
-    strengths: ["Leadership in crisis", "Unwavering determination", "Protective instincts", "Clear sense of right and wrong", "Ability to inspire others"],
-    shadowAspects: ["Potential for aggression", "Difficulty with vulnerability", "All-or-nothing thinking"],
-    growthPath: "Learning when to fight and when to yield, developing emotional intelligence alongside strength"
+    description: "Your soul burns with the sacred fire of protection and justice, driving you to stand as a guardian for what matters most in this world. You possess an unshakeable moral compass that points toward courage in the face of adversity, and you naturally step forward when others step back. Your identity is forged in the crucible of challenge, where your strength, honor, and determination are tested and proven.",
+    detailedAnalysis: "The Warrior within you represents the archetypal force of protection and righteous action. You are drawn to causes larger than yourself and feel a deep responsibility to defend the vulnerable and fight for justice. This identity gives you extraordinary resilience and the ability to take decisive action when others are paralyzed by fear or uncertainty. Your presence alone can inspire confidence in others and rally them to face their own challenges with greater courage.",
+    traits: ["Unwavering courage in adversity", "Natural protective instincts", "Strong moral compass and sense of justice", "Leadership in crisis situations", "Determination that doesn't yield to obstacles", "Honor and integrity in all actions", "Ability to inspire others to be brave"],
+    strengths: ["Taking decisive action when others hesitate", "Protecting those who cannot protect themselves", "Standing firm in your convictions under pressure", "Leading others through difficult times", "Maintaining hope and fighting spirit against all odds", "Creating safety through your strength and presence"],
+    shadowAspects: ["Tendency toward aggression when frustrated", "Difficulty showing vulnerability or asking for help", "All-or-nothing thinking that misses nuance", "Potential for righteous anger to become destructive", "Risk of becoming overly controlling in protection", "Struggle with situations that require patience over action"],
+    growthPath: "Your path involves learning the wisdom of strategic restraint—knowing when to fight and when to yield. Developing emotional intelligence and vulnerability will make your strength even more powerful, as true warriors know that the greatest battles are often fought within the heart."
   },
   nurturer: {
     name: "The Nurturer",
-    description: "You are motivated by love, compassion, and the desire to help others flourish. You create safe spaces and support growth in everyone around you.",
-    traits: ["Compassionate", "Supportive", "Empathetic", "Generous", "Healing"],
-    strengths: ["Creating emotional safety", "Understanding others' needs", "Building community", "Fostering growth", "Unconditional support"],
-    shadowAspects: ["Self-neglect", "Boundary issues", "Enabling behaviors"],
-    growthPath: "Learning to care for yourself as much as others, setting healthy boundaries while maintaining compassion"
+    description: "Your heart operates as a wellspring of compassion and care, naturally creating healing spaces where others can grow, flourish, and become their truest selves. You possess an innate understanding of what others need to thrive, and you find deep fulfillment in supporting their journey toward wholeness. Your identity is rooted in the sacred act of tending to life in all its forms.",
+    detailedAnalysis: "The Nurturer within you embodies the archetypal force of love and growth. You have an extraordinary ability to see potential in others, even when they cannot see it themselves. Your presence creates emotional safety that allows people to be vulnerable, heal from their wounds, and step into their power. You understand that true strength often comes through gentleness, and that the greatest transformations happen in environments of unconditional acceptance and support.",
+    traits: ["Deep empathy and emotional intelligence", "Natural healing presence", "Ability to see potential in others", "Creating safe spaces for vulnerability", "Unconditional acceptance and support", "Intuitive understanding of emotional needs", "Generous heart that gives freely"],
+    strengths: ["Making others feel valued and understood", "Creating communities where people belong", "Facilitating healing and emotional growth", "Supporting others through difficult transitions", "Building trust through consistent care", "Recognizing and nurturing hidden talents in others"],
+    shadowAspects: ["Self-neglect while caring for others", "Difficulty setting healthy boundaries", "Tendency to enable rather than empower", "Taking on others' emotions as your own", "Becoming depleted from over-giving", "Struggling to receive care from others"],
+    growthPath: "Your journey involves learning that caring for yourself is not selfish—it's essential for sustaining your ability to care for others. Setting boundaries actually enhances your capacity to love, and receiving support models healthy relationship dynamics for those you nurture."
   },
   creator: {
     name: "The Creator",
