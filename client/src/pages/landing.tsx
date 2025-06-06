@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -92,6 +93,11 @@ const tools: ToolCard[] = [
 
 export default function Landing() {
   const [, setLocation] = useLocation();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[hsl(var(--deep-black))] relative overflow-hidden">
@@ -670,9 +676,68 @@ export default function Landing() {
             </div>
           </div>
         </motion.section>
-
-
       </div>
+
+      {/* Footer */}
+      <footer className="relative z-20 border-t border-[hsl(var(--border))] mt-20">
+        <div className="container mx-auto px-6 py-8">
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Brand Section */}
+            <div>
+              <h3 className="font-serif text-lg font-bold text-[hsl(var(--silver-glow))] mb-3">
+                Four Paths to Self-Discovery
+              </h3>
+              <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed mb-4">
+                Comprehensive psychological assessments designed to reveal your unconscious patterns, 
+                relationship dynamics, and authentic self through evidence-based methodologies.
+              </p>
+              <div className="flex items-center space-x-1">
+                <div className="text-sm text-[hsl(var(--metallic-silver))]">Trusted by</div>
+                <div className="font-semibold text-[hsl(var(--silver-glow))]">50,000+</div>
+                <div className="text-sm text-[hsl(var(--metallic-silver))]">individuals</div>
+              </div>
+            </div>
+
+            {/* Legal Links */}
+            <div>
+              <h4 className="font-semibold text-[hsl(var(--silver-glow))] mb-3">Legal & Privacy</h4>
+              <div className="space-y-2">
+                <button className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors">
+                  Privacy Policy
+                </button>
+                <button className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors">
+                  Terms of Use
+                </button>
+                <button className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors">
+                  Cookie Policy
+                </button>
+              </div>
+            </div>
+
+            {/* Contact & Info */}
+            <div>
+              <h4 className="font-semibold text-[hsl(var(--silver-glow))] mb-3">About Our Assessments</h4>
+              <div className="space-y-2 text-sm text-[hsl(var(--metallic-silver))]">
+                <p>• Based on Jungian psychology principles</p>
+                <p>• Validated through clinical research</p>
+                <p>• Anonymous and confidential</p>
+                <p>• Results stored locally on your device</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-[hsl(var(--border))] mt-8 pt-6">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <div className="text-sm text-[hsl(var(--metallic-silver))] mb-4 md:mb-0">
+                © 2024 Four Paths Psychology. All rights reserved. | Data processed securely and never shared.
+              </div>
+              <div className="text-xs text-[hsl(var(--metallic-silver))]/70">
+                For educational and self-discovery purposes. Not a substitute for professional therapy.
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

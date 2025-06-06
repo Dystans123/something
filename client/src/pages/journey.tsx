@@ -186,6 +186,9 @@ export default function Journey() {
   const [showSummary, setShowSummary] = useState(false);
 
   useEffect(() => {
+    // Scroll to top when page loads
+    window.scrollTo(0, 0);
+    
     // Load progress from localStorage
     const savedProgress = localStorage.getItem('psychTestProgress');
     const savedResults = localStorage.getItem('psychTestResults');
@@ -264,6 +267,14 @@ export default function Journey() {
     } else {
       const completedCount = [progress.intelligenceMap, progress.attachmentStyle, progress.identityCompass, progress.innerDriver].filter(Boolean).length;
       return (completedCount / 4) * 100;
+    }
+  };
+
+  const getCompletedTestsCount = () => {
+    if (journeyType === 'relationship') {
+      return [progress.shadowTest, progress.toxicityCompass, progress.relationshipPatterns, progress.integrationGuide].filter(Boolean).length;
+    } else {
+      return [progress.intelligenceMap, progress.attachmentStyle, progress.identityCompass, progress.innerDriver].filter(Boolean).length;
     }
   };
 
@@ -354,9 +365,9 @@ export default function Journey() {
             
             <div className="text-right">
               <div className="flex items-center space-x-2 mb-2">
-                <Trophy className="h-5 w-5 text-yellow-400" />
-                <span className="font-semibold text-[hsl(var(--silver-glow))]">{totalPoints}</span>
-                <span className="text-[hsl(var(--metallic-silver))] text-sm">points</span>
+                <CheckCircle className="h-5 w-5 text-emerald-400" />
+                <span className="font-semibold text-[hsl(var(--silver-glow))]">{getCompletedTestsCount()}/4</span>
+                <span className="text-[hsl(var(--metallic-silver))] text-sm">Tests Complete</span>
               </div>
               <Progress value={getCompletionPercentage()} className="w-32" />
             </div>
@@ -375,22 +386,22 @@ export default function Journey() {
         >
           <div className="flex items-center space-x-4 bg-[hsl(var(--dark-gray))] rounded-full p-2 border border-[hsl(var(--border))]">
             <div className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-              journeyType === 'relationship' ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400'
-            }`}>
-              <Heart className="h-4 w-4" />
-              <Label htmlFor="journey-toggle" className="cursor-pointer">Relationship</Label>
-            </div>
-            <Switch
-              id="journey-toggle"
-              checked={journeyType === 'single'}
-              onCheckedChange={(checked) => setJourneyType(checked ? 'single' : 'relationship')}
-              className="data-[state=checked]:bg-blue-500"
-            />
-            <div className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
               journeyType === 'single' ? 'bg-blue-500/20 text-blue-300' : 'text-gray-400'
             }`}>
               <User className="h-4 w-4" />
               <Label htmlFor="journey-toggle" className="cursor-pointer">Single</Label>
+            </div>
+            <Switch
+              id="journey-toggle"
+              checked={journeyType === 'relationship'}
+              onCheckedChange={(checked) => setJourneyType(checked ? 'relationship' : 'single')}
+              className="data-[state=checked]:bg-purple-500"
+            />
+            <div className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+              journeyType === 'relationship' ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400'
+            }`}>
+              <Heart className="h-4 w-4" />
+              <Label htmlFor="journey-toggle" className="cursor-pointer">Relationship</Label>
             </div>
           </div>
         </motion.div>

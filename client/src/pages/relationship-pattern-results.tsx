@@ -71,7 +71,7 @@ export default function RelationshipPatternResults() {
     localStorage.setItem('psychTestResults', JSON.stringify(results));
   }, [pattern, patternScores, insights, recommendations]);
 
-  const patternData = relationshipPatterns[pattern as keyof typeof relationshipPatterns] || relationshipPatterns.secure;
+  const patternData = relationshipPatterns[pattern as keyof typeof relationshipPatterns] || relationshipPatterns["secure-attachment"];
 
   const handleShare = () => {
     shareRelationshipPatternResult(pattern);
