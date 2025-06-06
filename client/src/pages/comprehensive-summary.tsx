@@ -214,27 +214,27 @@ export default function ComprehensiveSummary() {
 
   const generateUnconsciousMotivations = (shadowResult: any, relationshipResult: any): string[] => {
     return [
-      "Nieświadome motywacje to głębokie siły napędowe, które wpływają na Twoje wybory bez świadomej kontroli",
-      "Archetyp reprezentuje fundamentalne potrzeby psychiczne ukryte poniżej powierzchni świadomości",
-      "Wzorce relacyjne często odzwierciedlają nieświadome próby uzdrowienia dawnych ran emocjonalnych",
-      "Projekcja na innych może ujawniać nieakceptowane aspekty własnej osobowości",
-      "Powtarzające się konflikty często wskazują na nierozwiązane wewnętrzne sprzeczności",
-      "Nieświadome lęki mogą sabotować świadome cele i marzenia",
-      "Zrozumienie nieświadomych motywacji zwiększa wolność wyboru i autentyczność",
-      "Praca z nieświadomością wymaga odwagi, cierpliwości i często profesjonalnego wsparcia"
+      "Unconscious motivations are deep driving forces that influence your choices without conscious control",
+      "Your archetype represents fundamental psychic needs hidden below the surface of consciousness",
+      "Relationship patterns often reflect unconscious attempts to heal old emotional wounds",
+      "Projection onto others may reveal unaccepted aspects of your own personality",
+      "Recurring conflicts often point to unresolved internal contradictions",
+      "Unconscious fears can sabotage conscious goals and dreams",
+      "Understanding unconscious motivations increases freedom of choice and authenticity",
+      "Working with the unconscious requires courage, patience, and often professional support"
     ];
   };
 
   const generateCorePersonality = (shadowResult: any, relationshipResult: any): string[] => {
     const core = [
-      "Twoja podstawowa struktura osobowości łączy unikalne cechy archetypowe z indywidualnymi doświadczeniami życiowymi",
-      "Rdzeń osobowości pozostaje względnie stały, ale może ewoluować poprzez świadomą pracę nad sobą",
-      "Kombinacja archetypu i wzorców relacyjnych tworzy Twój unikalny podpis psychologiczny",
-      "Autentyczna ekspresja siebie wymaga akceptacji i integracji wszystkich aspektów osobowości"
+      "Your foundational personality structure combines unique archetypal traits with individual life experiences",
+      "The core of personality remains relatively stable, but can evolve through conscious self-work",
+      "The combination of archetype and relationship patterns creates your unique psychological signature",
+      "Authentic self-expression requires acceptance and integration of all personality aspects"
     ];
 
     if (shadowResult?.archetype) {
-      core.push(`Jako ${shadowResult.archetype}, Twoja osobowość koncentruje się wokół określonych wartości i motywacji`);
+      core.push(`As ${shadowResult.archetype}, your personality centers around specific values and motivations`);
     }
 
     return core;
@@ -242,18 +242,18 @@ export default function ComprehensiveSummary() {
 
   const generateRelationshipStyle = (toxicityResult: any, relationshipResult: any): string[] => {
     const style = [
-      "Twój styl relacyjny odzwierciedla głębokie potrzeby dotyczące bliskości, autonomii i bezpieczeństwa",
-      "Wzorce w relacjach często pochodzą z wczesnych doświadczeń z opiekunami i pierwszymi znaczącymi osobami",
-      "Zdrowe relacje wymagają równowagi między bliskością a zachowaniem własnej tożsamości",
-      "Świadomość własnego stylu relacyjnego pomaga w budowaniu bardziej satysfakcjonujących połączeń z innymi"
+      "Your relational style reflects deep needs regarding intimacy, autonomy, and security",
+      "Relationship patterns often stem from early experiences with caregivers and first significant others",
+      "Healthy relationships require balance between closeness and maintaining your own identity",
+      "Awareness of your relational style helps build more satisfying connections with others"
     ];
 
     if (toxicityResult?.zone === 'green') {
-      style.push("Twój zdrowy poziom toksyczności wskazuje na umiejętność utrzymywania zrównoważonych relacji");
+      style.push("Your healthy toxicity level indicates ability to maintain balanced relationships");
     } else if (toxicityResult?.zone === 'yellow') {
-      style.push("Umiarkowany poziom toksyczności sugeruje potrzebę pracy nad granicami emocjonalnymi");
+      style.push("Moderate toxicity level suggests need for work on emotional boundaries");
     } else if (toxicityResult?.zone === 'red') {
-      style.push("Wysoki poziom toksyczności wskazuje na priorytetową potrzebę uzdrowienia wzorców relacyjnych");
+      style.push("High toxicity level indicates priority need for healing relationship patterns");
     }
 
     return style;
@@ -261,42 +261,42 @@ export default function ComprehensiveSummary() {
 
   const generateLifeChallenges = (shadowResult: any, toxicityResult: any, relationshipResult: any): string[] => {
     return [
-      "Główne wyzwania życiowe często odzwierciedlają obszary wymagające największego wzrostu psychologicznego",
-      "Każdy archetyp niesie ze sobą specyficzne pokuszenia i pułapki, które wymagają świadomości",
-      "Toksyczne wzorce w relacjach mogą być źródłem powtarzających się trudności życiowych",
-      "Nieintegrowne aspekty osobowości często manifestują się jako zewnętrzne problemy i konflikty",
-      "Największe wyzwania często skrywają największe możliwości wzrostu i transformacji",
-      "Praca z wyzwaniami wymaga odwagi, cierpliwości i często wsparcia innych ludzi",
-      "Każde pokonane wyzwanie zwiększa odporność psychiczną i mądrość życiową"
+      "Major life challenges often reflect areas requiring the greatest psychological growth",
+      "Each archetype carries specific temptations and pitfalls that require awareness",
+      "Toxic patterns in relationships can be a source of recurring life difficulties",
+      "Unintegrated personality aspects often manifest as external problems and conflicts",
+      "The greatest challenges often hide the greatest opportunities for growth and transformation",
+      "Working with challenges requires courage, patience, and often support from others",
+      "Each overcome challenge increases psychological resilience and life wisdom"
     ];
   };
 
   const generateSpiritualJourney = (shadowResult: any, integrationResult: any): string[] => {
     return [
-      "Podróż duchowa to proces odkrywania głębszego sensu i celu w życiu",
-      "Praca z cieniem jest fundamentalnym aspektem duchowego rozwoju w tradycji jungowskiej",
-      "Integracja różnych aspektów osobowości prowadzi do większej całości i autentyczności",
-      "Duchowość może obejmować zarówno tradycyjne praktyki religijne, jak i osobiste poszukiwania sensu",
-      "Konfrontacja z własnymi ograniczeniami i słabościami często otwiera drogę do transcendencji",
-      "Duchowy rozwój często wiąże się z rozwijaniem współczucia dla siebie i innych",
-      "Praktyki kontemplacyjne mogą wspierać proces integracji i samopoznania"
+      "The spiritual journey is a process of discovering deeper meaning and purpose in life",
+      "Shadow work is a fundamental aspect of spiritual development in the Jungian tradition",
+      "Integration of different personality aspects leads to greater wholeness and authenticity",
+      "Spirituality can encompass both traditional religious practices and personal searches for meaning",
+      "Confronting your own limitations and weaknesses often opens the path to transcendence",
+      "Spiritual development often involves cultivating compassion for yourself and others",
+      "Contemplative practices can support the process of integration and self-knowledge"
     ];
   };
 
   const generateCareerGuidance = (shadowResult: any, relationshipResult: any): string[] => {
     const guidance = [
-      "Wybór kariery powinien uwzględniać Twoje naturalne talenty i archetypowe predyspozycje",
-      "Satysfakcjonująca praca często odzwierciedla głębokie wartości i motywacje osobiste",
-      "Styl relacyjny wpływa na preferencje dotyczące pracy zespołowej versus samodzielnej",
-      "Środowisko pracy powinno wspierać Twój naturalny styl funkcjonowania i komunikacji"
+      "Career choice should consider your natural talents and archetypal predispositions",
+      "Satisfying work often reflects deep personal values and motivations",
+      "Relational style influences preferences for teamwork versus independent work",
+      "Work environment should support your natural functioning and communication style"
     ];
 
     if (shadowResult?.archetype === "The Sage") {
-      guidance.push("Jako Mędrzec, prawdopodobnie flourytujesz w rolach związanych z nauczaniem, badaniami lub doradztwem");
+      guidance.push("As a Sage, you likely flourish in roles related to teaching, research, or counseling");
     } else if (shadowResult?.archetype === "The Hero") {
-      guidance.push("Archetyp Bohatera predysponuje do ról liderskich i sytuacji wymagających odwagi");
+      guidance.push("The Hero archetype predisposes you to leadership roles and situations requiring courage");
     } else if (shadowResult?.archetype === "The Creator") {
-      guidance.push("Jako Twórca, potrzebujesz przestrzeni do innowacji i kreatywnej ekspresji");
+      guidance.push("As a Creator, you need space for innovation and creative expression");
     }
 
     return guidance;
@@ -304,20 +304,20 @@ export default function ComprehensiveSummary() {
 
   const generateHealingPriorities = (toxicityResult: any, integrationResult: any): string[] => {
     const priorities = [
-      "Priorytety w procesie uzdrawiania powinny uwzględniać najpilniejsze potrzeby psychologiczne",
-      "Toksyczne wzorce w relacjach często wymagają priorytetowej uwagi i profesjonalnego wsparcia",
-      "Uzdrawianie to proces stopniowy, wymagający cierpliwości i samoakceptacji",
-      "Integracja traumatycznych doświadczeń jest kluczowa dla pełnego zdrowia psychicznego"
+      "Healing priorities should consider the most urgent psychological needs",
+      "Toxic patterns in relationships often require priority attention and professional support",
+      "Healing is a gradual process requiring patience and self-acceptance",
+      "Integration of traumatic experiences is crucial for complete mental health"
     ];
 
     if (toxicityResult?.zone === 'red') {
-      priorities.push("Wysokie priorytety: ustanowienie zdrowych granic, praca z traumą, budowanie wsparcia");
+      priorities.push("High priorities: establishing healthy boundaries, trauma work, building support");
     } else if (toxicityResult?.zone === 'yellow') {
-      priorities.push("Średnie priorytety: wzmocnienie granic emocjonalnych, poprawa komunikacji");
+      priorities.push("Medium priorities: strengthening emotional boundaries, improving communication");
     }
 
     if (integrationResult?.integrationLevel === 'low') {
-      priorities.push("Kluczowe: rozpoczęcie systematycznej pracy z cieniem i nieświadomymi aspektami");
+      priorities.push("Key focus: beginning systematic shadow work and unconscious aspects");
     }
 
     return priorities;
@@ -325,28 +325,28 @@ export default function ComprehensiveSummary() {
 
   const generateDailyPractices = (shadowResult: any, toxicityResult: any, integrationResult: any): string[] => {
     return [
-      "Codzienna 10-minutowa medytacja uważności dla zwiększenia samoświadomości",
-      "Prowadzenie dziennika emocji i wzorców behawioralnych",
-      "Praktyka wdzięczności - zapisywanie trzech rzeczy dziennie, za które jesteś wdzięczny",
-      "Regularne sprawdzanie granic emocjonalnych w relacjach",
-      "Świadome oddychanie w sytuacjach stresowych",
-      "Praktyka samoakceptacji - codzienne afirmacje wspomagające",
-      "Krótkie sesje wizualizacji pozytywnych scenariuszy",
-      "Regularne sprawdzanie potrzeb emocjonalnych i fizycznych"
+      "Daily 10-minute mindfulness meditation to increase self-awareness",
+      "Keeping a journal of emotions and behavioral patterns",
+      "Gratitude practice - writing down three things daily that you're grateful for",
+      "Regular checking of emotional boundaries in relationships",
+      "Conscious breathing in stressful situations",
+      "Self-acceptance practice - daily supportive affirmations",
+      "Brief visualization sessions of positive scenarios",
+      "Regular checking of emotional and physical needs"
     ];
   };
 
   const generateTherapeuticRecommendations = (toxicityResult: any, relationshipResult: any): string[] => {
     const recommendations = [
-      "Terapia psychodynamiczna dla pracy z nieświadomymi wzorcami",
-      "Terapia poznawczo-behawioralna (CBT) dla zmiany destrukcyjnych myśli",
-      "Terapia schematu dla pracy z głębokimi wzorcami relacyjnymi",
-      "EMDR dla przetwarzania traumatycznych doświadczeń"
+      "Psychodynamic therapy for working with unconscious patterns",
+      "Cognitive-behavioral therapy (CBT) for changing destructive thoughts",
+      "Schema therapy for working with deep relationship patterns",
+      "EMDR for processing traumatic experiences"
     ];
 
     if (toxicityResult?.zone === 'red') {
-      recommendations.push("Priorytetowa terapia dla pracy z toksycznymi wzorcami relacyjnymi");
-      recommendations.push("Możliwa potrzeba intensywnej terapii grupowej lub warsztatów");
+      recommendations.push("Priority therapy for working with toxic relationship patterns");
+      recommendations.push("Possible need for intensive group therapy or workshops");
     }
 
     return recommendations;
@@ -354,14 +354,14 @@ export default function ComprehensiveSummary() {
 
   const generateBookRecommendations = (shadowResult: any, integrationResult: any): string[] => {
     return [
-      "'Człowiek i jego symbole' - Carl Gustav Jung (podstawy psychologii analitycznej)",
-      "'Dar wrażliwości' - Elaine Aron (dla osób wysokowrażliwych)",
-      "'Ciało pamiętają' - Bessel van der Kolk (trauma i uzdrawianie)",
-      "'Miłość to nie to, co myślisz' - David Richo (o zdrowych relacjach)",
-      "'Siła teraźniejszości' - Eckhart Tolle (praktyki uważności)",
-      "'Zranione dziecko w nas' - Stefanie Stahl (praca z wewnętrznym dzieckiem)",
-      "'Przebudzenie tygrysa' - Peter Levine (uzdrawianie traumy)",
-      "'Droga mniej uczęszczana' - Scott Peck (duchowy rozwój)"
+      "'Man and His Symbols' - Carl Gustav Jung (foundations of analytical psychology)",
+      "'The Highly Sensitive Person' - Elaine Aron (for highly sensitive individuals)",
+      "'The Body Keeps the Score' - Bessel van der Kolk (trauma and healing)",
+      "'How to Be an Adult in Relationships' - David Richo (healthy relationships)",
+      "'The Power of Now' - Eckhart Tolle (mindfulness practices)",
+      "'The Child in You' - Stefanie Stahl (inner child work)",
+      "'Waking the Tiger' - Peter Levine (trauma healing)",
+      "'The Road Less Traveled' - Scott Peck (spiritual development)"
     ];
   };
 
