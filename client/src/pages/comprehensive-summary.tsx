@@ -43,13 +43,37 @@ interface ComprehensiveProfile {
     emotionalHealth: string[];
     relationshipDynamics: string[];
     personalGrowth: string[];
+    psychologicalInsights: string[];
+    behavioralPatterns: string[];
+    lifeThemes: string[];
+    unconsciousMotivations: string[];
   };
   strengths: string[];
   growthAreas: string[];
   actionPlan: string[];
   nextSteps: string[];
+  comprehensiveInterpretation: {
+    corePersonality: string[];
+    relationshipStyle: string[];
+    lifeChallenges: string[];
+    spiritualJourney: string[];
+    careerGuidance: string[];
+    healingPriorities: string[];
+  };
+  integrationGuidance: {
+    dailyPractices: string[];
+    therapeuticRecommendations: string[];
+    bookRecommendations: string[];
+    journalingPrompts: string[];
+    meditationPractices: string[];
+    relationshipExercises: string[];
+  };
   completionDate: string;
   totalPoints: number;
+  psychologicalMaturity: number;
+  emotionalIntelligence: number;
+  relationshipHealth: number;
+  personalGrowthPotential: number;
 }
 
 interface TestResult {
@@ -97,6 +121,289 @@ export default function ComprehensiveSummary() {
     return "border-red-400/30";
   };
 
+  // Helper functions for comprehensive analysis
+  const calculatePsychologicalMaturity = (shadowResult: any, toxicityResult: any, relationshipResult: any, integrationResult: any): number => {
+    let score = 50;
+    if (shadowResult) score += 20;
+    if (toxicityResult?.zone === 'green') score += 20;
+    if (toxicityResult?.zone === 'yellow') score += 10;
+    if (relationshipResult) score += 15;
+    if (integrationResult?.integrationLevel === 'high') score += 20;
+    if (integrationResult?.integrationLevel === 'medium') score += 10;
+    return Math.min(score, 100);
+  };
+
+  const calculateEmotionalIntelligence = (shadowResult: any, toxicityResult: any, relationshipResult: any, integrationResult: any): number => {
+    let score = 40;
+    if (shadowResult) score += 25;
+    if (toxicityResult?.zone === 'green') score += 25;
+    if (toxicityResult?.zone === 'yellow') score += 15;
+    if (relationshipResult) score += 20;
+    if (integrationResult) score += 15;
+    return Math.min(score, 100);
+  };
+
+  const calculateRelationshipHealth = (toxicityResult: any, relationshipResult: any): number => {
+    let score = 30;
+    if (toxicityResult?.zone === 'green') score += 40;
+    if (toxicityResult?.zone === 'yellow') score += 25;
+    if (toxicityResult?.zone === 'red') score += 10;
+    if (relationshipResult) score += 30;
+    return Math.min(score, 100);
+  };
+
+  const calculateGrowthPotential = (shadowResult: any, integrationResult: any): number => {
+    let score = 60;
+    if (shadowResult) score += 20;
+    if (integrationResult?.integrationLevel === 'high') score += 20;
+    if (integrationResult?.integrationLevel === 'medium') score += 15;
+    if (integrationResult?.integrationLevel === 'low') score += 10;
+    return Math.min(score, 100);
+  };
+
+  const generatePsychologicalInsights = (shadowResult: any, toxicityResult: any, relationshipResult: any, integrationResult: any): string[] => {
+    const insights = [
+      "Twoja osobowość jest złożoną mozaiką świadomych i nieświadomych wzorców, które kształtowały się przez całe życie",
+      "Archetyp reprezentuje rdzeń Twojej psychicznej struktury - fundamentalne siły motywacyjne i behawioralne",
+      "Poziom toksyczności w relacjach odzwierciedla Twoją zdolność do utrzymywania zdrowych granic emocjonalnych",
+      "Wzorce relacyjne ujawniają głębokie potrzeby dotyczące bliskości, autonomii i bezpieczeństwa emocjonalnego",
+      "Integracja psychologiczna to proces świadomego włączania wszystkich aspektów osobowości w spójną całość",
+      "Twoje odpowiedzi ujawniają unikalne połączenie mocnych stron i obszarów wymagających dalszego rozwoju",
+      "Psychologiczny profil pokazuje, jak nieświadome motywy wpływają na Twoje świadome wybory życiowe",
+      "Emocjonalna inteligencja przejawia się w sposób, w jaki radzisz sobie z własnymi i cudzymi emocjami"
+    ];
+
+    if (shadowResult?.archetype === "The Sage") {
+      insights.push("Jako Mędrzec, Twoja potrzeba zrozumienia świata może czasem prowadzić do intelektualizacji emocji");
+    }
+    if (shadowResult?.archetype === "The Hero") {
+      insights.push("Archetyp Bohatera wskazuje na silną potrzebę stawienia czoła wyzwaniom i ochrony innych");
+    }
+    if (toxicityResult?.zone === 'red') {
+      insights.push("Wysoki poziom toksyczności może wskazywać na nierozwiązane traumy lub wzorce z dzieciństwa");
+    }
+
+    return insights;
+  };
+
+  const generateBehavioralPatterns = (shadowResult: any, relationshipResult: any): string[] => {
+    return [
+      "Wzorce behawioralne są automatycznymi reakcjami wypracowanymi w odpowiedzi na życiowe doświadczenia",
+      "Twój dominujący archetyp wpływa na sposób, w jaki podchodzisz do problemów i podejmujesz decyzje",
+      "W sytuacjach stresowych prawdopodobnie powracasz do znanych, bezpiecznych wzorców zachowań",
+      "Relacyjne wzorce behawioralne odzwierciedlają Twoje wczesne doświadczenia z opiekunami",
+      "Świadomość własnych wzorców jest pierwszym krokiem do ich świadomej zmiany",
+      "Niektóre zachowania służą jako mechanizmy obronne chroniące przed bólem emocjonalnym",
+      "Pozytywne wzorce warto wzmacniać, a destrukcyjne stopniowo przekształcać",
+      "Zmiana wzorców behawioralnych wymaga czasu, cierpliwości i konsekwentnej praktyki"
+    ];
+  };
+
+  const generateLifeThemes = (shadowResult: any, toxicityResult: any, relationshipResult: any, integrationResult: any): string[] => {
+    return [
+      "Główne tematy życiowe to powtarzające się motywy w Twoich doświadczeniach i wyborach",
+      "Archetyp ujawnia centralne pytania egzystencjalne, które napędzają Twoje poszukiwania",
+      "Wzorce relacyjne wskazują na kluczowe lekcje dotyczące miłości, bliskości i zaufania",
+      "Poziom integracji odzwierciedla Twoją gotowość do konfrontacji z trudnymi aspektami siebie",
+      "Życiowe tematy często związane są z nierozwiązanymi konfliktami z przeszłości",
+      "Każdy test ujawnia różne aspekty Twojej podróży ku większej autentyczności i pełni",
+      "Powtarzające się wzorce w życiu często niosą ważne przesłania do zrozumienia",
+      "Integracja wszystkich aspektów osobowości prowadzi do większej spójności i spokoju wewnętrznego"
+    ];
+  };
+
+  const generateUnconsciousMotivations = (shadowResult: any, relationshipResult: any): string[] => {
+    return [
+      "Nieświadome motywacje to głębokie siły napędowe, które wpływają na Twoje wybory bez świadomej kontroli",
+      "Archetyp reprezentuje fundamentalne potrzeby psychiczne ukryte poniżej powierzchni świadomości",
+      "Wzorce relacyjne często odzwierciedlają nieświadome próby uzdrowienia dawnych ran emocjonalnych",
+      "Projekcja na innych może ujawniać nieakceptowane aspekty własnej osobowości",
+      "Powtarzające się konflikty często wskazują na nierozwiązane wewnętrzne sprzeczności",
+      "Nieświadome lęki mogą sabotować świadome cele i marzenia",
+      "Zrozumienie nieświadomych motywacji zwiększa wolność wyboru i autentyczność",
+      "Praca z nieświadomością wymaga odwagi, cierpliwości i często profesjonalnego wsparcia"
+    ];
+  };
+
+  const generateCorePersonality = (shadowResult: any, relationshipResult: any): string[] => {
+    const core = [
+      "Twoja podstawowa struktura osobowości łączy unikalne cechy archetypowe z indywidualnymi doświadczeniami życiowymi",
+      "Rdzeń osobowości pozostaje względnie stały, ale może ewoluować poprzez świadomą pracę nad sobą",
+      "Kombinacja archetypu i wzorców relacyjnych tworzy Twój unikalny podpis psychologiczny",
+      "Autentyczna ekspresja siebie wymaga akceptacji i integracji wszystkich aspektów osobowości"
+    ];
+
+    if (shadowResult?.archetype) {
+      core.push(`Jako ${shadowResult.archetype}, Twoja osobowość koncentruje się wokół określonych wartości i motywacji`);
+    }
+
+    return core;
+  };
+
+  const generateRelationshipStyle = (toxicityResult: any, relationshipResult: any): string[] => {
+    const style = [
+      "Twój styl relacyjny odzwierciedla głębokie potrzeby dotyczące bliskości, autonomii i bezpieczeństwa",
+      "Wzorce w relacjach często pochodzą z wczesnych doświadczeń z opiekunami i pierwszymi znaczącymi osobami",
+      "Zdrowe relacje wymagają równowagi między bliskością a zachowaniem własnej tożsamości",
+      "Świadomość własnego stylu relacyjnego pomaga w budowaniu bardziej satysfakcjonujących połączeń z innymi"
+    ];
+
+    if (toxicityResult?.zone === 'green') {
+      style.push("Twój zdrowy poziom toksyczności wskazuje na umiejętność utrzymywania zrównoważonych relacji");
+    } else if (toxicityResult?.zone === 'yellow') {
+      style.push("Umiarkowany poziom toksyczności sugeruje potrzebę pracy nad granicami emocjonalnymi");
+    } else if (toxicityResult?.zone === 'red') {
+      style.push("Wysoki poziom toksyczności wskazuje na priorytetową potrzebę uzdrowienia wzorców relacyjnych");
+    }
+
+    return style;
+  };
+
+  const generateLifeChallenges = (shadowResult: any, toxicityResult: any, relationshipResult: any): string[] => {
+    return [
+      "Główne wyzwania życiowe często odzwierciedlają obszary wymagające największego wzrostu psychologicznego",
+      "Każdy archetyp niesie ze sobą specyficzne pokuszenia i pułapki, które wymagają świadomości",
+      "Toksyczne wzorce w relacjach mogą być źródłem powtarzających się trudności życiowych",
+      "Nieintegrowne aspekty osobowości często manifestują się jako zewnętrzne problemy i konflikty",
+      "Największe wyzwania często skrywają największe możliwości wzrostu i transformacji",
+      "Praca z wyzwaniami wymaga odwagi, cierpliwości i często wsparcia innych ludzi",
+      "Każde pokonane wyzwanie zwiększa odporność psychiczną i mądrość życiową"
+    ];
+  };
+
+  const generateSpiritualJourney = (shadowResult: any, integrationResult: any): string[] => {
+    return [
+      "Podróż duchowa to proces odkrywania głębszego sensu i celu w życiu",
+      "Praca z cieniem jest fundamentalnym aspektem duchowego rozwoju w tradycji jungowskiej",
+      "Integracja różnych aspektów osobowości prowadzi do większej całości i autentyczności",
+      "Duchowość może obejmować zarówno tradycyjne praktyki religijne, jak i osobiste poszukiwania sensu",
+      "Konfrontacja z własnymi ograniczeniami i słabościami często otwiera drogę do transcendencji",
+      "Duchowy rozwój często wiąże się z rozwijaniem współczucia dla siebie i innych",
+      "Praktyki kontemplacyjne mogą wspierać proces integracji i samopoznania"
+    ];
+  };
+
+  const generateCareerGuidance = (shadowResult: any, relationshipResult: any): string[] => {
+    const guidance = [
+      "Wybór kariery powinien uwzględniać Twoje naturalne talenty i archetypowe predyspozycje",
+      "Satysfakcjonująca praca często odzwierciedla głębokie wartości i motywacje osobiste",
+      "Styl relacyjny wpływa na preferencje dotyczące pracy zespołowej versus samodzielnej",
+      "Środowisko pracy powinno wspierać Twój naturalny styl funkcjonowania i komunikacji"
+    ];
+
+    if (shadowResult?.archetype === "The Sage") {
+      guidance.push("Jako Mędrzec, prawdopodobnie flourytujesz w rolach związanych z nauczaniem, badaniami lub doradztwem");
+    } else if (shadowResult?.archetype === "The Hero") {
+      guidance.push("Archetyp Bohatera predysponuje do ról liderskich i sytuacji wymagających odwagi");
+    } else if (shadowResult?.archetype === "The Creator") {
+      guidance.push("Jako Twórca, potrzebujesz przestrzeni do innowacji i kreatywnej ekspresji");
+    }
+
+    return guidance;
+  };
+
+  const generateHealingPriorities = (toxicityResult: any, integrationResult: any): string[] => {
+    const priorities = [
+      "Priorytety w procesie uzdrawiania powinny uwzględniać najpilniejsze potrzeby psychologiczne",
+      "Toksyczne wzorce w relacjach często wymagają priorytetowej uwagi i profesjonalnego wsparcia",
+      "Uzdrawianie to proces stopniowy, wymagający cierpliwości i samoakceptacji",
+      "Integracja traumatycznych doświadczeń jest kluczowa dla pełnego zdrowia psychicznego"
+    ];
+
+    if (toxicityResult?.zone === 'red') {
+      priorities.push("Wysokie priorytety: ustanowienie zdrowych granic, praca z traumą, budowanie wsparcia");
+    } else if (toxicityResult?.zone === 'yellow') {
+      priorities.push("Średnie priorytety: wzmocnienie granic emocjonalnych, poprawa komunikacji");
+    }
+
+    if (integrationResult?.integrationLevel === 'low') {
+      priorities.push("Kluczowe: rozpoczęcie systematycznej pracy z cieniem i nieświadomymi aspektami");
+    }
+
+    return priorities;
+  };
+
+  const generateDailyPractices = (shadowResult: any, toxicityResult: any, integrationResult: any): string[] => {
+    return [
+      "Codzienna 10-minutowa medytacja uważności dla zwiększenia samoświadomości",
+      "Prowadzenie dziennika emocji i wzorców behawioralnych",
+      "Praktyka wdzięczności - zapisywanie trzech rzeczy dziennie, za które jesteś wdzięczny",
+      "Regularne sprawdzanie granic emocjonalnych w relacjach",
+      "Świadome oddychanie w sytuacjach stresowych",
+      "Praktyka samoakceptacji - codzienne afirmacje wspomagające",
+      "Krótkie sesje wizualizacji pozytywnych scenariuszy",
+      "Regularne sprawdzanie potrzeb emocjonalnych i fizycznych"
+    ];
+  };
+
+  const generateTherapeuticRecommendations = (toxicityResult: any, relationshipResult: any): string[] => {
+    const recommendations = [
+      "Terapia psychodynamiczna dla pracy z nieświadomymi wzorcami",
+      "Terapia poznawczo-behawioralna (CBT) dla zmiany destrukcyjnych myśli",
+      "Terapia schematu dla pracy z głębokimi wzorcami relacyjnymi",
+      "EMDR dla przetwarzania traumatycznych doświadczeń"
+    ];
+
+    if (toxicityResult?.zone === 'red') {
+      recommendations.push("Priorytetowa terapia dla pracy z toksycznymi wzorcami relacyjnymi");
+      recommendations.push("Możliwa potrzeba intensywnej terapii grupowej lub warsztatów");
+    }
+
+    return recommendations;
+  };
+
+  const generateBookRecommendations = (shadowResult: any, integrationResult: any): string[] => {
+    return [
+      "'Człowiek i jego symbole' - Carl Gustav Jung (podstawy psychologii analitycznej)",
+      "'Dar wrażliwości' - Elaine Aron (dla osób wysokowrażliwych)",
+      "'Ciało pamiętają' - Bessel van der Kolk (trauma i uzdrawianie)",
+      "'Miłość to nie to, co myślisz' - David Richo (o zdrowych relacjach)",
+      "'Siła teraźniejszości' - Eckhart Tolle (praktyki uważności)",
+      "'Zranione dziecko w nas' - Stefanie Stahl (praca z wewnętrznym dzieckiem)",
+      "'Przebudzenie tygrysa' - Peter Levine (uzdrawianie traumy)",
+      "'Droga mniej uczęszczana' - Scott Peck (duchowy rozwój)"
+    ];
+  };
+
+  const generateJournalingPrompts = (shadowResult: any, relationshipResult: any): string[] => {
+    return [
+      "Jakie wzorce z dzieciństwa powtarzam w obecnych relacjach?",
+      "Kiedy czuję się najbardziej autentyczny/-a? Co to o mnie mówi?",
+      "Jakie emocje najczęściej staram się unikać i dlaczego?",
+      "W jaki sposób mój archetyp przejawia się w codziennym życiu?",
+      "Które z moich zachowań wynikają z lęku, a które z miłości?",
+      "Jakie przesłania otrzymywałem/-am w dzieciństwie o sobie i relacjach?",
+      "Co chciałbym/-aby powiedzieć swojemu wewnętrznemu dziecku?",
+      "Jakie granice muszę wzmocnić w swoich relacjach?"
+    ];
+  };
+
+  const generateMeditationPractices = (shadowResult: any, integrationResult: any): string[] => {
+    return [
+      "Medytacja uważności na oddech (10-20 minut dziennie)",
+      "Praktyka loving-kindness dla rozwoju autoakceptacji",
+      "Medytacja na obserwacji myśli bez osądzania",
+      "Wizualizacja uzdrawiająca dla integracji cienia",
+      "Skanowanie ciała dla zwiększenia świadomości somatycznej",
+      "Medytacja chodzenia dla uziemienia i obecności",
+      "Praktyka wdzięczności z elementami medytacyjnymi",
+      "Krótkie medytacje w ciągu dnia dla zarządzania stresem"
+    ];
+  };
+
+  const generateRelationshipExercises = (toxicityResult: any, relationshipResult: any): string[] => {
+    return [
+      "Ćwiczenie komunikacji bez osądzania - używanie komunikatów 'ja'",
+      "Praktyka aktywnego słuchania z pełną uwagą",
+      "Ustalanie i komunikowanie zdrowych granic",
+      "Regularne sprawdzanie emocjonalne z partnerem/rodziną",
+      "Ćwiczenia budowania zaufania i intymności",
+      "Praktyka przepraszania i przebaczania",
+      "Wspólne ustalanie wartości i celów w relacji",
+      "Ćwiczenia rozwiązywania konfliktów w konstruktywny sposób"
+    ];
+  };
+
   const generateComprehensiveProfile = (results: TestResult[]): ComprehensiveProfile => {
     const shadowResult = results.find(r => r.testId === 'shadow-test')?.result;
     const toxicityResult = results.find(r => r.testId === 'toxicity-compass')?.result;
@@ -121,6 +428,12 @@ export default function ComprehensiveSummary() {
     if (progress.relationshipPatterns) totalPoints += 300;
     if (progress.integrationGuide) totalPoints += 350;
 
+    // Calculate comprehensive metrics
+    const psychologicalMaturity = calculatePsychologicalMaturity(shadowResult, toxicityResult, relationshipResult, integrationResult);
+    const emotionalIntelligence = calculateEmotionalIntelligence(shadowResult, toxicityResult, relationshipResult, integrationResult);
+    const relationshipHealth = calculateRelationshipHealth(toxicityResult, relationshipResult);
+    const personalGrowthPotential = calculateGrowthPotential(shadowResult, integrationResult);
+
     return {
       dominantArchetype: shadowResult?.archetype || "Unknown",
       archetypeDescription: getArchetypeDescription(shadowResult?.archetype),
@@ -133,14 +446,38 @@ export default function ComprehensiveSummary() {
         shadowWork: generateShadowAnalysis(shadowResult),
         emotionalHealth: generateEmotionalAnalysis(toxicityResult),
         relationshipDynamics: generateRelationshipAnalysis(relationshipResult),
-        personalGrowth: generateGrowthAnalysis(integrationResult)
+        personalGrowth: generateGrowthAnalysis(integrationResult),
+        psychologicalInsights: generatePsychologicalInsights(shadowResult, toxicityResult, relationshipResult, integrationResult),
+        behavioralPatterns: generateBehavioralPatterns(shadowResult, relationshipResult),
+        lifeThemes: generateLifeThemes(shadowResult, toxicityResult, relationshipResult, integrationResult),
+        unconsciousMotivations: generateUnconsciousMotivations(shadowResult, relationshipResult)
       },
       strengths: generateStrengths(shadowResult, toxicityResult, relationshipResult, integrationResult),
       growthAreas: generateGrowthAreas(shadowResult, toxicityResult, relationshipResult, integrationResult),
       actionPlan: generateActionPlan(shadowResult, toxicityResult, relationshipResult, integrationResult),
       nextSteps: generateNextSteps(shadowResult, toxicityResult, relationshipResult, integrationResult),
+      comprehensiveInterpretation: {
+        corePersonality: generateCorePersonality(shadowResult, relationshipResult),
+        relationshipStyle: generateRelationshipStyle(toxicityResult, relationshipResult),
+        lifeChallenges: generateLifeChallenges(shadowResult, toxicityResult, relationshipResult),
+        spiritualJourney: generateSpiritualJourney(shadowResult, integrationResult),
+        careerGuidance: generateCareerGuidance(shadowResult, relationshipResult),
+        healingPriorities: generateHealingPriorities(toxicityResult, integrationResult)
+      },
+      integrationGuidance: {
+        dailyPractices: generateDailyPractices(shadowResult, toxicityResult, integrationResult),
+        therapeuticRecommendations: generateTherapeuticRecommendations(toxicityResult, relationshipResult),
+        bookRecommendations: generateBookRecommendations(shadowResult, integrationResult),
+        journalingPrompts: generateJournalingPrompts(shadowResult, relationshipResult),
+        meditationPractices: generateMeditationPractices(shadowResult, integrationResult),
+        relationshipExercises: generateRelationshipExercises(toxicityResult, relationshipResult)
+      },
       completionDate: new Date().toLocaleDateString(),
-      totalPoints
+      totalPoints,
+      psychologicalMaturity,
+      emotionalIntelligence,
+      relationshipHealth,
+      personalGrowthPotential
     };
   };
 
@@ -294,585 +631,413 @@ export default function ComprehensiveSummary() {
         url: window.location.href
       });
     } else {
-      navigator.clipboard.writeText(`${text} ${window.location.href}`);
+      navigator.clipboard.writeText(text);
     }
-  };
-
-  const restartJourney = () => {
-    if (confirm('Are you sure you want to restart your journey? This will clear all progress and results.')) {
-      localStorage.removeItem('psychTestProgress');
-      localStorage.removeItem('psychTestResults');
-      localStorage.removeItem('shadowTestResult');
-      localStorage.removeItem('toxicityResult');
-      localStorage.removeItem('relationshipPatternResult');
-      localStorage.removeItem('integrationGuideResult');
-      setLocation('/journey');
-    }
-  };
-
-  const downloadReport = () => {
-    if (!profile) return;
-    
-    // Generate a comprehensive text report
-    const report = `
-COMPREHENSIVE PSYCHOLOGICAL ASSESSMENT REPORT
-Generated: ${profile.completionDate}
-Total Points: ${profile.totalPoints}
-
-DOMINANT ARCHETYPE: ${profile.dominantArchetype}
-${profile.archetypeDescription}
-
-EMOTIONAL HEALTH: ${profile.toxicityLevel} (${profile.toxicityScore}%)
-RELATIONSHIP PATTERN: ${profile.relationshipPattern}
-INTEGRATION LEVEL: ${profile.integrationLevel}
-OVERALL SCORE: ${profile.overallScore}/100
-
-DETAILED ANALYSIS:
-
-Shadow Work Insights:
-${profile.detailedAnalysis.shadowWork.map(item => `• ${item}`).join('\n')}
-
-Emotional Health Assessment:
-${profile.detailedAnalysis.emotionalHealth.map(item => `• ${item}`).join('\n')}
-
-Relationship Dynamics:
-${profile.detailedAnalysis.relationshipDynamics.map(item => `• ${item}`).join('\n')}
-
-Personal Growth Opportunities:
-${profile.detailedAnalysis.personalGrowth.map(item => `• ${item}`).join('\n')}
-
-STRENGTHS:
-${profile.strengths.map(item => `• ${item}`).join('\n')}
-
-GROWTH AREAS:
-${profile.growthAreas.map(item => `• ${item}`).join('\n')}
-
-ACTION PLAN:
-${profile.actionPlan.map(item => `• ${item}`).join('\n')}
-
-NEXT STEPS:
-${profile.nextSteps.map(item => `• ${item}`).join('\n')}
-    `;
-    
-    const blob = new Blob([report], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `psychological-assessment-${new Date().toISOString().split('T')[0]}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[hsl(var(--deep-black))] flex items-center justify-center">
+      <div className="min-h-screen bg-black text-white p-6 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[hsl(var(--metallic-silver))]">Loading your comprehensive profile...</p>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-400 mx-auto mb-4"></div>
+          <p className="text-lg">Loading your comprehensive profile...</p>
         </div>
       </div>
     );
   }
 
+  // Show assessment incomplete message if not all tests are done
   if (!profile) {
     return (
-      <div className="min-h-screen bg-[hsl(var(--deep-black))] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
-        
-        <div className="relative z-10 container mx-auto px-6 py-12 max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center"
-          >
-            <AlertTriangle className="h-16 w-16 text-amber-400 mx-auto mb-6" />
-            <h1 className="font-serif text-3xl font-bold text-[hsl(var(--silver-glow))] mb-4">
-              Assessment Incomplete
-            </h1>
-            <p className="text-[hsl(var(--metallic-silver))] mb-8 max-w-2xl mx-auto">
+      <div className="min-h-screen bg-black text-white p-6 flex items-center justify-center">
+        <Card className="w-full max-w-md mx-auto bg-gray-900/80 border-gray-700">
+          <CardContent className="p-8 text-center">
+            <AlertTriangle className="h-16 w-16 text-yellow-400 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold mb-4">Assessment Incomplete</h2>
+            <p className="text-gray-300 mb-6">
               You need to complete all four psychological assessments to view your comprehensive summary.
             </p>
-            
-            <div className="flex gap-4 justify-center">
-              <Button
-                onClick={() => setLocation('/journey')}
-                className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Return to Journey
-              </Button>
-            </div>
-          </motion.div>
-        </div>
+            <Button
+              onClick={() => setLocation('/journey')}
+              className="bg-purple-600 hover:bg-purple-700 text-white"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Return to Journey
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return "text-emerald-400";
-    if (score >= 60) return "text-yellow-400";
-    return "text-red-400";
-  };
-
-  const getScoreDescription = (score: number) => {
-    if (score >= 80) return "Excellent psychological health and integration";
-    if (score >= 60) return "Good psychological health with room for growth";
-    return "Areas of concern requiring attention";
-  };
-
-
-
   return (
-    <div className="min-h-screen bg-[hsl(var(--deep-black))] relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
-      
-      {/* Header */}
-      <motion.header 
-        className="relative z-20 p-6 border-b border-[hsl(var(--border))]"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Button
-                onClick={() => setLocation('/journey')}
-                variant="outline"
-                size="sm"
-                className="border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))]"
-              >
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Journey
-              </Button>
-              <div>
-                <h1 className="font-serif text-2xl md:text-3xl font-bold text-[hsl(var(--silver-glow))]">
-                  Your Comprehensive Psychological Profile
-                </h1>
-                <p className="text-[hsl(var(--metallic-silver))] mt-1">
-                  A detailed analysis based on all four assessments
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <Button
-                onClick={shareResults}
-                variant="outline"
-                size="sm"
-                className="border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))]"
-              >
-                <Share2 className="h-4 w-4 mr-2" />
-                Share
-              </Button>
-              <Button
-                onClick={downloadReport}
-                variant="outline"
-                size="sm"
-                className="border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))]"
-              >
-                <Download className="h-4 w-4 mr-2" />
-                Download Report
-              </Button>
-            </div>
+    <div className="min-h-screen bg-black text-white p-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-8"
+        >
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Award className="h-8 w-8 text-yellow-400" />
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Comprehensive Psychological Profile
+            </h1>
+            <Award className="h-8 w-8 text-yellow-400" />
           </div>
-        </div>
-      </motion.header>
+          <p className="text-gray-300 text-lg">
+            Your complete psychological landscape revealed through archetypal analysis
+          </p>
+        </motion.div>
 
-      <div className="relative z-10 container mx-auto px-6 py-12 max-w-6xl">
-        
-        {/* Overall Score */}
+        {/* Overall Score Card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          transition={{ delay: 0.2 }}
+          className="mb-8"
         >
-          <Card className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border-[hsl(var(--metallic-silver)/0.3)] inline-block px-8 py-6">
-            <div className="flex items-center space-x-6">
-              <div className="text-center">
-                <div className={`text-6xl font-bold ${getScoreColor(profile.overallScore)} mb-2`}>
-                  {profile.overallScore}
+          <Card className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border-purple-500/30">
+            <CardContent className="p-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-400 mb-2">{profile.psychologicalMaturity}%</div>
+                  <div className="text-gray-300">Psychological Maturity</div>
                 </div>
-                <div className="text-[hsl(var(--metallic-silver))] text-sm">Overall Score</div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-400 mb-2">{profile.emotionalIntelligence}%</div>
+                  <div className="text-gray-300">Emotional Intelligence</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-emerald-400 mb-2">{profile.relationshipHealth}%</div>
+                  <div className="text-gray-300">Relationship Health</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-yellow-400 mb-2">{profile.personalGrowthPotential}%</div>
+                  <div className="text-gray-300">Growth Potential</div>
+                </div>
               </div>
-              <div className="text-left max-w-md">
-                <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))] mb-2">
-                  Psychological Wellness Index
-                </h3>
-                <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
-                  {getScoreDescription(profile.overallScore)}
-                </p>
-              </div>
-            </div>
+            </CardContent>
           </Card>
         </motion.div>
 
-        {/* Test Results Overview */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
+        {/* Core Profile */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-12"
+          transition={{ delay: 0.3 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"
         >
-          <h2 className="font-serif text-2xl md:text-3xl font-bold text-[hsl(var(--silver-glow))] mb-8 text-center">
-            Your Psychological Landscape
-          </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border-purple-400/30">
-              <CardHeader className="pb-4">
-                <div className="flex items-center space-x-3">
-                  <Brain className="h-8 w-8 text-purple-400" />
-                  <div>
-                    <h3 className="font-semibold text-[hsl(var(--silver-glow))]">Shadow Archetype</h3>
-                    <p className="text-purple-400 font-medium">{profile.dominantArchetype}</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-[hsl(var(--metallic-silver))] text-sm">
-                  Your unconscious patterns and hidden motivations
-                </p>
-              </CardContent>
-            </Card>
+          <Card className="bg-gray-900/80 border-gray-700">
+            <CardHeader>
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <Brain className="h-5 w-5 text-purple-400" />
+                Dominant Archetype
+              </h3>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-purple-400 mb-2">{profile.dominantArchetype}</div>
+              <p className="text-gray-300">{profile.archetypeDescription}</p>
+            </CardContent>
+          </Card>
 
-            <Card className={`bg-gradient-to-br ${getToxicityLevelBg(profile.toxicityLevel)} ${getToxicityLevelBorder(profile.toxicityLevel)}`}>
-              <CardHeader className="pb-4">
-                <div className="flex items-center space-x-3">
-                  <Shield className={`h-8 w-8 ${getToxicityLevelColor(profile.toxicityLevel)}`} />
-                  <div>
-                    <h3 className="font-semibold text-[hsl(var(--silver-glow))]">Toxicity Level</h3>
-                    <p className={`${getToxicityLevelColor(profile.toxicityLevel)} font-medium`}>{profile.toxicityLevel}</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-[hsl(var(--metallic-silver))] text-sm">
-                  Your resilience to toxic relationship patterns
-                </p>
-              </CardContent>
-            </Card>
+          <Card className={`bg-gray-900/80 border-gray-700`}>
+            <CardHeader>
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <Shield className="h-5 w-5 text-emerald-400" />
+                Relationship Health
+              </h3>
+            </CardHeader>
+            <CardContent>
+              <div className={`text-2xl font-bold mb-2 ${getToxicityLevelColor(profile.toxicityLevel)}`}>
+                {profile.toxicityLevel.toUpperCase()} Zone
+              </div>
+              <p className="text-gray-300">Toxicity Level: {profile.toxicityScore}%</p>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-            <Card className="bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border-emerald-400/30">
-              <CardHeader className="pb-4">
-                <div className="flex items-center space-x-3">
-                  <Users className="h-8 w-8 text-emerald-400" />
-                  <div>
-                    <h3 className="font-semibold text-[hsl(var(--silver-glow))]">Relationship Style</h3>
-                    <p className="text-emerald-400 font-medium">{profile.relationshipPattern}</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-[hsl(var(--metallic-silver))] text-sm">
-                  How you connect and interact with others
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-amber-500/20 to-yellow-500/20 border-amber-400/30">
-              <CardHeader className="pb-4">
-                <div className="flex items-center space-x-3">
-                  <Lightbulb className="h-8 w-8 text-amber-400" />
-                  <div>
-                    <h3 className="font-semibold text-[hsl(var(--silver-glow))]">Integration Level</h3>
-                    <p className="text-amber-400 font-medium">{profile.integrationLevel}</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-[hsl(var(--metallic-silver))] text-sm">
-                  Your capacity for psychological wholeness
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </motion.section>
-
-        {/* Detailed Analysis */}
+        {/* Detailed Analysis Sections */}
         {showDetails && (
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
             className="space-y-8"
           >
-            {/* Strengths */}
-            <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--border))]">
+            {/* Psychological Insights */}
+            <Card className="bg-gray-900/80 border-gray-700">
               <CardHeader>
-                <div className="flex items-center space-x-3">
-                  <TrendingUp className="h-6 w-6 text-emerald-400" />
-                  <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
-                    Your Psychological Strengths
-                  </h3>
-                </div>
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <Eye className="h-5 w-5 text-indigo-400" />
+                  Głębokie Analizy Psychologiczne
+                </h3>
               </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {profile.strengths.map((strength, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="flex items-start space-x-3 p-3 rounded-lg bg-emerald-500/10"
-                    >
-                      <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                      <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
-                        {strength}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
+              <CardContent className="space-y-4">
+                {profile.detailedAnalysis.psychologicalInsights.map((insight, index) => (
+                  <div key={index} className="p-4 bg-gray-800/50 rounded-lg border-l-4 border-indigo-400">
+                    <p className="text-gray-300">{insight}</p>
+                  </div>
+                ))}
               </CardContent>
             </Card>
 
-            {/* Growth Areas */}
-            <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--border))]">
+            {/* Behavioral Patterns */}
+            <Card className="bg-gray-900/80 border-gray-700">
               <CardHeader>
-                <div className="flex items-center space-x-3">
-                  <AlertTriangle className="h-6 w-6 text-amber-400" />
-                  <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
-                    Areas for Growth
-                  </h3>
-                </div>
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-blue-400" />
+                  Wzorce Behawioralne
+                </h3>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {profile.growthAreas.map((area, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="flex items-start space-x-3 p-3 rounded-lg bg-amber-500/10"
-                    >
-                      <Target className="h-5 w-5 text-amber-400 flex-shrink-0 mt-0.5" />
-                      <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
-                        {area}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
+              <CardContent className="space-y-4">
+                {profile.detailedAnalysis.behavioralPatterns.map((pattern, index) => (
+                  <div key={index} className="p-4 bg-gray-800/50 rounded-lg border-l-4 border-blue-400">
+                    <p className="text-gray-300">{pattern}</p>
+                  </div>
+                ))}
               </CardContent>
             </Card>
 
-            {/* Detailed Analysis Sections */}
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Shadow Work Analysis */}
-              <Card className="bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border-purple-400/30">
+            {/* Life Themes */}
+            <Card className="bg-gray-900/80 border-gray-700">
+              <CardHeader>
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <Star className="h-5 w-5 text-yellow-400" />
+                  Główne Tematy Życiowe
+                </h3>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {profile.detailedAnalysis.lifeThemes.map((theme, index) => (
+                  <div key={index} className="p-4 bg-gray-800/50 rounded-lg border-l-4 border-yellow-400">
+                    <p className="text-gray-300">{theme}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Unconscious Motivations */}
+            <Card className="bg-gray-900/80 border-gray-700">
+              <CardHeader>
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <Compass className="h-5 w-5 text-purple-400" />
+                  Nieświadome Motywacje
+                </h3>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {profile.detailedAnalysis.unconsciousMotivations.map((motivation, index) => (
+                  <div key={index} className="p-4 bg-gray-800/50 rounded-lg border-l-4 border-purple-400">
+                    <p className="text-gray-300">{motivation}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Comprehensive Interpretation */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="bg-gray-900/80 border-gray-700">
                 <CardHeader>
-                  <div className="flex items-center space-x-3">
-                    <Brain className="h-6 w-6 text-purple-400" />
-                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
-                      Shadow Work Insights
-                    </h3>
-                  </div>
+                  <h3 className="text-xl font-bold flex items-center gap-2">
+                    <Heart className="h-5 w-5 text-red-400" />
+                    Rdzeń Osobowości
+                  </h3>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {profile.detailedAnalysis.shadowWork.map((insight, index) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <Eye className="h-4 w-4 text-purple-400 flex-shrink-0 mt-1" />
-                        <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
-                          {insight}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                <CardContent className="space-y-3">
+                  {profile.comprehensiveInterpretation.corePersonality.map((trait, index) => (
+                    <p key={index} className="text-gray-300 text-sm">{trait}</p>
+                  ))}
                 </CardContent>
               </Card>
 
-              {/* Emotional Health Analysis */}
-              <Card className="bg-gradient-to-br from-red-500/10 to-orange-500/10 border-red-400/30">
+              <Card className="bg-gray-900/80 border-gray-700">
                 <CardHeader>
-                  <div className="flex items-center space-x-3">
-                    <Heart className="h-6 w-6 text-red-400" />
-                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
-                      Emotional Health
-                    </h3>
-                  </div>
+                  <h3 className="text-xl font-bold flex items-center gap-2">
+                    <Users className="h-5 w-5 text-emerald-400" />
+                    Styl Relacyjny
+                  </h3>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {profile.detailedAnalysis.emotionalHealth.map((insight, index) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <Shield className="h-4 w-4 text-red-400 flex-shrink-0 mt-1" />
-                        <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
-                          {insight}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                <CardContent className="space-y-3">
+                  {profile.comprehensiveInterpretation.relationshipStyle.map((style, index) => (
+                    <p key={index} className="text-gray-300 text-sm">{style}</p>
+                  ))}
                 </CardContent>
               </Card>
 
-              {/* Relationship Dynamics */}
-              <Card className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border-emerald-400/30">
+              <Card className="bg-gray-900/80 border-gray-700">
                 <CardHeader>
-                  <div className="flex items-center space-x-3">
-                    <Users className="h-6 w-6 text-emerald-400" />
-                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
-                      Relationship Dynamics
-                    </h3>
-                  </div>
+                  <h3 className="text-xl font-bold flex items-center gap-2">
+                    <Target className="h-5 w-5 text-orange-400" />
+                    Wyzwania Życiowe
+                  </h3>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {profile.detailedAnalysis.relationshipDynamics.map((insight, index) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <Users className="h-4 w-4 text-emerald-400 flex-shrink-0 mt-1" />
-                        <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
-                          {insight}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                <CardContent className="space-y-3">
+                  {profile.comprehensiveInterpretation.lifeChallenges.map((challenge, index) => (
+                    <p key={index} className="text-gray-300 text-sm">{challenge}</p>
+                  ))}
                 </CardContent>
               </Card>
 
-              {/* Personal Growth */}
-              <Card className="bg-gradient-to-br from-amber-500/10 to-yellow-500/10 border-amber-400/30">
+              <Card className="bg-gray-900/80 border-gray-700">
                 <CardHeader>
-                  <div className="flex items-center space-x-3">
-                    <Target className="h-6 w-6 text-amber-400" />
-                    <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
-                      Personal Growth
-                    </h3>
-                  </div>
+                  <h3 className="text-xl font-bold flex items-center gap-2">
+                    <Lightbulb className="h-5 w-5 text-yellow-400" />
+                    Podróż Duchowa
+                  </h3>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {profile.detailedAnalysis.personalGrowth.map((insight, index) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <Lightbulb className="h-4 w-4 text-amber-400 flex-shrink-0 mt-1" />
-                        <p className="text-[hsl(var(--metallic-silver))] text-sm leading-relaxed">
-                          {insight}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                <CardContent className="space-y-3">
+                  {profile.comprehensiveInterpretation.spiritualJourney.map((journey, index) => (
+                    <p key={index} className="text-gray-300 text-sm">{journey}</p>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gray-900/80 border-gray-700">
+                <CardHeader>
+                  <h3 className="text-xl font-bold flex items-center gap-2">
+                    <Trophy className="h-5 w-5 text-blue-400" />
+                    Wskazówki Kariery
+                  </h3>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {profile.comprehensiveInterpretation.careerGuidance.map((guidance, index) => (
+                    <p key={index} className="text-gray-300 text-sm">{guidance}</p>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gray-900/80 border-gray-700">
+                <CardHeader>
+                  <h3 className="text-xl font-bold flex items-center gap-2">
+                    <Zap className="h-5 w-5 text-green-400" />
+                    Priorytety Uzdrawiania
+                  </h3>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {profile.comprehensiveInterpretation.healingPriorities.map((priority, index) => (
+                    <p key={index} className="text-gray-300 text-sm">{priority}</p>
+                  ))}
                 </CardContent>
               </Card>
             </div>
 
-            {/* Action Plan */}
-            <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--border))]">
+            {/* Integration Guidance */}
+            <Card className="bg-gray-900/80 border-gray-700">
               <CardHeader>
-                <div className="flex items-center space-x-3">
-                  <BookOpen className="h-6 w-6 text-blue-400" />
-                  <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
-                    Personalized Action Plan
-                  </h3>
-                </div>
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <BookOpen className="h-5 w-5 text-indigo-400" />
+                  Przewodnik Integracji i Praktyk
+                </h3>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {profile.actionPlan.map((action, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="flex items-start space-x-3 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20"
-                    >
-                      <div className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="text-blue-400 text-sm font-bold">{index + 1}</span>
-                      </div>
-                      <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                        {action}
-                      </p>
-                    </motion.div>
-                  ))}
+              <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-semibold text-purple-400 mb-3">Codzienne Praktyki</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    {profile.integrationGuidance.dailyPractices.map((practice, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
+                        {practice}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-blue-400 mb-3">Rekomendacje Terapeutyczne</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    {profile.integrationGuidance.therapeuticRecommendations.map((recommendation, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                        {recommendation}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-yellow-400 mb-3">Rekomendacje Książek</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    {profile.integrationGuidance.bookRecommendations.map((book, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <BookOpen className="h-4 w-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+                        {book}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-emerald-400 mb-3">Pytania do Dziennika</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    {profile.integrationGuidance.journalingPrompts.map((prompt, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <ChevronRight className="h-4 w-4 text-emerald-400 mt-0.5 flex-shrink-0" />
+                        {prompt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-indigo-400 mb-3">Praktyki Medytacyjne</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    {profile.integrationGuidance.meditationPractices.map((practice, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <Star className="h-4 w-4 text-indigo-400 mt-0.5 flex-shrink-0" />
+                        {practice}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-pink-400 mb-3">Ćwiczenia Relacyjne</h4>
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    {profile.integrationGuidance.relationshipExercises.map((exercise, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <Heart className="h-4 w-4 text-pink-400 mt-0.5 flex-shrink-0" />
+                        {exercise}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </CardContent>
             </Card>
-
-            {/* Next Steps */}
-            <Card className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] border-[hsl(var(--border))]">
-              <CardHeader>
-                <div className="flex items-center space-x-3">
-                  <ChevronRight className="h-6 w-6 text-green-400" />
-                  <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
-                    Next Steps for Continued Growth
-                  </h3>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {profile.nextSteps.map((step, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="flex items-start space-x-3 p-4 rounded-lg bg-green-500/10 border border-green-500/20"
-                    >
-                      <Compass className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">
-                        {step}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Final CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-center"
-            >
-              <Card className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border-[hsl(var(--metallic-silver)/0.3)] inline-block">
-                <CardContent className="p-8">
-                  <Trophy className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
-                  <h3 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))] mb-4">
-                    Congratulations on Completing Your Journey!
-                  </h3>
-                  <p className="text-[hsl(var(--metallic-silver))] mb-6 max-w-2xl">
-                    You've taken a significant step toward self-understanding and personal growth. 
-                    Use these insights as a foundation for continued psychological development and authentic living.
-                  </p>
-                  
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button
-                      onClick={() => setLocation('/journey')}
-                      size="lg"
-                      className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0"
-                    >
-                      <Home className="mr-2 h-4 w-4" />
-                      Back to Journey
-                    </Button>
-                    <Button
-                      onClick={shareResults}
-                      variant="outline"
-                      size="lg"
-                      className="px-8 py-4 border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))]"
-                    >
-                      Share Your Journey
-                      <Share2 className="ml-2 h-4 w-4" />
-                    </Button>
-                    <Button
-                      onClick={restartJourney}
-                      variant="outline"
-                      size="lg"
-                      className="px-8 py-4 border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
-                    >
-                      <RotateCcw className="mr-2 h-4 w-4" />
-                      Restart Journey
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.section>
+          </motion.div>
         )}
+
+        {/* Action Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="flex flex-wrap justify-center gap-4 mt-8"
+        >
+          <Button
+            onClick={() => setLocation('/journey')}
+            variant="outline"
+            className="border-gray-600 text-gray-300 hover:bg-gray-800"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Journey
+          </Button>
+          
+          <Button
+            onClick={shareResults}
+            className="bg-purple-600 hover:bg-purple-700 text-white"
+          >
+            <Share2 className="h-4 w-4 mr-2" />
+            Share Results
+          </Button>
+
+          <Button
+            onClick={() => setLocation('/')}
+            className="bg-gray-700 hover:bg-gray-600 text-white"
+          >
+            <Home className="h-4 w-4 mr-2" />
+            Home
+          </Button>
+        </motion.div>
       </div>
     </div>
   );
