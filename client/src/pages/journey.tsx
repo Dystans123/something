@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import { 
   ArrowRight, 
   Brain, 
@@ -20,7 +22,13 @@ import {
   ChevronUp,
   Award,
   Target,
-  Home
+  Home,
+  Heart,
+  User,
+  Compass,
+  Zap,
+  Eye,
+  Puzzle
 } from "lucide-react";
 
 interface TestProgress {
