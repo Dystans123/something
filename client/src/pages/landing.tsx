@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Brain, Shield, Users, Lightbulb, Clock, CheckCircle, Target, Heart, Eye } from "lucide-react";
+import { ArrowRight, Brain, Shield, Users, Lightbulb, Clock, CheckCircle, Target, Heart, Eye, Compass, Zap } from "lucide-react";
 
 interface ToolCard {
   id: string;
@@ -25,12 +25,12 @@ const tools: ToolCard[] = [
     id: "shadow-test",
     title: "Shadow Archetype Test",
     subtitle: "Core Assessment",
-    description: "Discover your dominant shadow archetype through 40 psychological projection questions. Uncover the hidden aspects of your personality that influence your decisions, relationships, and life patterns in ways you never realized.",
+    description: "Discover your dominant shadow archetype through 20 psychological projection questions. Uncover the hidden aspects of your personality that influence your decisions, relationships, and life patterns in ways you never realized.",
     icon: <Brain className="h-6 w-6" />,
     color: "text-purple-400",
     bgGradient: "from-purple-500/20 to-indigo-500/20",
     features: [
-      "40 deep psychological questions",
+      "20 deep psychological questions",
       "8 Jungian shadow archetypes",
       "Personalized archetype analysis"
     ],
@@ -87,6 +87,74 @@ const tools: ToolCard[] = [
     ],
     buttonText: "Start Integration",
     route: "/integration-guide",
+    duration: "8-12 minutes"
+  },
+  {
+    id: "intelligence-map",
+    title: "Intelligence Map",
+    subtitle: "Mind Analysis",
+    description: "Discover your dominant intelligence type and how you naturally process the world around you. Understand your cognitive strengths and optimize your learning and problem-solving approaches.",
+    icon: <Brain className="h-6 w-6" />,
+    color: "text-blue-400",
+    bgGradient: "from-blue-500/20 to-cyan-500/20",
+    features: [
+      "Multiple intelligence assessment",
+      "Cognitive strength analysis",
+      "Personalized learning strategies"
+    ],
+    buttonText: "Map Your Intelligence",
+    route: "/intelligence-map",
+    duration: "8-12 minutes"
+  },
+  {
+    id: "attachment-style",
+    title: "Attachment Style Audit",
+    subtitle: "Connection Patterns",
+    description: "Explore your attachment style and how you build relationships, even when single. Understand your emotional patterns in connections and develop healthier relationship dynamics.",
+    icon: <Heart className="h-6 w-6" />,
+    color: "text-pink-400",
+    bgGradient: "from-pink-500/20 to-rose-500/20",
+    features: [
+      "Attachment style identification",
+      "Emotional pattern analysis",
+      "Relationship guidance"
+    ],
+    buttonText: "Audit Your Style",
+    route: "/attachment-style",
+    duration: "6-10 minutes"
+  },
+  {
+    id: "identity-compass",
+    title: "Identity Compass",
+    subtitle: "Core Identity",
+    description: "Reveal the dominant forces that shape your decisions, values, and life direction. Discover your authentic self and align your choices with your true identity.",
+    icon: <Compass className="h-6 w-6" />,
+    color: "text-emerald-400",
+    bgGradient: "from-emerald-500/20 to-teal-500/20",
+    features: [
+      "Core identity exploration",
+      "Value system analysis",
+      "Authentic self-discovery"
+    ],
+    buttonText: "Find Your Identity",
+    route: "/identity-compass",
+    duration: "7-11 minutes"
+  },
+  {
+    id: "inner-driver",
+    title: "Inner Driver Matrix",
+    subtitle: "Motivation Engine",
+    description: "Uncover what truly drives and motivates you to take action in your life. Understand your psychological motivators and harness them for personal success and fulfillment.",
+    icon: <Zap className="h-6 w-6" />,
+    color: "text-yellow-400",
+    bgGradient: "from-yellow-500/20 to-amber-500/20",
+    features: [
+      "Motivation pattern analysis",
+      "Drive identification system",
+      "Performance optimization"
+    ],
+    buttonText: "Discover Your Drivers",
+    route: "/inner-driver",
     duration: "8-12 minutes"
   }
 ];
@@ -407,7 +475,7 @@ export default function Landing() {
         >
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-6">
-              Four Scientifically-Backed Assessment Tools
+              Eight Scientifically-Backed Assessment Tools
             </h2>
             <p className="text-lg text-[hsl(var(--metallic-silver))] max-w-4xl mx-auto leading-relaxed">
               Each tool reveals different aspects of your psychological landscape, providing a comprehensive 
@@ -702,13 +770,22 @@ export default function Landing() {
             <div>
               <h4 className="font-semibold text-[hsl(var(--silver-glow))] mb-3">Legal & Privacy</h4>
               <div className="space-y-2">
-                <button className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors">
+                <button 
+                  onClick={() => setLocation("/privacy-policy")}
+                  className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors"
+                >
                   Privacy Policy
                 </button>
-                <button className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors">
+                <button 
+                  onClick={() => setLocation("/terms-of-use")}
+                  className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors"
+                >
                   Terms of Use
                 </button>
-                <button className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors">
+                <button 
+                  onClick={() => setLocation("/cookie-policy")}
+                  className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors"
+                >
                   Cookie Policy
                 </button>
               </div>
