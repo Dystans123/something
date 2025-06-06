@@ -254,26 +254,29 @@ export const identityTypes = {
   },
   creator: {
     name: "The Creator",
-    description: "You are inspired by beauty, innovation, and the desire to bring new things into existence. You see possibilities everywhere and transform ideas into reality.",
-    traits: ["Creative", "Visionary", "Innovative", "Expressive", "Transformative"],
-    strengths: ["Generating original ideas", "Seeing possibilities", "Artistic expression", "Problem-solving creativity", "Inspiring innovation"],
-    shadowAspects: ["Perfectionism", "Inconsistency", "Difficulty with mundane tasks"],
-    growthPath: "Balancing creative vision with practical execution, learning to complete projects while staying inspired"
+    description: "Your spirit dances with the infinite possibilities of what could be, driven by an irrepressible urge to bring new realities into existence. You see the world as raw material for transformation, and your imagination serves as a bridge between the realm of ideas and the world of form. Your identity is defined by your ability to birth beauty, innovation, and meaning from the void of potential.",
+    detailedAnalysis: "The Creator within you embodies the archetypal force of innovation and artistic expression. You possess a unique ability to perceive patterns, connections, and possibilities that others miss, and you feel compelled to manifest these visions in tangible form. Your creative process is often mysterious even to yourself—ideas seem to flow through you rather than from you, and you serve as a channel for bringing new beauty and solutions into the world.",
+    traits: ["Visionary imagination and artistic sensibility", "Ability to see possibilities in everything", "Natural innovation and problem-solving", "Expressive communication of ideas", "Transformative thinking that challenges status quo", "Aesthetic sensitivity and appreciation for beauty", "Courage to experiment and take creative risks"],
+    strengths: ["Generating breakthrough ideas and solutions", "Inspiring others with your vision and creativity", "Transforming problems into opportunities for innovation", "Creating beauty that uplifts and moves people", "Adapting quickly to new situations with creative flexibility", "Seeing potential where others see limitations"],
+    shadowAspects: ["Perfectionism that prevents completion", "Inconsistency in following through on projects", "Difficulty with routine or mundane tasks", "Becoming overwhelmed by too many ideas", "Impatience with practical details", "Tendency to abandon projects when inspiration wanes"],
+    growthPath: "Your evolution involves learning to balance divine inspiration with earthly execution. Developing discipline and project management skills will help you bring more of your visions to completion, while learning to find creativity within constraints will deepen your artistic mastery."
   },
   seeker: {
     name: "The Seeker",
-    description: "You are driven by the quest for truth, meaning, and understanding. You explore life's deeper mysteries and seek wisdom in all experiences.",
-    traits: ["Curious", "Philosophical", "Introspective", "Wise", "Truth-seeking"],
-    strengths: ["Deep thinking", "Spiritual insight", "Pattern recognition", "Asking important questions", "Finding meaning"],
-    shadowAspects: ["Overthinking", "Analysis paralysis", "Spiritual bypassing"],
-    growthPath: "Balancing contemplation with action, using wisdom to create positive change in the world"
+    description: "Your soul is driven by an insatiable hunger for truth, meaning, and understanding that transcends the surface of ordinary experience. You are drawn to life's deepest mysteries and find yourself perpetually questioning, exploring, and seeking wisdom in every encounter. Your identity is forged in the pursuit of enlightenment and the integration of knowledge with lived experience.",
+    detailedAnalysis: "The Seeker within you represents the archetypal force of wisdom and spiritual inquiry. You possess a natural inclination to look beyond appearances and ask the questions that others avoid or haven't considered. Your journey is one of constant learning, growth, and evolution as you seek to understand the deeper patterns and meanings that govern existence. You serve as a bridge between the known and unknown, bringing insights from your explorations back to illuminate the path for others.",
+    traits: ["Insatiable curiosity about life's deeper meanings", "Natural philosophical and spiritual inclination", "Ability to see patterns and connections across domains", "Comfort with uncertainty and mystery", "Deep introspective and reflective capacity", "Wisdom that comes from direct experience", "Questions that challenge assumptions and reveal truth"],
+    strengths: ["Gaining profound insights from life experiences", "Asking questions that lead to breakthrough understanding", "Finding meaning and purpose in difficult circumstances", "Guiding others through their own spiritual journeys", "Synthesizing knowledge from diverse sources", "Maintaining perspective during challenging times"],
+    shadowAspects: ["Overthinking that leads to paralysis", "Analysis that becomes a substitute for action", "Spiritual bypassing of practical responsibilities", "Becoming lost in abstract concepts", "Difficulty making decisions without complete understanding", "Tendency to become isolated in pursuit of truth"],
+    growthPath: "Your path involves learning to ground your wisdom in practical action and service to others. The greatest insights come from living your understanding, not just contemplating it. Your journey is to become a wisdom keeper who shares knowledge through example as much as words."
   },
   loneWolf: {
     name: "The Lone Wolf",
-    description: "You are motivated by freedom, authenticity, and self-determination. You value independence and prefer to walk your own path.",
-    traits: ["Independent", "Authentic", "Self-reliant", "Non-conforming", "Introspective"],
-    strengths: ["Self-sufficiency", "Authentic living", "Clear personal boundaries", "Resistance to social pressure", "Deep self-knowledge"],
-    shadowAspects: ["Isolation", "Difficulty trusting", "Resistance to help"],
-    growthPath: "Learning to balance independence with meaningful connections, allowing others to support you occasionally"
+    description: "Your spirit thrives in the space of radical authenticity and self-determination, choosing to walk a path that honors your deepest truth over social conformity. You possess an uncompromising commitment to living according to your own values and vision, and you find strength in solitude that others might fear. Your identity is built on the foundation of fierce independence and authentic self-expression.",
+    detailedAnalysis: "The Lone Wolf within you embodies the archetypal force of individualism and authentic living. You have developed a rare ability to trust your own inner compass even when it leads you away from the crowd. This independence isn't born from antisocial tendencies but from a deep respect for your own sovereignty and a refusal to compromise your integrity for acceptance. You understand that true belonging can only come from being genuinely yourself.",
+    traits: ["Unwavering commitment to authenticity", "Strong sense of personal sovereignty", "Ability to thrive in solitude", "Resistance to social pressure and conformity", "Deep self-knowledge and introspection", "Clear personal boundaries and values", "Courage to stand alone when necessary"],
+    strengths: ["Living authentically regardless of others' opinions", "Making decisions based on your own values and wisdom", "Maintaining independence while still caring for others", "Inspiring others to be more authentic", "Staying true to yourself under pressure", "Creating your own path when existing ones don't fit"],
+    shadowAspects: ["Isolation that cuts you off from meaningful connection", "Difficulty trusting others or accepting help", "Resistance to collaboration even when beneficial", "Stubbornness that prevents growth", "Tendency to reject good advice because it comes from others", "Missing out on the gifts that community can offer"],
+    growthPath: "Your journey involves learning that true independence includes the wisdom to know when connection serves your authentic self. You can maintain your sovereignty while still allowing others to support and enrich your journey. The strongest wolves know when to run with the pack."
   }
 };
