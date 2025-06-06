@@ -163,24 +163,24 @@ export default function ComprehensiveSummary() {
 
   const generatePsychologicalInsights = (shadowResult: any, toxicityResult: any, relationshipResult: any, integrationResult: any): string[] => {
     const insights = [
-      "Twoja osobowość jest złożoną mozaiką świadomych i nieświadomych wzorców, które kształtowały się przez całe życie",
-      "Archetyp reprezentuje rdzeń Twojej psychicznej struktury - fundamentalne siły motywacyjne i behawioralne",
-      "Poziom toksyczności w relacjach odzwierciedla Twoją zdolność do utrzymywania zdrowych granic emocjonalnych",
-      "Wzorce relacyjne ujawniają głębokie potrzeby dotyczące bliskości, autonomii i bezpieczeństwa emocjonalnego",
-      "Integracja psychologiczna to proces świadomego włączania wszystkich aspektów osobowości w spójną całość",
-      "Twoje odpowiedzi ujawniają unikalne połączenie mocnych stron i obszarów wymagających dalszego rozwoju",
-      "Psychologiczny profil pokazuje, jak nieświadome motywy wpływają na Twoje świadome wybory życiowe",
-      "Emocjonalna inteligencja przejawia się w sposób, w jaki radzisz sobie z własnymi i cudzymi emocjami"
+      "Your personality is a complex mosaic of conscious and unconscious patterns that have shaped throughout your entire life",
+      "Your archetype represents the core of your psychic structure - the fundamental motivational and behavioral forces",
+      "The toxicity level in relationships reflects your ability to maintain healthy emotional boundaries",
+      "Relationship patterns reveal deep needs regarding intimacy, autonomy, and emotional security",
+      "Psychological integration is the process of consciously incorporating all aspects of personality into a coherent whole",
+      "Your responses reveal a unique combination of strengths and areas requiring further development",
+      "Your psychological profile shows how unconscious motives influence your conscious life choices",
+      "Emotional intelligence manifests in how you handle your own and others' emotions"
     ];
 
     if (shadowResult?.archetype === "The Sage") {
-      insights.push("Jako Mędrzec, Twoja potrzeba zrozumienia świata może czasem prowadzić do intelektualizacji emocji");
+      insights.push("As a Sage, your need to understand the world can sometimes lead to intellectualizing emotions");
     }
     if (shadowResult?.archetype === "The Hero") {
-      insights.push("Archetyp Bohatera wskazuje na silną potrzebę stawienia czoła wyzwaniom i ochrony innych");
+      insights.push("The Hero archetype indicates a strong need to face challenges and protect others");
     }
     if (toxicityResult?.zone === 'red') {
-      insights.push("Wysoki poziom toksyczności może wskazywać na nierozwiązane traumy lub wzorce z dzieciństwa");
+      insights.push("High toxicity levels may indicate unresolved trauma or patterns from childhood");
     }
 
     return insights;
@@ -188,27 +188,27 @@ export default function ComprehensiveSummary() {
 
   const generateBehavioralPatterns = (shadowResult: any, relationshipResult: any): string[] => {
     return [
-      "Wzorce behawioralne są automatycznymi reakcjami wypracowanymi w odpowiedzi na życiowe doświadczenia",
-      "Twój dominujący archetyp wpływa na sposób, w jaki podchodzisz do problemów i podejmujesz decyzje",
-      "W sytuacjach stresowych prawdopodobnie powracasz do znanych, bezpiecznych wzorców zachowań",
-      "Relacyjne wzorce behawioralne odzwierciedlają Twoje wczesne doświadczenia z opiekunami",
-      "Świadomość własnych wzorców jest pierwszym krokiem do ich świadomej zmiany",
-      "Niektóre zachowania służą jako mechanizmy obronne chroniące przed bólem emocjonalnym",
-      "Pozytywne wzorce warto wzmacniać, a destrukcyjne stopniowo przekształcać",
-      "Zmiana wzorców behawioralnych wymaga czasu, cierpliwości i konsekwentnej praktyki"
+      "Behavioral patterns are automatic responses developed in reaction to life experiences",
+      "Your dominant archetype influences how you approach problems and make decisions",
+      "In stressful situations, you likely return to familiar, safe behavioral patterns",
+      "Relational behavioral patterns reflect your early experiences with caregivers",
+      "Awareness of your own patterns is the first step toward conscious change",
+      "Some behaviors serve as defensive mechanisms protecting against emotional pain",
+      "Positive patterns are worth strengthening, while destructive ones should be gradually transformed",
+      "Changing behavioral patterns requires time, patience, and consistent practice"
     ];
   };
 
   const generateLifeThemes = (shadowResult: any, toxicityResult: any, relationshipResult: any, integrationResult: any): string[] => {
     return [
-      "Główne tematy życiowe to powtarzające się motywy w Twoich doświadczeniach i wyborach",
-      "Archetyp ujawnia centralne pytania egzystencjalne, które napędzają Twoje poszukiwania",
-      "Wzorce relacyjne wskazują na kluczowe lekcje dotyczące miłości, bliskości i zaufania",
-      "Poziom integracji odzwierciedla Twoją gotowość do konfrontacji z trudnymi aspektami siebie",
-      "Życiowe tematy często związane są z nierozwiązanymi konfliktami z przeszłości",
-      "Każdy test ujawnia różne aspekty Twojej podróży ku większej autentyczności i pełni",
-      "Powtarzające się wzorce w życiu często niosą ważne przesłania do zrozumienia",
-      "Integracja wszystkich aspektów osobowości prowadzi do większej spójności i spokoju wewnętrznego"
+      "Core life themes are recurring motifs in your experiences and choices",
+      "Your archetype reveals central existential questions that drive your search for meaning",
+      "Relationship patterns point to key lessons about love, intimacy, and trust",
+      "Your integration level reflects your readiness to confront difficult aspects of yourself",
+      "Life themes are often connected to unresolved conflicts from the past",
+      "Each test reveals different aspects of your journey toward greater authenticity and wholeness",
+      "Recurring patterns in life often carry important messages to understand",
+      "Integration of all personality aspects leads to greater coherence and inner peace"
     ];
   };
 
@@ -596,6 +596,119 @@ export default function ComprehensiveSummary() {
     ];
   };
 
+  const generateDemoProfile = (): ComprehensiveProfile => {
+    return {
+      dominantArchetype: "The Sage",
+      archetypeDescription: "You are driven by the desire to understand the world and share wisdom with others.",
+      toxicityLevel: "green",
+      toxicityScore: 15,
+      relationshipPattern: "Secure Attachment",
+      integrationLevel: "high",
+      overallScore: 85,
+      detailedAnalysis: {
+        shadowWork: generateShadowAnalysis({ archetype: "The Sage" }),
+        emotionalHealth: generateEmotionalAnalysis({ zone: "green", percentage: 15 }),
+        relationshipDynamics: generateRelationshipAnalysis({ dominantPattern: "Secure" }),
+        personalGrowth: generateGrowthAnalysis({ integrationLevel: "high" }),
+        psychologicalInsights: generatePsychologicalInsights(
+          { archetype: "The Sage" },
+          { zone: "green", percentage: 15 },
+          { dominantPattern: "Secure" },
+          { integrationLevel: "high" }
+        ),
+        behavioralPatterns: generateBehavioralPatterns(
+          { archetype: "The Sage" },
+          { dominantPattern: "Secure" }
+        ),
+        lifeThemes: generateLifeThemes(
+          { archetype: "The Sage" },
+          { zone: "green", percentage: 15 },
+          { dominantPattern: "Secure" },
+          { integrationLevel: "high" }
+        ),
+        unconsciousMotivations: generateUnconsciousMotivations(
+          { archetype: "The Sage" },
+          { dominantPattern: "Secure" }
+        )
+      },
+      strengths: [
+        "Głęboka mądrość i dążenie do zrozumienia",
+        "Zdolność do nauczania i dzielenia się wiedzą",
+        "Silna intuicja i wgląd w ludzką naturę",
+        "Naturalna skłonność do refleksji i analizy",
+        "Umiejętność widzenia szerszego obrazu"
+      ],
+      growthAreas: [
+        "Równoważenie intelektu z emocjami",
+        "Unikanie nadmiernej analizy kosztem działania",
+        "Rozwijanie cierpliwości wobec mniej doświadczonych",
+        "Praktyczne zastosowanie teoretycznej wiedzy"
+      ],
+      actionPlan: generateActionPlan(),
+      nextSteps: generateNextSteps(),
+      comprehensiveInterpretation: {
+        corePersonality: generateCorePersonality(
+          { archetype: "The Sage" },
+          { dominantPattern: "Secure" }
+        ),
+        relationshipStyle: generateRelationshipStyle(
+          { zone: "green", percentage: 15 },
+          { dominantPattern: "Secure" }
+        ),
+        lifeChallenges: generateLifeChallenges(
+          { archetype: "The Sage" },
+          { zone: "green", percentage: 15 },
+          { dominantPattern: "Secure" }
+        ),
+        spiritualJourney: generateSpiritualJourney(
+          { archetype: "The Sage" },
+          { integrationLevel: "high" }
+        ),
+        careerGuidance: generateCareerGuidance(
+          { archetype: "The Sage" },
+          { dominantPattern: "Secure" }
+        ),
+        healingPriorities: generateHealingPriorities(
+          { zone: "green", percentage: 15 },
+          { integrationLevel: "high" }
+        )
+      },
+      integrationGuidance: {
+        dailyPractices: generateDailyPractices(
+          { archetype: "The Sage" },
+          { zone: "green", percentage: 15 },
+          { integrationLevel: "high" }
+        ),
+        therapeuticRecommendations: generateTherapeuticRecommendations(
+          { zone: "green", percentage: 15 },
+          { dominantPattern: "Secure" }
+        ),
+        bookRecommendations: generateBookRecommendations(
+          { archetype: "The Sage" },
+          { integrationLevel: "high" }
+        ),
+        journalingPrompts: generateJournalingPrompts(
+          { archetype: "The Sage" },
+          { dominantPattern: "Secure" }
+        ),
+        meditationPractices: generateMeditationPractices(
+          { archetype: "The Sage" },
+          { integrationLevel: "high" }
+        ),
+        relationshipExercises: generateRelationshipExercises(
+          { zone: "green", percentage: 15 },
+          { dominantPattern: "Secure" }
+        )
+      },
+      completionDate: new Date().toLocaleDateString(),
+      totalPoints: 1100,
+      psychologicalMaturity: 90,
+      emotionalIntelligence: 85,
+      relationshipHealth: 92,
+      personalGrowthPotential: 88
+    };
+  };
+
   useEffect(() => {
     // Load and process actual test results
     const savedResults = localStorage.getItem('psychTestResults');
@@ -612,6 +725,11 @@ export default function ComprehensiveSummary() {
       if (allCompleted) {
         const comprehensiveProfile = generateComprehensiveProfile(results);
         setProfile(comprehensiveProfile);
+        setTimeout(() => setShowDetails(true), 1000);
+      } else {
+        // For demonstration purposes, create a sample profile to show the comprehensive analysis
+        const demoProfile = generateDemoProfile();
+        setProfile(demoProfile);
         setTimeout(() => setShowDetails(true), 1000);
       }
     }
