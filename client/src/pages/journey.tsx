@@ -32,10 +32,16 @@ import {
 } from "lucide-react";
 
 interface TestProgress {
+  // Relationship tests
   shadowTest: boolean;
   toxicityCompass: boolean;
   relationshipPatterns: boolean;
   integrationGuide: boolean;
+  // Single tests
+  intelligenceMap: boolean;
+  attachmentStyle: boolean;
+  identityCompass: boolean;
+  innerDriver: boolean;
 }
 
 interface TestResult {
@@ -44,7 +50,7 @@ interface TestResult {
   completedAt: Date;
 }
 
-const gameTests = [
+const relationshipTests = [
   {
     id: "shadow-test",
     title: "Shadow Archetype Test",
@@ -103,13 +109,77 @@ const gameTests = [
   }
 ];
 
+const singleTests = [
+  {
+    id: "intelligence-map",
+    title: "Intelligence Map",
+    subtitle: "Level 1: Mind Analysis",
+    description: "Discover your dominant intelligence type and how you naturally process the world around you.",
+    icon: <Brain className="h-8 w-8" />,
+    color: "text-blue-400",
+    bgGradient: "from-blue-500/20 to-cyan-500/20",
+    borderColor: "border-blue-400",
+    route: "/intelligence-map",
+    duration: "8-12 min",
+    points: 300,
+    unlockMessage: "Understand how your mind works"
+  },
+  {
+    id: "attachment-style",
+    title: "Attachment Style Audit",
+    subtitle: "Level 2: Connection Patterns",
+    description: "Explore your attachment style and how you build relationships, even when single.",
+    icon: <Heart className="h-8 w-8" />,
+    color: "text-pink-400",
+    bgGradient: "from-pink-500/20 to-rose-500/20",
+    borderColor: "border-pink-400",
+    route: "/attachment-style",
+    duration: "6-10 min",
+    points: 250,
+    unlockMessage: "Discover your connection patterns"
+  },
+  {
+    id: "identity-compass",
+    title: "Identity Compass",
+    subtitle: "Level 3: Core Identity",
+    description: "Reveal the dominant forces that shape your decisions, values, and life direction.",
+    icon: <Compass className="h-8 w-8" />,
+    color: "text-emerald-400",
+    bgGradient: "from-emerald-500/20 to-teal-500/20",
+    borderColor: "border-emerald-400",
+    route: "/identity-compass",
+    duration: "7-11 min",
+    points: 275,
+    unlockMessage: "Find your true identity"
+  },
+  {
+    id: "inner-driver",
+    title: "Inner Driver Matrix",
+    subtitle: "Level 4: Motivation Engine",
+    description: "Uncover what truly drives and motivates you to take action in your life.",
+    icon: <Zap className="h-8 w-8" />,
+    color: "text-yellow-400",
+    bgGradient: "from-yellow-500/20 to-amber-500/20",
+    borderColor: "border-yellow-400",
+    route: "/inner-driver",
+    duration: "8-12 min",
+    points: 325,
+    unlockMessage: "Discover your inner fuel"
+  }
+];
+
 export default function Journey() {
   const [, setLocation] = useLocation();
+  const [journeyType, setJourneyType] = useState<'relationship' | 'single'>('relationship');
   const [progress, setProgress] = useState<TestProgress>({
     shadowTest: false,
     toxicityCompass: false,
     relationshipPatterns: false,
-    integrationGuide: false
+    integrationGuide: false,
+    intelligenceMap: false,
+    attachmentStyle: false,
+    identityCompass: false,
+    innerDriver: false
   });
   const [results, setResults] = useState<TestResult[]>([]);
   const [totalPoints, setTotalPoints] = useState(0);
@@ -129,25 +199,39 @@ export default function Journey() {
   }, []);
 
   useEffect(() => {
-    // Calculate total points based on actual test values
+    // Calculate total points based on actual test values and journey type
     let points = 0;
-    if (progress.shadowTest) points += 250;
-    if (progress.toxicityCompass) points += 200;
-    if (progress.relationshipPatterns) points += 300;
-    if (progress.integrationGuide) points += 350;
+    if (journeyType === 'relationship') {
+      if (progress.shadowTest) points += 250;
+      if (progress.toxicityCompass) points += 200;
+      if (progress.relationshipPatterns) points += 300;
+      if (progress.integrationGuide) points += 350;
+      
+      // Only show summary when ALL 4 relationship tests are completed
+      const allCompleted = progress.shadowTest && progress.toxicityCompass && 
+                          progress.relationshipPatterns && progress.integrationGuide;
+      setShowSummary(allCompleted);
+    } else {
+      if (progress.intelligenceMap) points += 300;
+      if (progress.attachmentStyle) points += 250;
+      if (progress.identityCompass) points += 275;
+      if (progress.innerDriver) points += 325;
+      
+      // Only show summary when ALL 4 single tests are completed
+      const allCompleted = progress.intelligenceMap && progress.attachmentStyle && 
+                          progress.identityCompass && progress.innerDriver;
+      setShowSummary(allCompleted);
+    }
     setTotalPoints(points);
-    
-    // Only show summary when ALL 4 tests are completed
-    const allCompleted = progress.shadowTest && progress.toxicityCompass && 
-                        progress.relationshipPatterns && progress.integrationGuide;
-    setShowSummary(allCompleted);
-  }, [progress]);
+  }, [progress, journeyType]);
 
   const getTestStatus = (testIndex: number) => {
     if (testIndex === 0) return 'available';
     
-    // Check if all previous tests are completed
-    const progressKeys: (keyof TestProgress)[] = ['shadowTest', 'toxicityCompass', 'relationshipPatterns', 'integrationGuide'];
+    // Check if all previous tests are completed based on journey type
+    const progressKeys: (keyof TestProgress)[] = journeyType === 'relationship' 
+      ? ['shadowTest', 'toxicityCompass', 'relationshipPatterns', 'integrationGuide']
+      : ['intelligenceMap', 'attachmentStyle', 'identityCompass', 'innerDriver'];
     
     for (let i = 0; i < testIndex; i++) {
       if (!progress[progressKeys[i]]) {
@@ -163,15 +247,24 @@ export default function Journey() {
       'shadow-test': 'shadowTest',
       'toxicity-compass': 'toxicityCompass',
       'relationship-patterns': 'relationshipPatterns',
-      'integration-guide': 'integrationGuide'
+      'integration-guide': 'integrationGuide',
+      'intelligence-map': 'intelligenceMap',
+      'attachment-style': 'attachmentStyle',
+      'identity-compass': 'identityCompass',
+      'inner-driver': 'innerDriver'
     };
     const progressKey = progressMap[testId];
     return progress[progressKey];
   };
 
   const getCompletionPercentage = () => {
-    const completedCount = Object.values(progress).filter(Boolean).length;
-    return (completedCount / 4) * 100;
+    if (journeyType === 'relationship') {
+      const completedCount = [progress.shadowTest, progress.toxicityCompass, progress.relationshipPatterns, progress.integrationGuide].filter(Boolean).length;
+      return (completedCount / 4) * 100;
+    } else {
+      const completedCount = [progress.intelligenceMap, progress.attachmentStyle, progress.identityCompass, progress.innerDriver].filter(Boolean).length;
+      return (completedCount / 4) * 100;
+    }
   };
 
   const startTest = (route: string) => {
@@ -220,7 +313,11 @@ export default function Journey() {
         shadowTest: false,
         toxicityCompass: false,
         relationshipPatterns: false,
-        integrationGuide: false
+        integrationGuide: false,
+        intelligenceMap: false,
+        attachmentStyle: false,
+        identityCompass: false,
+        innerDriver: false
       });
       setResults([]);
       setTotalPoints(0);
@@ -265,13 +362,64 @@ export default function Journey() {
 
       <div className="relative z-10 container mx-auto px-6 py-12 max-w-4xl">
         
+        {/* Journey Type Toggle */}
+        <motion.div 
+          className="flex items-center justify-center space-x-4 mb-8"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="flex items-center space-x-4 bg-[hsl(var(--dark-gray))] rounded-full p-2 border border-[hsl(var(--border))]">
+            <div className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+              journeyType === 'relationship' ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400'
+            }`}>
+              <Heart className="h-4 w-4" />
+              <Label htmlFor="journey-toggle" className="cursor-pointer">Relationship</Label>
+            </div>
+            <Switch
+              id="journey-toggle"
+              checked={journeyType === 'single'}
+              onCheckedChange={(checked) => setJourneyType(checked ? 'single' : 'relationship')}
+              className="data-[state=checked]:bg-blue-500"
+            />
+            <div className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+              journeyType === 'single' ? 'bg-blue-500/20 text-blue-300' : 'text-gray-400'
+            }`}>
+              <User className="h-4 w-4" />
+              <Label htmlFor="journey-toggle" className="cursor-pointer">Single</Label>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Journey Description */}
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <h2 className="font-serif text-xl font-semibold text-[hsl(var(--silver-glow))] mb-3">
+            {journeyType === 'relationship' ? 'Relationship Journey' : 'Single Journey'}
+          </h2>
+          <p className="text-[hsl(var(--metallic-silver))] max-w-2xl mx-auto">
+            {journeyType === 'relationship' 
+              ? 'Explore your shadow archetypes, relationship patterns, and integration path for deeper connections'
+              : 'Discover your intelligence type, attachment style, identity compass, and inner drivers for personal mastery'
+            }
+          </p>
+        </motion.div>
+        
         {/* Journey Ladder */}
         <div className="relative">
           {/* Connecting Line */}
-          <div className="absolute left-12 top-8 bottom-8 w-1 bg-gradient-to-b from-purple-400 via-red-400 via-emerald-400 to-amber-400 opacity-30"></div>
+          <div className={`absolute left-12 top-8 bottom-8 w-1 bg-gradient-to-b opacity-30 ${
+            journeyType === 'relationship' 
+              ? 'from-purple-400 via-red-400 via-emerald-400 to-amber-400'
+              : 'from-blue-400 via-pink-400 via-emerald-400 to-yellow-400'
+          }`}></div>
           
           <div className="space-y-8">
-            {gameTests.map((test, index) => {
+            {(journeyType === 'relationship' ? relationshipTests : singleTests).map((test, index) => {
               const status = getTestStatus(index);
               const completed = isTestCompleted(test.id);
               
