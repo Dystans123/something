@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Landing from "@/pages/landing";
 import Journey from "@/pages/journey";
 import ComprehensiveSummary from "@/pages/comprehensive-summary";
+import RelationshipComprehensiveSummary from "@/pages/relationship-comprehensive-summary";
 import Test from "@/pages/test";
 import Results from "@/pages/results";
 import Archetypes from "@/pages/archetypes";
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/" component={Landing} />
       <Route path="/journey" component={Journey} />
       <Route path="/comprehensive-summary" component={ComprehensiveSummary} />
+      <Route path="/relationship-comprehensive-summary" component={RelationshipComprehensiveSummary} />
       <Route path="/test" component={Test} />
       <Route path="/results" component={Results} />
       <Route path="/archetypes" component={Archetypes} />

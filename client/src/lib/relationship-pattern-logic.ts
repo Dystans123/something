@@ -112,7 +112,7 @@ function generateRecommendations(dominantPattern: string, patternScores: Record<
 }
 
 export function getRelationshipPatternProgress(currentIndex: number): number {
-  return ((currentIndex + 1) / relationshipPatternQuestions.length) * 100;
+  return ((currentIndex + 1) / 20) * 100;
 }
 
 export function canRelationshipPatternProceed(answers: RelationshipPatternAnswer[], currentIndex: number): boolean {

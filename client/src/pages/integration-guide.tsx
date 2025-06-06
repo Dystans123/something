@@ -2,15 +2,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, ArrowRight, Home } from "lucide-react";
+import { ArrowLeft, Compass } from "lucide-react";
 import { integrationGuideQuestions } from "@/data/integration-guide-questions";
-import { 
-  IntegrationGuideAnswer, 
-  calculateIntegrationGuideResult, 
-  getIntegrationGuideProgress, 
-  canIntegrationGuideProceed 
-} from "@/lib/integration-guide-logic";
+import { IntegrationGuideAnswer, calculateIntegrationGuideResult, getIntegrationGuideProgress, canIntegrationGuideProceed } from "@/lib/integration-guide-logic";
 
 export default function IntegrationGuide() {
   const [, setLocation] = useLocation();
@@ -29,20 +23,18 @@ export default function IntegrationGuide() {
     setSelectedOption(existingAnswer ? existingAnswer.optionIndex : null);
   }, [currentQuestionIndex, answers]);
 
-  const handleOptionSelect = (optionIndex: number) => {
+  const selectOption = (optionIndex: number) => {
+    const option = currentQuestion.options[optionIndex];
     setSelectedOption(optionIndex);
     
-    const option = currentQuestion.options[optionIndex];
-    const answer: IntegrationGuideAnswer = {
+    // Update answers array
+    const newAnswers = answers.filter(a => a.questionIndex !== currentQuestionIndex);
+    newAnswers.push({
       questionIndex: currentQuestionIndex,
       optionIndex,
       integration: option.integration,
       value: option.value
-    };
-
-    // Update answers array
-    const newAnswers = answers.filter(a => a.questionIndex !== currentQuestionIndex);
-    newAnswers.push(answer);
+    });
     setAnswers(newAnswers);
 
     // Auto-advance after a short delay
@@ -53,170 +45,179 @@ export default function IntegrationGuide() {
       } else {
         // Test complete, go to results
         const result = calculateIntegrationGuideResult([...newAnswers]);
-        const params = new URLSearchParams({
-          level: result.integrationLevel,
-          score: result.averageScore.toString(),
-          categoryScores: JSON.stringify(result.categoryScores),
-          strengths: JSON.stringify(result.strengths),
-          growthAreas: JSON.stringify(result.growthAreas),
-          guidance: JSON.stringify(result.personalizedGuidance)
-        });
-        setLocation(`/integration-guide-results?${params.toString()}`);
+        setLocation(`/integration-guide-results?level=${result.integrationLevel}&score=${result.averageScore.toFixed(1)}`);
       }
     }, 600);
   };
 
   const nextQuestion = () => {
-    if (!canGoNext) return;
-    
-    if (currentQuestionIndex === integrationGuideQuestions.length - 1) {
-      // Test complete, calculate results and navigate
-      const updatedAnswers = answers.filter(a => a.questionIndex !== currentQuestionIndex);
-      const option = currentQuestion.options[selectedOption!];
-      const finalAnswer: IntegrationGuideAnswer = {
-        questionIndex: currentQuestionIndex,
-        optionIndex: selectedOption!,
-        integration: option.integration,
-        value: option.value
-      };
-      const allAnswers = [...updatedAnswers, finalAnswer];
-      
-      const result = calculateIntegrationGuideResult(allAnswers);
-      const params = new URLSearchParams({
-        level: result.integrationLevel,
-        score: result.averageScore.toString(),
-        categoryScores: JSON.stringify(result.categoryScores),
-        strengths: JSON.stringify(result.strengths),
-        growthAreas: JSON.stringify(result.growthAreas),
-        guidance: JSON.stringify(result.personalizedGuidance)
-      });
-      setLocation(`/integration-guide-results?${params.toString()}`);
+    if (currentQuestionIndex < integrationGuideQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      setCurrentQuestionIndex(prev => prev + 1);
-      setSelectedOption(null);
+      // Test complete, go to results
+      const result = calculateIntegrationGuideResult(answers);
+      setLocation(`/integration-guide-results?level=${result.integrationLevel}&score=${result.averageScore.toFixed(1)}`);
     }
   };
 
   const prevQuestion = () => {
     if (canGoPrev) {
-      setCurrentQuestionIndex(prev => prev - 1);
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
 
-  const goHome = () => {
-    setLocation("/");
-  };
-
   return (
-    <div className="min-h-screen relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
+    <div className="min-h-screen bg-[hsl(var(--deep-black))] relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-amber-900/20 to-[hsl(var(--deep-black))]" />
       
-      <div className="relative z-10 container mx-auto px-4 py-6">
-        {/* Header */}
-        <motion.div 
-          className="flex justify-between items-center mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Button
-            variant="outline"
-            onClick={goHome}
-            className="px-3 py-2 text-sm bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-          >
-            <Home className="mr-1 h-4 w-4" />
-            <span className="hidden sm:inline">Back to Home</span>
-            <span className="sm:hidden">Home</span>
-          </Button>
-          <h1 className="font-serif text-2xl text-[hsl(var(--silver-glow))]">Personal Integration Guide</h1>
-          <div className="w-32" />
-        </motion.div>
+      <motion.header 
+        className="relative z-20 p-6 border-b border-[hsl(var(--border))]"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="container mx-auto max-w-4xl">
+          <div className="flex items-center justify-between">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setLocation("/journey")}
+              className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))]"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Journey
+            </Button>
+            
+            <div className="text-center">
+              <div className="flex items-center space-x-3 mb-2">
+                <Compass className="h-6 w-6 text-amber-400" />
+                <h1 className="font-serif text-xl md:text-2xl font-bold text-[hsl(var(--silver-glow))]">
+                  Integration Guide
+                </h1>
+              </div>
+              <div className="text-sm text-[hsl(var(--metallic-silver))]">
+                Question {currentQuestionIndex + 1} of {integrationGuideQuestions.length}
+              </div>
+            </div>
+            
+            <div className="w-32" /> {/* Spacer for centering */}
+          </div>
+        </div>
+      </motion.header>
+      
+      <div className="relative z-10 container mx-auto px-6 py-8 max-w-4xl">
 
         {/* Progress Bar */}
         <motion.div 
           className="mb-8"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-sm text-[hsl(var(--metallic-silver))]">Progress</span>
-            <span className="text-sm text-[hsl(var(--metallic-silver))]">
-              {currentQuestionIndex + 1} of {integrationGuideQuestions.length}
-            </span>
+          <div className="bg-[hsl(var(--dark-gray))]/50 rounded-full h-2 mb-2 backdrop-blur-sm border border-[hsl(var(--border))]">
+            <motion.div 
+              className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.5 }}
+            />
           </div>
-          <Progress 
-            value={progress} 
-            className="w-full h-2 bg-[hsl(var(--dark-gray))]"
-          />
+          <div className="text-center text-sm text-[hsl(var(--metallic-silver))]">
+            {progress.toFixed(1)}% Complete
+          </div>
         </motion.div>
 
         {/* Question Card */}
-        <motion.div 
-          className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="bg-gradient-to-br from-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] rounded-3xl p-8 md:p-12 border border-[hsl(var(--metallic-silver)/0.2)] mb-8 relative">
-            <div className="text-center mb-8">
-              <div className="text-sm text-[hsl(var(--metallic-silver))] mb-2">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentQuestionIndex}
+            className="bg-[hsl(var(--dark-gray))]/30 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-[hsl(var(--border))] shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Category Badge */}
+            <motion.div 
+              className="mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
+              <span className="inline-block px-4 py-2 bg-gradient-to-r from-amber-500/20 to-yellow-400/20 text-amber-300 rounded-full text-sm font-medium border border-amber-400/30">
                 {currentQuestion.category}
-              </div>
-              <h2 className="font-serif text-2xl md:text-3xl font-bold text-[hsl(var(--silver-glow))] leading-relaxed">
-                {currentQuestion.text}
-              </h2>
-            </div>
-
-            <div className="space-y-4 mb-12">
-              <AnimatePresence mode="wait">
-                {currentQuestion.options.map((option, index) => (
-                  <motion.button
-                    key={`${currentQuestionIndex}-${index}`}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    onClick={() => handleOptionSelect(index)}
-                    className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-300 ${
-                      selectedOption === index
-                        ? 'border-[hsl(var(--metallic-silver))] bg-[hsl(var(--metallic-silver)/0.1)] text-[hsl(var(--silver-glow))]'
-                        : 'border-[hsl(var(--metallic-silver)/0.3)] bg-transparent text-[hsl(var(--metallic-silver))] hover:border-[hsl(var(--metallic-silver)/0.6)] hover:bg-[hsl(var(--metallic-silver)/0.05)]'
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <div className={`w-4 h-4 rounded-full border-2 mr-3 ${
-                        selectedOption === index
-                          ? 'border-[hsl(var(--metallic-silver))] bg-[hsl(var(--metallic-silver))]'
-                          : 'border-[hsl(var(--metallic-silver)/0.5)]'
-                      }`} />
-                      <span className="text-base">{option.text}</span>
-                    </div>
-                  </motion.button>
-                ))}
-              </AnimatePresence>
-            </div>
-
-            {/* Back Arrow in Bottom Left */}
-            {canGoPrev && (
-              <motion.div 
-                className="absolute bottom-8 left-8 md:bottom-12 md:left-12"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-              >
-                <Button
-                  variant="outline"
-                  onClick={prevQuestion}
-                  size="sm"
-                  className="p-2 bg-transparent border border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] rounded-full transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+              </span>
+            </motion.div>
+            
+            {/* Question Text */}
+            <motion.h2 
+              className="font-serif text-2xl md:text-3xl font-bold text-[hsl(var(--silver-glow))] mb-10 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              {currentQuestion.text}
+            </motion.h2>
+            
+            {/* Answer Options */}
+            <div className="space-y-4">
+              {currentQuestion.options.map((option, index) => (
+                <motion.button
+                  key={index}
+                  className={`w-full text-left p-4 md:p-6 rounded-2xl border-2 transition-all duration-300 ${
+                    selectedOption === index
+                      ? 'bg-gradient-to-r from-amber-500/20 to-yellow-400/20 border-amber-400 text-[hsl(var(--silver-glow))] shadow-lg transform scale-[1.02]'
+                      : 'bg-[hsl(var(--dark-gray))]/20 border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))] hover:border-amber-400/50 hover:bg-amber-500/10'
+                  }`}
+                  onClick={() => selectOption(index)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
+                  whileHover={{ scale: selectedOption === index ? 1.02 : 1.01 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <ArrowLeft className="h-4 w-4" />
+                  <div className="flex items-center space-x-4">
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                      selectedOption === index 
+                        ? 'border-amber-400 bg-amber-400' 
+                        : 'border-[hsl(var(--metallic-silver))]'
+                    }`}>
+                      {selectedOption === index && (
+                        <motion.div 
+                          className="w-2 h-2 bg-white rounded-full"
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ duration: 0.2 }}
+                        />
+                      )}
+                    </div>
+                    <span className="font-medium">{option.text}</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Navigation */}
+            <div className="flex justify-between items-center mt-10">
+              {canGoPrev ? (
+                <Button
+                  variant="ghost"
+                  onClick={prevQuestion}
+                  className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))]"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Previous
                 </Button>
-              </motion.div>
-            )}
-          </div>
-        </motion.div>
+              ) : (
+                <div></div>
+              )}
+              
+              <div className="text-sm text-[hsl(var(--metallic-silver))]">
+                {currentQuestionIndex + 1} of {integrationGuideQuestions.length}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

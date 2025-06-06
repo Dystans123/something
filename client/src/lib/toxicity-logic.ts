@@ -43,7 +43,7 @@ export function calculateToxicityResult(answers: ToxicityAnswer[]): ToxicityResu
 }
 
 export function getToxicityProgress(currentIndex: number): number {
-  return ((currentIndex + 1) / toxicityQuestions.length) * 100;
+  return ((currentIndex + 1) / 20) * 100;
 }
 
 export function canToxicityProceed(answers: ToxicityAnswer[], currentIndex: number): boolean {

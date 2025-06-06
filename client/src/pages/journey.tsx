@@ -601,11 +601,11 @@ export default function Journey() {
                     {showSummary ? (
                       <>
                         <Button
-                          onClick={() => setLocation('/comprehensive-summary')}
+                          onClick={() => setLocation(journeyType === 'relationship' ? '/relationship-comprehensive-summary' : '/comprehensive-summary')}
                           size="lg"
                           className="w-full sm:w-auto px-6 py-4 text-base sm:text-lg font-bold bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 hover:from-purple-600 hover:via-blue-600 hover:to-emerald-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
                         >
-                          <span className="truncate">🎉 View Complete Summary 🎉</span>
+                          <span className="truncate">View Complete Profile</span>
                           <Target className="ml-2 h-5 w-5 flex-shrink-0" />
                         </Button>
                         

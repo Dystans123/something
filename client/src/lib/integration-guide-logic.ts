@@ -195,7 +195,7 @@ function generatePersonalizedGuidance(integrationLevel: string, categoryScores: 
 }
 
 export function getIntegrationGuideProgress(currentIndex: number): number {
-  return ((currentIndex + 1) / integrationGuideQuestions.length) * 100;
+  return ((currentIndex + 1) / 20) * 100;
 }
 
 export function canIntegrationGuideProceed(answers: IntegrationGuideAnswer[], currentIndex: number): boolean {
