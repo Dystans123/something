@@ -367,40 +367,40 @@ export default function ComprehensiveSummary() {
 
   const generateJournalingPrompts = (shadowResult: any, relationshipResult: any): string[] => {
     return [
-      "Jakie wzorce z dzieciństwa powtarzam w obecnych relacjach?",
-      "Kiedy czuję się najbardziej autentyczny/-a? Co to o mnie mówi?",
-      "Jakie emocje najczęściej staram się unikać i dlaczego?",
-      "W jaki sposób mój archetyp przejawia się w codziennym życiu?",
-      "Które z moich zachowań wynikają z lęku, a które z miłości?",
-      "Jakie przesłania otrzymywałem/-am w dzieciństwie o sobie i relacjach?",
-      "Co chciałbym/-aby powiedzieć swojemu wewnętrznemu dziecku?",
-      "Jakie granice muszę wzmocnić w swoich relacjach?"
+      "What patterns from childhood do I repeat in current relationships?",
+      "When do I feel most authentic? What does this tell me about myself?",
+      "Which emotions do I most often try to avoid and why?",
+      "How does my archetype manifest in daily life?",
+      "Which of my behaviors stem from fear, and which from love?",
+      "What messages did I receive in childhood about myself and relationships?",
+      "What would I like to say to my inner child?",
+      "What boundaries do I need to strengthen in my relationships?"
     ];
   };
 
   const generateMeditationPractices = (shadowResult: any, integrationResult: any): string[] => {
     return [
-      "Medytacja uważności na oddech (10-20 minut dziennie)",
-      "Praktyka loving-kindness dla rozwoju autoakceptacji",
-      "Medytacja na obserwacji myśli bez osądzania",
-      "Wizualizacja uzdrawiająca dla integracji cienia",
-      "Skanowanie ciała dla zwiększenia świadomości somatycznej",
-      "Medytacja chodzenia dla uziemienia i obecności",
-      "Praktyka wdzięczności z elementami medytacyjnymi",
-      "Krótkie medytacje w ciągu dnia dla zarządzania stresem"
+      "Mindfulness meditation on breath (10-20 minutes daily)",
+      "Loving-kindness practice for developing self-acceptance",
+      "Meditation on observing thoughts without judgment",
+      "Healing visualization for shadow integration",
+      "Body scanning for increased somatic awareness",
+      "Walking meditation for grounding and presence",
+      "Gratitude practice with meditative elements",
+      "Brief meditations throughout the day for stress management"
     ];
   };
 
   const generateRelationshipExercises = (toxicityResult: any, relationshipResult: any): string[] => {
     return [
-      "Ćwiczenie komunikacji bez osądzania - używanie komunikatów 'ja'",
-      "Praktyka aktywnego słuchania z pełną uwagą",
-      "Ustalanie i komunikowanie zdrowych granic",
-      "Regularne sprawdzanie emocjonalne z partnerem/rodziną",
-      "Ćwiczenia budowania zaufania i intymności",
-      "Praktyka przepraszania i przebaczania",
-      "Wspólne ustalanie wartości i celów w relacji",
-      "Ćwiczenia rozwiązywania konfliktów w konstruktywny sposób"
+      "Non-judgmental communication exercise - using 'I' statements",
+      "Active listening practice with full attention",
+      "Establishing and communicating healthy boundaries",
+      "Regular emotional check-ins with partner/family",
+      "Trust and intimacy building exercises",
+      "Practice of apologizing and forgiving",
+      "Collaborative setting of values and goals in relationship",
+      "Constructive conflict resolution exercises"
     ];
   };
 
@@ -632,17 +632,17 @@ export default function ComprehensiveSummary() {
         )
       },
       strengths: [
-        "Głęboka mądrość i dążenie do zrozumienia",
-        "Zdolność do nauczania i dzielenia się wiedzą",
-        "Silna intuicja i wgląd w ludzką naturę",
-        "Naturalna skłonność do refleksji i analizy",
-        "Umiejętność widzenia szerszego obrazu"
+        "Deep wisdom and drive for understanding",
+        "Ability to teach and share knowledge",
+        "Strong intuition and insight into human nature",
+        "Natural inclination toward reflection and analysis",
+        "Ability to see the bigger picture"
       ],
       growthAreas: [
-        "Równoważenie intelektu z emocjami",
-        "Unikanie nadmiernej analizy kosztem działania",
-        "Rozwijanie cierpliwości wobec mniej doświadczonych",
-        "Praktyczne zastosowanie teoretycznej wiedzy"
+        "Balancing intellect with emotions",
+        "Avoiding over-analysis at the expense of action",
+        "Developing patience with less experienced individuals",
+        "Practical application of theoretical knowledge"
       ],
       actionPlan: generateActionPlan(),
       nextSteps: generateNextSteps(),
@@ -889,7 +889,7 @@ export default function ComprehensiveSummary() {
               <CardHeader>
                 <h3 className="text-xl font-bold flex items-center gap-2">
                   <Eye className="h-5 w-5 text-indigo-400" />
-                  Głębokie Analizy Psychologiczne
+                  Deep Psychological Analysis
                 </h3>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -906,7 +906,7 @@ export default function ComprehensiveSummary() {
               <CardHeader>
                 <h3 className="text-xl font-bold flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-blue-400" />
-                  Wzorce Behawioralne
+                  Behavioral Patterns
                 </h3>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -923,7 +923,7 @@ export default function ComprehensiveSummary() {
               <CardHeader>
                 <h3 className="text-xl font-bold flex items-center gap-2">
                   <Star className="h-5 w-5 text-yellow-400" />
-                  Główne Tematy Życiowe
+                  Core Life Themes
                 </h3>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -940,7 +940,7 @@ export default function ComprehensiveSummary() {
               <CardHeader>
                 <h3 className="text-xl font-bold flex items-center gap-2">
                   <Compass className="h-5 w-5 text-purple-400" />
-                  Nieświadome Motywacje
+                  Unconscious Motivations
                 </h3>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -958,7 +958,7 @@ export default function ComprehensiveSummary() {
                 <CardHeader>
                   <h3 className="text-xl font-bold flex items-center gap-2">
                     <Heart className="h-5 w-5 text-red-400" />
-                    Rdzeń Osobowości
+                    Core Personality
                   </h3>
                 </CardHeader>
                 <CardContent className="space-y-3">
