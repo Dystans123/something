@@ -972,7 +972,7 @@ export default function ComprehensiveSummary() {
                 <CardHeader>
                   <h3 className="text-xl font-bold flex items-center gap-2">
                     <Users className="h-5 w-5 text-emerald-400" />
-                    Styl Relacyjny
+                    Relationship Style
                   </h3>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -986,7 +986,7 @@ export default function ComprehensiveSummary() {
                 <CardHeader>
                   <h3 className="text-xl font-bold flex items-center gap-2">
                     <Target className="h-5 w-5 text-orange-400" />
-                    Wyzwania Życiowe
+                    Life Challenges
                   </h3>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -1000,7 +1000,7 @@ export default function ComprehensiveSummary() {
                 <CardHeader>
                   <h3 className="text-xl font-bold flex items-center gap-2">
                     <Lightbulb className="h-5 w-5 text-yellow-400" />
-                    Podróż Duchowa
+                    Spiritual Journey
                   </h3>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -1014,7 +1014,7 @@ export default function ComprehensiveSummary() {
                 <CardHeader>
                   <h3 className="text-xl font-bold flex items-center gap-2">
                     <Trophy className="h-5 w-5 text-blue-400" />
-                    Wskazówki Kariery
+                    Career Guidance
                   </h3>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -1028,7 +1028,7 @@ export default function ComprehensiveSummary() {
                 <CardHeader>
                   <h3 className="text-xl font-bold flex items-center gap-2">
                     <Zap className="h-5 w-5 text-green-400" />
-                    Priorytety Uzdrawiania
+                    Healing Priorities
                   </h3>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -1044,12 +1044,12 @@ export default function ComprehensiveSummary() {
               <CardHeader>
                 <h3 className="text-xl font-bold flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-indigo-400" />
-                  Przewodnik Integracji i Praktyk
+                  Integration & Practice Guide
                 </h3>
               </CardHeader>
               <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-semibold text-purple-400 mb-3">Codzienne Praktyki</h4>
+                  <h4 className="font-semibold text-purple-400 mb-3">Daily Practices</h4>
                   <ul className="space-y-2 text-sm text-gray-300">
                     {profile.integrationGuidance.dailyPractices.map((practice, index) => (
                       <li key={index} className="flex items-start gap-2">
@@ -1061,7 +1061,7 @@ export default function ComprehensiveSummary() {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-blue-400 mb-3">Rekomendacje Terapeutyczne</h4>
+                  <h4 className="font-semibold text-blue-400 mb-3">Therapeutic Recommendations</h4>
                   <ul className="space-y-2 text-sm text-gray-300">
                     {profile.integrationGuidance.therapeuticRecommendations.map((recommendation, index) => (
                       <li key={index} className="flex items-start gap-2">
@@ -1073,7 +1073,7 @@ export default function ComprehensiveSummary() {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-yellow-400 mb-3">Rekomendacje Książek</h4>
+                  <h4 className="font-semibold text-yellow-400 mb-3">Book Recommendations</h4>
                   <ul className="space-y-2 text-sm text-gray-300">
                     {profile.integrationGuidance.bookRecommendations.map((book, index) => (
                       <li key={index} className="flex items-start gap-2">
@@ -1085,7 +1085,7 @@ export default function ComprehensiveSummary() {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-emerald-400 mb-3">Pytania do Dziennika</h4>
+                  <h4 className="font-semibold text-emerald-400 mb-3">Journaling Prompts</h4>
                   <ul className="space-y-2 text-sm text-gray-300">
                     {profile.integrationGuidance.journalingPrompts.map((prompt, index) => (
                       <li key={index} className="flex items-start gap-2">
