@@ -213,7 +213,7 @@ export default function Landing() {
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Individual Tests Path */}
             <motion.div 
-              className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-[hsl(var(--border))] hover:border-blue-400/50 transition-all duration-300"
+              className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-[hsl(var(--border))] hover:border-blue-400/50 transition-all duration-300 flex flex-col"
               whileHover={{ scale: 1.02 }}
             >
               <div className="text-center mb-6">
@@ -229,7 +229,7 @@ export default function Landing() {
                 </p>
               </div>
               
-              <div className="space-y-3 mb-6">
+              <div className="space-y-3 mb-6 flex-grow">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-4 w-4 text-blue-400 flex-shrink-0" />
                   <span className="text-[hsl(var(--metallic-silver))] text-sm">
@@ -248,12 +248,24 @@ export default function Landing() {
                     Focus on specific areas of growth
                   </span>
                 </div>
+                {/* Spacer to match the height of the other card */}
+                <div className="flex items-center space-x-3 opacity-0">
+                  <CheckCircle className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <span className="text-[hsl(var(--metallic-silver))] text-sm">
+                    Hidden spacer item
+                  </span>
+                </div>
               </div>
               
-              <div className="text-center">
+              <div className="text-center mt-auto">
                 <p className="text-sm text-blue-400 font-semibold mb-3">Best for: Quick insights & targeted discovery</p>
                 <Button
-                  onClick={() => setLocation("/test")}
+                  onClick={() => {
+                    const toolsSection = document.querySelector('[data-section="tools"]');
+                    if (toolsSection) {
+                      toolsSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                   className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0"
                 >
                   Start Individual Test
@@ -264,7 +276,7 @@ export default function Landing() {
 
             {/* Complete Journey Path */}
             <motion.div 
-              className="bg-gradient-to-br from-emerald-500/10 to-amber-500/10 rounded-2xl p-8 border border-[hsl(var(--border))] hover:border-emerald-400/50 transition-all duration-300 relative"
+              className="bg-gradient-to-br from-emerald-500/10 to-amber-500/10 rounded-2xl p-8 border border-[hsl(var(--border))] hover:border-emerald-400/50 transition-all duration-300 relative flex flex-col"
               whileHover={{ scale: 1.02 }}
             >
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -286,7 +298,7 @@ export default function Landing() {
                 </p>
               </div>
               
-              <div className="space-y-3 mb-6">
+              <div className="space-y-3 mb-6 flex-grow">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
                   <span className="text-[hsl(var(--metallic-silver))] text-sm">
@@ -313,7 +325,7 @@ export default function Landing() {
                 </div>
               </div>
               
-              <div className="text-center">
+              <div className="text-center mt-auto">
                 <p className="text-sm text-emerald-400 font-semibold mb-3">Best for: Deep transformation & holistic growth</p>
                 <Button
                   onClick={() => setLocation("/journey")}
@@ -381,6 +393,7 @@ export default function Landing() {
         {/* Tools Grid */}
         <motion.section 
           className="mb-20"
+          data-section="tools"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
