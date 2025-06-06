@@ -1097,7 +1097,7 @@ export default function ComprehensiveSummary() {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-indigo-400 mb-3">Praktyki Medytacyjne</h4>
+                  <h4 className="font-semibold text-indigo-400 mb-3">Meditation Practices</h4>
                   <ul className="space-y-2 text-sm text-gray-300">
                     {profile.integrationGuidance.meditationPractices.map((practice, index) => (
                       <li key={index} className="flex items-start gap-2">
@@ -1109,7 +1109,7 @@ export default function ComprehensiveSummary() {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-pink-400 mb-3">Ćwiczenia Relacyjne</h4>
+                  <h4 className="font-semibold text-pink-400 mb-3">Relationship Exercises</h4>
                   <ul className="space-y-2 text-sm text-gray-300">
                     {profile.integrationGuidance.relationshipExercises.map((exercise, index) => (
                       <li key={index} className="flex items-start gap-2">
