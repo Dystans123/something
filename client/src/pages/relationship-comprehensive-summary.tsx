@@ -67,81 +67,116 @@ export default function RelationshipComprehensiveSummary() {
   const generateCoreInsights = (shadow: any, patterns: any, integration: any) => {
     const insights = [];
     
-    // Deep attachment pattern insights
+    // Deep attachment pattern insights with expanded psychological understanding
     if (patterns?.dominantPattern === 'secure') {
-      insights.push("Your secure attachment foundation creates psychological safety in relationships, allowing both partners to grow authentically while maintaining deep connection.");
-      insights.push("You naturally balance emotional availability with healthy boundaries, creating an environment where love can flourish without suffocation.");
-    } else if (patterns?.dominantPattern === 'anxious') {
-      insights.push("Your heightened emotional sensitivity reveals a profound capacity for deep love and connection, though your nervous system may interpret normal relationship fluctuations as threats to the bond.");
-      insights.push("Beneath your need for reassurance lies an extraordinary ability to attune to your partner's emotional states - a gift that, when channeled consciously, creates remarkable intimacy.");
-    } else if (patterns?.dominantPattern === 'avoidant') {
-      insights.push("Your protective mechanisms around emotional vulnerability likely developed as intelligent adaptations to early experiences, but may now limit your access to the deep connection you actually crave.");
-      insights.push("Your strength in maintaining independence and emotional regulation can be balanced with gradual expansion of your comfort zone for emotional expression and interdependence.");
-    } else if (patterns?.dominantPattern === 'dismissive') {
-      insights.push("Your dismissive patterns reflect learned strategies for emotional self-protection, yet beneath this armor lies a deep human need for connection that deserves honoring and gentle exploration.");
-    }
-
-    // Shadow archetype integration insights
-    if (shadow?.archetype === 'ruler') {
-      insights.push("Your Ruler shadow brings powerful leadership qualities to relationships, but may create dynamics where control overshadows collaboration and mutual growth.");
-    } else if (shadow?.archetype === 'lover') {
-      insights.push("Your Lover shadow reveals deep passion and romantic idealization, which can inspire beautiful connection while potentially creating unrealistic expectations of perpetual intensity.");
-    } else if (shadow?.archetype === 'caregiver') {
-      insights.push("Your Caregiver shadow demonstrates profound nurturing capacity, though it may lead to over-functioning in relationships where you give more than you receive.");
-    } else if (shadow?.archetype === 'rebel') {
-      insights.push("Your Rebel shadow brings fierce independence and authenticity, which can challenge partners to grow while sometimes creating unnecessary conflict or resistance to intimacy.");
-    }
-
-    // Integration level insights with specific guidance
-    if (integration?.integrationLevel === 'mastery') {
-      insights.push("Your advanced relationship consciousness allows you to hold space for complex emotions and dynamics, serving as a catalyst for healing and growth in your partnerships.");
-    } else if (integration?.integrationLevel === 'integrated') {
-      insights.push("Your developed self-awareness enables you to recognize and work with relationship patterns consciously, creating opportunities for continuous growth and deeper intimacy.");
-    } else if (integration?.integrationLevel === 'developing') {
-      insights.push("You're building crucial relationship skills with clear areas for growth, indicating readiness for deeper levels of conscious partnership and emotional maturity.");
-    } else {
       insights.push("Your emerging awareness of relationship dynamics represents the beginning of profound transformation - every conscious choice you make now creates ripple effects for healthier connections.");
+      insights.push("Your secure attachment foundation creates psychological safety in relationships, allowing both partners to grow authentically while maintaining deep connection. This rare gift enables you to serve as an emotional anchor during turbulent times.");
+      insights.push("You naturally balance emotional availability with healthy boundaries, creating an environment where love can flourish without suffocation. Your relationships become laboratories for mutual evolution and conscious growth.");
+    } else if (patterns?.dominantPattern === 'anxious') {
+      insights.push("Your emerging awareness of relationship dynamics represents the beginning of profound transformation - every conscious choice you make now creates ripple effects for healthier connections.");
+      insights.push("Your heightened emotional sensitivity reveals a profound capacity for deep love and connection, though your nervous system may interpret normal relationship fluctuations as threats to the bond. This sensitivity, when regulated, becomes your greatest strength in creating intimate connections.");
+      insights.push("Beneath your need for reassurance lies an extraordinary ability to attune to your partner's emotional states - a gift that, when channeled consciously, creates remarkable intimacy. Your emotional radar can detect subtle shifts that others miss entirely.");
+      insights.push("Your intense capacity for love stems from an open heart that has remained vulnerable despite past wounds. This courage to keep loving, even when afraid, is a testament to your resilience and authentic desire for deep connection.");
+    } else if (patterns?.dominantPattern === 'avoidant') {
+      insights.push("Your emerging awareness of relationship dynamics represents the beginning of profound transformation - every conscious choice you make now creates ripple effects for healthier connections.");
+      insights.push("Your protective mechanisms around emotional vulnerability likely developed as intelligent adaptations to early experiences, but may now limit your access to the deep connection you actually crave. These defenses once served you well but can now be gradually softened.");
+      insights.push("Your strength in maintaining independence and emotional regulation can be balanced with gradual expansion of your comfort zone for emotional expression and interdependence. True autonomy includes the freedom to choose intimacy when it serves your highest good.");
+      insights.push("Your ability to remain calm during emotional storms provides invaluable stability in relationships. When paired with increased emotional expression, this creates a powerful foundation for lasting partnerships built on both security and authenticity.");
+    } else if (patterns?.dominantPattern === 'dismissive') {
+      insights.push("Your emerging awareness of relationship dynamics represents the beginning of profound transformation - every conscious choice you make now creates ripple effects for healthier connections.");
+      insights.push("Your dismissive patterns reflect learned strategies for emotional self-protection, yet beneath this armor lies a deep human need for connection that deserves honoring and gentle exploration. Your journey involves rediscovering the value of emotional intimacy.");
+      insights.push("Your intellectual approach to relationships, while sometimes distancing, offers valuable perspective and problem-solving abilities that can greatly benefit partnerships when balanced with emotional engagement.");
     }
 
-    return insights.slice(0, 4);
+    // Expanded shadow archetype integration insights
+    if (shadow?.archetype === 'ruler') {
+      insights.push("Your Ruler shadow brings powerful leadership qualities to relationships, creating natural magnetism and the ability to inspire growth in others. The challenge lies in balancing authority with collaboration, ensuring that your strength empowers rather than overshadows your partner.");
+    } else if (shadow?.archetype === 'lover') {
+      insights.push("Your Lover shadow reveals deep passion and romantic idealization, which can inspire beautiful connection while potentially creating unrealistic expectations of perpetual intensity. Learning to love the ordinary moments alongside the extraordinary ones deepens authentic intimacy.");
+    } else if (shadow?.archetype === 'caregiver') {
+      insights.push("Your Caregiver shadow demonstrates profound nurturing capacity and an intuitive understanding of others' needs. The growth edge involves learning to receive care as gracefully as you give it, creating balanced reciprocity in your relationships.");
+    } else if (shadow?.archetype === 'rebel') {
+      insights.push("Your Rebel shadow brings fierce independence and authenticity, challenging conventional relationship norms in favor of genuine connection. This energy can revolutionize how you and your partners approach love, intimacy, and commitment.");
+    } else if (shadow?.archetype === 'sage') {
+      insights.push("Your Sage shadow offers profound wisdom and the ability to see relationship patterns clearly. Your challenge is to share this insight without creating teacher-student dynamics that can inhibit emotional intimacy and mutual vulnerability.");
+    } else if (shadow?.archetype === 'explorer') {
+      insights.push("Your Explorer shadow craves adventure and new experiences, bringing excitement and growth to relationships. Balancing this with commitment and consistency creates partnerships that are both stable and continuously evolving.");
+    }
+
+    // Detailed integration level insights with specific relationship applications
+    if (integration?.integrationLevel === 'mastery') {
+      insights.push("Your advanced relationship consciousness allows you to hold space for complex emotions and dynamics, serving as a catalyst for healing and growth in your partnerships. You naturally transform conflicts into opportunities for deeper understanding and connection.");
+    } else if (integration?.integrationLevel === 'integrated') {
+      insights.push("Your developed self-awareness enables you to recognize and work with relationship patterns consciously, creating opportunities for continuous growth and deeper intimacy. You can catch unhealthy dynamics before they become entrenched and redirect them toward healing.");
+    } else if (integration?.integrationLevel === 'developing') {
+      insights.push("You're building crucial relationship skills with clear areas for growth, indicating readiness for deeper levels of conscious partnership and emotional maturity. Your willingness to examine your patterns shows tremendous courage and commitment to authentic love.");
+    } else {
+      insights.push("Your emerging awareness of relationship dynamics represents the beginning of profound transformation - every conscious choice you make now creates ripple effects for healthier connections. This awakening is the first step toward the kind of love you truly desire.");
+    }
+
+    return insights;
   };
 
   const generateStrengths = (patterns: any, integration: any) => {
     const strengths = [];
     
     if (patterns?.dominantPattern === 'secure') {
-      strengths.push("Exceptional ability to create psychological safety - you naturally make others feel seen, heard, and valued");
-      strengths.push("Masterful balance of emotional availability and healthy boundaries, allowing authentic connection without losing yourself");
-      strengths.push("Innate capacity for conflict resolution that transforms disagreements into opportunities for deeper understanding");
-      strengths.push("Emotional regulation skills that provide stability during relationship storms while remaining open to growth");
-      strengths.push("Natural mentoring ability - your secure presence helps others develop their own relationship skills");
+      strengths.push("Exceptional ability to create psychological safety - you naturally make others feel seen, heard, and valued, creating an environment where authentic vulnerability can flourish");
+      strengths.push("Masterful balance of emotional availability and healthy boundaries, allowing authentic connection without losing yourself or suffocating your partner");
+      strengths.push("Innate capacity for conflict resolution that transforms disagreements into opportunities for deeper understanding and stronger bonds");
+      strengths.push("Emotional regulation skills that provide stability during relationship storms while remaining open to growth and change");
+      strengths.push("Natural mentoring ability - your secure presence helps others develop their own relationship skills and emotional intelligence");
+      strengths.push("Ability to remain grounded during crisis while offering compassionate support without rescuing or enabling");
+      strengths.push("Gift for seeing the highest potential in your partners and creating space for them to grow into that vision");
+      strengths.push("Remarkable capacity to forgive and rebuild trust when relationships experience setbacks or breaches");
     } else if (patterns?.dominantPattern === 'anxious') {
-      strengths.push("Extraordinary emotional attunement - you can sense subtle shifts in relationship dynamics that others miss");
-      strengths.push("Profound capacity for deep love and intimate connection that creates transformative bonds");
-      strengths.push("High emotional intelligence that allows you to understand complex relationship dynamics");
-      strengths.push("Passionate commitment to working through relationship challenges rather than avoiding them");
-      strengths.push("Ability to create intense emotional intimacy when your nervous system feels safe");
+      strengths.push("Extraordinary emotional attunement - you can sense subtle shifts in relationship dynamics that others miss, making you incredibly responsive to your partner's needs");
+      strengths.push("Profound capacity for deep love and intimate connection that creates transformative bonds and lasting emotional memories");
+      strengths.push("High emotional intelligence that allows you to understand complex relationship dynamics and navigate them with increasing skill");
+      strengths.push("Passionate commitment to working through relationship challenges rather than avoiding them, demonstrating remarkable relationship resilience");
+      strengths.push("Ability to create intense emotional intimacy when your nervous system feels safe, leading to extraordinarily deep connections");
+      strengths.push("Natural empathy that allows you to understand and validate your partner's emotional experiences with remarkable accuracy");
+      strengths.push("Courage to remain emotionally open and vulnerable even after experiencing hurt or disappointment");
+      strengths.push("Intuitive understanding of the healing power of love and your willingness to offer that healing to others");
+      strengths.push("Ability to inspire emotional growth and deeper feeling capacity in partners who may be more emotionally distant");
     } else if (patterns?.dominantPattern === 'avoidant') {
-      strengths.push("Remarkable emotional self-regulation that provides stability and consistency in relationships");
-      strengths.push("Healthy respect for independence and personal boundaries that prevents codependency");
-      strengths.push("Ability to think clearly during emotional intensity, offering rational perspective during conflicts");
-      strengths.push("Strong sense of personal identity that doesn't get lost in relationship dynamics");
-      strengths.push("Capacity for loyalty and commitment once trust is established, though expressed differently than anxious types");
+      strengths.push("Remarkable emotional self-regulation that provides stability and consistency in relationships, creating a calming influence during turbulent times");
+      strengths.push("Healthy respect for independence and personal boundaries that prevents codependency and enables both partners to maintain their individual identities");
+      strengths.push("Ability to think clearly during emotional intensity, offering rational perspective during conflicts when emotions run high");
+      strengths.push("Strong sense of personal identity that doesn't get lost in relationship dynamics, maintaining authenticity even in intimate partnerships");
+      strengths.push("Capacity for loyalty and commitment once trust is established, though expressed through actions rather than constant emotional expression");
+      strengths.push("Ability to give partners space to process emotions without feeling rejected or taking their need for space personally");
+      strengths.push("Natural problem-solving abilities that can help resolve practical relationship issues and conflicts efficiently");
+      strengths.push("Consistency in showing up for responsibilities and commitments, providing a reliable foundation for partnership");
+      strengths.push("Ability to remain calm during crisis situations, offering steady presence when your partner is experiencing emotional overwhelm");
     } else if (patterns?.dominantPattern === 'dismissive') {
-      strengths.push("Strong personal boundaries and self-advocacy skills that prevent relationship exploitation");
-      strengths.push("Intellectual approach to relationships that can offer valuable perspective on emotional situations");
-      strengths.push("Consistency and reliability in practical aspects of partnership");
-      strengths.push("Ability to maintain objectivity during relationship crises");
+      strengths.push("Strong personal boundaries and self-advocacy skills that prevent relationship exploitation and maintain healthy limits");
+      strengths.push("Intellectual approach to relationships that can offer valuable perspective on emotional situations and clear analysis of dynamics");
+      strengths.push("Consistency and reliability in practical aspects of partnership, providing stability through actions and follow-through");
+      strengths.push("Ability to maintain objectivity during relationship crises, offering clear-headed perspective when emotions cloud judgment");
+      strengths.push("Independence that prevents you from becoming overly dependent on relationships for self-worth or identity");
+      strengths.push("Practical wisdom about relationship dynamics that can help navigate complex situations with clarity");
     }
 
-    // Add integration-based strengths
-    if (integration?.integrationLevel === 'mastery' || integration?.integrationLevel === 'integrated') {
-      strengths.push("Advanced self-awareness that allows you to catch and redirect unhealthy patterns in real-time");
-      strengths.push("Ability to hold space for your partner's growth without taking their emotions personally");
-      strengths.push("Skilled at transforming relationship challenges into opportunities for mutual evolution");
+    // Add integration-based strengths with expanded descriptions
+    if (integration?.integrationLevel === 'mastery') {
+      strengths.push("Advanced self-awareness that allows you to catch and redirect unhealthy patterns in real-time, preventing relationship damage before it occurs");
+      strengths.push("Ability to hold space for your partner's growth without taking their emotions personally or trying to fix their experience");
+      strengths.push("Skilled at transforming relationship challenges into opportunities for mutual evolution and deeper understanding");
+      strengths.push("Capacity to see relationship dynamics from multiple perspectives simultaneously, enabling nuanced responses to complex situations");
+      strengths.push("Natural ability to create healing environments where both partners can address past wounds and grow together");
+    } else if (integration?.integrationLevel === 'integrated') {
+      strengths.push("Developed self-awareness that enables conscious choice-making in relationship dynamics rather than reactive responses");
+      strengths.push("Growing ability to hold paradox - being both independent and interdependent, strong and vulnerable, giving and receiving");
+      strengths.push("Increasing skill at transforming conflicts into opportunities for greater intimacy and understanding");
+      strengths.push("Capacity to recognize and interrupt unhealthy patterns before they become entrenched in the relationship");
+    } else if (integration?.integrationLevel === 'developing') {
+      strengths.push("Growing self-awareness and willingness to examine your relationship patterns with honesty and courage");
+      strengths.push("Increasing ability to communicate your needs and boundaries clearly while remaining open to your partner's perspective");
+      strengths.push("Developing skills in emotional regulation and conscious response rather than reactive behavior");
     }
 
-    return strengths.slice(0, 5);
+    return strengths;
   };
 
   const generateGrowthOpportunities = (toxicity: any, patterns: any, integration: any) => {
