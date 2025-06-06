@@ -15,6 +15,14 @@ import RelationshipPatterns from "@/pages/relationship-patterns";
 import RelationshipPatternResults from "@/pages/relationship-pattern-results";
 import IntegrationGuide from "@/pages/integration-guide";
 import IntegrationGuideResults from "@/pages/integration-guide-results";
+import IntelligenceMap from "@/pages/intelligence-map";
+import IntelligenceMapResults from "@/pages/intelligence-map-results";
+import AttachmentStyle from "@/pages/attachment-style";
+import AttachmentStyleResults from "@/pages/attachment-style-results";
+import IdentityCompass from "@/pages/identity-compass";
+import IdentityCompassResults from "@/pages/identity-compass-results";
+import InnerDriver from "@/pages/inner-driver";
+import InnerDriverResults from "@/pages/inner-driver-results";
 
 function Router() {
   return (
@@ -31,6 +39,14 @@ function Router() {
       <Route path="/relationship-pattern-results" component={RelationshipPatternResults} />
       <Route path="/integration-guide" component={IntegrationGuide} />
       <Route path="/integration-guide-results" component={IntegrationGuideResults} />
+      <Route path="/intelligence-map" component={IntelligenceMap} />
+      <Route path="/intelligence-map-results" component={IntelligenceMapResults} />
+      <Route path="/attachment-style" component={AttachmentStyle} />
+      <Route path="/attachment-style-results" component={AttachmentStyleResults} />
+      <Route path="/identity-compass" component={IdentityCompass} />
+      <Route path="/identity-compass-results" component={IdentityCompassResults} />
+      <Route path="/inner-driver" component={InnerDriver} />
+      <Route path="/inner-driver-results" component={InnerDriverResults} />
     </Switch>
   );
 }
