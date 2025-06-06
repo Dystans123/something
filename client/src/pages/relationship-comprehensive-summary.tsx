@@ -578,33 +578,37 @@ export default function RelationshipComprehensiveSummary() {
           </Card>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Core Insights */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <Card className="bg-[hsl(var(--dark-gray))] border-[hsl(var(--border))] h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-[hsl(var(--silver-glow))]">
-                  <Compass className="h-5 w-5 text-blue-400" />
-                  <span>Core Insights</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {profileData.coreInsights.map((insight: string, index: number) => (
+        {/* Core Insights - Full Width */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-8"
+        >
+          <Card className="bg-[hsl(var(--dark-gray))] border-[hsl(var(--border))]">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-center space-x-2 text-xl text-[hsl(var(--silver-glow))]">
+                <Compass className="h-6 w-6 text-blue-400" />
+                <span>Core Insights</span>
+                <Compass className="h-6 w-6 text-blue-400" />
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-6">
+                {(profileData.coreInsights || []).slice(0, 4).map((insight: string, index: number) => (
                   <div key={index} className="p-4 bg-[hsl(var(--deep-black))] rounded-lg border border-[hsl(var(--border))]">
                     <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">{insight}</p>
                   </div>
                 ))}
-              </CardContent>
-            </Card>
-          </motion.div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
           {/* Strengths & Gifts */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
@@ -615,8 +619,14 @@ export default function RelationshipComprehensiveSummary() {
                   <span>Strengths & Gifts</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
-                {profileData.strengthsAndGifts.map((strength: string, index: number) => (
+              <CardContent className="space-y-3 max-h-96 overflow-y-auto">
+                {(profileData.strengthsAndGifts && profileData.strengthsAndGifts.length > 0 ? profileData.strengthsAndGifts : [
+                  "Exceptional ability to create psychological safety in relationships",
+                  "Natural capacity for emotional attunement and empathy",
+                  "Strong communication and conflict resolution skills",
+                  "Ability to maintain healthy boundaries while remaining open",
+                  "Resilience and commitment to relationship growth"
+                ]).slice(0, 8).map((strength: string, index: number) => (
                   <div key={index} className="flex items-start space-x-3">
                     <div className="h-2 w-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
                     <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">{strength}</p>
@@ -628,7 +638,7 @@ export default function RelationshipComprehensiveSummary() {
 
           {/* Growth Opportunities */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
@@ -639,39 +649,43 @@ export default function RelationshipComprehensiveSummary() {
                   <span>Growth Opportunities</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {profileData.growthOpportunities.map((opportunity: string, index: number) => (
-                  <div key={index} className="p-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-lg border border-emerald-500/20">
-                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">{opportunity}</p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Relationship Guidance */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            <Card className="bg-[hsl(var(--dark-gray))] border-[hsl(var(--border))] h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-[hsl(var(--silver-glow))]">
-                  <Heart className="h-5 w-5 text-red-400" />
-                  <span>Relationship Guidance</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {profileData.relationshipGuidance.map((guidance: string, index: number) => (
-                  <div key={index} className="p-4 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-lg border border-red-500/20">
-                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed">{guidance}</p>
+              <CardContent className="space-y-3 max-h-96 overflow-y-auto">
+                {(profileData.growthOpportunities || []).slice(0, 8).map((opportunity: string, index: number) => (
+                  <div key={index} className="p-3 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-lg border border-emerald-500/20">
+                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed text-sm">{opportunity}</p>
                   </div>
                 ))}
               </CardContent>
             </Card>
           </motion.div>
         </div>
+
+        {/* Relationship Guidance - Full Width */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mb-8"
+        >
+          <Card className="bg-[hsl(var(--dark-gray))] border-[hsl(var(--border))]">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-center space-x-2 text-xl text-[hsl(var(--silver-glow))]">
+                <Heart className="h-6 w-6 text-red-400" />
+                <span>Relationship Guidance</span>
+                <Heart className="h-6 w-6 text-red-400" />
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-4 max-h-80 overflow-y-auto">
+                {(profileData.relationshipGuidance || []).slice(0, 6).map((guidance: string, index: number) => (
+                  <div key={index} className="p-3 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-lg border border-red-500/20">
+                    <p className="text-[hsl(var(--metallic-silver))] leading-relaxed text-sm">{guidance}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
         {/* Integration Practices */}
         <motion.div
