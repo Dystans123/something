@@ -85,8 +85,7 @@ export default function IntegrationGuideResults() {
     localStorage.setItem('psychTestResults', JSON.stringify(results));
   }, [level, score, categoryScores, strengths, growthAreas, guidance]);
 
-  const levelInfo = Object.entries(integrationLevels).find(([key]) => key === level);
-  const levelData = levelInfo ? levelInfo[1] : integrationLevels["emerging-awareness"];
+  const levelData = integrationLevels[level as keyof typeof integrationLevels] || integrationLevels.emerging;
 
   const handleShare = () => {
     shareIntegrationGuideResult(level);
