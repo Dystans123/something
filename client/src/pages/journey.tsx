@@ -55,7 +55,7 @@ const relationshipTests = [
     id: "shadow-test",
     title: "Shadow Archetype Test",
     subtitle: "Level 1: Core Assessment",
-    description: "Discover your dominant shadow archetype through 40 psychological projection questions.",
+    description: "Discover your dominant shadow archetype through 20 psychological projection questions.",
     icon: <Brain className="h-8 w-8" />,
     color: "text-purple-400",
     bgGradient: "from-purple-500/20 to-indigo-500/20",
@@ -443,14 +443,14 @@ export default function Journey() {
         
         {/* Journey Ladder */}
         <div className="relative">
-          {/* Connecting Line */}
-          <div className={`absolute left-12 top-8 bottom-8 w-1 bg-gradient-to-b opacity-30 ${
+          {/* Connecting Line - Hidden on mobile */}
+          <div className={`hidden md:block absolute left-12 top-8 bottom-8 w-1 bg-gradient-to-b opacity-30 ${
             journeyType === 'relationship' 
               ? 'from-purple-400 via-red-400 via-emerald-400 to-amber-400'
               : 'from-blue-400 via-pink-400 via-emerald-400 to-yellow-400'
           }`}></div>
           
-          <div className="space-y-8">
+          <div className="space-y-4 md:space-y-8">
             {(journeyType === 'relationship' ? relationshipTests : singleTests).map((test, index) => {
               const status = getTestStatus(index);
               const completed = isTestCompleted(test.id);
@@ -463,47 +463,49 @@ export default function Journey() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="relative"
                 >
-                  {/* Level Indicator */}
-                  <div className={`absolute left-8 top-8 w-8 h-8 rounded-full border-4 ${test.borderColor} flex items-center justify-center z-10 ${
+                  {/* Level Indicator - Responsive positioning */}
+                  <div className={`absolute left-2 md:left-8 top-4 md:top-8 w-6 h-6 md:w-8 md:h-8 rounded-full border-2 md:border-4 ${test.borderColor} flex items-center justify-center z-10 ${
                     completed ? `bg-gradient-to-br ${test.bgGradient}` : 
                     status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600' : 
                     'bg-[hsl(var(--deep-black))]'
                   }`}>
                     {completed ? (
-                      <CheckCircle className={`h-4 w-4 ${test.color}`} />
+                      <CheckCircle className={`h-3 w-3 md:h-4 md:w-4 ${test.color}`} />
                     ) : status === 'locked' ? (
-                      <Lock className="h-4 w-4 text-gray-500" />
+                      <Lock className="h-3 w-3 md:h-4 md:w-4 text-gray-500" />
                     ) : (
-                      <div className={`w-2 h-2 rounded-full bg-current ${test.color}`} />
+                      <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-current ${test.color}`} />
                     )}
                   </div>
 
-                  {/* Test Card */}
-                  <Card className={`ml-20 ${
+                  {/* Test Card - Responsive margins */}
+                  <Card className={`ml-10 md:ml-20 ${
                     completed ? `bg-gradient-to-r ${test.bgGradient} border-${test.borderColor.split('-')[1]}-400` :
                     status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600 opacity-60' :
                     `bg-gradient-to-r ${test.bgGradient} border-[hsl(var(--border))] hover:border-[hsl(var(--metallic-silver)/0.5)]`
                   } transition-all duration-300 ${status === 'available' ? 'hover:shadow-glow cursor-pointer' : ''}`}>
-                    <CardHeader className="pb-4">
+                    <CardHeader className="pb-3 md:pb-4 p-4 md:p-6">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <div className={`w-12 h-12 rounded-full ${status === 'locked' ? 'bg-gray-600' : `bg-gradient-to-br ${test.bgGradient}`} flex items-center justify-center ${test.color}`}>
-                            {test.icon}
+                        <div className="flex items-center space-x-2 md:space-x-4 flex-1">
+                          <div className={`w-8 h-8 md:w-12 md:h-12 rounded-full ${status === 'locked' ? 'bg-gray-600' : `bg-gradient-to-br ${test.bgGradient}`} flex items-center justify-center ${test.color} flex-shrink-0`}>
+                            <div className="scale-75 md:scale-100">
+                              {test.icon}
+                            </div>
                           </div>
-                          <div>
-                            <Badge variant="outline" className={`${test.color} border-current mb-2`}>
+                          <div className="min-w-0 flex-1">
+                            <Badge variant="outline" className={`${test.color} border-current mb-1 md:mb-2 text-xs`}>
                               {test.subtitle}
                             </Badge>
-                            <h3 className="font-serif text-xl font-bold text-[hsl(var(--silver-glow))]">
+                            <h3 className="font-serif text-base md:text-xl font-bold text-[hsl(var(--silver-glow))] leading-tight">
                               {test.title}
                             </h3>
                           </div>
                         </div>
                         
                         {completed && (
-                          <div className="text-center">
-                            <Award className={`h-8 w-8 ${test.color} mx-auto mb-1`} />
-                            <div className="text-sm font-semibold text-[hsl(var(--silver-glow))]">
+                          <div className="text-center flex-shrink-0 ml-2">
+                            <Award className={`h-6 w-6 md:h-8 md:w-8 ${test.color} mx-auto mb-1`} />
+                            <div className="text-xs md:text-sm font-semibold text-[hsl(var(--silver-glow))]">
                               +{test.points} pts
                             </div>
                           </div>
@@ -511,13 +513,13 @@ export default function Journey() {
                       </div>
                     </CardHeader>
                     
-                    <CardContent>
-                      <p className="text-[hsl(var(--metallic-silver))] mb-4 leading-relaxed">
+                    <CardContent className="p-4 md:p-6 pt-0">
+                      <p className="text-[hsl(var(--metallic-silver))] mb-3 md:mb-4 leading-relaxed text-sm md:text-base">
                         {status === 'locked' ? 'Complete previous levels to unlock' : test.description}
                       </p>
                       
                       {status === 'available' && (
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                           <div className="flex items-center space-x-2 text-[hsl(var(--metallic-silver))] text-sm">
                             <Clock className="h-4 w-4" />
                             <span>{test.duration}</span>
@@ -526,20 +528,20 @@ export default function Journey() {
                           {completed ? (
                             <Button
                               onClick={() => viewResult(test.id)}
-                              size="lg"
-                              className={`px-6 py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300`}
+                              size="default"
+                              className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
                             >
                               View Results
-                              <ChevronUp className="ml-2 h-5 w-5" />
+                              <ChevronUp className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                             </Button>
                           ) : (
                             <Button
                               onClick={() => startTest(test.route)}
-                              size="lg"
-                              className={`px-6 py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300`}
+                              size="default"
+                              className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
                             >
                               {index === 0 ? 'Begin Journey' : 'Start Level'}
-                              <ArrowRight className="ml-2 h-5 w-5" />
+                              <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                             </Button>
                           )}
                         </div>
