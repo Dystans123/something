@@ -15,8 +15,8 @@ COPY . .
 # Build client assets
 RUN npx vite build
 
-# Build production server excluding Vite
-RUN npx esbuild server/index-production.ts --platform=node --packages=external --bundle --format=esm --outfile=dist/index.js --external:vite --external:@vitejs/* --external:@replit/* --external:nanoid --banner:js="import { createRequire } from 'module'; import { fileURLToPath } from 'url'; import { dirname } from 'path'; const require = createRequire(import.meta.url); const __filename = fileURLToPath(import.meta.url); const __dirname = dirname(__filename);"
+# Build production server with fixed static file serving
+RUN npx esbuild server/index-production.ts server/production-fixed.ts --platform=node --packages=external --bundle --format=esm --outfile=dist/index.js --external:vite --external:@vitejs/* --external:@replit/* --external:nanoid --banner:js="import { createRequire } from 'module'; import { fileURLToPath } from 'url'; import { dirname } from 'path'; const require = createRequire(import.meta.url); const __filename = fileURLToPath(import.meta.url); const __dirname = dirname(__filename);"
 
 # Production stage
 FROM node:20-alpine AS production

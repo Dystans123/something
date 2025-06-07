@@ -44,11 +44,24 @@ export function serveStatic(app: Express) {
   // Serve static files with proper headers
   app.use(express.static(distPath, {
     maxAge: '1d',
-    etag: true
+    etag: true,
+    index: false,
+    fallthrough: true
   }));
 
-  // SPA fallback - serve index.html for all non-API routes
-  app.use("*", (_req, res) => {
+  // SPA fallback - serve index.html only for HTML routes (not assets)
+  app.get("*", (req, res, next) => {
+    // Skip API routes
+    if (req.path.startsWith('/api/')) {
+      return next();
+    }
+    
+    // Skip asset requests (files with extensions)
+    if (req.path.includes('.') && !req.path.endsWith('.html')) {
+      return res.status(404).send('Asset not found');
+    }
+    
+    // Serve index.html for all other routes
     const indexPath = path.resolve(distPath!, "index.html");
     res.sendFile(indexPath);
   });
