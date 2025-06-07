@@ -60,6 +60,21 @@ export default function IntelligenceMap() {
       ...prev,
       answers: newAnswers
     }));
+
+    // Auto-advance after a short delay
+    setTimeout(() => {
+      if (state.currentQuestionIndex < intelligenceMapQuestions.length - 1) {
+        setState(prev => ({
+          ...prev,
+          currentQuestionIndex: prev.currentQuestionIndex + 1
+        }));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setState(prev => ({ ...prev, isComplete: true }));
+        localStorage.setItem('intelligenceMapResult', JSON.stringify(newAnswers));
+        setLocation('/intelligence-map-results');
+      }
+    }, 600);
   };
 
   const nextQuestion = () => {

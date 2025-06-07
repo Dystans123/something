@@ -58,6 +58,21 @@ export default function AttachmentStyle() {
       ...prev,
       answers: newAnswers
     }));
+
+    // Auto-advance after a short delay
+    setTimeout(() => {
+      if (state.currentQuestionIndex < attachmentStyleQuestions.length - 1) {
+        setState(prev => ({
+          ...prev,
+          currentQuestionIndex: prev.currentQuestionIndex + 1
+        }));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setState(prev => ({ ...prev, isComplete: true }));
+        localStorage.setItem('attachmentStyleResult', JSON.stringify(newAnswers));
+        setLocation('/attachment-style-results');
+      }
+    }, 600);
   };
 
   const nextQuestion = () => {
