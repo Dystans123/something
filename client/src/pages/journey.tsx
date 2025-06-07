@@ -170,7 +170,7 @@ const singleTests = [
 
 export default function Journey() {
   const [, setLocation] = useLocation();
-  const [journeyType, setJourneyType] = useState<'relationship' | 'single'>('relationship');
+  const [journeyType, setJourneyType] = useState<'relationship' | 'single'>('single');
   const [progress, setProgress] = useState<TestProgress>({
     shadowTest: false,
     toxicityCompass: false,

@@ -30,7 +30,7 @@ export default function IntelligenceMapResults() {
       const calculatedResult = calculateIntelligenceMapResult(answers);
       setResult(calculatedResult);
     } else {
-      setLocation('/journey');
+      setLocation('/journey?type=single');
     }
   }, [setLocation]);
 

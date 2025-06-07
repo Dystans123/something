@@ -30,7 +30,7 @@ export default function AttachmentStyleResults() {
       const calculatedResult = calculateAttachmentStyleResult(answers);
       setResult(calculatedResult);
     } else {
-      setLocation('/journey');
+      setLocation('/journey?type=single');
     }
   }, [setLocation]);
 

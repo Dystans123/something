@@ -31,7 +31,7 @@ export default function IdentityCompassResults() {
       const calculatedResult = calculateIdentityCompassResult(answers);
       setResult(calculatedResult);
     } else {
-      setLocation('/journey');
+      setLocation('/journey?type=single');
     }
   }, [setLocation]);
 

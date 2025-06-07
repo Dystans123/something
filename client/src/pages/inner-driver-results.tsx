@@ -31,7 +31,7 @@ export default function InnerDriverResults() {
       const calculatedResult = calculateInnerDriverResult(answers);
       setResult(calculatedResult);
     } else {
-      setLocation('/journey');
+      setLocation('/journey?type=single');
     }
   }, [setLocation]);
 
