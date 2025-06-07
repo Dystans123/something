@@ -3,10 +3,10 @@ import fs from "fs";
 import path from "path";
 
 export function serveStatic(app: Express) {
-  // Try multiple possible build output directories
+  // Check for built client files in multiple locations
   const possibleDistPaths = [
+    path.resolve(process.cwd(), "dist"),
     path.resolve(process.cwd(), "dist", "public"),
-    path.resolve(process.cwd(), "dist", "client"),
     path.resolve(process.cwd(), "build"),
     path.resolve(process.cwd(), "client", "dist")
   ];
@@ -14,33 +14,43 @@ export function serveStatic(app: Express) {
   let distPath: string | null = null;
   
   for (const testPath of possibleDistPaths) {
-    if (fs.existsSync(testPath)) {
+    const indexPath = path.join(testPath, "index.html");
+    if (fs.existsSync(indexPath)) {
       distPath = testPath;
+      console.log(`[production] Found client files at: ${distPath}`);
       break;
     }
   }
 
   if (!distPath) {
-    // If no build directory exists, serve a simple fallback
+    console.log(`[production] No client build found, searched: ${possibleDistPaths.join(", ")}`);
+    // Serve a development-like fallback
     app.use("*", (_req, res) => {
-      res.status(503).json({ 
-        error: "Application not built for production. Please run 'npm run build' first.",
-        searchedPaths: possibleDistPaths
-      });
+      res.status(503).send(`
+        <!DOCTYPE html>
+        <html>
+          <head><title>Build Required</title></head>
+          <body>
+            <h1>Application Not Built</h1>
+            <p>Please run: <code>npm run build</code></p>
+            <p>Searched paths: ${possibleDistPaths.join(", ")}</p>
+          </body>
+        </html>
+      `);
     });
     return;
   }
 
-  app.use(express.static(distPath));
+  // Serve static files with proper headers
+  app.use(express.static(distPath, {
+    maxAge: '1d',
+    etag: true
+  }));
 
-  // fall through to index.html if the file doesn't exist
+  // SPA fallback - serve index.html for all non-API routes
   app.use("*", (_req, res) => {
     const indexPath = path.resolve(distPath!, "index.html");
-    if (fs.existsSync(indexPath)) {
-      res.sendFile(indexPath);
-    } else {
-      res.status(404).json({ error: "Application files not found" });
-    }
+    res.sendFile(indexPath);
   });
 }
 
