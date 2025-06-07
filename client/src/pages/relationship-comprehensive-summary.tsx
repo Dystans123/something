@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { AdSense } from "@/components/ui/adsense";
 import { ArrowLeft, Heart, Share2, Download, RefreshCw, Shield, Users, Compass, Star } from "lucide-react";
 
 interface TestResult {
@@ -614,6 +615,19 @@ export default function RelationshipComprehensiveSummary() {
               </div>
             </CardContent>
           </Card>
+        </motion.div>
+
+        {/* AdSense - After Core Insights */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="mb-8"
+        >
+          <AdSense 
+            adSlot="4567890123"
+            className="max-w-4xl mx-auto"
+          />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
