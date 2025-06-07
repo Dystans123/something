@@ -367,13 +367,24 @@ export default function Journey() {
       >
         <div className="container mx-auto max-w-4xl">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div className="text-center md:text-left">
-              <h1 className="font-serif text-xl md:text-3xl font-bold text-[hsl(var(--silver-glow))]">
-                Your Psychology Journey
-              </h1>
-              <p className="text-[hsl(var(--metallic-silver))] mt-1 text-sm md:text-base">
-                Complete all levels to unlock your comprehensive psychological profile
-              </p>
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setLocation('/')}
+                className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] flex items-center gap-2"
+              >
+                <Home className="h-4 w-4" />
+                <span className="hidden sm:inline">Home</span>
+              </Button>
+              <div className="text-center md:text-left">
+                <h1 className="font-serif text-xl md:text-3xl font-bold text-[hsl(var(--silver-glow))]">
+                  Your Psychology Journey
+                </h1>
+                <p className="text-[hsl(var(--metallic-silver))] mt-1 text-sm md:text-base">
+                  Complete all levels to unlock your comprehensive psychological profile
+                </p>
+              </div>
             </div>
             
             <div className="text-center md:text-right">

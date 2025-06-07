@@ -191,13 +191,13 @@ export default function IdentityCompass() {
                       }`}
                       onClick={() => handleAnswer(index)}
                     >
-                      <div className="flex items-start w-full min-h-0">
-                        <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 mr-3 md:mr-4 mt-1 flex-shrink-0 ${
+                      <div className="flex items-start w-full min-h-0 overflow-hidden">
+                        <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 mr-2 md:mr-4 mt-1 flex-shrink-0 ${
                           selectedAnswer?.optionIndex === index
                             ? 'bg-emerald-400 border-emerald-400'
                             : 'border-gray-500'
                         }`} />
-                        <span className="text-sm md:text-base leading-relaxed break-words hyphens-auto flex-1 min-w-0">{option.text}</span>
+                        <span className="text-xs sm:text-sm md:text-base leading-relaxed break-words hyphens-auto flex-1 min-w-0 overflow-wrap-anywhere whitespace-pre-wrap">{option.text}</span>
                       </div>
                     </Button>
                   </motion.div>
