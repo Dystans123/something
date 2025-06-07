@@ -39,8 +39,9 @@ export default function IntegrationGuide() {
 
     // Auto-advance after a short delay
     setTimeout(() => {
-      if (currentQuestionIndex < integrationGuideQuestions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
+      const nextQuestionIndex = currentQuestionIndex + 1;
+      if (nextQuestionIndex < integrationGuideQuestions.length) {
+        setCurrentQuestionIndex(nextQuestionIndex);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         // Test complete, go to results
