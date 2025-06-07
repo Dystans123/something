@@ -1,0 +1,39 @@
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+2025-06-07 13:24:45.372 UTC [1] FATAL:  could not load private key file "/var/lib/postgresql/certs/server.key": Permission denied
+2025-06-07 13:24:45.372 UTC [1] LOG:  database system is shut down
+2025-06-07 13:24:45.774 UTC [1] FATAL:  could not load private key file "/var/lib/postgresql/certs/server.key": Permission denied
+2025-06-07 13:24:45.774 UTC [1] LOG:  database system is shut down
+2025-06-07 13:24:46.225 UTC [1] FATAL:  could not load private key file "/var/lib/postgresql/certs/server.key": Permission denied
+2025-06-07 13:24:46.226 UTC [1] LOG:  database system is shut down
+2025-06-07 13:24:46.959 UTC [1] FATAL:  could not load private key file "/var/lib/postgresql/certs/server.key": Permission denied
+2025-06-07 13:24:46.960 UTC [1] LOG:  database system is shut down
+2025-06-07 13:24:48.083 UTC [1] FATAL:  could not load private key file "/var/lib/postgresql/certs/server.key": Permission denied
+2025-06-07 13:24:48.083 UTC [1] LOG:  database system is shut down
+2025-06-07 13:24:50.073 UTC [1] FATAL:  could not load private key file "/var/lib/postgresql/certs/server.key": Permission denied
+2025-06-07 13:24:50.073 UTC [1] LOG:  database system is shut down
+2025-06-07 13:24:53.576 UTC [1] FATAL:  could not load private key file "/var/lib/postgresql/certs/server.key": Permission denied
+2025-06-07 13:24:53.576 UTC [1] LOG:  database system is shut down
+2025-06-07 13:25:00.270 UTC [1] FATAL:  could not load private key file "/var/lib/postgresql/certs/server.key": Permission denied
+2025-06-07 13:25:00.270 UTC [1] LOG:  database system is shut down
