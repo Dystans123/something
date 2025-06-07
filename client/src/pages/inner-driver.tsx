@@ -155,26 +155,26 @@ export default function InnerDriver() {
             <Card className="bg-gradient-to-br from-yellow-500/10 to-amber-500/10 border-yellow-400/30 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/5 to-amber-500/5" />
               
-              <CardHeader className="text-center relative z-10 pb-8">
+              <CardHeader className="text-center relative z-10 pb-6 md:pb-8 p-4 md:p-6">
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
-                  className="w-20 h-20 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-6"
+                  className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6"
                 >
-                  <Zap className="h-10 w-10 text-yellow-400" />
+                  <Zap className="h-8 w-8 md:h-10 md:w-10 text-yellow-400" />
                 </motion.div>
                 
-                <h2 className="font-serif text-2xl md:text-3xl font-bold text-[hsl(var(--silver-glow))] mb-4">
+                <h2 className="font-serif text-lg md:text-3xl font-bold text-[hsl(var(--silver-glow))] mb-3 md:mb-4 leading-tight">
                   {currentQuestion.text}
                 </h2>
                 
-                <Badge variant="outline" className="text-yellow-400 border-yellow-400">
+                <Badge variant="outline" className="text-yellow-400 border-yellow-400 text-xs md:text-sm">
                   {currentQuestion.category.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                 </Badge>
               </CardHeader>
               
-              <CardContent className="relative z-10 space-y-4">
+              <CardContent className="relative z-10 space-y-3 md:space-y-4 p-4 md:p-6 pt-0">
                 {currentQuestion.options.map((option, index) => (
                   <motion.div
                     key={index}
@@ -184,20 +184,20 @@ export default function InnerDriver() {
                   >
                     <Button
                       variant="outline"
-                      className={`w-full p-6 h-auto text-left justify-start transition-all duration-300 ${
+                      className={`w-full p-4 md:p-6 h-auto text-left justify-start transition-all duration-300 ${
                         selectedAnswer?.optionIndex === index
                           ? 'bg-yellow-500/20 border-yellow-400 text-yellow-300 shadow-lg'
                           : 'bg-[hsl(var(--dark-gray))]/30 border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))] hover:border-yellow-400/50 hover:bg-yellow-500/10'
                       }`}
                       onClick={() => handleAnswer(index)}
                     >
-                      <div className="flex items-center w-full">
-                        <div className={`w-4 h-4 rounded-full border-2 mr-4 ${
+                      <div className="flex items-start w-full">
+                        <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 mr-3 md:mr-4 mt-0.5 flex-shrink-0 ${
                           selectedAnswer?.optionIndex === index
                             ? 'bg-yellow-400 border-yellow-400'
                             : 'border-gray-500'
                         }`} />
-                        <span className="text-base leading-relaxed">{option.text}</span>
+                        <span className="text-sm md:text-base leading-relaxed">{option.text}</span>
                       </div>
                     </Button>
                   </motion.div>
