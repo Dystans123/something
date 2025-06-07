@@ -189,6 +189,19 @@ export default function Journey() {
     // Scroll to top when page loads
     window.scrollTo(0, 0);
     
+    // Check URL parameters for journey type
+    const urlParams = new URLSearchParams(window.location.search);
+    const typeParam = urlParams.get('type');
+    if (typeParam === 'single' || typeParam === 'relationship') {
+      setJourneyType(typeParam);
+    } else {
+      // Load saved journey type from localStorage
+      const savedJourneyType = localStorage.getItem('currentJourneyType');
+      if (savedJourneyType === 'single' || savedJourneyType === 'relationship') {
+        setJourneyType(savedJourneyType);
+      }
+    }
+    
     // Load progress from localStorage
     const savedProgress = localStorage.getItem('psychTestProgress');
     const savedResults = localStorage.getItem('psychTestResults');
@@ -389,12 +402,16 @@ export default function Journey() {
               journeyType === 'single' ? 'bg-blue-500/20 text-blue-300' : 'text-gray-400'
             }`}>
               <User className="h-4 w-4" />
-              <Label htmlFor="journey-toggle" className="cursor-pointer">Single</Label>
+              <Label htmlFor="journey-toggle" className="cursor-pointer">Personality</Label>
             </div>
             <Switch
               id="journey-toggle"
               checked={journeyType === 'relationship'}
-              onCheckedChange={(checked) => setJourneyType(checked ? 'relationship' : 'single')}
+              onCheckedChange={(checked) => {
+                const newType = checked ? 'relationship' : 'single';
+                setJourneyType(newType);
+                localStorage.setItem('currentJourneyType', newType);
+              }}
               className="data-[state=checked]:bg-purple-500"
             />
             <div className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
@@ -593,7 +610,7 @@ export default function Journey() {
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-emerald-400 mb-2">
-                        {Object.values(progress).filter(Boolean).length}/4
+                        {Object.values(progress).filter(Boolean).length}/8
                       </div>
                       <p className="text-[hsl(var(--metallic-silver))] text-sm">Tests Complete</p>
                     </div>
