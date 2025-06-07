@@ -423,7 +423,10 @@ export default function Journey() {
                 setJourneyType(newType);
                 localStorage.setItem('currentJourneyType', newType);
               }}
-              className="data-[state=checked]:bg-purple-500 scale-75 md:scale-100"
+              className="scale-75 md:scale-100"
+              style={{
+                backgroundColor: journeyType === 'relationship' ? '#a855f7' : '#3b82f6'
+              }}
             />
             <div className={`flex items-center space-x-1 md:space-x-2 px-2 md:px-4 py-1.5 md:py-2 rounded-full transition-all duration-300 flex-1 md:flex-none justify-center ${
               journeyType === 'relationship' ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400'
