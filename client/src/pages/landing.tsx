@@ -297,7 +297,7 @@ export default function Landing() {
                   Individual Tests
                 </h3>
                 <p className="text-[hsl(var(--metallic-silver))] mb-6">
-                  Take any single assessment to gain specific insights into one aspect of your personality. 
+                  Take any single test to gain specific insights into one aspect of your personality. 
                   Perfect for targeted self-discovery and immediate actionable results.
                 </p>
               </div>
@@ -306,7 +306,7 @@ export default function Landing() {
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-4 w-4 text-blue-400 flex-shrink-0" />
                   <span className="text-[hsl(var(--metallic-silver))] text-sm">
-                    Choose any of the four assessments
+                    Choose any of the eight tests
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -366,7 +366,7 @@ export default function Landing() {
                   Complete Journey
                 </h3>
                 <p className="text-[hsl(var(--metallic-silver))] mb-6">
-                  Take all four assessments in a guided sequence to unlock a comprehensive psychological profile 
+                  Take two assessments in a guided sequence to unlock a comprehensive psychological profile 
                   with deep insights and personalized integration strategies.
                 </p>
               </div>
@@ -375,7 +375,7 @@ export default function Landing() {
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
                   <span className="text-[hsl(var(--metallic-silver))] text-sm">
-                    Complete all four assessments
+                    Complete assessments
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
