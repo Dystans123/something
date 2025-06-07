@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CookieBanner } from "@/components/cookie-banner";
 import Landing from "@/pages/landing";
 import Journey from "@/pages/journey";
 import ComprehensiveSummary from "@/pages/comprehensive-summary";
@@ -66,6 +67,7 @@ function App() {
         <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))] text-[hsl(var(--foreground))] overflow-x-hidden">
           <Toaster />
           <Router />
+          <CookieBanner />
         </div>
       </TooltipProvider>
     </QueryClientProvider>

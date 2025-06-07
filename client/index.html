@@ -10,7 +10,16 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-VR8C89CF14');
+      // Default consent state (denied until user gives consent)
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'wait_for_update': 500
+      });
+
+      gtag('config', 'G-VR8C89CF14', {
+        'anonymize_ip': true
+      });
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1833063815391985"
      crossorigin="anonymous"></script>
