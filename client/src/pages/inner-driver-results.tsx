@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { calculateInnerDriverResult, shareInnerDriverResult } from "@/lib/inner-driver-logic";
 import { driverTypes } from "@/data/inner-driver-questions";
-import { saveTestResult } from "@/lib/test-state-manager";
+import { saveTestResult } from "@/lib/storage-utils";
 
 export default function InnerDriverResults() {
   const [, setLocation] = useLocation();
