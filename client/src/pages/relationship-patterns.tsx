@@ -164,7 +164,7 @@ export default function RelationshipPatterns() {
               {currentQuestion.options.map((option, index) => (
                 <motion.button
                   key={index}
-                  className={`w-full text-left p-4 md:p-6 rounded-2xl border-2 transition-all duration-300 ${
+                  className={`w-full text-left p-3 md:p-6 rounded-2xl border-2 transition-all duration-300 ${
                     selectedOption === index
                       ? 'bg-gradient-to-r from-emerald-500/20 to-teal-400/20 border-emerald-400 text-[hsl(var(--silver-glow))] shadow-lg transform scale-[1.02]'
                       : 'bg-[hsl(var(--dark-gray))]/20 border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))] hover:border-emerald-400/50 hover:bg-emerald-500/10'
@@ -176,22 +176,22 @@ export default function RelationshipPatterns() {
                   whileHover={{ scale: selectedOption === index ? 1.02 : 1.01 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                  <div className="flex items-start space-x-2 md:space-x-4 overflow-hidden">
+                    <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 mt-1 flex-shrink-0 ${
                       selectedOption === index 
                         ? 'border-emerald-400 bg-emerald-400' 
                         : 'border-[hsl(var(--metallic-silver))]'
                     }`}>
                       {selectedOption === index && (
                         <motion.div 
-                          className="w-2 h-2 bg-white rounded-full"
+                          className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full"
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ duration: 0.2 }}
                         />
                       )}
                     </div>
-                    <span className="font-medium">{option.text}</span>
+                    <span className="text-xs sm:text-sm md:text-base font-medium leading-relaxed break-words hyphens-auto flex-1 min-w-0 overflow-wrap-anywhere whitespace-pre-wrap">{option.text}</span>
                   </div>
                 </motion.button>
               ))}

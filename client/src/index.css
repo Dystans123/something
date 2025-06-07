@@ -45,9 +45,57 @@
   hyphens: auto;
 }
 
+/* Better text wrapping utility */
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+}
+
 /* Ensure flex containers handle overflow properly */
 .flex-1 {
   min-width: 0;
+}
+
+/* Mobile-first responsive typography */
+@media (max-width: 640px) {
+  /* Improve touch targets on mobile */
+  button, 
+  .touchable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better text scaling on small screens */
+  .text-responsive {
+    font-size: clamp(0.75rem, 2.5vw, 1rem);
+    line-height: 1.5;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Better card padding on mobile */
+  .card-mobile-padding {
+    padding: 0.75rem;
+  }
+  
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Enhanced mobile scrolling */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better focus states for accessibility */
+button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
 }
 
 .min-w-0 {
