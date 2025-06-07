@@ -58,6 +58,21 @@ export default function InnerDriver() {
       ...prev,
       answers: newAnswers
     }));
+
+    // Auto-advance after a short delay
+    setTimeout(() => {
+      if (state.currentQuestionIndex < innerDriverQuestions.length - 1) {
+        setState(prev => ({
+          ...prev,
+          currentQuestionIndex: prev.currentQuestionIndex + 1
+        }));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setState(prev => ({ ...prev, isComplete: true }));
+        localStorage.setItem('innerDriverResult', JSON.stringify(newAnswers));
+        setLocation('/inner-driver-results');
+      }
+    }, 600);
   };
 
   const nextQuestion = () => {
@@ -89,46 +104,46 @@ export default function InnerDriver() {
       <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-yellow-900/20 to-[hsl(var(--deep-black))]" />
       
       <motion.header 
-        className="relative z-20 p-6 border-b border-[hsl(var(--border))]"
+        className="relative z-20 p-4 md:p-6 border-b border-[hsl(var(--border))]"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         <div className="container mx-auto max-w-4xl">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div className="flex items-center space-x-2 md:space-x-4">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setLocation("/journey")}
                 className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))]"
               >
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Journey
+                <ArrowLeft className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
+                <span className="text-xs md:text-sm">Back to Journey</span>
               </Button>
             </div>
             
             <div className="text-center">
-              <div className="flex items-center space-x-3 mb-2">
-                <Zap className="h-6 w-6 text-yellow-400" />
-                <h1 className="font-serif text-xl md:text-2xl font-bold text-[hsl(var(--silver-glow))]">
+              <div className="flex items-center justify-center space-x-2 md:space-x-3 mb-1 md:mb-2">
+                <Zap className="h-5 w-5 md:h-6 md:w-6 text-yellow-400" />
+                <h1 className="font-serif text-lg md:text-2xl font-bold text-[hsl(var(--silver-glow))]">
                   Inner Driver Matrix
                 </h1>
               </div>
-              <Badge variant="outline" className="text-yellow-400 border-yellow-400">
+              <Badge variant="outline" className="text-yellow-400 border-yellow-400 text-xs md:text-sm">
                 Question {state.currentQuestionIndex + 1} of {innerDriverQuestions.length}
               </Badge>
             </div>
             
-            <div className="text-right">
-              <div className="text-sm text-[hsl(var(--metallic-silver))] mb-2">Progress</div>
-              <Progress value={progress} className="w-32" />
+            <div className="text-center md:text-right">
+              <div className="text-xs md:text-sm text-[hsl(var(--metallic-silver))] mb-2">Progress</div>
+              <Progress value={progress} className="w-full md:w-32" />
             </div>
           </div>
         </div>
       </motion.header>
 
-      <div className="relative z-10 container mx-auto px-6 py-12 max-w-4xl">
+      <div className="relative z-10 container mx-auto px-4 md:px-6 py-8 md:py-12 max-w-4xl">
         <AnimatePresence mode="wait">
           <motion.div
             key={state.currentQuestionIndex}
