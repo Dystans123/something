@@ -360,49 +360,49 @@ export default function Journey() {
       
       {/* Header */}
       <motion.header 
-        className="relative z-20 p-6 border-b border-[hsl(var(--border))]"
+        className="relative z-20 p-4 md:p-6 border-b border-[hsl(var(--border))]"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         <div className="container mx-auto max-w-4xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="font-serif text-2xl md:text-3xl font-bold text-[hsl(var(--silver-glow))]">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div className="text-center md:text-left">
+              <h1 className="font-serif text-xl md:text-3xl font-bold text-[hsl(var(--silver-glow))]">
                 Your Psychology Journey
               </h1>
-              <p className="text-[hsl(var(--metallic-silver))] mt-1">
+              <p className="text-[hsl(var(--metallic-silver))] mt-1 text-sm md:text-base">
                 Complete all levels to unlock your comprehensive psychological profile
               </p>
             </div>
             
-            <div className="text-right">
-              <div className="flex items-center space-x-2 mb-2">
-                <CheckCircle className="h-5 w-5 text-emerald-400" />
+            <div className="text-center md:text-right">
+              <div className="flex items-center justify-center md:justify-end space-x-2 mb-2">
+                <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-emerald-400" />
                 <span className="font-semibold text-[hsl(var(--silver-glow))]">{getCompletedTestsCount()}/4</span>
                 <span className="text-[hsl(var(--metallic-silver))] text-sm">Tests Complete</span>
               </div>
-              <Progress value={getCompletionPercentage()} className="w-32" />
+              <Progress value={getCompletionPercentage()} className="w-full md:w-32" />
             </div>
           </div>
         </div>
       </motion.header>
 
-      <div className="relative z-10 container mx-auto px-6 py-12 max-w-4xl">
+      <div className="relative z-10 container mx-auto px-4 md:px-6 py-8 md:py-12 max-w-4xl">
         
         {/* Journey Type Toggle */}
         <motion.div 
-          className="flex items-center justify-center space-x-4 mb-8"
+          className="flex items-center justify-center mb-6 md:mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center space-x-4 bg-[hsl(var(--dark-gray))] rounded-full p-2 border border-[hsl(var(--border))]">
-            <div className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+          <div className="flex items-center space-x-2 md:space-x-4 bg-[hsl(var(--dark-gray))] rounded-full p-1.5 md:p-2 border border-[hsl(var(--border))] w-full max-w-xs md:max-w-none md:w-auto">
+            <div className={`flex items-center space-x-1 md:space-x-2 px-2 md:px-4 py-1.5 md:py-2 rounded-full transition-all duration-300 flex-1 md:flex-none justify-center ${
               journeyType === 'single' ? 'bg-blue-500/20 text-blue-300' : 'text-gray-400'
             }`}>
-              <User className="h-4 w-4" />
-              <Label htmlFor="journey-toggle" className="cursor-pointer">Personality</Label>
+              <User className="h-3 w-3 md:h-4 md:w-4" />
+              <Label htmlFor="journey-toggle" className="cursor-pointer text-xs md:text-sm">Personality</Label>
             </div>
             <Switch
               id="journey-toggle"
@@ -412,28 +412,28 @@ export default function Journey() {
                 setJourneyType(newType);
                 localStorage.setItem('currentJourneyType', newType);
               }}
-              className="data-[state=checked]:bg-purple-500"
+              className="data-[state=checked]:bg-purple-500 scale-75 md:scale-100"
             />
-            <div className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
+            <div className={`flex items-center space-x-1 md:space-x-2 px-2 md:px-4 py-1.5 md:py-2 rounded-full transition-all duration-300 flex-1 md:flex-none justify-center ${
               journeyType === 'relationship' ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400'
             }`}>
-              <Heart className="h-4 w-4" />
-              <Label htmlFor="journey-toggle" className="cursor-pointer">Relationship</Label>
+              <Heart className="h-3 w-3 md:h-4 md:w-4" />
+              <Label htmlFor="journey-toggle" className="cursor-pointer text-xs md:text-sm">Relationship</Label>
             </div>
           </div>
         </motion.div>
 
         {/* Journey Description */}
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="font-serif text-xl font-semibold text-[hsl(var(--silver-glow))] mb-3">
+          <h2 className="font-serif text-lg md:text-xl font-semibold text-[hsl(var(--silver-glow))] mb-2 md:mb-3">
             {journeyType === 'relationship' ? 'Relationship Journey' : 'Single Journey'}
           </h2>
-          <p className="text-[hsl(var(--metallic-silver))] max-w-2xl mx-auto">
+          <p className="text-[hsl(var(--metallic-silver))] max-w-2xl mx-auto text-sm md:text-base px-2">
             {journeyType === 'relationship' 
               ? 'Explore your shadow archetypes, relationship patterns, and integration path for deeper connections'
               : 'Discover your intelligence type, attachment style, identity compass, and inner drivers for personal mastery'
