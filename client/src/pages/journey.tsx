@@ -36,12 +36,10 @@ interface TestProgress {
   shadowTest: boolean;
   toxicityCompass: boolean;
   relationshipPatterns: boolean;
-  integrationGuide: boolean;
   // Single tests
   intelligenceMap: boolean;
   attachmentStyle: boolean;
   identityCompass: boolean;
-  innerDriver: boolean;
 }
 
 interface TestResult {
@@ -93,20 +91,7 @@ const relationshipTests = [
     points: 300,
     unlockMessage: "Master your relationship dynamics"
   },
-  {
-    id: "integration-guide",
-    title: "Integration Guide",
-    subtitle: "Level 4: Personal Growth",
-    description: "Receive personalized guidance for integrating your shadow aspects into conscious awareness.",
-    icon: <Lightbulb className="h-8 w-8" />,
-    color: "text-amber-400",
-    bgGradient: "from-amber-500/20 to-yellow-500/20",
-    borderColor: "border-amber-400",
-    route: "/integration-guide",
-    duration: "8-12 min",
-    points: 350,
-    unlockMessage: "Achieve psychological wholeness"
-  }
+
 ];
 
 const singleTests = [
@@ -152,20 +137,7 @@ const singleTests = [
     points: 275,
     unlockMessage: "Find your true identity"
   },
-  {
-    id: "inner-driver",
-    title: "Inner Driver Matrix",
-    subtitle: "Level 4: Motivation Engine",
-    description: "Uncover what truly drives and motivates you to take action in your life.",
-    icon: <Zap className="h-8 w-8" />,
-    color: "text-yellow-400",
-    bgGradient: "from-yellow-500/20 to-amber-500/20",
-    borderColor: "border-yellow-400",
-    route: "/inner-driver",
-    duration: "8-12 min",
-    points: 325,
-    unlockMessage: "Discover your inner fuel"
-  }
+
 ];
 
 export default function Journey() {
@@ -175,11 +147,9 @@ export default function Journey() {
     shadowTest: false,
     toxicityCompass: false,
     relationshipPatterns: false,
-    integrationGuide: false,
     intelligenceMap: false,
     attachmentStyle: false,
-    identityCompass: false,
-    innerDriver: false
+    identityCompass: false
   });
   const [results, setResults] = useState<TestResult[]>([]);
   const [totalPoints, setTotalPoints] = useState(0);
@@ -208,21 +178,19 @@ export default function Journey() {
       if (progress.shadowTest) points += 250;
       if (progress.toxicityCompass) points += 200;
       if (progress.relationshipPatterns) points += 300;
-      if (progress.integrationGuide) points += 350;
       
-      // Only show summary when ALL 4 relationship tests are completed
+      // Only show summary when ALL 3 relationship tests are completed
       const allCompleted = progress.shadowTest && progress.toxicityCompass && 
-                          progress.relationshipPatterns && progress.integrationGuide;
+                          progress.relationshipPatterns;
       setShowSummary(allCompleted);
     } else {
       if (progress.intelligenceMap) points += 300;
       if (progress.attachmentStyle) points += 250;
       if (progress.identityCompass) points += 275;
-      if (progress.innerDriver) points += 325;
       
-      // Only show summary when ALL 4 single tests are completed
+      // Only show summary when ALL 3 single tests are completed
       const allCompleted = progress.intelligenceMap && progress.attachmentStyle && 
-                          progress.identityCompass && progress.innerDriver;
+                          progress.identityCompass;
       setShowSummary(allCompleted);
     }
     setTotalPoints(points);
@@ -233,8 +201,8 @@ export default function Journey() {
     
     // Check if all previous tests are completed based on journey type
     const progressKeys: (keyof TestProgress)[] = journeyType === 'relationship' 
-      ? ['shadowTest', 'toxicityCompass', 'relationshipPatterns', 'integrationGuide']
-      : ['intelligenceMap', 'attachmentStyle', 'identityCompass', 'innerDriver'];
+      ? ['shadowTest', 'toxicityCompass', 'relationshipPatterns']
+      : ['intelligenceMap', 'attachmentStyle', 'identityCompass'];
     
     for (let i = 0; i < testIndex; i++) {
       if (!progress[progressKeys[i]]) {
@@ -262,11 +230,11 @@ export default function Journey() {
 
   const getCompletionPercentage = () => {
     if (journeyType === 'relationship') {
-      const completedCount = [progress.shadowTest, progress.toxicityCompass, progress.relationshipPatterns, progress.integrationGuide].filter(Boolean).length;
-      return (completedCount / 4) * 100;
+      const completedCount = [progress.shadowTest, progress.toxicityCompass, progress.relationshipPatterns].filter(Boolean).length;
+      return (completedCount / 3) * 100;
     } else {
-      const completedCount = [progress.intelligenceMap, progress.attachmentStyle, progress.identityCompass, progress.innerDriver].filter(Boolean).length;
-      return (completedCount / 4) * 100;
+      const completedCount = [progress.intelligenceMap, progress.attachmentStyle, progress.identityCompass].filter(Boolean).length;
+      return (completedCount / 3) * 100;
     }
   };
 
@@ -366,7 +334,7 @@ export default function Journey() {
             <div className="text-right">
               <div className="flex items-center space-x-2 mb-2">
                 <CheckCircle className="h-5 w-5 text-emerald-400" />
-                <span className="font-semibold text-[hsl(var(--silver-glow))]">{getCompletedTestsCount()}/4</span>
+                <span className="font-semibold text-[hsl(var(--silver-glow))]">{getCompletedTestsCount()}/3</span>
                 <span className="text-[hsl(var(--metallic-silver))] text-sm">Tests Complete</span>
               </div>
               <Progress value={getCompletionPercentage()} className="w-32" />
@@ -389,7 +357,7 @@ export default function Journey() {
               journeyType === 'single' ? 'bg-blue-500/20 text-blue-300' : 'text-gray-400'
             }`}>
               <User className="h-4 w-4" />
-              <Label htmlFor="journey-toggle" className="cursor-pointer">Single</Label>
+              <Label htmlFor="journey-toggle" className="cursor-pointer">Personality</Label>
             </div>
             <Switch
               id="journey-toggle"
@@ -414,7 +382,7 @@ export default function Journey() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <h2 className="font-serif text-xl font-semibold text-[hsl(var(--silver-glow))] mb-3">
-            {journeyType === 'relationship' ? 'Relationship Journey' : 'Single Journey'}
+            {journeyType === 'relationship' ? 'Relationship Journey' : 'Personality Journey'}
           </h2>
           <p className="text-[hsl(var(--metallic-silver))] max-w-2xl mx-auto">
             {journeyType === 'relationship' 
