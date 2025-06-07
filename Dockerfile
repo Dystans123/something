@@ -1,44 +1,38 @@
 # Use Node.js 20 LTS as base image
-FROM node:20-alpine AS base
+FROM node:20-alpine
 
-# Install dependencies only when needed
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY package.json package-lock.json* ./
-RUN npm ci --only=production && npm cache clean --force
+# Install system dependencies
+RUN apk add --no-cache libc6-compat python3 make g++
 
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
+# Copy package files
 COPY package.json package-lock.json* ./
-RUN npm ci
 
+# Install dependencies
+RUN npm ci --include=dev && npm cache clean --force
+
+# Copy source code
 COPY . .
 
 # Build the application
 RUN npm run build
 
-# Production image, copy all the files and run the app
-FROM base AS runner
-WORKDIR /app
+# Remove dev dependencies after build
+RUN npm prune --omit=dev
 
-ENV NODE_ENV=production
-
+# Create non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nodejs
 
-# Copy the built application
-COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
-COPY --from=deps --chown=nodejs:nodejs /app/node_modules ./node_modules
-COPY --from=builder --chown=nodejs:nodejs /app/package.json ./package.json
+# Change ownership of app directory
+RUN chown -R nodejs:nodejs /app
 
 USER nodejs
 
 EXPOSE 5000
 
+ENV NODE_ENV=production
 ENV PORT=5000
 ENV HOST=0.0.0.0
 
