@@ -13,6 +13,7 @@ declare global {
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [showPreferences, setShowPreferences] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem('cookie-consent');
@@ -68,6 +69,23 @@ export function CookieBanner() {
     }
   };
 
+  // Show preferences button if consent was given but banner is hidden
+  if (!isVisible && localStorage.getItem('cookie-consent')) {
+    return (
+      <div className="fixed bottom-4 right-4 z-50">
+        <Button
+          onClick={() => setIsVisible(true)}
+          variant="outline"
+          size="sm"
+          className="bg-white dark:bg-gray-900 shadow-lg"
+        >
+          <Cookie className="h-4 w-4 mr-2" />
+          Cookie Preferences
+        </Button>
+      </div>
+    );
+  }
+
   if (!isVisible) return null;
 
   return (
@@ -96,7 +114,10 @@ export function CookieBanner() {
               <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                 We use cookies and similar technologies to enhance your browsing experience, 
                 analyze website traffic, and understand where our visitors are coming from. 
-                By clicking "Accept All", you consent to our use of cookies.
+                We also process your personal data (such as IP address, device information, and usage patterns) 
+                for analytics and website improvement purposes based on your consent (GDPR Art. 6(1)(a)). 
+                By clicking "Accept All", you consent to our use of cookies and processing of your personal data 
+                as described in our Privacy Policy. You can withdraw your consent at any time.
               </p>
               
               <div className="flex flex-wrap gap-2">
@@ -126,11 +147,11 @@ export function CookieBanner() {
                   <Shield className="h-5 w-5 text-green-600 mt-0.5" />
                   <div>
                     <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-1">
-                      Essential Cookies
+                      Essential Cookies & Data Processing
                     </h4>
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                       Required for basic website functionality, security, and user preferences. 
-                      These cannot be disabled.
+                      We process minimal data necessary for website operation. These cannot be disabled.
                     </p>
                   </div>
                 </div>
@@ -139,19 +160,22 @@ export function CookieBanner() {
                   <BarChart3 className="h-5 w-5 text-blue-600 mt-0.5" />
                   <div>
                     <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-1">
-                      Analytics Cookies
+                      Analytics Cookies & Personal Data Processing
                     </h4>
                     <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Help us understand how visitors interact with our website by collecting 
-                      and reporting information anonymously via Google Analytics.
+                      We collect and process personal data (IP address, device info, usage patterns) 
+                      via Google Analytics to understand website performance. Data is anonymized where possible 
+                      and processed lawfully under GDPR Article 6(1)(a) based on your consent.
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-                For more information about how we process your data, please see our{' '}
-                <a href="/privacy" className="underline hover:text-gray-700 dark:hover:text-gray-300">
+                <strong>Your Rights:</strong> You have the right to access, rectify, erase, restrict processing, 
+                data portability, and object to processing of your personal data. You can withdraw consent at any time. 
+                For more information about how we process your data and your rights under GDPR, please see our{' '}
+                <a href="/privacy-policy" className="underline hover:text-gray-700 dark:hover:text-gray-300">
                   Privacy Policy
                 </a>
                 . You can change your preferences at any time.
