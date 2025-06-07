@@ -358,48 +358,48 @@ export default function Journey() {
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-black))] via-[hsl(var(--dark-gray))] to-[hsl(var(--deep-black))]" />
       
-        {/* Header */}
-        <motion.header 
-          className="relative z-20 p-4 md:p-6 border-b border-[hsl(var(--border))]"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="container mx-auto max-w-4xl">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setLocation('/')}
-                  className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] flex items-center gap-2"
-                >
-                  <Home className="h-4 w-4" />
-                  <span className="hidden sm:inline">Home</span>
-                </Button>
-                <div className="text-center md:text-left">
-                  <h1 className="font-serif text-xl md:text-3xl font-bold text-[hsl(var(--silver-glow))]">
-                    Your Psychology Journey
-                  </h1>
-                  <p className="text-[hsl(var(--metallic-silver))] mt-1 text-sm md:text-base">
-                    Complete all levels to unlock your comprehensive psychological profile
-                  </p>
-                </div>
-              </div>
-              
-              <div className="text-center md:text-right">
-                <div className="flex items-center justify-center md:justify-end space-x-2 mb-2">
-                  <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-emerald-400" />
-                  <span className="font-semibold text-[hsl(var(--silver-glow))]">{getCompletedTestsCount()}/4</span>
-                  <span className="text-[hsl(var(--metallic-silver))] text-sm">Tests Complete</span>
-                </div>
-                <Progress value={getCompletionPercentage()} className="w-full md:w-32" />
+      {/* Header */}
+      <motion.header 
+        className="relative z-20 p-4 md:p-6 border-b border-[hsl(var(--border))]"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="container mx-auto max-w-4xl">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setLocation('/')}
+                className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] flex items-center gap-2"
+              >
+                <Home className="h-4 w-4" />
+                <span className="hidden sm:inline">Home</span>
+              </Button>
+              <div className="text-center md:text-left">
+                <h1 className="font-serif text-xl md:text-3xl font-bold text-[hsl(var(--silver-glow))]">
+                  Your Psychology Journey
+                </h1>
+                <p className="text-[hsl(var(--metallic-silver))] mt-1 text-sm md:text-base">
+                  Complete all levels to unlock your comprehensive psychological profile
+                </p>
               </div>
             </div>
+            
+            <div className="text-center md:text-right">
+              <div className="flex items-center justify-center md:justify-end space-x-2 mb-2">
+                <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-emerald-400" />
+                <span className="font-semibold text-[hsl(var(--silver-glow))]">{getCompletedTestsCount()}/4</span>
+                <span className="text-[hsl(var(--metallic-silver))] text-sm">Tests Complete</span>
+              </div>
+              <Progress value={getCompletionPercentage()} className="w-full md:w-32" />
+            </div>
           </div>
-        </motion.header>
+        </div>
+      </motion.header>
 
-        <div className="container mx-auto px-4 md:px-6 py-8 md:py-12 max-w-4xl">
+      <div className="relative z-10 container mx-auto px-4 md:px-6 py-8 md:py-12 max-w-4xl">
         
         {/* Journey Type Toggle */}
         <motion.div 
@@ -423,10 +423,7 @@ export default function Journey() {
                 setJourneyType(newType);
                 localStorage.setItem('currentJourneyType', newType);
               }}
-              className="scale-75 md:scale-100"
-              style={{
-                backgroundColor: journeyType === 'relationship' ? '#a855f7' : '#3b82f6'
-              }}
+              className="data-[state=checked]:bg-purple-500 scale-75 md:scale-100"
             />
             <div className={`flex items-center space-x-1 md:space-x-2 px-2 md:px-4 py-1.5 md:py-2 rounded-full transition-all duration-300 flex-1 md:flex-none justify-center ${
               journeyType === 'relationship' ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400'
@@ -455,59 +452,19 @@ export default function Journey() {
           </p>
         </motion.div>
         
-        {/* Journey Ladder with Enhanced Animations */}
+        {/* Journey Ladder */}
         <div className="relative">
-          {/* Animated Connecting Line - Hidden on mobile */}
-          <div className="hidden md:block absolute left-12 top-8 bottom-8 w-1 overflow-hidden">
-            {/* Base line */}
-            <div className={`absolute inset-0 bg-gradient-to-b opacity-20 ${
-              journeyType === 'relationship' 
-                ? 'from-purple-400 via-red-400 via-emerald-400 to-amber-400'
-                : 'from-blue-400 via-pink-400 via-emerald-400 to-yellow-400'
-            }`}></div>
-            
-            {/* Animated progress line */}
-            <motion.div 
-              className={`absolute top-0 left-0 w-full bg-gradient-to-b ${
-                journeyType === 'relationship' 
-                  ? 'from-purple-400 via-red-400 via-emerald-400 to-amber-400'
-                  : 'from-blue-400 via-pink-400 via-emerald-400 to-yellow-400'
-              }`}
-              initial={{ height: '0%' }}
-              animate={{ height: `${(getCompletedTestsCount() / 4) * 100}%` }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-            />
-            
-            {/* Flowing particles */}
-            {Array.from({ length: 3 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className={`absolute w-2 h-2 rounded-full ${
-                  journeyType === 'relationship' ? 'bg-purple-400' : 'bg-blue-400'
-                } opacity-60`}
-                animate={{
-                  y: [0, '100vh'],
-                  opacity: [0, 1, 0]
-                }}
-                transition={{
-                  duration: 3,
-                  delay: i * 1,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                style={{ left: '-0.125rem' }}
-              />
-            ))}
-          </div>
-          
-          {/* Mobile connecting dots */}
-          <div className="md:hidden absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-gray-600 to-gray-800 opacity-30"></div>
+          {/* Connecting Line - Hidden on mobile */}
+          <div className={`hidden md:block absolute left-12 top-8 bottom-8 w-1 bg-gradient-to-b opacity-30 ${
+            journeyType === 'relationship' 
+              ? 'from-purple-400 via-red-400 via-emerald-400 to-amber-400'
+              : 'from-blue-400 via-pink-400 via-emerald-400 to-yellow-400'
+          }`}></div>
           
           <div className="space-y-4 md:space-y-8">
             {(journeyType === 'relationship' ? relationshipTests : singleTests).map((test, index) => {
               const status = getTestStatus(index);
               const completed = isTestCompleted(test.id);
-              const isActive = status === 'available' && !completed;
               
               return (
                 <motion.div
@@ -517,234 +474,99 @@ export default function Journey() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="relative"
                 >
-                  {/* Connection line to next test */}
-                  {index < 3 && (
-                    <motion.div
-                      className={`hidden md:block absolute left-12 top-16 w-1 h-16 bg-gradient-to-b ${
-                        completed 
-                          ? journeyType === 'relationship'
-                            ? 'from-purple-400 to-red-400'
-                            : 'from-blue-400 to-pink-400'
-                          : 'from-gray-600 to-gray-800'
-                      } opacity-30`}
-                      initial={{ scaleY: 0 }}
-                      animate={{ scaleY: completed ? 1 : 0.3 }}
-                      transition={{ duration: 0.8, delay: 0.5 }}
-                    />
-                  )}
-
-                  {/* Level Indicator with enhanced animations */}
-                  <motion.div 
-                    className={`absolute left-2 md:left-8 top-4 md:top-8 w-6 h-6 md:w-8 md:h-8 rounded-full border-2 md:border-4 flex items-center justify-center z-10 ${
-                      completed ? `${test.borderColor} bg-gradient-to-br ${test.bgGradient} shadow-lg` : 
-                      status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600' : 
-                      `${test.borderColor} bg-[hsl(var(--deep-black))] hover:bg-gradient-to-br hover:${test.bgGradient}`
-                    }`}
-                    animate={isActive ? {
-                      scale: [1, 1.1, 1],
-                      boxShadow: [
-                        '0 0 0 0 rgba(0, 0, 0, 0)',
-                        '0 0 0 10px rgba(147, 197, 253, 0.2)',
-                        '0 0 0 0 rgba(0, 0, 0, 0)'
-                      ]
-                    } : {}}
-                    transition={isActive ? {
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    } : {}}
-                    whileHover={status === 'available' ? { scale: 1.1 } : {}}
-                  >
+                  {/* Level Indicator - Responsive positioning */}
+                  <div className={`absolute left-2 md:left-8 top-4 md:top-8 w-6 h-6 md:w-8 md:h-8 rounded-full border-2 md:border-4 ${test.borderColor} flex items-center justify-center z-10 ${
+                    completed ? `bg-gradient-to-br ${test.bgGradient}` : 
+                    status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600' : 
+                    'bg-[hsl(var(--deep-black))]'
+                  }`}>
                     {completed ? (
-                      <motion.div
-                        initial={{ scale: 0, rotate: -180 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.5, type: "spring" }}
-                      >
-                        <CheckCircle className={`h-3 w-3 md:h-4 md:w-4 ${test.color}`} />
-                      </motion.div>
+                      <CheckCircle className={`h-3 w-3 md:h-4 md:w-4 ${test.color}`} />
                     ) : status === 'locked' ? (
                       <Lock className="h-3 w-3 md:h-4 md:w-4 text-gray-500" />
                     ) : (
-                      <motion.div 
-                        className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-current ${test.color}`}
-                        animate={isActive ? {
-                          scale: [1, 1.5, 1],
-                          opacity: [0.7, 1, 0.7]
-                        } : {}}
-                        transition={isActive ? {
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        } : {}}
-                      />
+                      <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-current ${test.color}`} />
                     )}
-                  </motion.div>
+                  </div>
 
-                  {/* Step number badge */}
-                  <motion.div
-                    className={`absolute -left-1 md:left-5 -top-2 md:-top-3 w-5 h-5 md:w-6 md:h-6 rounded-full text-xs md:text-sm font-bold flex items-center justify-center ${
-                      completed 
-                        ? `${test.color} bg-gradient-to-br ${test.bgGradient}`
-                        : status === 'locked'
-                        ? 'bg-gray-600 text-gray-300'
-                        : `${test.color} bg-[hsl(var(--dark-gray))]`
-                    } border border-[hsl(var(--border))] z-20`}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 + 0.3 }}
-                  >
-                    {index + 1}
-                  </motion.div>
-
-                  {/* Test Card - Enhanced with ladder animations */}
-                  <motion.div
-                    className={`ml-10 md:ml-20 ${status === 'available' ? 'cursor-pointer' : ''}`}
-                    whileHover={status === 'available' ? { 
-                      scale: 1.02,
-                      transition: { duration: 0.2 }
-                    } : {}}
-                    animate={isActive ? {
-                      y: [0, -2, 0],
-                    } : {}}
-                    transition={isActive ? {
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    } : {}}
-                  >
-                    <Card className={`${
-                      completed ? `bg-gradient-to-r ${test.bgGradient} border-${test.borderColor.split('-')[1]}-400 shadow-lg` :
-                      status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600 opacity-60' :
-                      `bg-gradient-to-r ${test.bgGradient} border-[hsl(var(--border))] hover:border-[hsl(var(--metallic-silver)/0.5)] hover:shadow-glow`
-                    } transition-all duration-300 relative overflow-hidden`}>
-                      
-                      {/* Shimmer effect for active test */}
-                      {isActive && (
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                          animate={{
-                            x: ['-100%', '100%']
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "linear"
-                          }}
-                        />
-                      )}
-                      
-                      {/* Completion celebration particles */}
-                      {completed && (
-                        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                          {Array.from({ length: 5 }).map((_, i) => (
-                            <motion.div
-                              key={i}
-                              className={`absolute w-1 h-1 ${test.color} rounded-full`}
-                              initial={{ 
-                                x: `${20 + i * 15}%`,
-                                y: '100%',
-                                opacity: 0
-                              }}
-                              animate={{
-                                y: ['100%', '0%', '100%'],
-                                opacity: [0, 1, 0],
-                                scale: [0, 1, 0]
-                              }}
-                              transition={{
-                                duration: 1.5,
-                                delay: i * 0.1,
-                                repeat: Infinity,
-                                repeatDelay: 3
-                              }}
-                            />
-                          ))}
-                        </div>
-                      )}
-                      
-                      <CardHeader className="pb-3 md:pb-4 p-4 md:p-6 relative z-10">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2 md:space-x-4 flex-1">
-                            <motion.div 
-                              className={`w-8 h-8 md:w-12 md:h-12 rounded-full ${status === 'locked' ? 'bg-gray-600' : `bg-gradient-to-br ${test.bgGradient}`} flex items-center justify-center ${test.color} flex-shrink-0`}
-                              animate={isActive ? {
-                                rotate: [0, 5, -5, 0]
-                              } : {}}
-                              transition={isActive ? {
-                                duration: 2,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                              } : {}}
-                            >
-                              <div className="scale-75 md:scale-100">
-                                {test.icon}
-                              </div>
-                            </motion.div>
-                            <div className="min-w-0 flex-1">
-                              <Badge variant="outline" className={`${test.color} border-current mb-1 md:mb-2 text-xs`}>
-                                {test.subtitle}
-                              </Badge>
-                              <h3 className="font-serif text-base md:text-xl font-bold text-[hsl(var(--silver-glow))] leading-tight">
-                                {test.title}
-                              </h3>
+                  {/* Test Card - Responsive margins */}
+                  <Card className={`ml-10 md:ml-20 ${
+                    completed ? `bg-gradient-to-r ${test.bgGradient} border-${test.borderColor.split('-')[1]}-400` :
+                    status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600 opacity-60' :
+                    `bg-gradient-to-r ${test.bgGradient} border-[hsl(var(--border))] hover:border-[hsl(var(--metallic-silver)/0.5)]`
+                  } transition-all duration-300 ${status === 'available' ? 'hover:shadow-glow cursor-pointer' : ''}`}>
+                    <CardHeader className="pb-3 md:pb-4 p-4 md:p-6">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2 md:space-x-4 flex-1">
+                          <div className={`w-8 h-8 md:w-12 md:h-12 rounded-full ${status === 'locked' ? 'bg-gray-600' : `bg-gradient-to-br ${test.bgGradient}`} flex items-center justify-center ${test.color} flex-shrink-0`}>
+                            <div className="scale-75 md:scale-100">
+                              {test.icon}
                             </div>
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <Badge variant="outline" className={`${test.color} border-current mb-1 md:mb-2 text-xs`}>
+                              {test.subtitle}
+                            </Badge>
+                            <h3 className="font-serif text-base md:text-xl font-bold text-[hsl(var(--silver-glow))] leading-tight">
+                              {test.title}
+                            </h3>
+                          </div>
+                        </div>
+                        
+                        {completed && (
+                          <div className="text-center flex-shrink-0 ml-2">
+                            <Award className={`h-6 w-6 md:h-8 md:w-8 ${test.color} mx-auto mb-1`} />
+                            <div className="text-xs md:text-sm font-semibold text-[hsl(var(--silver-glow))]">
+                              +{test.points} pts
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </CardHeader>
+                    
+                    <CardContent className="p-4 md:p-6 pt-0">
+                      <p className="text-[hsl(var(--metallic-silver))] mb-3 md:mb-4 leading-relaxed text-sm md:text-base">
+                        {status === 'locked' ? 'Complete previous levels to unlock' : test.description}
+                      </p>
+                      
+                      {status === 'available' && (
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                          <div className="flex items-center space-x-2 text-[hsl(var(--metallic-silver))] text-sm">
+                            <Clock className="h-4 w-4" />
+                            <span>{test.duration}</span>
                           </div>
                           
-                          {completed && (
-                            <div className="text-center flex-shrink-0 ml-2">
-                              <Award className={`h-6 w-6 md:h-8 md:w-8 ${test.color} mx-auto mb-1`} />
-                              <div className="text-xs md:text-sm font-semibold text-[hsl(var(--silver-glow))]">
-                                +{test.points} pts
-                              </div>
-                            </div>
+                          {completed ? (
+                            <Button
+                              onClick={() => viewResult(test.id)}
+                              size="default"
+                              className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
+                            >
+                              View Results
+                              <ChevronUp className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+                            </Button>
+                          ) : (
+                            <Button
+                              onClick={() => startTest(test.route)}
+                              size="default"
+                              className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
+                            >
+                              {index === 0 ? 'Begin Journey' : 'Start Level'}
+                              <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+                            </Button>
                           )}
                         </div>
-                      </CardHeader>
+                      )}
                       
-                      <CardContent className="p-4 md:p-6 pt-0 relative z-10">
-                        <p className="text-[hsl(var(--metallic-silver))] mb-3 md:mb-4 leading-relaxed text-sm md:text-base">
-                          {status === 'locked' ? 'Complete previous levels to unlock' : test.description}
-                        </p>
-                        
-                        {status === 'available' && (
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                            <div className="flex items-center space-x-2 text-[hsl(var(--metallic-silver))] text-sm">
-                              <Clock className="h-4 w-4" />
-                              <span>{test.duration}</span>
-                            </div>
-                            
-                            {completed ? (
-                              <Button
-                                onClick={() => viewResult(test.id)}
-                                size="default"
-                                className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
-                              >
-                                View Results
-                                <ChevronUp className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-                              </Button>
-                            ) : (
-                              <Button
-                                onClick={() => startTest(test.route)}
-                                size="default"
-                                className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
-                              >
-                                {index === 0 ? 'Begin Journey' : 'Start Level'}
-                                <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-                              </Button>
-                            )}
-                          </div>
-                        )}
-                        
-                        {status === 'locked' && (
-                          <div className="text-center py-4">
-                            <p className="text-[hsl(var(--metallic-silver))] text-sm italic">
-                              {test.unlockMessage}
-                            </p>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </motion.div>
+                      {status === 'locked' && (
+                        <div className="text-center py-4">
+                          <p className="text-[hsl(var(--metallic-silver))] text-sm italic">
+                            {test.unlockMessage}
+                          </p>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
                 </motion.div>
               );
             })}
@@ -890,7 +712,8 @@ export default function Journey() {
           )}
         </AnimatePresence>
 
-        </div>
+
       </div>
-    );
-  }
+    </div>
+  );
+}
