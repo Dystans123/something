@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { AdSense } from "@/components/ui/adsense";
 import { 
   ArrowRight, 
   Brain, 
@@ -638,6 +639,16 @@ export default function Journey() {
                       </p>
                     </div>
                   </div>
+
+                  {/* AdSense - Between tests after continuing journey */}
+                  {Object.values(progress).some(Boolean) && !showSummary && (
+                    <div className="mb-8">
+                      <AdSense 
+                        adSlot="2345678901"
+                        className="max-w-2xl mx-auto"
+                      />
+                    </div>
+                  )}
 
                   {/* Action Buttons */}
                   <div className="flex flex-col gap-3 justify-center px-6 sm:px-8">

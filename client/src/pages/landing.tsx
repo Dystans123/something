@@ -4,6 +4,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AdSense } from "@/components/ui/adsense";
 import { ArrowRight, Brain, Shield, Users, Lightbulb, Clock, CheckCircle, Target, Heart, Eye, Compass, Zap } from "lucide-react";
 
 interface ToolCard {
@@ -409,6 +410,20 @@ export default function Landing() {
               </div>
             </motion.div>
           </div>
+        </motion.section>
+
+        {/* AdSense - After Hero Section */}
+        <motion.section 
+          className="mb-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <AdSense 
+            adSlot="1234567890"
+            className="max-w-4xl mx-auto"
+          />
         </motion.section>
 
         {/* Why Self-Discovery Matters Section */}
