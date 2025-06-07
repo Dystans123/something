@@ -189,20 +189,20 @@ export default function IntelligenceMap() {
                   >
                     <Button
                       variant="outline"
-                      className={`w-full p-4 md:p-6 h-auto text-left justify-start transition-all duration-300 ${
+                      className={`w-full p-3 md:p-4 h-auto text-left justify-start transition-all duration-300 ${
                         selectedAnswer?.optionIndex === index
                           ? 'bg-blue-500/20 border-blue-400 text-blue-300 shadow-lg'
                           : 'bg-[hsl(var(--dark-gray))]/30 border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))] hover:border-blue-400/50 hover:bg-blue-500/10'
                       }`}
                       onClick={() => handleAnswer(index)}
                     >
-                      <div className="flex items-start w-full">
-                        <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 mr-3 md:mr-4 mt-0.5 flex-shrink-0 ${
+                      <div className="flex items-start w-full min-h-0">
+                        <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 mr-3 md:mr-4 mt-1 flex-shrink-0 ${
                           selectedAnswer?.optionIndex === index
                             ? 'bg-blue-400 border-blue-400'
                             : 'border-gray-500'
                         }`} />
-                        <span className="text-sm md:text-base leading-relaxed">{option.text}</span>
+                        <span className="text-sm md:text-base leading-relaxed break-words hyphens-auto flex-1 min-w-0">{option.text}</span>
                       </div>
                     </Button>
                   </motion.div>
@@ -212,39 +212,23 @@ export default function IntelligenceMap() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation */}
-        <motion.div 
-          className="flex justify-between items-center mt-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <Button
-            variant="outline"
-            onClick={previousQuestion}
-            disabled={state.currentQuestionIndex === 0}
-            className="px-6 py-3"
+        {/* Previous Question Arrow */}
+        {state.currentQuestionIndex > 0 && (
+          <motion.div 
+            className="flex justify-start mt-6"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Previous
-          </Button>
-          
-          <div className="text-center">
-            <div className="text-sm text-[hsl(var(--metallic-silver))] mb-2">
-              Question {state.currentQuestionIndex + 1} of {intelligenceMapQuestions.length}
-            </div>
-            <Progress value={progress} className="w-48" />
-          </div>
-          
-          <Button
-            onClick={nextQuestion}
-            disabled={!canIntelligenceMapProceed(state.answers, state.currentQuestionIndex)}
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0"
-          >
-            {state.currentQuestionIndex === intelligenceMapQuestions.length - 1 ? 'Complete' : 'Next'}
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </motion.div>
+            <Button
+              variant="ghost"
+              onClick={previousQuestion}
+              className="text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] p-2"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+          </motion.div>
+        )}
       </div>
     </div>
   );
