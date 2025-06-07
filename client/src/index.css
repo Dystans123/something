@@ -31,6 +31,29 @@
   --dark-gray: 0 0% 10%; /* #1A1A1A */
 }
 
+/* Enhanced text wrapping for answer cards */
+.break-words {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.hyphens-auto {
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+/* Ensure flex containers handle overflow properly */
+.flex-1 {
+  min-width: 0;
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+
 .dark {
   --background: 0 0% 4%; /* #0A0A0A */
   --foreground: 0 0% 89%; /* #E5E5E5 */
