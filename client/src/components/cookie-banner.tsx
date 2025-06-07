@@ -69,33 +69,16 @@ export function CookieBanner() {
     }
   };
 
-  // Show preferences button if consent was given but banner is hidden
-  if (!isVisible && localStorage.getItem('cookie-consent')) {
-    return (
-      <div className="fixed bottom-4 right-4 z-50">
-        <Button
-          onClick={() => setIsVisible(true)}
-          variant="outline"
-          size="sm"
-          className="bg-white dark:bg-gray-900 shadow-lg"
-        >
-          <Cookie className="h-4 w-4 mr-2" />
-          Cookie Preferences
-        </Button>
-      </div>
-    );
-  }
-
   if (!isVisible) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
       <Card className="max-w-4xl mx-auto bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-lg">
-        <div className="p-6">
-          <div className="flex items-start justify-between mb-4">
+        <div className="p-4">
+          <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Cookie className="h-5 w-5 text-amber-600" />
-              <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+              <Cookie className="h-4 w-4 text-amber-600" />
+              <h3 className="font-medium text-gray-900 dark:text-gray-100">
                 We use cookies
               </h3>
             </div>
@@ -103,21 +86,17 @@ export function CookieBanner() {
               variant="ghost"
               size="sm"
               onClick={() => setIsVisible(false)}
-              className="h-8 w-8 p-0"
+              className="h-6 w-6 p-0"
             >
-              <X className="h-4 w-4" />
+              <X className="h-3 w-3" />
             </Button>
           </div>
 
           {!showDetails ? (
             <>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                We use cookies and similar technologies to enhance your browsing experience, 
-                analyze website traffic, and understand where our visitors are coming from. 
-                We also process your personal data (such as IP address, device information, and usage patterns) 
-                for analytics and website improvement purposes based on your consent (GDPR Art. 6(1)(a)). 
-                By clicking "Accept All", you consent to our use of cookies and processing of your personal data 
-                as described in our Privacy Policy. You can withdraw your consent at any time.
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
+                We use cookies to improve your experience and analyze website traffic. 
+                By clicking "Accept All", you consent to cookies and data processing.
               </p>
               
               <div className="flex flex-wrap gap-2">
