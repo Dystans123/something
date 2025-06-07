@@ -175,7 +175,7 @@ export default function Landing() {
       
       {/* Navigation */}
       <motion.nav 
-        className="relative z-20 flex justify-between items-center p-6 border-b border-[hsl(var(--border))]"
+
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -183,10 +183,8 @@ export default function Landing() {
         <div className="flex items-center space-x-2">
           
         </div>
-        <h1 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))]">
-          Eight Paths to Self-Discovery
-        </h1>
-        <div className="w-50"></div> {/* Spacer for centering */}
+
+        
       </motion.nav>
 
       {/* Main Content */}
@@ -776,19 +774,6 @@ export default function Landing() {
                 <div className="text-sm text-[hsl(var(--metallic-silver))]">Trusted by</div>
                 <div className="font-semibold text-[hsl(var(--silver-glow))]">50,000+</div>
                 <div className="text-sm text-[hsl(var(--metallic-silver))]">individuals</div>
-              </div>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="font-semibold text-[hsl(var(--silver-glow))] mb-3">Kontakt</h4>
-              <div className="space-y-2">
-                <a 
-                  href="mailto:districteleven.pl@gmail.com"
-                  className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors"
-                >
-                  districteleven.pl@gmail.com
-                </a>
               </div>
             </div>
 
