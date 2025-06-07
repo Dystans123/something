@@ -125,11 +125,11 @@ export default function Results() {
     }
     localStorage.setItem('psychTestResults', JSON.stringify(results));
     
-    setLocation("/journey");
+    setLocation("/journey?type=relationship");
   };
 
   const backToJourney = () => {
-    setLocation("/journey");
+    setLocation("/journey?type=relationship");
   };
 
   // Format description into sections

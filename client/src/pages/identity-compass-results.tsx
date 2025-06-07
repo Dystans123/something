@@ -68,11 +68,11 @@ export default function IdentityCompassResults() {
     }
     localStorage.setItem('psychTestResults', JSON.stringify(results));
     
-    setLocation("/journey");
+    setLocation("/journey?type=single");
   };
 
   const backToJourney = () => {
-    setLocation("/journey");
+    setLocation("/journey?type=single");
   };
 
   return (

@@ -67,11 +67,11 @@ export default function IntelligenceMapResults() {
     }
     localStorage.setItem('psychTestResults', JSON.stringify(results));
     
-    setLocation("/journey");
+    setLocation("/journey?type=single");
   };
 
   const backToJourney = () => {
-    setLocation("/journey");
+    setLocation("/journey?type=single");
   };
 
   return (

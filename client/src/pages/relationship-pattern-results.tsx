@@ -121,11 +121,11 @@ export default function RelationshipPatternResults() {
     }
     localStorage.setItem('psychTestResults', JSON.stringify(results));
     
-    setLocation("/journey");
+    setLocation("/journey?type=relationship");
   };
 
   const backToJourney = () => {
-    setLocation("/journey");
+    setLocation("/journey?type=relationship");
   };
 
   const getPatternColor = (patternKey: string) => {

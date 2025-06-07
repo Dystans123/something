@@ -117,11 +117,11 @@ export default function ToxicityResults() {
     }
     localStorage.setItem('psychTestResults', JSON.stringify(results));
     
-    setLocation("/journey");
+    setLocation("/journey?type=relationship");
   };
 
   const backToJourney = () => {
-    setLocation("/journey");
+    setLocation("/journey?type=relationship");
   };
 
   const getToxicityExplanation = (zone: string) => {
