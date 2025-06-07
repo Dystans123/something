@@ -61,10 +61,11 @@ export default function InnerDriver() {
 
     // Auto-advance after a short delay
     setTimeout(() => {
-      if (state.currentQuestionIndex < innerDriverQuestions.length - 1) {
+      const nextQuestionIndex = state.currentQuestionIndex + 1;
+      if (nextQuestionIndex < innerDriverQuestions.length) {
         setState(prev => ({
           ...prev,
-          currentQuestionIndex: prev.currentQuestionIndex + 1
+          currentQuestionIndex: nextQuestionIndex
         }));
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {

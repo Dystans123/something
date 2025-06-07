@@ -39,8 +39,9 @@ export default function ToxicityCompass() {
 
     // Auto-advance after a short delay
     setTimeout(() => {
-      if (currentQuestionIndex < toxicityQuestions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
+      const nextQuestionIndex = currentQuestionIndex + 1;
+      if (nextQuestionIndex < toxicityQuestions.length) {
+        setCurrentQuestionIndex(nextQuestionIndex);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         // Test complete, go to results

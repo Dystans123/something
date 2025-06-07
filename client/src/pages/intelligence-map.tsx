@@ -93,10 +93,11 @@ export default function IntelligenceMap() {
 
     // Auto-advance after a short delay
     setTimeout(() => {
-      if (state.currentQuestionIndex < intelligenceMapQuestions.length - 1) {
+      const nextQuestionIndex = state.currentQuestionIndex + 1;
+      if (nextQuestionIndex < intelligenceMapQuestions.length) {
         setState(prev => ({
           ...prev,
-          currentQuestionIndex: prev.currentQuestionIndex + 1
+          currentQuestionIndex: nextQuestionIndex
         }));
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
