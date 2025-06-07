@@ -23,11 +23,41 @@ export default function IdentityCompass() {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem('identityCompassState');
-    if (saved) {
-      setState(JSON.parse(saved));
+    try {
+      // Check if test is already completed
+      const savedProgress = localStorage.getItem('psychTestProgress');
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        if (progress.identityCompass) {
+          setLocation('/identity-compass-results');
+          return;
+        }
+      }
+
+      // Load saved test state
+      const saved = localStorage.getItem('identityCompassState');
+      if (saved) {
+        const parsedState = JSON.parse(saved);
+        if (parsedState && 
+            typeof parsedState.currentQuestionIndex === 'number' &&
+            Array.isArray(parsedState.answers) &&
+            parsedState.currentQuestionIndex >= 0 &&
+            parsedState.currentQuestionIndex < identityCompassQuestions.length) {
+          setState(parsedState);
+        }
+      }
+
+      // Check if results already exist
+      const savedResults = localStorage.getItem('identityCompassResult');
+      if (savedResults) {
+        setLocation('/identity-compass-results');
+      }
+    } catch (error) {
+      console.warn('Error loading identity compass state:', error);
+      localStorage.removeItem('identityCompassState');
+      localStorage.removeItem('identityCompassResult');
     }
-  }, []);
+  }, [setLocation]);
 
   useEffect(() => {
     localStorage.setItem('identityCompassState', JSON.stringify(state));

@@ -18,6 +18,44 @@ export default function ToxicityCompass() {
   const canGoNext = selectedOption !== null;
   const canGoPrev = currentQuestionIndex > 0;
 
+  // Load saved state on component mount
+  useEffect(() => {
+    try {
+      // Check if test is already completed
+      const savedProgress = localStorage.getItem('psychTestProgress');
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        if (progress.toxicityCompass) {
+          // Test already completed, redirect to results
+          setLocation('/toxicity-results');
+          return;
+        }
+      }
+
+      // Load saved test state
+      const savedState = localStorage.getItem('toxicityCompassState');
+      if (savedState) {
+        const state = JSON.parse(savedState);
+        if (state.currentQuestionIndex !== undefined && Array.isArray(state.answers)) {
+          setCurrentQuestionIndex(state.currentQuestionIndex);
+          setAnswers(state.answers);
+        }
+      }
+    } catch (error) {
+      console.warn('Error loading toxicity compass state:', error);
+      localStorage.removeItem('toxicityCompassState');
+    }
+  }, [setLocation]);
+
+  // Save state whenever it changes
+  useEffect(() => {
+    const state = {
+      currentQuestionIndex,
+      answers
+    };
+    localStorage.setItem('toxicityCompassState', JSON.stringify(state));
+  }, [currentQuestionIndex, answers]);
+
   // Load previous answer if exists
   useEffect(() => {
     const existingAnswer = answers.find(a => a.questionIndex === currentQuestionIndex);

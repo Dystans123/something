@@ -23,11 +23,41 @@ export default function InnerDriver() {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem('innerDriverState');
-    if (saved) {
-      setState(JSON.parse(saved));
+    try {
+      // Check if test is already completed
+      const savedProgress = localStorage.getItem('psychTestProgress');
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        if (progress.innerDriver) {
+          setLocation('/inner-driver-results');
+          return;
+        }
+      }
+
+      // Load saved test state
+      const saved = localStorage.getItem('innerDriverState');
+      if (saved) {
+        const parsedState = JSON.parse(saved);
+        if (parsedState && 
+            typeof parsedState.currentQuestionIndex === 'number' &&
+            Array.isArray(parsedState.answers) &&
+            parsedState.currentQuestionIndex >= 0 &&
+            parsedState.currentQuestionIndex < innerDriverQuestions.length) {
+          setState(parsedState);
+        }
+      }
+
+      // Check if results already exist
+      const savedResults = localStorage.getItem('innerDriverResult');
+      if (savedResults) {
+        setLocation('/inner-driver-results');
+      }
+    } catch (error) {
+      console.warn('Error loading inner driver state:', error);
+      localStorage.removeItem('innerDriverState');
+      localStorage.removeItem('innerDriverResult');
     }
-  }, []);
+  }, [setLocation]);
 
   useEffect(() => {
     localStorage.setItem('innerDriverState', JSON.stringify(state));

@@ -42,11 +42,19 @@ export default function IntelligenceMap() {
           localStorage.removeItem('intelligenceMapState');
         }
       }
+      
+      // Check if test is already completed
+      const savedResults = localStorage.getItem('intelligenceMapResult');
+      if (savedResults) {
+        // Redirect to results page if test is already completed
+        setLocation('/intelligence-map-results');
+      }
     } catch (error) {
       console.warn('Error loading intelligence map state:', error);
       localStorage.removeItem('intelligenceMapState');
+      localStorage.removeItem('intelligenceMapResult');
     }
-  }, []);
+  }, [setLocation]);
 
   useEffect(() => {
     // Save progress

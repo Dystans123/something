@@ -23,11 +23,41 @@ export default function AttachmentStyle() {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem('attachmentStyleState');
-    if (saved) {
-      setState(JSON.parse(saved));
+    try {
+      // Check if test is already completed
+      const savedProgress = localStorage.getItem('psychTestProgress');
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        if (progress.attachmentStyle) {
+          setLocation('/attachment-style-results');
+          return;
+        }
+      }
+
+      // Load saved test state
+      const saved = localStorage.getItem('attachmentStyleState');
+      if (saved) {
+        const parsedState = JSON.parse(saved);
+        if (parsedState && 
+            typeof parsedState.currentQuestionIndex === 'number' &&
+            Array.isArray(parsedState.answers) &&
+            parsedState.currentQuestionIndex >= 0 &&
+            parsedState.currentQuestionIndex < attachmentStyleQuestions.length) {
+          setState(parsedState);
+        }
+      }
+
+      // Check if results already exist
+      const savedResults = localStorage.getItem('attachmentStyleResult');
+      if (savedResults) {
+        setLocation('/attachment-style-results');
+      }
+    } catch (error) {
+      console.warn('Error loading attachment style state:', error);
+      localStorage.removeItem('attachmentStyleState');
+      localStorage.removeItem('attachmentStyleResult');
     }
-  }, []);
+  }, [setLocation]);
 
   useEffect(() => {
     localStorage.setItem('attachmentStyleState', JSON.stringify(state));
