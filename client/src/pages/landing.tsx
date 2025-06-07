@@ -180,14 +180,12 @@ export default function Landing() {
         transition={{ duration: 0.8 }}
       >
         <div className="flex items-center space-x-2">
-          <Badge variant="outline" className="text-[hsl(var(--metallic-silver))] border-[hsl(var(--metallic-silver))]">
-            Comprehensive Assessment Suite
-          </Badge>
+          
         </div>
         <h1 className="font-serif text-2xl font-bold text-[hsl(var(--silver-glow))]">
-          Four Paths to Self-Discovery
+          Eight Paths to Self-Discovery
         </h1>
-        <div className="w-48"></div> {/* Spacer for centering */}
+        <div className="w-50"></div> {/* Spacer for centering */}
       </motion.nav>
 
       {/* Main Content */}
@@ -735,7 +733,7 @@ export default function Landing() {
               
               <div className="text-center">
                 <p className="text-sm text-[hsl(var(--metallic-silver))] mb-1">Free • No signup required • Instant results</p>
-                <p className="text-xs text-[hsl(var(--metallic-silver))]/70">Takes 10-15 minutes</p>
+                <p className="text-xs text-[hsl(var(--metallic-silver))]/70"></p>
               </div>
             </div>
 
