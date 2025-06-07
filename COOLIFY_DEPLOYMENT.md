@@ -1,10 +1,13 @@
-# Coolify Deployment Guide
+# Coolify Deployment Solution
 
-## Problem Solved
-Fixed the Docker deployment error where Vite was being imported in production builds, causing `ERR_MODULE_NOT_FOUND` errors.
+## Problem Fixed
+Resolved the Docker deployment error: `Cannot find package 'vite' imported from /app/dist/index.js`
 
-## Solution Overview
-Created a production-specific server build that excludes Vite dependencies and uses only production-ready modules.
+## Root Cause
+The original build process was bundling Vite development dependencies into the production server, but Vite is only available during the build stage, not in the production container.
+
+## Solution
+Created a dedicated production server entry point (`server/index-production.ts`) that completely avoids Vite imports and uses the corrected Dockerfile build process.
 
 ## Deployment Files
 
