@@ -38,6 +38,18 @@ export default function IntelligenceMap() {
   const currentQuestion = intelligenceMapQuestions[state.currentQuestionIndex];
   const progress = getIntelligenceMapProgress(state.currentQuestionIndex);
 
+  // Handle case where currentQuestion might be undefined
+  if (!currentQuestion) {
+    return (
+      <div className="min-h-screen bg-[hsl(var(--deep-black))] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400 mx-auto mb-4"></div>
+          <p className="text-lg text-[hsl(var(--silver-glow))]">Loading questions...</p>
+        </div>
+      </div>
+    );
+  }
+
   const handleAnswer = (optionIndex: number) => {
     const option = currentQuestion.options[optionIndex];
     const answer: IntelligenceMapAnswer = {

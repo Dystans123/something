@@ -711,27 +711,48 @@ export default function ComprehensiveSummary() {
 
   useEffect(() => {
     // Load and process actual test results
-    const savedResults = localStorage.getItem('psychTestResults');
-    const savedProgress = localStorage.getItem('psychTestProgress');
-    
-    if (savedResults && savedProgress) {
-      const results: TestResult[] = JSON.parse(savedResults);
-      const progress = JSON.parse(savedProgress);
+    try {
+      const savedResults = localStorage.getItem('psychTestResults');
+      const savedProgress = localStorage.getItem('psychTestProgress');
       
-      // Only generate profile if all tests are completed
-      const allCompleted = progress.shadowTest && progress.toxicityCompass && 
-                          progress.relationshipPatterns && progress.integrationGuide;
-      
-      if (allCompleted) {
-        const comprehensiveProfile = generateComprehensiveProfile(results);
-        setProfile(comprehensiveProfile);
-        setTimeout(() => setShowDetails(true), 1000);
+      if (savedResults && savedProgress) {
+        const results: TestResult[] = JSON.parse(savedResults);
+        const progress = JSON.parse(savedProgress);
+        
+        // Validate that results array is properly formed
+        if (Array.isArray(results) && typeof progress === 'object') {
+          // Only generate profile if all tests are completed
+          const allCompleted = progress.shadowTest && progress.toxicityCompass && 
+                              progress.relationshipPatterns && progress.integrationGuide;
+          
+          if (allCompleted && results.length >= 4) {
+            const comprehensiveProfile = generateComprehensiveProfile(results);
+            setProfile(comprehensiveProfile);
+            setTimeout(() => setShowDetails(true), 1000);
+          } else {
+            // For demonstration purposes, create a sample profile to show the comprehensive analysis
+            const demoProfile = generateDemoProfile();
+            setProfile(demoProfile);
+            setTimeout(() => setShowDetails(true), 1000);
+          }
+        } else {
+          // Data corruption detected, create demo profile
+          const demoProfile = generateDemoProfile();
+          setProfile(demoProfile);
+          setTimeout(() => setShowDetails(true), 1000);
+        }
       } else {
-        // For demonstration purposes, create a sample profile to show the comprehensive analysis
+        // No saved data, create demo profile
         const demoProfile = generateDemoProfile();
         setProfile(demoProfile);
         setTimeout(() => setShowDetails(true), 1000);
       }
+    } catch (error) {
+      console.warn('Error loading test results, using demo profile:', error);
+      // Fallback to demo profile if localStorage data is corrupted
+      const demoProfile = generateDemoProfile();
+      setProfile(demoProfile);
+      setTimeout(() => setShowDetails(true), 1000);
     }
     
     setLoading(false);

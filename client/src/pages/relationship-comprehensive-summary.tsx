@@ -21,19 +21,30 @@ export default function RelationshipComprehensiveSummary() {
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Load all test results from localStorage
-    const savedResults = localStorage.getItem('psychTestResults');
-    if (savedResults) {
-      const allResults = JSON.parse(savedResults);
-      // Filter for relationship journey tests
-      const relationshipResults = allResults.filter((r: TestResult) => 
-        ['shadow-test', 'toxicity-compass', 'relationship-patterns', 'integration-guide'].includes(r.testId)
-      );
-      setResults(relationshipResults);
-      
-      if (relationshipResults.length === 4) {
-        generateComprehensiveProfile(relationshipResults);
+    try {
+      // Load all test results from localStorage
+      const savedResults = localStorage.getItem('psychTestResults');
+      if (savedResults) {
+        const allResults = JSON.parse(savedResults);
+        
+        // Validate that results is an array
+        if (Array.isArray(allResults)) {
+          // Filter for relationship journey tests
+          const relationshipResults = allResults.filter((r: TestResult) => 
+            r && r.testId && ['shadow-test', 'toxicity-compass', 'relationship-patterns', 'integration-guide'].includes(r.testId)
+          );
+          setResults(relationshipResults);
+          
+          if (relationshipResults.length === 4) {
+            generateComprehensiveProfile(relationshipResults);
+          }
+        }
       }
+    } catch (error) {
+      console.warn('Error loading relationship test results:', error);
+      // Clear corrupted data and reset
+      localStorage.removeItem('psychTestResults');
+      localStorage.removeItem('psychTestProgress');
     }
   }, []);
 

@@ -202,15 +202,28 @@ export default function Journey() {
       }
     }
     
-    // Load progress from localStorage
-    const savedProgress = localStorage.getItem('psychTestProgress');
-    const savedResults = localStorage.getItem('psychTestResults');
-    
-    if (savedProgress) {
-      setProgress(JSON.parse(savedProgress));
-    }
-    if (savedResults) {
-      setResults(JSON.parse(savedResults));
+    // Load progress from localStorage with error handling
+    try {
+      const savedProgress = localStorage.getItem('psychTestProgress');
+      const savedResults = localStorage.getItem('psychTestResults');
+      
+      if (savedProgress) {
+        const progressData = JSON.parse(savedProgress);
+        if (typeof progressData === 'object' && progressData !== null) {
+          setProgress(progressData);
+        }
+      }
+      if (savedResults) {
+        const resultsData = JSON.parse(savedResults);
+        if (Array.isArray(resultsData)) {
+          setResults(resultsData);
+        }
+      }
+    } catch (error) {
+      console.warn('Error loading journey progress:', error);
+      // Reset corrupted data
+      localStorage.removeItem('psychTestProgress');
+      localStorage.removeItem('psychTestResults');
     }
   }, []);
 
