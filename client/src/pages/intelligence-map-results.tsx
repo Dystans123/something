@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { calculateIntelligenceMapResult, shareIntelligenceMapResult } from "@/lib/intelligence-map-logic";
 import { intelligenceTypes } from "@/data/intelligence-map-questions";
+import { saveTestResult } from "@/lib/test-state-manager";
 
 export default function IntelligenceMapResults() {
   const [, setLocation] = useLocation();
@@ -48,25 +49,7 @@ export default function IntelligenceMapResults() {
   const dominantType = intelligenceTypes[result.dominantIntelligence as keyof typeof intelligenceTypes];
 
   const continueJourney = () => {
-    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
-    progress.intelligenceMap = true;
-    localStorage.setItem('psychTestProgress', JSON.stringify(progress));
-    
-    const results = JSON.parse(localStorage.getItem('psychTestResults') || '[]');
-    const existingIndex = results.findIndex((r: any) => r.testId === 'intelligence-map');
-    const newResult = {
-      testId: 'intelligence-map',
-      result: result,
-      completedAt: new Date().toISOString()
-    };
-    
-    if (existingIndex >= 0) {
-      results[existingIndex] = newResult;
-    } else {
-      results.push(newResult);
-    }
-    localStorage.setItem('psychTestResults', JSON.stringify(results));
-    
+    saveTestResult('intelligenceMap', result);
     setLocation("/journey?type=single");
   };
 

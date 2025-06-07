@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { calculateIdentityCompassResult, shareIdentityCompassResult } from "@/lib/identity-compass-logic";
 import { identityTypes } from "@/data/identity-compass-questions";
+import { saveTestResult } from "@/lib/test-state-manager";
 
 export default function IdentityCompassResults() {
   const [, setLocation] = useLocation();

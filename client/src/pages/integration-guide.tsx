@@ -17,6 +17,43 @@ export default function IntegrationGuide() {
   const canGoNext = selectedOption !== null;
   const canGoPrev = currentQuestionIndex > 0;
 
+  // Load saved state on component mount
+  useEffect(() => {
+    try {
+      // Check if test is already completed
+      const savedProgress = localStorage.getItem('psychTestProgress');
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        if (progress.integrationGuide) {
+          setLocation('/integration-guide-results');
+          return;
+        }
+      }
+
+      // Load saved test state
+      const savedState = localStorage.getItem('integrationGuideState');
+      if (savedState) {
+        const state = JSON.parse(savedState);
+        if (state.currentQuestionIndex !== undefined && Array.isArray(state.answers)) {
+          setCurrentQuestionIndex(state.currentQuestionIndex);
+          setAnswers(state.answers);
+        }
+      }
+    } catch (error) {
+      console.warn('Error loading integration guide state:', error);
+      localStorage.removeItem('integrationGuideState');
+    }
+  }, [setLocation]);
+
+  // Save state whenever it changes
+  useEffect(() => {
+    const state = {
+      currentQuestionIndex,
+      answers
+    };
+    localStorage.setItem('integrationGuideState', JSON.stringify(state));
+  }, [currentQuestionIndex, answers]);
+
   // Load previous answer if exists
   useEffect(() => {
     const existingAnswer = answers.find(a => a.questionIndex === currentQuestionIndex);

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { calculateAttachmentStyleResult, shareAttachmentStyleResult } from "@/lib/attachment-style-logic";
 import { attachmentStyles } from "@/data/attachment-style-questions";
+import { saveTestResult } from "@/lib/test-state-manager";
 
 export default function AttachmentStyleResults() {
   const [, setLocation] = useLocation();
