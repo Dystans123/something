@@ -595,6 +595,41 @@ export default function IntegrationGuideResults() {
                 </CardContent>
               </Card>
             </motion.div>
+
+            {/* Action Buttons at Bottom */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center mt-12"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 3.4, duration: 0.6 }}
+            >
+              <Button
+                onClick={continueJourney}
+                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0"
+              >
+                Continue Journey
+                <Target className="ml-2 h-5 w-5" />
+              </Button>
+              
+              <Button
+                variant="outline"
+                onClick={retakeTest}
+                className="border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--dark-gray))]"
+              >
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Retake Test
+              </Button>
+              
+              <Button
+                variant="outline"
+                onClick={handleShare}
+                className="border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--dark-gray))]"
+              >
+                <Share2 className="mr-2 h-4 w-4" />
+                Share Results
+              </Button>
+            </motion.div>
+
           </motion.div>
         </div>
       </div>

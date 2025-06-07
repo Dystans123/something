@@ -4,7 +4,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Share, RotateCcw, Home, Brain, Shield, AlertTriangle, TrendingUp, Heart } from "lucide-react";
+import { Share, RotateCcw, Home, Brain, Shield, AlertTriangle, TrendingUp, Heart, ArrowRight, RefreshCw } from "lucide-react";
 import { shareToxicityResult } from "@/lib/toxicity-logic";
 
 interface ZoneInfo {
@@ -475,6 +475,39 @@ export default function ToxicityResults() {
               </Card>
             </motion.div>
 
+            {/* Action Buttons at Bottom */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center mt-12"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 3.2, duration: 0.6 }}
+            >
+              <Button
+                onClick={continueJourney}
+                className="bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white border-0"
+              >
+                Continue Journey
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              
+              <Button
+                variant="outline"
+                onClick={retakeTest}
+                className="border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--dark-gray))]"
+              >
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Retake Test
+              </Button>
+              
+              <Button
+                variant="outline"
+                onClick={handleShare}
+                className="border-[hsl(var(--border))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--dark-gray))]"
+              >
+                <Share className="mr-2 h-4 w-4" />
+                Share Results
+              </Button>
+            </motion.div>
 
           </motion.div>
         </div>

@@ -444,6 +444,42 @@ export default function Results() {
               </Card>
             </motion.div>
 
+            {/* Action Buttons at Bottom */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center mt-12"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.6, duration: 0.6 }}
+            >
+              <Button
+                onClick={continueJourney}
+                size="lg"
+                className="px-10 py-4 text-lg font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0 transition-all duration-300 hover:scale-105"
+              >
+                Continue Journey
+                <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5-5 5M6 12h12" />
+                </svg>
+              </Button>
+
+              <Button
+                onClick={handleShare}
+                variant="outline"
+                className="px-8 py-4 bg-transparent border-2 border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] font-semibold rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+              >
+                <Share className="mr-2 h-5 w-5" />
+                Share Result
+              </Button>
+              
+              <Button
+                variant="outline"
+                onClick={retakeTest}
+                className="px-8 py-4 bg-transparent border-2 border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] font-semibold rounded-lg transition-all duration-300 hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+              >
+                <RotateCcw className="mr-2 h-5 w-5" />
+                Retake Test
+              </Button>
+            </motion.div>
 
           </motion.div>
         </div>
