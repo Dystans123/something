@@ -49,25 +49,7 @@ export default function AttachmentStyleResults() {
   const dominantStyle = attachmentStyles[result.dominantStyle as keyof typeof attachmentStyles];
 
   const continueJourney = () => {
-    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
-    progress.attachmentStyle = true;
-    localStorage.setItem('psychTestProgress', JSON.stringify(progress));
-    
-    const results = JSON.parse(localStorage.getItem('psychTestResults') || '[]');
-    const existingIndex = results.findIndex((r: any) => r.testId === 'attachment-style');
-    const newResult = {
-      testId: 'attachment-style',
-      result: result,
-      completedAt: new Date().toISOString()
-    };
-    
-    if (existingIndex >= 0) {
-      results[existingIndex] = newResult;
-    } else {
-      results.push(newResult);
-    }
-    localStorage.setItem('psychTestResults', JSON.stringify(results));
-    
+    saveTestResult('attachmentStyle', result);
     setLocation("/journey?type=single");
   };
 

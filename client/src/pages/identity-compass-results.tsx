@@ -50,25 +50,7 @@ export default function IdentityCompassResults() {
   const dominantIdentity = identityTypes[result.dominantIdentity as keyof typeof identityTypes];
 
   const continueJourney = () => {
-    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
-    progress.identityCompass = true;
-    localStorage.setItem('psychTestProgress', JSON.stringify(progress));
-    
-    const results = JSON.parse(localStorage.getItem('psychTestResults') || '[]');
-    const existingIndex = results.findIndex((r: any) => r.testId === 'identity-compass');
-    const newResult = {
-      testId: 'identity-compass',
-      result: result,
-      completedAt: new Date().toISOString()
-    };
-    
-    if (existingIndex >= 0) {
-      results[existingIndex] = newResult;
-    } else {
-      results.push(newResult);
-    }
-    localStorage.setItem('psychTestResults', JSON.stringify(results));
-    
+    saveTestResult('identityCompass', result);
     setLocation("/journey?type=single");
   };
 
