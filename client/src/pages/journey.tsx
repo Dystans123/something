@@ -30,6 +30,7 @@ import {
   Eye,
   Puzzle
 } from "lucide-react";
+import { getTestResults, getTestProgress, validateAndCleanStorage, TestResult } from "@/lib/storage-utils";
 
 interface TestProgress {
   // Relationship tests
@@ -42,12 +43,6 @@ interface TestProgress {
   attachmentStyle: boolean;
   identityCompass: boolean;
   innerDriver: boolean;
-}
-
-interface TestResult {
-  testId: string;
-  result: any;
-  completedAt: Date;
 }
 
 const relationshipTests = [
@@ -202,29 +197,23 @@ export default function Journey() {
       }
     }
     
-    // Load progress from localStorage with error handling
-    try {
-      const savedProgress = localStorage.getItem('psychTestProgress');
-      const savedResults = localStorage.getItem('psychTestResults');
-      
-      if (savedProgress) {
-        const progressData = JSON.parse(savedProgress);
-        if (typeof progressData === 'object' && progressData !== null) {
-          setProgress(progressData);
-        }
-      }
-      if (savedResults) {
-        const resultsData = JSON.parse(savedResults);
-        if (Array.isArray(resultsData)) {
-          setResults(resultsData);
-        }
-      }
-    } catch (error) {
-      console.warn('Error loading journey progress:', error);
-      // Reset corrupted data
-      localStorage.removeItem('psychTestProgress');
-      localStorage.removeItem('psychTestResults');
-    }
+    // Validate and clean storage data, then load
+    validateAndCleanStorage();
+    
+    const progressData = getTestProgress();
+    const resultsData = getTestResults();
+    
+    setProgress({
+      shadowTest: progressData.shadowTest || false,
+      toxicityCompass: progressData.toxicityCompass || false,
+      relationshipPatterns: progressData.relationshipPatterns || false,
+      integrationGuide: progressData.integrationGuide || false,
+      intelligenceMap: progressData.intelligenceMap || false,
+      attachmentStyle: progressData.attachmentStyle || false,
+      identityCompass: progressData.identityCompass || false,
+      innerDriver: progressData.innerDriver || false
+    });
+    setResults(resultsData);
   }, []);
 
   useEffect(() => {

@@ -23,10 +23,28 @@ export default function IntelligenceMap() {
   });
 
   useEffect(() => {
-    // Load saved progress
-    const saved = localStorage.getItem('intelligenceMapState');
-    if (saved) {
-      setState(JSON.parse(saved));
+    // Load saved progress with validation
+    try {
+      const saved = localStorage.getItem('intelligenceMapState');
+      if (saved) {
+        const parsedState = JSON.parse(saved);
+        
+        // Validate the state structure
+        if (parsedState && 
+            typeof parsedState.currentQuestionIndex === 'number' &&
+            Array.isArray(parsedState.answers) &&
+            typeof parsedState.isComplete === 'boolean' &&
+            parsedState.currentQuestionIndex >= 0 &&
+            parsedState.currentQuestionIndex < intelligenceMapQuestions.length) {
+          setState(parsedState);
+        } else {
+          // Invalid state, reset
+          localStorage.removeItem('intelligenceMapState');
+        }
+      }
+    } catch (error) {
+      console.warn('Error loading intelligence map state:', error);
+      localStorage.removeItem('intelligenceMapState');
     }
   }, []);
 

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { calculateInnerDriverResult, shareInnerDriverResult } from "@/lib/inner-driver-logic";
 import { driverTypes } from "@/data/inner-driver-questions";
+import { saveTestResult } from "@/lib/storage-utils";
 
 export default function InnerDriverResults() {
   const [, setLocation] = useLocation();
@@ -49,25 +50,7 @@ export default function InnerDriverResults() {
   const dominantDriver = driverTypes[result.dominantDriver as keyof typeof driverTypes];
 
   const continueJourney = () => {
-    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
-    progress.innerDriver = true;
-    localStorage.setItem('psychTestProgress', JSON.stringify(progress));
-    
-    const results = JSON.parse(localStorage.getItem('psychTestResults') || '[]');
-    const existingIndex = results.findIndex((r: any) => r.testId === 'inner-driver');
-    const newResult = {
-      testId: 'inner-driver',
-      result: result,
-      completedAt: new Date().toISOString()
-    };
-    
-    if (existingIndex >= 0) {
-      results[existingIndex] = newResult;
-    } else {
-      results.push(newResult);
-    }
-    localStorage.setItem('psychTestResults', JSON.stringify(results));
-    
+    saveTestResult('inner-driver', result);
     setLocation("/journey?type=single");
   };
 
