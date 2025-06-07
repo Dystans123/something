@@ -454,17 +454,57 @@ export default function Journey() {
         
         {/* Journey Ladder */}
         <div className="relative">
-          {/* Connecting Line - Hidden on mobile */}
-          <div className={`hidden md:block absolute left-12 top-8 bottom-8 w-1 bg-gradient-to-b opacity-30 ${
-            journeyType === 'relationship' 
-              ? 'from-purple-400 via-red-400 via-emerald-400 to-amber-400'
-              : 'from-blue-400 via-pink-400 via-emerald-400 to-yellow-400'
-          }`}></div>
+          {/* Animated Connecting Line - Hidden on mobile */}
+          <div className="hidden md:block absolute left-12 top-8 bottom-8 w-1 overflow-hidden">
+            {/* Base line */}
+            <div className={`absolute inset-0 bg-gradient-to-b opacity-20 ${
+              journeyType === 'relationship' 
+                ? 'from-purple-400 via-red-400 via-emerald-400 to-amber-400'
+                : 'from-blue-400 via-pink-400 via-emerald-400 to-yellow-400'
+            }`}></div>
+            
+            {/* Animated progress line */}
+            <motion.div 
+              className={`absolute top-0 left-0 w-full bg-gradient-to-b ${
+                journeyType === 'relationship' 
+                  ? 'from-purple-400 via-red-400 via-emerald-400 to-amber-400'
+                  : 'from-blue-400 via-pink-400 via-emerald-400 to-yellow-400'
+              }`}
+              initial={{ height: '0%' }}
+              animate={{ height: `${(getCompletedTestsCount() / 4) * 100}%` }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+            
+            {/* Flowing particles */}
+            {Array.from({ length: 3 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className={`absolute w-2 h-2 rounded-full ${
+                  journeyType === 'relationship' ? 'bg-purple-400' : 'bg-blue-400'
+                } opacity-60`}
+                animate={{
+                  y: [0, '100vh'],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{
+                  duration: 3,
+                  delay: i * 1,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                style={{ left: '-0.125rem' }}
+              />
+            ))}
+          </div>
+          
+          {/* Mobile connecting dots */}
+          <div className="md:hidden absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-gray-600 to-gray-800 opacity-30"></div>
           
           <div className="space-y-4 md:space-y-8">
             {(journeyType === 'relationship' ? relationshipTests : singleTests).map((test, index) => {
               const status = getTestStatus(index);
               const completed = isTestCompleted(test.id);
+              const isActive = status === 'available' && !completed;
               
               return (
                 <motion.div
@@ -474,246 +514,379 @@ export default function Journey() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="relative"
                 >
-                  {/* Level Indicator - Responsive positioning */}
-                  <div className={`absolute left-2 md:left-8 top-4 md:top-8 w-6 h-6 md:w-8 md:h-8 rounded-full border-2 md:border-4 ${test.borderColor} flex items-center justify-center z-10 ${
-                    completed ? `bg-gradient-to-br ${test.bgGradient}` : 
-                    status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600' : 
-                    'bg-[hsl(var(--deep-black))]'
-                  }`}>
+                  {/* Connection line to next test */}
+                  {index < 3 && (
+                    <motion.div
+                      className={`hidden md:block absolute left-12 top-16 w-1 h-16 bg-gradient-to-b ${
+                        completed 
+                          ? journeyType === 'relationship'
+                            ? 'from-purple-400 to-red-400'
+                            : 'from-blue-400 to-pink-400'
+                          : 'from-gray-600 to-gray-800'
+                      } opacity-30`}
+                      initial={{ scaleY: 0 }}
+                      animate={{ scaleY: completed ? 1 : 0.3 }}
+                      transition={{ duration: 0.8, delay: 0.5 }}
+                    />
+                  )}
+
+                  {/* Level Indicator with enhanced animations */}
+                  <motion.div 
+                    className={`absolute left-2 md:left-8 top-4 md:top-8 w-6 h-6 md:w-8 md:h-8 rounded-full border-2 md:border-4 flex items-center justify-center z-10 ${
+                      completed ? `${test.borderColor} bg-gradient-to-br ${test.bgGradient} shadow-lg` : 
+                      status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600' : 
+                      `${test.borderColor} bg-[hsl(var(--deep-black))] hover:bg-gradient-to-br hover:${test.bgGradient}`
+                    }`}
+                    animate={isActive ? {
+                      scale: [1, 1.1, 1],
+                      boxShadow: [
+                        '0 0 0 0 rgba(0, 0, 0, 0)',
+                        '0 0 0 10px rgba(147, 197, 253, 0.2)',
+                        '0 0 0 0 rgba(0, 0, 0, 0)'
+                      ]
+                    } : {}}
+                    transition={isActive ? {
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    } : {}}
+                    whileHover={status === 'available' ? { scale: 1.1 } : {}}
+                  >
                     {completed ? (
-                      <CheckCircle className={`h-3 w-3 md:h-4 md:w-4 ${test.color}`} />
+                      <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ duration: 0.5, type: "spring" }}
+                      >
+                        <CheckCircle className={`h-3 w-3 md:h-4 md:w-4 ${test.color}`} />
+                      </motion.div>
                     ) : status === 'locked' ? (
                       <Lock className="h-3 w-3 md:h-4 md:w-4 text-gray-500" />
                     ) : (
-                      <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-current ${test.color}`} />
+                      <motion.div 
+                        className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-current ${test.color}`}
+                        animate={isActive ? {
+                          scale: [1, 1.5, 1],
+                          opacity: [0.7, 1, 0.7]
+                        } : {}}
+                        transition={isActive ? {
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        } : {}}
+                      />
                     )}
-                  </div>
+                  </motion.div>
 
-                  {/* Test Card - Responsive margins */}
-                  <Card className={`ml-10 md:ml-20 ${
-                    completed ? `bg-gradient-to-r ${test.bgGradient} border-${test.borderColor.split('-')[1]}-400` :
-                    status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600 opacity-60' :
-                    `bg-gradient-to-r ${test.bgGradient} border-[hsl(var(--border))] hover:border-[hsl(var(--metallic-silver)/0.5)]`
-                  } transition-all duration-300 ${status === 'available' ? 'hover:shadow-glow cursor-pointer' : ''}`}>
-                    <CardHeader className="pb-3 md:pb-4 p-4 md:p-6">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 md:space-x-4 flex-1">
-                          <div className={`w-8 h-8 md:w-12 md:h-12 rounded-full ${status === 'locked' ? 'bg-gray-600' : `bg-gradient-to-br ${test.bgGradient}`} flex items-center justify-center ${test.color} flex-shrink-0`}>
-                            <div className="scale-75 md:scale-100">
-                              {test.icon}
-                            </div>
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <Badge variant="outline" className={`${test.color} border-current mb-1 md:mb-2 text-xs`}>
-                              {test.subtitle}
-                            </Badge>
-                            <h3 className="font-serif text-base md:text-xl font-bold text-[hsl(var(--silver-glow))] leading-tight">
-                              {test.title}
-                            </h3>
-                          </div>
-                        </div>
-                        
-                        {completed && (
-                          <div className="text-center flex-shrink-0 ml-2">
-                            <Award className={`h-6 w-6 md:h-8 md:w-8 ${test.color} mx-auto mb-1`} />
-                            <div className="text-xs md:text-sm font-semibold text-[hsl(var(--silver-glow))]">
-                              +{test.points} pts
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </CardHeader>
-                    
-                    <CardContent className="p-4 md:p-6 pt-0">
-                      <p className="text-[hsl(var(--metallic-silver))] mb-3 md:mb-4 leading-relaxed text-sm md:text-base">
-                        {status === 'locked' ? 'Complete previous levels to unlock' : test.description}
-                      </p>
+                  {/* Step number badge */}
+                  <motion.div
+                    className={`absolute -left-1 md:left-5 -top-2 md:-top-3 w-5 h-5 md:w-6 md:h-6 rounded-full text-xs md:text-sm font-bold flex items-center justify-center ${
+                      completed 
+                        ? `${test.color} bg-gradient-to-br ${test.bgGradient}`
+                        : status === 'locked'
+                        ? 'bg-gray-600 text-gray-300'
+                        : `${test.color} bg-[hsl(var(--dark-gray))]`
+                    } border border-[hsl(var(--border))] z-20`}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 + 0.3 }}
+                  >
+                    {index + 1}
+                  </motion.div>
+
+                  {/* Test Card - Enhanced with ladder animations */}
+                  <motion.div
+                    className={`ml-10 md:ml-20 ${status === 'available' ? 'cursor-pointer' : ''}`}
+                    whileHover={status === 'available' ? { 
+                      scale: 1.02,
+                      transition: { duration: 0.2 }
+                    } : {}}
+                    animate={isActive ? {
+                      y: [0, -2, 0],
+                    } : {}}
+                    transition={isActive ? {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    } : {}}
+                  >
+                    <Card className={`${
+                      completed ? `bg-gradient-to-r ${test.bgGradient} border-${test.borderColor.split('-')[1]}-400 shadow-lg` :
+                      status === 'locked' ? 'bg-[hsl(var(--dark-gray))] border-gray-600 opacity-60' :
+                      `bg-gradient-to-r ${test.bgGradient} border-[hsl(var(--border))] hover:border-[hsl(var(--metallic-silver)/0.5)] hover:shadow-glow`
+                    } transition-all duration-300 relative overflow-hidden`}>
                       
-                      {status === 'available' && (
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                          <div className="flex items-center space-x-2 text-[hsl(var(--metallic-silver))] text-sm">
-                            <Clock className="h-4 w-4" />
-                            <span>{test.duration}</span>
+                      {/* Shimmer effect for active test */}
+                      {isActive && (
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                          animate={{
+                            x: ['-100%', '100%']
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "linear"
+                          }}
+                        />
+                      )}
+                      
+                      {/* Completion celebration particles */}
+                      {completed && (
+                        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <motion.div
+                              key={i}
+                              className={`absolute w-1 h-1 ${test.color} rounded-full`}
+                              initial={{ 
+                                x: `${20 + i * 15}%`,
+                                y: '100%',
+                                opacity: 0
+                              }}
+                              animate={{
+                                y: ['100%', '0%', '100%'],
+                                opacity: [0, 1, 0],
+                                scale: [0, 1, 0]
+                              }}
+                              transition={{
+                                duration: 1.5,
+                                delay: i * 0.1,
+                                repeat: Infinity,
+                                repeatDelay: 3
+                              }}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      
+                      <CardHeader className="pb-3 md:pb-4 p-4 md:p-6 relative z-10">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2 md:space-x-4 flex-1">
+                            <motion.div 
+                              className={`w-8 h-8 md:w-12 md:h-12 rounded-full ${status === 'locked' ? 'bg-gray-600' : `bg-gradient-to-br ${test.bgGradient}`} flex items-center justify-center ${test.color} flex-shrink-0`}
+                              animate={isActive ? {
+                                rotate: [0, 5, -5, 0]
+                              } : {}}
+                              transition={isActive ? {
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                              } : {}}
+                            >
+                              <div className="scale-75 md:scale-100">
+                                {test.icon}
+                              </div>
+                            </motion.div>
+                            <div className="min-w-0 flex-1">
+                              <Badge variant="outline" className={`${test.color} border-current mb-1 md:mb-2 text-xs`}>
+                                {test.subtitle}
+                              </Badge>
+                              <h3 className="font-serif text-base md:text-xl font-bold text-[hsl(var(--silver-glow))] leading-tight">
+                                {test.title}
+                              </h3>
+                            </div>
                           </div>
                           
-                          {completed ? (
-                            <Button
-                              onClick={() => viewResult(test.id)}
-                              size="default"
-                              className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
-                            >
-                              View Results
-                              <ChevronUp className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-                            </Button>
-                          ) : (
-                            <Button
-                              onClick={() => startTest(test.route)}
-                              size="default"
-                              className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
-                            >
-                              {index === 0 ? 'Begin Journey' : 'Start Level'}
-                              <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-                            </Button>
+                          {completed && (
+                            <div className="text-center flex-shrink-0 ml-2">
+                              <Award className={`h-6 w-6 md:h-8 md:w-8 ${test.color} mx-auto mb-1`} />
+                              <div className="text-xs md:text-sm font-semibold text-[hsl(var(--silver-glow))]">
+                                +{test.points} pts
+                              </div>
+                            </div>
                           )}
                         </div>
-                      )}
+                      </CardHeader>
                       
-                      {status === 'locked' && (
-                        <div className="text-center py-4">
-                          <p className="text-[hsl(var(--metallic-silver))] text-sm italic">
-                            {test.unlockMessage}
-                          </p>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Progress Summary Section */}
-        <AnimatePresence>
-          {Object.values(progress).some(Boolean) && (
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mt-16"
-            >
-              <Card className="bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-emerald-500/10 border-[hsl(var(--metallic-silver)/0.3)] relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-emerald-500/5" />
-                
-                <CardHeader className="text-center relative z-10">
-                  <div className="flex justify-center mb-4">
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                      showSummary 
-                        ? 'bg-gradient-to-br from-yellow-400 to-orange-400' 
-                        : 'bg-gradient-to-br from-purple-400 to-blue-400'
-                    }`}>
-                      {showSummary ? (
-                        <Trophy className="h-8 w-8 text-white" />
-                      ) : (
-                        <Star className="h-8 w-8 text-white" />
-                      )}
-                    </div>
-                  </div>
-                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-4">
-                    {showSummary ? 'Journey Complete!' : 'Journey in Progress'}
-                  </h2>
-                  <p className="text-lg text-[hsl(var(--metallic-silver))] max-w-2xl mx-auto">
-                    {showSummary 
-                      ? 'Congratulations! You\'ve completed all four psychological assessments. Here\'s your comprehensive psychological profile and personalized insights.'
-                      : 'You\'re making great progress on your psychological journey. Continue completing assessments to unlock your comprehensive profile.'
-                    }
-                  </p>
-                </CardHeader>
-
-                <CardContent className="relative z-10 space-y-8">
-                  {/* Achievement Stats */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-purple-400 mb-2">{Math.round(getCompletionPercentage())}%</div>
-                      <p className="text-[hsl(var(--metallic-silver))] text-sm">Progress Complete</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-blue-400 mb-2">{totalPoints}</div>
-                      <p className="text-[hsl(var(--metallic-silver))] text-sm">Total Points</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-emerald-400 mb-2">
-                        {Object.values(progress).filter(Boolean).length}/8
-                      </div>
-                      <p className="text-[hsl(var(--metallic-silver))] text-sm">Tests Complete</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-amber-400 mb-2">
-                        {showSummary ? '⭐' : '🔓'}
-                      </div>
-                      <p className="text-[hsl(var(--metallic-silver))] text-sm">
-                        {showSummary ? 'Self-Discovery Master' : 'Unlocking Insights'}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-col gap-3 justify-center px-6 sm:px-8">
-                    {showSummary ? (
-                      <>
-                        <Button
-                          onClick={() => setLocation(journeyType === 'relationship' ? '/relationship-comprehensive-summary' : '/comprehensive-summary')}
-                          size="lg"
-                          className="w-full sm:w-auto px-6 py-4 text-base sm:text-lg font-bold bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 hover:from-purple-600 hover:via-blue-600 hover:to-emerald-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
-                        >
-                          <span className="truncate">View Complete Profile</span>
-                          <Target className="ml-2 h-5 w-5 flex-shrink-0" />
-                        </Button>
+                      <CardContent className="p-4 md:p-6 pt-0 relative z-10">
+                        <p className="text-[hsl(var(--metallic-silver))] mb-3 md:mb-4 leading-relaxed text-sm md:text-base">
+                          {status === 'locked' ? 'Complete previous levels to unlock' : test.description}
+                        </p>
                         
-                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                          <Button
-                            onClick={shareProgress}
-                            variant="outline"
-                            size="lg"
-                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-                          >
-                            Share Achievement
-                            <Share2 className="ml-2 h-4 w-4" />
-                          </Button>
-                          
-                          <Button
-                            onClick={restartJourney}
-                            variant="outline"
-                            size="lg"
-                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
-                          >
-                            Restart Journey
-                          </Button>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                          <Button
-                            onClick={() => setLocation('/')}
-                            variant="outline"
-                            size="lg"
-                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-                          >
-                            <Home className="mr-2 h-4 w-4" />
-                            Home
-                          </Button>
-                          
-                          <Button
-                            onClick={shareProgress}
-                            variant="outline"
-                            size="lg"
-                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
-                          >
-                            Share Progress
-                            <Share2 className="ml-2 h-4 w-4" />
-                          </Button>
-                          
-                          <Button
-                            onClick={restartJourney}
-                            variant="outline"
-                            size="lg"
-                            className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
-                          >
-                            Restart Journey
-                          </Button>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                        {status === 'available' && (
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                            <div className="flex items-center space-x-2 text-[hsl(var(--metallic-silver))] text-sm">
+                              <Clock className="h-4 w-4" />
+                              <span>{test.duration}</span>
+                            </div>
+                            
+                            {completed ? (
+                              <Button
+                                onClick={() => viewResult(test.id)}
+                                size="default"
+                                className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
+                              >
+                                View Results
+                                <ChevronUp className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+                              </Button>
+                            ) : (
+                              <Button
+                                onClick={() => startTest(test.route)}
+                                size="default"
+                                className={`w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 font-semibold bg-gradient-to-r ${test.bgGradient} hover:opacity-90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base`}
+                              >
+                                {index === 0 ? 'Begin Journey' : 'Start Level'}
+                                <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+                              </Button>
+                            )}
+                          </div>
+                        )}
+                        
+                        {status === 'locked' && (
+                          <div className="text-center py-4">
+                            <p className="text-[hsl(var(--metallic-silver))] text-sm italic">
+                              {test.unlockMessage}
+                            </p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
 
+          {/* Progress Summary Section */}
+          <AnimatePresence>
+            {Object.values(progress).some(Boolean) && (
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="mt-16"
+              >
+                <Card className="bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-emerald-500/10 border-[hsl(var(--metallic-silver)/0.3)] relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-emerald-500/5" />
+                  
+                  <CardHeader className="text-center relative z-10">
+                    <div className="flex justify-center mb-4">
+                      <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                        showSummary 
+                          ? 'bg-gradient-to-br from-yellow-400 to-orange-400' 
+                          : 'bg-gradient-to-br from-purple-400 to-blue-400'
+                      }`}>
+                        {showSummary ? (
+                          <Trophy className="h-8 w-8 text-white" />
+                        ) : (
+                          <Star className="h-8 w-8 text-white" />
+                        )}
+                      </div>
+                    </div>
+                    <h2 className="font-serif text-3xl md:text-4xl font-bold text-[hsl(var(--silver-glow))] mb-4">
+                      {showSummary ? 'Journey Complete!' : 'Journey in Progress'}
+                    </h2>
+                    <p className="text-lg text-[hsl(var(--metallic-silver))] max-w-2xl mx-auto">
+                      {showSummary 
+                        ? 'Congratulations! You\'ve completed all four psychological assessments. Here\'s your comprehensive psychological profile and personalized insights.'
+                        : 'You\'re making great progress on your psychological journey. Continue completing assessments to unlock your comprehensive profile.'
+                      }
+                    </p>
+                  </CardHeader>
 
+                  <CardContent className="relative z-10 space-y-8">
+                    {/* Achievement Stats */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-purple-400 mb-2">{Math.round(getCompletionPercentage())}%</div>
+                        <p className="text-[hsl(var(--metallic-silver))] text-sm">Progress Complete</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-blue-400 mb-2">{totalPoints}</div>
+                        <p className="text-[hsl(var(--metallic-silver))] text-sm">Total Points</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-emerald-400 mb-2">
+                          {Object.values(progress).filter(Boolean).length}/8
+                        </div>
+                        <p className="text-[hsl(var(--metallic-silver))] text-sm">Tests Complete</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-amber-400 mb-2">
+                          {showSummary ? '⭐' : '🔓'}
+                        </div>
+                        <p className="text-[hsl(var(--metallic-silver))] text-sm">
+                          {showSummary ? 'Self-Discovery Master' : 'Unlocking Insights'}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-col gap-3 justify-center px-6 sm:px-8">
+                      {showSummary ? (
+                        <>
+                          <Button
+                            onClick={() => setLocation(journeyType === 'relationship' ? '/relationship-comprehensive-summary' : '/comprehensive-summary')}
+                            size="lg"
+                            className="w-full sm:w-auto px-6 py-4 text-base sm:text-lg font-bold bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 hover:from-purple-600 hover:via-blue-600 hover:to-emerald-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
+                          >
+                            <span className="truncate">View Complete Profile</span>
+                            <Target className="ml-2 h-5 w-5 flex-shrink-0" />
+                          </Button>
+                          
+                          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                            <Button
+                              onClick={shareProgress}
+                              variant="outline"
+                              size="lg"
+                              className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                            >
+                              Share Achievement
+                              <Share2 className="ml-2 h-4 w-4" />
+                            </Button>
+                            
+                            <Button
+                              onClick={restartJourney}
+                              variant="outline"
+                              size="lg"
+                              className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+                            >
+                              Restart Journey
+                            </Button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                            <Button
+                              onClick={() => setLocation('/')}
+                              variant="outline"
+                              size="lg"
+                              className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                            >
+                              <Home className="mr-2 h-4 w-4" />
+                              Home
+                            </Button>
+                            
+                            <Button
+                              onClick={shareProgress}
+                              variant="outline"
+                              size="lg"
+                              className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-[hsl(var(--metallic-silver))] text-[hsl(var(--metallic-silver))] hover:bg-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--deep-black))]"
+                            >
+                              Share Progress
+                              <Share2 className="ml-2 h-4 w-4" />
+                            </Button>
+                            
+                            <Button
+                              onClick={restartJourney}
+                              variant="outline"
+                              size="lg"
+                              className="w-full sm:w-auto px-6 py-3 text-sm sm:text-base border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+                            >
+                              Restart Journey
+                            </Button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
