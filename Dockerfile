@@ -12,8 +12,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application for production
-RUN node build-production.js
+# Build client first
+RUN npm run build
+
+# Build production server without Vite dependencies
+RUN node esbuild.config.js
 
 # Production stage
 FROM node:20-alpine AS production

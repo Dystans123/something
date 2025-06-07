@@ -1,49 +1,48 @@
 #!/bin/bash
 
-echo "Building psychological profiling application for production..."
+echo "Preparing psychological profiling app for production deployment..."
 
-# Clean previous builds
+# Clean any previous builds
 rm -rf dist
 
-# Build the client
+# Build client assets
 echo "Building client..."
-npm run build 2>&1 | grep -v "Browserslist"
+npm run build
 
 # Check if client build succeeded
-if [ ! -d "dist/public" ]; then
-    echo "Client build failed - no dist/public directory found"
+if [ ! -d "dist" ] || [ ! -f "dist/index.html" ]; then
+    echo "Client build failed - missing dist directory or index.html"
     exit 1
 fi
 
-# Build the server
-echo "Building server..."
-npx esbuild server/index.ts server/production.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+# Build production server
+echo "Building production server..."
+node esbuild.config.js
 
-# Check if server build succeeded
+# Verify production build
 if [ ! -f "dist/index.js" ]; then
-    echo "Server build failed - no dist/index.js found"
+    echo "Production server build failed"
     exit 1
 fi
 
-echo "Build completed successfully!"
-echo "Client assets: $(ls -la dist/public | wc -l) files"
-echo "Server bundle: dist/index.js ($(du -h dist/index.js | cut -f1))"
+echo "Build verification:"
+echo "- Client files: $(find dist -name "*.html" -o -name "*.js" -o -name "*.css" | wc -l)"
+echo "- Server bundle: $(du -h dist/index.js | cut -f1)"
 
-# Test production server
-echo "Testing production configuration..."
-NODE_ENV=production timeout 10s node dist/index.js &
-PID=$!
+# Test production server startup
+echo "Testing production server..."
+NODE_ENV=production timeout 5s node dist/index.js &
+SERVER_PID=$!
 
-sleep 3
+sleep 2
 
-# Check if server is running
-if kill -0 $PID 2>/dev/null; then
-    echo "✓ Production server started successfully"
-    kill $PID
+if kill -0 $SERVER_PID 2>/dev/null; then
+    echo "✓ Production server starts successfully"
+    kill $SERVER_PID
 else
     echo "✗ Production server failed to start"
     exit 1
 fi
 
-echo "Deployment build ready!"
-echo "To deploy: NODE_ENV=production node dist/index.js"
+echo "Deployment build completed successfully!"
+echo "Ready for Docker/Coolify deployment"
