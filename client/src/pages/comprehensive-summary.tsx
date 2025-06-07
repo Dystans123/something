@@ -438,81 +438,954 @@ export default function ComprehensiveSummary() {
     ];
   };
 
-  const generateComprehensiveProfile = (results: TestResult[]): ComprehensiveProfile => {
-    const shadowResult = results.find(r => r.testId === 'shadow-test')?.result;
-    const toxicityResult = results.find(r => r.testId === 'toxicity-compass')?.result;
-    const relationshipResult = results.find(r => r.testId === 'relationship-patterns')?.result;
-    const integrationResult = results.find(r => r.testId === 'integration-guide')?.result;
+  // Single Journey Calculation Functions
+  const calculateSingleJourneyMaturity = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): number => {
+    let score = 50 + Math.floor(Math.random() * 10); // Base: 50-59
+    
+    if (intelligenceResult) score += 10 + Math.floor(Math.random() * 8); // +10-17
+    if (attachmentResult?.dominantStyle === 'secure') score += 15 + Math.floor(Math.random() * 7); // +15-21
+    else if (attachmentResult?.dominantStyle === 'anxious') score += 8 + Math.floor(Math.random() * 5); // +8-12
+    else if (attachmentResult?.dominantStyle === 'avoidant') score += 6 + Math.floor(Math.random() * 5); // +6-10
+    
+    if (identityResult) score += 12 + Math.floor(Math.random() * 8); // +12-19
+    if (driverResult) score += 8 + Math.floor(Math.random() * 6); // +8-13
+    
+    return Math.min(Math.max(score, 55), 95);
+  };
 
-    // Calculate overall score based on test results
-    let overallScore = 0;
-    if (shadowResult) overallScore += 25;
-    if (toxicityResult) {
-      if (toxicityResult.zone === 'green') overallScore += 30;
-      else if (toxicityResult.zone === 'yellow') overallScore += 20;
-      else overallScore += 10;
-    }
-    if (relationshipResult) overallScore += 25;
-    if (integrationResult) overallScore += 20;
+  const calculateSingleJourneyEI = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): number => {
+    let score = 45 + Math.floor(Math.random() * 10); // Base: 45-54
+    
+    if (intelligenceResult?.dominantIntelligence === 'emotional') score += 20 + Math.floor(Math.random() * 8); // +20-27
+    else if (intelligenceResult?.dominantIntelligence === 'interpersonal') score += 15 + Math.floor(Math.random() * 8); // +15-22
+    else score += 8 + Math.floor(Math.random() * 6); // +8-13
+    
+    if (attachmentResult?.dominantStyle === 'secure') score += 15 + Math.floor(Math.random() * 7); // +15-21
+    if (identityResult) score += 10 + Math.floor(Math.random() * 6); // +10-15
+    if (driverResult) score += 8 + Math.floor(Math.random() * 5); // +8-12
+    
+    return Math.min(Math.max(score, 52), 93);
+  };
 
-    const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
-    let totalPoints = 0;
-    if (progress.shadowTest) totalPoints += 250;
-    if (progress.toxicityCompass) totalPoints += 200;
-    if (progress.relationshipPatterns) totalPoints += 300;
-    if (progress.integrationGuide) totalPoints += 350;
+  const calculateSingleJourneyRelationships = (attachmentResult: any, identityResult: any): number => {
+    let score = 40 + Math.floor(Math.random() * 12); // Base: 40-51
+    
+    if (attachmentResult?.dominantStyle === 'secure') score += 25 + Math.floor(Math.random() * 10); // +25-34
+    else if (attachmentResult?.dominantStyle === 'anxious') score += 12 + Math.floor(Math.random() * 8); // +12-19
+    else if (attachmentResult?.dominantStyle === 'avoidant') score += 8 + Math.floor(Math.random() * 6); // +8-13
+    
+    if (identityResult) score += 15 + Math.floor(Math.random() * 8); // +15-22
+    
+    return Math.min(Math.max(score, 48), 90);
+  };
 
-    // Calculate comprehensive metrics
-    const psychologicalMaturity = calculatePsychologicalMaturity(shadowResult, toxicityResult, relationshipResult, integrationResult);
-    const emotionalIntelligence = calculateEmotionalIntelligence(shadowResult, toxicityResult, relationshipResult, integrationResult);
-    const relationshipHealth = calculateRelationshipHealth(toxicityResult, relationshipResult);
-    const personalGrowthPotential = calculateGrowthPotential(shadowResult, integrationResult);
+  const calculateSingleJourneyGrowth = (identityResult: any, driverResult: any): number => {
+    let score = 60 + Math.floor(Math.random() * 10); // Base: 60-69
+    
+    if (identityResult) score += 15 + Math.floor(Math.random() * 8); // +15-22
+    if (driverResult) score += 12 + Math.floor(Math.random() * 7); // +12-18
+    
+    return Math.min(Math.max(score, 65), 92);
+  };
 
-    return {
-      dominantArchetype: shadowResult?.archetype || "Unknown",
-      archetypeDescription: getArchetypeDescription(shadowResult?.archetype),
-      toxicityLevel: toxicityResult?.zone || "Unknown",
-      toxicityScore: toxicityResult?.percentage || 0,
-      relationshipPattern: relationshipResult?.dominantPattern || "Unknown",
-      integrationLevel: integrationResult?.integrationLevel || "Unknown",
-      overallScore,
-      detailedAnalysis: {
-        shadowWork: generateShadowAnalysis(shadowResult),
-        emotionalHealth: generateEmotionalAnalysis(toxicityResult),
-        relationshipDynamics: generateRelationshipAnalysis(relationshipResult),
-        personalGrowth: generateGrowthAnalysis(integrationResult),
-        psychologicalInsights: generatePsychologicalInsights(shadowResult, toxicityResult, relationshipResult, integrationResult),
-        behavioralPatterns: generateBehavioralPatterns(shadowResult, relationshipResult),
-        lifeThemes: generateLifeThemes(shadowResult, toxicityResult, relationshipResult, integrationResult),
-        unconsciousMotivations: generateUnconsciousMotivations(shadowResult, relationshipResult)
-      },
-      strengths: generateStrengths(shadowResult, toxicityResult, relationshipResult, integrationResult),
-      growthAreas: generateGrowthAreas(shadowResult, toxicityResult, relationshipResult, integrationResult),
-      actionPlan: generateActionPlan(shadowResult, toxicityResult, relationshipResult, integrationResult),
-      nextSteps: generateNextSteps(shadowResult, toxicityResult, relationshipResult, integrationResult),
-      comprehensiveInterpretation: {
-        corePersonality: generateCorePersonality(shadowResult, relationshipResult),
-        relationshipStyle: generateRelationshipStyle(toxicityResult, relationshipResult),
-        lifeChallenges: generateLifeChallenges(shadowResult, toxicityResult, relationshipResult),
-        spiritualJourney: generateSpiritualJourney(shadowResult, integrationResult),
-        careerGuidance: generateCareerGuidance(shadowResult, relationshipResult),
-        healingPriorities: generateHealingPriorities(toxicityResult, integrationResult)
-      },
-      integrationGuidance: {
-        dailyPractices: generateDailyPractices(shadowResult, toxicityResult, integrationResult),
-        therapeuticRecommendations: generateTherapeuticRecommendations(toxicityResult, relationshipResult),
-        bookRecommendations: generateBookRecommendations(shadowResult, integrationResult),
-        journalingPrompts: generateJournalingPrompts(shadowResult, relationshipResult),
-        meditationPractices: generateMeditationPractices(shadowResult, integrationResult),
-        relationshipExercises: generateRelationshipExercises(toxicityResult, relationshipResult)
-      },
-      completionDate: new Date().toLocaleDateString(),
-      totalPoints,
-      psychologicalMaturity,
-      emotionalIntelligence,
-      relationshipHealth,
-      personalGrowthPotential
+  const getSingleJourneyDescription = (intelligenceResult: any, identityResult: any): string => {
+    const intelligence = intelligenceResult?.dominantIntelligence || "Unknown";
+    const identity = identityResult?.dominantIdentity || "Unknown";
+    
+    return `Your dominant intelligence type is ${intelligence}, combined with a ${identity} identity pattern, creating a unique psychological profile focused on personal mastery and self-understanding.`;
+  };
+
+  const getAttachmentHealthLevel = (attachmentResult: any): string => {
+    if (!attachmentResult) return "unknown";
+    
+    const style = attachmentResult.dominantStyle?.toLowerCase();
+    if (style === 'secure') return "green";
+    if (style === 'anxious' || style === 'avoidant') return "yellow";
+    return "red";
+  };
+
+  const getAttachmentHealthScore = (attachmentResult: any): number => {
+    if (!attachmentResult) return 50;
+    
+    const style = attachmentResult.dominantStyle?.toLowerCase();
+    if (style === 'secure') return 15 + Math.floor(Math.random() * 10); // 15-24
+    if (style === 'anxious') return 35 + Math.floor(Math.random() * 15); // 35-49
+    if (style === 'avoidant') return 40 + Math.floor(Math.random() * 15); // 40-54
+    return 60 + Math.floor(Math.random() * 20); // 60-79
+  };
+
+  // Single Journey Analysis Functions
+  const generateIntelligenceAnalysis = (intelligenceResult: any): string[] => {
+    if (!intelligenceResult) return ["Intelligence mapping assessment not completed"];
+    
+    const intelligence = intelligenceResult.dominantIntelligence;
+    return [
+      `Your dominant intelligence type reveals core cognitive strengths and processing preferences`,
+      `${intelligence} intelligence indicates specific ways you learn, problem-solve, and understand the world`,
+      `Understanding your intelligence profile helps optimize learning and career choices`,
+      `Each intelligence type has unique gifts and applications in personal and professional life`
+    ];
+  };
+
+  const generateAttachmentAnalysis = (attachmentResult: any): string[] => {
+    if (!attachmentResult) return ["Attachment style assessment not completed"];
+    
+    const style = attachmentResult.dominantStyle;
+    const styleAnalysis: Record<string, string[]> = {
+      'secure': [
+        "You demonstrate healthy attachment patterns with balanced independence and intimacy",
+        "Your relationships are characterized by trust, effective communication, and emotional regulation",
+        "You have a positive view of yourself and others, creating stable relationship dynamics",
+        "Continue nurturing these healthy attachment patterns in all relationships"
+      ],
+      'anxious': [
+        "You may experience heightened sensitivity to relationship changes and partner availability",
+        "Your attachment style involves deep care for others but sometimes with self-doubt",
+        "Working on self-soothing and communication can enhance relationship satisfaction",
+        "Building self-confidence and secure base behaviors supports attachment security"
+      ],
+      'avoidant': [
+        "You value independence and may prefer emotional distance in relationships",
+        "Your attachment style prioritizes self-reliance and may struggle with vulnerability",
+        "Gradually building comfort with emotional intimacy can enrich relationships",
+        "Learning to express needs and emotions safely supports deeper connections"
+      ],
+      'disorganized': [
+        "Your attachment patterns may fluctuate between different styles depending on the situation",
+        "This style often develops from inconsistent early relationships or trauma",
+        "Professional support can be valuable in developing more consistent attachment security",
+        "Healing work focuses on building internal safety and predictable relationship patterns"
+      ]
     };
+    
+    return styleAnalysis[style.toLowerCase()] || ["Attachment style assessment needs review"];
+  };
+
+  const generateIdentityAnalysis = (identityResult: any): string[] => {
+    if (!identityResult) return ["Identity compass assessment not completed"];
+    
+    const identity = identityResult.dominantIdentity;
+    return [
+      `Your ${identity} identity represents core values and life direction`,
+      `Identity patterns influence major life decisions, career choices, and relationship preferences`,
+      `Understanding your identity compass helps align actions with authentic self-expression`,
+      `Your identity type suggests specific paths for meaningful contribution and fulfillment`
+    ];
+  };
+
+  const generateDriverAnalysis = (driverResult: any): string[] => {
+    if (!driverResult) return ["Inner driver assessment not completed"];
+    
+    const driver = driverResult.dominantDriver;
+    return [
+      `Your dominant inner driver reveals core motivational forces and energy patterns`,
+      `${driver} driver influences how you approach goals, handle challenges, and find satisfaction`,
+      `Understanding your inner drivers helps optimize motivation and prevent burnout`,
+      `Working with your natural drivers creates sustainable success and fulfillment`
+    ];
+  };
+
+  const generateSingleJourneyInsights = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Your personality combines multiple intelligence types with specific attachment patterns and core drivers",
+      "Intelligence type influences how you process information and approach learning opportunities",
+      "Attachment style shapes your relationship patterns and emotional regulation strategies",
+      "Identity compass reveals your authentic self-expression and core values alignment",
+      "Inner drivers show what truly motivates and energizes you in life and work",
+      "The combination of these elements creates your unique psychological signature",
+      "Personal mastery involves integrating all aspects of your personality into coherent self-understanding",
+      "Your profile reveals both natural strengths and areas for continued development"
+    ];
+  };
+
+  const generateSingleJourneyPatterns = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Behavioral patterns reflect the intersection of your intelligence type, attachment style, and core drivers",
+      "Your dominant intelligence influences how you approach problems and make decisions",
+      "Attachment patterns show up in how you form and maintain relationships across all life areas",
+      "Identity patterns guide your choices about career, lifestyle, and personal values",
+      "Inner drivers create consistent motivation patterns that can be recognized and optimized",
+      "Understanding these patterns increases self-awareness and intentional life design",
+      "Some patterns serve you well, while others may need conscious adjustment",
+      "Personal growth involves strengthening helpful patterns while transforming limiting ones"
+    ];
+  };
+
+  const generateSingleJourneyThemes = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Life themes emerge from the interplay of your intelligence type, attachment style, and core motivations",
+      "Your intelligence type suggests natural areas of interest and talent development",
+      "Attachment patterns influence themes around relationships, trust, and emotional expression",
+      "Identity patterns reveal recurring questions about purpose, meaning, and authentic living",
+      "Inner drivers create themes around achievement, contribution, and personal fulfillment",
+      "Understanding these themes helps identify life patterns and make conscious choices",
+      "Each assessment reveals different aspects of your journey toward self-actualization",
+      "Integration of all themes leads to greater coherence and purposeful living"
+    ];
+  };
+
+  const generateSingleJourneyMotivations = (identityResult: any, driverResult: any): string[] => {
+    return [
+      "Unconscious motivations stem from deep identity needs and core driving forces",
+      "Your identity pattern represents fundamental needs for self-expression and meaning",
+      "Inner drivers reflect unconscious desires for specific types of achievement and contribution",
+      "These motivations often influence major life choices without conscious awareness",
+      "Understanding unconscious patterns increases freedom and authentic decision-making",
+      "Some motivations align with conscious goals, while others may create internal conflict",
+      "Working with unconscious motivations requires honest self-reflection and sometimes professional support",
+      "Integration involves bringing unconscious drives into conscious alignment with values"
+    ];
+  };
+
+  const generateSingleJourneyStrengths = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    const strengths = [];
+    
+    if (intelligenceResult) strengths.push(`Natural ${intelligenceResult.dominantIntelligence} intelligence abilities`);
+    if (attachmentResult?.dominantStyle === 'secure') strengths.push("Healthy relationship patterns and emotional regulation");
+    if (identityResult) strengths.push(`Strong ${identityResult.dominantIdentity} identity alignment`);
+    if (driverResult) strengths.push(`Clear ${driverResult.dominantDriver} motivation and drive`);
+    
+    return strengths.length > 0 ? strengths : ["Completion of comprehensive personality assessment"];
+  };
+
+  const generateSingleJourneyGrowthAreas = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    const growthAreas = [];
+    
+    if (attachmentResult?.dominantStyle !== 'secure') growthAreas.push("Developing more secure attachment patterns");
+    if (intelligenceResult) growthAreas.push("Expanding beyond dominant intelligence type");
+    if (identityResult) growthAreas.push("Integrating shadow aspects of identity");
+    if (driverResult) growthAreas.push("Balancing inner drives with rest and reflection");
+    
+    return growthAreas.length > 0 ? growthAreas : ["Maintaining current psychological health"];
+  };
+
+  const generateSingleJourneyActionPlan = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Practice activities that strengthen your dominant intelligence type",
+      "Work on developing secure attachment patterns in relationships",
+      "Align daily choices with your core identity values",
+      "Create sustainable systems that honor your inner drivers",
+      "Engage in regular self-reflection and journaling"
+    ];
+  };
+
+  const generateSingleJourneyNextSteps = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Explore career opportunities that align with your intelligence type",
+      "Practice secure attachment behaviors in current relationships",
+      "Make life choices that reflect your authentic identity",
+      "Create goals that energize rather than drain you",
+      "Consider working with a coach or therapist for deeper integration"
+    ];
+  };
+
+  const generateSingleJourneyCorePersonality = (intelligenceResult: any, identityResult: any): string[] => {
+    const core = [
+      "Your core personality combines unique intelligence patterns with authentic identity expression",
+      "The foundation includes natural cognitive strengths and deep values alignment",
+      "Your personality structure supports both personal mastery and meaningful contribution",
+      "Integration involves honoring both intellectual gifts and identity authenticity"
+    ];
+
+    if (intelligenceResult?.dominantIntelligence) {
+      core.push(`Your ${intelligenceResult.dominantIntelligence} intelligence shapes how you engage with the world`);
+    }
+
+    return core;
+  };
+
+  const generateSingleJourneyRelationshipStyle = (attachmentResult: any, identityResult: any): string[] => {
+    const style = [
+      "Your relational style combines attachment patterns with identity authenticity",
+      "Relationships provide opportunities for both security and self-expression",
+      "Healthy connections support your personal growth and identity development",
+      "Understanding your patterns helps create more satisfying relationships"
+    ];
+
+    if (attachmentResult?.dominantStyle === 'secure') {
+      style.push("Your secure attachment supports healthy, balanced relationships");
+    } else if (attachmentResult?.dominantStyle === 'anxious') {
+      style.push("Your anxious attachment suggests need for reassurance and security building");
+    } else if (attachmentResult?.dominantStyle === 'avoidant') {
+      style.push("Your avoidant attachment indicates growth opportunity in emotional intimacy");
+    }
+
+    return style;
+  };
+
+  const generateSingleJourneyLifeChallenges = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Life challenges often involve balancing multiple intelligence types and inner drives",
+      "Attachment patterns can create difficulties in relationship formation and maintenance",
+      "Identity questions may arise during major life transitions and career decisions",
+      "Inner drivers can lead to overwork or burnout if not properly balanced",
+      "Integration challenges involve aligning all aspects of personality coherently",
+      "Growth requires moving beyond comfort zones while honoring authentic self"
+    ];
+  };
+
+  const generateSingleJourneySpiritualJourney = (identityResult: any, driverResult: any): string[] => {
+    return [
+      "Spiritual development involves alignment between identity, purpose, and inner drivers",
+      "Your identity pattern suggests specific pathways for meaning and transcendence",
+      "Inner drivers can either support or hinder spiritual growth depending on balance",
+      "Spiritual practices should honor your authentic nature while encouraging growth",
+      "Integration involves connecting personal development with larger purpose and meaning"
+    ];
+  };
+
+  const generateSingleJourneyCareerGuidance = (intelligenceResult: any, driverResult: any): string[] => {
+    const guidance = [
+      "Career fulfillment comes from aligning work with natural intelligence strengths",
+      "Your inner drivers indicate what types of work will be most energizing",
+      "Consider roles that utilize your dominant intelligence type",
+      "Sustainable career growth requires honoring your authentic motivations"
+    ];
+
+    if (intelligenceResult?.dominantIntelligence) {
+      guidance.push(`${intelligenceResult.dominantIntelligence} intelligence suggests specific career applications`);
+    }
+
+    return guidance;
+  };
+
+  const generateSingleJourneyHealingPriorities = (attachmentResult: any, identityResult: any): string[] => {
+    const priorities = [
+      "Healing involves integrating all aspects of personality into coherent wholeness",
+      "Identity work may require healing limiting beliefs about self-worth and capability",
+      "Attachment healing supports more secure and satisfying relationships"
+    ];
+
+    if (attachmentResult?.dominantStyle !== 'secure') {
+      priorities.push("Priority focus on developing attachment security and emotional regulation");
+    }
+
+    return priorities;
+  };
+
+  const generateSingleJourneyDailyPractices = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Daily activities that engage your dominant intelligence type",
+      "Regular self-reflection and identity alignment check-ins",
+      "Attachment security practices like mindfulness and self-compassion",
+      "Energy management based on your inner driver patterns",
+      "Journaling to track patterns and growth",
+      "Physical exercise that supports your specific needs",
+      "Creative expression aligned with your intelligence type"
+    ];
+  };
+
+  const generateSingleJourneyTherapeuticRecommendations = (attachmentResult: any, identityResult: any): string[] => {
+    const recommendations = [
+      "Consider therapy modalities that address both identity and attachment patterns",
+      "Cognitive-behavioral therapy for pattern recognition and change",
+      "Mindfulness-based approaches for present-moment awareness"
+    ];
+
+    if (attachmentResult?.dominantStyle !== 'secure') {
+      recommendations.push("Attachment-focused therapy for developing secure relationship patterns");
+    }
+
+    return recommendations;
+  };
+
+  const generateSingleJourneyBookRecommendations = (intelligenceResult: any, identityResult: any): string[] => {
+    return [
+      "Multiple Intelligences by Howard Gardner",
+      "Attached by Amir Levine and Rachel Heller",
+      "The Gifts of Imperfection by Brené Brown",
+      "Drive by Daniel H. Pink",
+      "Mindset by Carol Dweck",
+      "The Power of Now by Eckhart Tolle",
+      "Emotional Intelligence by Daniel Goleman"
+    ];
+  };
+
+  const generateSingleJourneyJournalingPrompts = (identityResult: any, driverResult: any): string[] => {
+    return [
+      "What activities make me feel most alive and authentic?",
+      "How do my relationships reflect my attachment patterns?",
+      "What values are most important to me, and how do I live them?",
+      "What motivates me at the deepest level?",
+      "How can I use my natural intelligence in service of others?",
+      "What patterns do I notice in my emotional responses?",
+      "How do I want to grow and develop over the next year?"
+    ];
+  };
+
+  const generateSingleJourneyMeditationPractices = (identityResult: any, driverResult: any): string[] => {
+    return [
+      "Mindfulness meditation for present-moment awareness",
+      "Loving-kindness meditation for attachment healing",
+      "Body scan meditation for emotional regulation",
+      "Walking meditation for grounding and clarity",
+      "Breath awareness for anxiety and stress management",
+      "Visualization practices for goal manifestation",
+      "Self-compassion meditation for inner critic work"
+    ];
+  };
+
+  const generateSingleJourneyRelationshipExercises = (attachmentResult: any, identityResult: any): string[] => {
+    return [
+      "Practice expressing needs and boundaries clearly",
+      "Regular emotional check-ins with close relationships",
+      "Active listening and empathy building exercises",
+      "Trust-building activities and vulnerability practice",
+      "Conflict resolution and communication skills development",
+      "Self-soothing techniques for relationship anxiety",
+      "Appreciation and gratitude expression practices"
+    ];
+  };
+
+  const generateComprehensiveProfile = (results: TestResult[], journeyType: string = 'relationship'): ComprehensiveProfile => {
+    if (journeyType === 'relationship') {
+      // Relationship journey logic
+      const shadowResult = results.find(r => r.testId === 'shadow-test')?.result;
+      const toxicityResult = results.find(r => r.testId === 'toxicity-compass')?.result;
+      const relationshipResult = results.find(r => r.testId === 'relationship-patterns')?.result;
+      const integrationResult = results.find(r => r.testId === 'integration-guide')?.result;
+
+      // Calculate overall score based on test results
+      let overallScore = 0;
+      if (shadowResult) overallScore += 25;
+      if (toxicityResult) {
+        if (toxicityResult.zone === 'green') overallScore += 30;
+        else if (toxicityResult.zone === 'yellow') overallScore += 20;
+        else overallScore += 10;
+      }
+      if (relationshipResult) overallScore += 25;
+      if (integrationResult) overallScore += 20;
+
+      const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
+      let totalPoints = 0;
+      if (progress.shadowTest) totalPoints += 250;
+      if (progress.toxicityCompass) totalPoints += 200;
+      if (progress.relationshipPatterns) totalPoints += 300;
+      if (progress.integrationGuide) totalPoints += 350;
+
+      // Calculate comprehensive metrics
+      const psychologicalMaturity = calculatePsychologicalMaturity(shadowResult, toxicityResult, relationshipResult, integrationResult);
+      const emotionalIntelligence = calculateEmotionalIntelligence(shadowResult, toxicityResult, relationshipResult, integrationResult);
+      const relationshipHealth = calculateRelationshipHealth(toxicityResult, relationshipResult);
+      const personalGrowthPotential = calculateGrowthPotential(shadowResult, integrationResult);
+
+      return {
+        dominantArchetype: shadowResult?.archetype || "Unknown",
+        archetypeDescription: getArchetypeDescription(shadowResult?.archetype),
+        toxicityLevel: toxicityResult?.zone || "Unknown",
+        toxicityScore: toxicityResult?.percentage || 0,
+        relationshipPattern: relationshipResult?.dominantPattern || "Unknown",
+        integrationLevel: integrationResult?.integrationLevel || "Unknown",
+        overallScore,
+        detailedAnalysis: {
+          shadowWork: generateShadowAnalysis(shadowResult),
+          emotionalHealth: generateEmotionalAnalysis(toxicityResult),
+          relationshipDynamics: generateRelationshipAnalysis(relationshipResult),
+          personalGrowth: generateGrowthAnalysis(integrationResult),
+          psychologicalInsights: generatePsychologicalInsights(shadowResult, toxicityResult, relationshipResult, integrationResult),
+          behavioralPatterns: generateBehavioralPatterns(shadowResult, relationshipResult),
+          lifeThemes: generateLifeThemes(shadowResult, toxicityResult, relationshipResult, integrationResult),
+          unconsciousMotivations: generateUnconsciousMotivations(shadowResult, relationshipResult)
+        },
+        strengths: generateStrengths(shadowResult, toxicityResult, relationshipResult, integrationResult),
+        growthAreas: generateGrowthAreas(shadowResult, toxicityResult, relationshipResult, integrationResult),
+        actionPlan: generateActionPlan(shadowResult, toxicityResult, relationshipResult, integrationResult),
+        nextSteps: generateNextSteps(shadowResult, toxicityResult, relationshipResult, integrationResult),
+        comprehensiveInterpretation: {
+          corePersonality: generateCorePersonality(shadowResult, relationshipResult),
+          relationshipStyle: generateRelationshipStyle(toxicityResult, relationshipResult),
+          lifeChallenges: generateLifeChallenges(shadowResult, toxicityResult, relationshipResult),
+          spiritualJourney: generateSpiritualJourney(shadowResult, integrationResult),
+          careerGuidance: generateCareerGuidance(shadowResult, relationshipResult),
+          healingPriorities: generateHealingPriorities(toxicityResult, integrationResult)
+        },
+        integrationGuidance: {
+          dailyPractices: generateDailyPractices(shadowResult, toxicityResult, integrationResult),
+          therapeuticRecommendations: generateTherapeuticRecommendations(toxicityResult, relationshipResult),
+          bookRecommendations: generateBookRecommendations(shadowResult, integrationResult),
+          journalingPrompts: generateJournalingPrompts(shadowResult, relationshipResult),
+          meditationPractices: generateMeditationPractices(shadowResult, integrationResult),
+          relationshipExercises: generateRelationshipExercises(toxicityResult, relationshipResult)
+        },
+        completionDate: new Date().toLocaleDateString(),
+        totalPoints,
+        psychologicalMaturity,
+        emotionalIntelligence,
+        relationshipHealth,
+        personalGrowthPotential
+      };
+    } else {
+      // Single journey logic
+      const intelligenceResult = results.find(r => r.testId === 'intelligence-map')?.result;
+      const attachmentResult = results.find(r => r.testId === 'attachment-style')?.result;
+      const identityResult = results.find(r => r.testId === 'identity-compass')?.result;
+      const driverResult = results.find(r => r.testId === 'inner-driver')?.result;
+
+      // Calculate overall score based on test results
+      let overallScore = 0;
+      if (intelligenceResult) overallScore += 25;
+      if (attachmentResult) overallScore += 25;
+      if (identityResult) overallScore += 25;
+      if (driverResult) overallScore += 25;
+
+      const progress = JSON.parse(localStorage.getItem('psychTestProgress') || '{}');
+      let totalPoints = 0;
+      if (progress.intelligenceMap) totalPoints += 250;
+      if (progress.attachmentStyle) totalPoints += 250;
+      if (progress.identityCompass) totalPoints += 250;
+      if (progress.innerDriver) totalPoints += 250;
+
+      // Calculate comprehensive metrics for single journey
+      const psychologicalMaturity = calculateSingleJourneyMaturity(intelligenceResult, attachmentResult, identityResult, driverResult);
+      const emotionalIntelligence = calculateSingleJourneyEI(intelligenceResult, attachmentResult, identityResult, driverResult);
+      const relationshipHealth = calculateSingleJourneyRelationships(attachmentResult, identityResult);
+      const personalGrowthPotential = calculateSingleJourneyGrowth(identityResult, driverResult);
+
+      return {
+        dominantArchetype: intelligenceResult?.dominantIntelligence || "Unknown Intelligence Type",
+        archetypeDescription: getSingleJourneyDescription(intelligenceResult, identityResult),
+        toxicityLevel: getAttachmentHealthLevel(attachmentResult),
+        toxicityScore: getAttachmentHealthScore(attachmentResult),
+        relationshipPattern: attachmentResult?.dominantStyle || "Unknown",
+        integrationLevel: identityResult?.dominantIdentity || "Unknown",
+        overallScore,
+        detailedAnalysis: {
+          shadowWork: generateIntelligenceAnalysis(intelligenceResult),
+          emotionalHealth: generateAttachmentAnalysis(attachmentResult),
+          relationshipDynamics: generateIdentityAnalysis(identityResult),
+          personalGrowth: generateDriverAnalysis(driverResult),
+          psychologicalInsights: generateSingleJourneyInsights(intelligenceResult, attachmentResult, identityResult, driverResult),
+          behavioralPatterns: generateSingleJourneyPatterns(intelligenceResult, attachmentResult, identityResult, driverResult),
+          lifeThemes: generateSingleJourneyThemes(intelligenceResult, attachmentResult, identityResult, driverResult),
+          unconsciousMotivations: generateSingleJourneyMotivations(identityResult, driverResult)
+        },
+        strengths: generateSingleJourneyStrengths(intelligenceResult, attachmentResult, identityResult, driverResult),
+        growthAreas: generateSingleJourneyGrowthAreas(intelligenceResult, attachmentResult, identityResult, driverResult),
+        actionPlan: generateSingleJourneyActionPlan(intelligenceResult, attachmentResult, identityResult, driverResult),
+        nextSteps: generateSingleJourneyNextSteps(intelligenceResult, attachmentResult, identityResult, driverResult),
+        comprehensiveInterpretation: {
+          corePersonality: generateSingleJourneyCorePersonality(intelligenceResult, identityResult),
+          relationshipStyle: generateSingleJourneyRelationshipStyle(attachmentResult, identityResult),
+          lifeChallenges: generateSingleJourneyLifeChallenges(intelligenceResult, attachmentResult, identityResult, driverResult),
+          spiritualJourney: generateSingleJourneySpiritualJourney(identityResult, driverResult),
+          careerGuidance: generateSingleJourneyCareerGuidance(intelligenceResult, driverResult),
+          healingPriorities: generateSingleJourneyHealingPriorities(attachmentResult, identityResult)
+        },
+        integrationGuidance: {
+          dailyPractices: generateSingleJourneyDailyPractices(intelligenceResult, attachmentResult, identityResult, driverResult),
+          therapeuticRecommendations: generateSingleJourneyTherapeuticRecommendations(attachmentResult, identityResult),
+          bookRecommendations: generateSingleJourneyBookRecommendations(intelligenceResult, identityResult),
+          journalingPrompts: generateSingleJourneyJournalingPrompts(identityResult, driverResult),
+          meditationPractices: generateSingleJourneyMeditationPractices(identityResult, driverResult),
+          relationshipExercises: generateSingleJourneyRelationshipExercises(attachmentResult, identityResult)
+        },
+        completionDate: new Date().toLocaleDateString(),
+        totalPoints,
+        psychologicalMaturity,
+        emotionalIntelligence,
+        relationshipHealth,
+        personalGrowthPotential
+      };
+    }
+  };
+
+  // Single Journey Calculation Functions
+  const calculateSingleJourneyMaturity = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): number => {
+    let score = 50 + Math.floor(Math.random() * 10); // Base: 50-59
+    
+    if (intelligenceResult) score += 10 + Math.floor(Math.random() * 8); // +10-17
+    if (attachmentResult?.dominantStyle === 'secure') score += 15 + Math.floor(Math.random() * 7); // +15-21
+    else if (attachmentResult?.dominantStyle === 'anxious') score += 8 + Math.floor(Math.random() * 5); // +8-12
+    else if (attachmentResult?.dominantStyle === 'avoidant') score += 6 + Math.floor(Math.random() * 5); // +6-10
+    
+    if (identityResult) score += 12 + Math.floor(Math.random() * 8); // +12-19
+    if (driverResult) score += 8 + Math.floor(Math.random() * 6); // +8-13
+    
+    return Math.min(Math.max(score, 55), 95);
+  };
+
+  const calculateSingleJourneyEI = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): number => {
+    let score = 45 + Math.floor(Math.random() * 10); // Base: 45-54
+    
+    if (intelligenceResult?.dominantIntelligence === 'emotional') score += 20 + Math.floor(Math.random() * 8); // +20-27
+    else if (intelligenceResult?.dominantIntelligence === 'interpersonal') score += 15 + Math.floor(Math.random() * 8); // +15-22
+    else score += 8 + Math.floor(Math.random() * 6); // +8-13
+    
+    if (attachmentResult?.dominantStyle === 'secure') score += 15 + Math.floor(Math.random() * 7); // +15-21
+    if (identityResult) score += 10 + Math.floor(Math.random() * 6); // +10-15
+    if (driverResult) score += 8 + Math.floor(Math.random() * 5); // +8-12
+    
+    return Math.min(Math.max(score, 52), 93);
+  };
+
+  const calculateSingleJourneyRelationships = (attachmentResult: any, identityResult: any): number => {
+    let score = 40 + Math.floor(Math.random() * 12); // Base: 40-51
+    
+    if (attachmentResult?.dominantStyle === 'secure') score += 25 + Math.floor(Math.random() * 10); // +25-34
+    else if (attachmentResult?.dominantStyle === 'anxious') score += 12 + Math.floor(Math.random() * 8); // +12-19
+    else if (attachmentResult?.dominantStyle === 'avoidant') score += 8 + Math.floor(Math.random() * 6); // +8-13
+    
+    if (identityResult) score += 15 + Math.floor(Math.random() * 8); // +15-22
+    
+    return Math.min(Math.max(score, 48), 90);
+  };
+
+  const calculateSingleJourneyGrowth = (identityResult: any, driverResult: any): number => {
+    let score = 60 + Math.floor(Math.random() * 10); // Base: 60-69
+    
+    if (identityResult) score += 15 + Math.floor(Math.random() * 8); // +15-22
+    if (driverResult) score += 12 + Math.floor(Math.random() * 7); // +12-18
+    
+    return Math.min(Math.max(score, 65), 92);
+  };
+
+  const getSingleJourneyDescription = (intelligenceResult: any, identityResult: any): string => {
+    const intelligence = intelligenceResult?.dominantIntelligence || "Unknown";
+    const identity = identityResult?.dominantIdentity || "Unknown";
+    
+    return `Your dominant intelligence type is ${intelligence}, combined with a ${identity} identity pattern, creating a unique psychological profile focused on personal mastery and self-understanding.`;
+  };
+
+  const getAttachmentHealthLevel = (attachmentResult: any): string => {
+    if (!attachmentResult) return "unknown";
+    
+    const style = attachmentResult.dominantStyle?.toLowerCase();
+    if (style === 'secure') return "green";
+    if (style === 'anxious' || style === 'avoidant') return "yellow";
+    return "red";
+  };
+
+  const getAttachmentHealthScore = (attachmentResult: any): number => {
+    if (!attachmentResult) return 50;
+    
+    const style = attachmentResult.dominantStyle?.toLowerCase();
+    if (style === 'secure') return 15 + Math.floor(Math.random() * 10); // 15-24
+    if (style === 'anxious') return 35 + Math.floor(Math.random() * 15); // 35-49
+    if (style === 'avoidant') return 40 + Math.floor(Math.random() * 15); // 40-54
+    return 60 + Math.floor(Math.random() * 20); // 60-79
+  };
+
+  // Single Journey Analysis Functions
+  const generateIntelligenceAnalysis = (intelligenceResult: any): string[] => {
+    if (!intelligenceResult) return ["Intelligence mapping assessment not completed"];
+    
+    const intelligence = intelligenceResult.dominantIntelligence;
+    return [
+      `Your dominant intelligence type reveals core cognitive strengths and processing preferences`,
+      `${intelligence} intelligence indicates specific ways you learn, problem-solve, and understand the world`,
+      `Understanding your intelligence profile helps optimize learning and career choices`,
+      `Each intelligence type has unique gifts and applications in personal and professional life`
+    ];
+  };
+
+  const generateAttachmentAnalysis = (attachmentResult: any): string[] => {
+    if (!attachmentResult) return ["Attachment style assessment not completed"];
+    
+    const style = attachmentResult.dominantStyle;
+    const styleAnalysis: Record<string, string[]> = {
+      'secure': [
+        "You demonstrate healthy attachment patterns with balanced independence and intimacy",
+        "Your relationships are characterized by trust, effective communication, and emotional regulation",
+        "You have a positive view of yourself and others, creating stable relationship dynamics",
+        "Continue nurturing these healthy attachment patterns in all relationships"
+      ],
+      'anxious': [
+        "You may experience heightened sensitivity to relationship changes and partner availability",
+        "Your attachment style involves deep care for others but sometimes with self-doubt",
+        "Working on self-soothing and communication can enhance relationship satisfaction",
+        "Building self-confidence and secure base behaviors supports attachment security"
+      ],
+      'avoidant': [
+        "You value independence and may prefer emotional distance in relationships",
+        "Your attachment style prioritizes self-reliance and may struggle with vulnerability",
+        "Gradually building comfort with emotional intimacy can enrich relationships",
+        "Learning to express needs and emotions safely supports deeper connections"
+      ],
+      'disorganized': [
+        "Your attachment patterns may fluctuate between different styles depending on the situation",
+        "This style often develops from inconsistent early relationships or trauma",
+        "Professional support can be valuable in developing more consistent attachment security",
+        "Healing work focuses on building internal safety and predictable relationship patterns"
+      ]
+    };
+    
+    return styleAnalysis[style.toLowerCase()] || ["Attachment style assessment needs review"];
+  };
+
+  const generateIdentityAnalysis = (identityResult: any): string[] => {
+    if (!identityResult) return ["Identity compass assessment not completed"];
+    
+    const identity = identityResult.dominantIdentity;
+    return [
+      `Your ${identity} identity represents core values and life direction`,
+      `Identity patterns influence major life decisions, career choices, and relationship preferences`,
+      `Understanding your identity compass helps align actions with authentic self-expression`,
+      `Your identity type suggests specific paths for meaningful contribution and fulfillment`
+    ];
+  };
+
+  const generateDriverAnalysis = (driverResult: any): string[] => {
+    if (!driverResult) return ["Inner driver assessment not completed"];
+    
+    const driver = driverResult.dominantDriver;
+    return [
+      `Your dominant inner driver reveals core motivational forces and energy patterns`,
+      `${driver} driver influences how you approach goals, handle challenges, and find satisfaction`,
+      `Understanding your inner drivers helps optimize motivation and prevent burnout`,
+      `Working with your natural drivers creates sustainable success and fulfillment`
+    ];
+  };
+
+  const generateSingleJourneyInsights = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Your personality combines multiple intelligence types with specific attachment patterns and core drivers",
+      "Intelligence type influences how you process information and approach learning opportunities",
+      "Attachment style shapes your relationship patterns and emotional regulation strategies",
+      "Identity compass reveals your authentic self-expression and core values alignment",
+      "Inner drivers show what truly motivates and energizes you in life and work",
+      "The combination of these elements creates your unique psychological signature",
+      "Personal mastery involves integrating all aspects of your personality into coherent self-understanding",
+      "Your profile reveals both natural strengths and areas for continued development"
+    ];
+  };
+
+  const generateSingleJourneyPatterns = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Behavioral patterns reflect the intersection of your intelligence type, attachment style, and core drivers",
+      "Your dominant intelligence influences how you approach problems and make decisions",
+      "Attachment patterns show up in how you form and maintain relationships across all life areas",
+      "Identity patterns guide your choices about career, lifestyle, and personal values",
+      "Inner drivers create consistent motivation patterns that can be recognized and optimized",
+      "Understanding these patterns increases self-awareness and intentional life design",
+      "Some patterns serve you well, while others may need conscious adjustment",
+      "Personal growth involves strengthening helpful patterns while transforming limiting ones"
+    ];
+  };
+
+  const generateSingleJourneyThemes = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Life themes emerge from the interplay of your intelligence type, attachment style, and core motivations",
+      "Your intelligence type suggests natural areas of interest and talent development",
+      "Attachment patterns influence themes around relationships, trust, and emotional expression",
+      "Identity patterns reveal recurring questions about purpose, meaning, and authentic living",
+      "Inner drivers create themes around achievement, contribution, and personal fulfillment",
+      "Understanding these themes helps identify life patterns and make conscious choices",
+      "Each assessment reveals different aspects of your journey toward self-actualization",
+      "Integration of all themes leads to greater coherence and purposeful living"
+    ];
+  };
+
+  const generateSingleJourneyMotivations = (identityResult: any, driverResult: any): string[] => {
+    return [
+      "Unconscious motivations stem from deep identity needs and core driving forces",
+      "Your identity pattern represents fundamental needs for self-expression and meaning",
+      "Inner drivers reflect unconscious desires for specific types of achievement and contribution",
+      "These motivations often influence major life choices without conscious awareness",
+      "Understanding unconscious patterns increases freedom and authentic decision-making",
+      "Some motivations align with conscious goals, while others may create internal conflict",
+      "Working with unconscious motivations requires honest self-reflection and sometimes professional support",
+      "Integration involves bringing unconscious drives into conscious alignment with values"
+    ];
+  };
+
+  const generateSingleJourneyStrengths = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    const strengths = [];
+    
+    if (intelligenceResult) strengths.push(`Natural ${intelligenceResult.dominantIntelligence} intelligence abilities`);
+    if (attachmentResult?.dominantStyle === 'secure') strengths.push("Healthy relationship patterns and emotional regulation");
+    if (identityResult) strengths.push(`Strong ${identityResult.dominantIdentity} identity alignment`);
+    if (driverResult) strengths.push(`Clear ${driverResult.dominantDriver} motivation and drive`);
+    
+    return strengths.length > 0 ? strengths : ["Completion of comprehensive personality assessment"];
+  };
+
+  const generateSingleJourneyGrowthAreas = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    const growthAreas = [];
+    
+    if (attachmentResult?.dominantStyle !== 'secure') growthAreas.push("Developing more secure attachment patterns");
+    if (intelligenceResult) growthAreas.push("Expanding beyond dominant intelligence type");
+    if (identityResult) growthAreas.push("Integrating shadow aspects of identity");
+    if (driverResult) growthAreas.push("Balancing inner drives with rest and reflection");
+    
+    return growthAreas.length > 0 ? growthAreas : ["Maintaining current psychological health"];
+  };
+
+  const generateSingleJourneyActionPlan = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Practice activities that strengthen your dominant intelligence type",
+      "Work on developing secure attachment patterns in relationships",
+      "Align daily choices with your core identity values",
+      "Create sustainable systems that honor your inner drivers",
+      "Engage in regular self-reflection and journaling"
+    ];
+  };
+
+  const generateSingleJourneyNextSteps = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Explore career opportunities that align with your intelligence type",
+      "Practice secure attachment behaviors in current relationships",
+      "Make life choices that reflect your authentic identity",
+      "Create goals that energize rather than drain you",
+      "Consider working with a coach or therapist for deeper integration"
+    ];
+  };
+
+  const generateSingleJourneyCorePersonality = (intelligenceResult: any, identityResult: any): string[] => {
+    const core = [
+      "Your core personality combines unique intelligence patterns with authentic identity expression",
+      "The foundation includes natural cognitive strengths and deep values alignment",
+      "Your personality structure supports both personal mastery and meaningful contribution",
+      "Integration involves honoring both intellectual gifts and identity authenticity"
+    ];
+
+    if (intelligenceResult?.dominantIntelligence) {
+      core.push(`Your ${intelligenceResult.dominantIntelligence} intelligence shapes how you engage with the world`);
+    }
+
+    return core;
+  };
+
+  const generateSingleJourneyRelationshipStyle = (attachmentResult: any, identityResult: any): string[] => {
+    const style = [
+      "Your relational style combines attachment patterns with identity authenticity",
+      "Relationships provide opportunities for both security and self-expression",
+      "Healthy connections support your personal growth and identity development",
+      "Understanding your patterns helps create more satisfying relationships"
+    ];
+
+    if (attachmentResult?.dominantStyle === 'secure') {
+      style.push("Your secure attachment supports healthy, balanced relationships");
+    } else if (attachmentResult?.dominantStyle === 'anxious') {
+      style.push("Your anxious attachment suggests need for reassurance and security building");
+    } else if (attachmentResult?.dominantStyle === 'avoidant') {
+      style.push("Your avoidant attachment indicates growth opportunity in emotional intimacy");
+    }
+
+    return style;
+  };
+
+  const generateSingleJourneyLifeChallenges = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Life challenges often involve balancing multiple intelligence types and inner drives",
+      "Attachment patterns can create difficulties in relationship formation and maintenance",
+      "Identity questions may arise during major life transitions and career decisions",
+      "Inner drivers can lead to overwork or burnout if not properly balanced",
+      "Integration challenges involve aligning all aspects of personality coherently",
+      "Growth requires moving beyond comfort zones while honoring authentic self"
+    ];
+  };
+
+  const generateSingleJourneySpiritualJourney = (identityResult: any, driverResult: any): string[] => {
+    return [
+      "Spiritual development involves alignment between identity, purpose, and inner drivers",
+      "Your identity pattern suggests specific pathways for meaning and transcendence",
+      "Inner drivers can either support or hinder spiritual growth depending on balance",
+      "Spiritual practices should honor your authentic nature while encouraging growth",
+      "Integration involves connecting personal development with larger purpose and meaning"
+    ];
+  };
+
+  const generateSingleJourneyCareerGuidance = (intelligenceResult: any, driverResult: any): string[] => {
+    const guidance = [
+      "Career fulfillment comes from aligning work with natural intelligence strengths",
+      "Your inner drivers indicate what types of work will be most energizing",
+      "Consider roles that utilize your dominant intelligence type",
+      "Sustainable career growth requires honoring your authentic motivations"
+    ];
+
+    if (intelligenceResult?.dominantIntelligence) {
+      guidance.push(`${intelligenceResult.dominantIntelligence} intelligence suggests specific career applications`);
+    }
+
+    return guidance;
+  };
+
+  const generateSingleJourneyHealingPriorities = (attachmentResult: any, identityResult: any): string[] => {
+    const priorities = [
+      "Healing involves integrating all aspects of personality into coherent wholeness",
+      "Identity work may require healing limiting beliefs about self-worth and capability",
+      "Attachment healing supports more secure and satisfying relationships"
+    ];
+
+    if (attachmentResult?.dominantStyle !== 'secure') {
+      priorities.push("Priority focus on developing attachment security and emotional regulation");
+    }
+
+    return priorities;
+  };
+
+  const generateSingleJourneyDailyPractices = (intelligenceResult: any, attachmentResult: any, identityResult: any, driverResult: any): string[] => {
+    return [
+      "Daily activities that engage your dominant intelligence type",
+      "Regular self-reflection and identity alignment check-ins",
+      "Attachment security practices like mindfulness and self-compassion",
+      "Energy management based on your inner driver patterns",
+      "Journaling to track patterns and growth",
+      "Physical exercise that supports your specific needs",
+      "Creative expression aligned with your intelligence type"
+    ];
+  };
+
+  const generateSingleJourneyTherapeuticRecommendations = (attachmentResult: any, identityResult: any): string[] => {
+    const recommendations = [
+      "Consider therapy modalities that address both identity and attachment patterns",
+      "Cognitive-behavioral therapy for pattern recognition and change",
+      "Mindfulness-based approaches for present-moment awareness"
+    ];
+
+    if (attachmentResult?.dominantStyle !== 'secure') {
+      recommendations.push("Attachment-focused therapy for developing secure relationship patterns");
+    }
+
+    return recommendations;
+  };
+
+  const generateSingleJourneyBookRecommendations = (intelligenceResult: any, identityResult: any): string[] => {
+    return [
+      "Multiple Intelligences by Howard Gardner",
+      "Attached by Amir Levine and Rachel Heller",
+      "The Gifts of Imperfection by Brené Brown",
+      "Drive by Daniel H. Pink",
+      "Mindset by Carol Dweck",
+      "The Power of Now by Eckhart Tolle",
+      "Emotional Intelligence by Daniel Goleman"
+    ];
+  };
+
+  const generateSingleJourneyJournalingPrompts = (identityResult: any, driverResult: any): string[] => {
+    return [
+      "What activities make me feel most alive and authentic?",
+      "How do my relationships reflect my attachment patterns?",
+      "What values are most important to me, and how do I live them?",
+      "What motivates me at the deepest level?",
+      "How can I use my natural intelligence in service of others?",
+      "What patterns do I notice in my emotional responses?",
+      "How do I want to grow and develop over the next year?"
+    ];
+  };
+
+  const generateSingleJourneyMeditationPractices = (identityResult: any, driverResult: any): string[] => {
+    return [
+      "Mindfulness meditation for present-moment awareness",
+      "Loving-kindness meditation for attachment healing",
+      "Body scan meditation for emotional regulation",
+      "Walking meditation for grounding and clarity",
+      "Breath awareness for anxiety and stress management",
+      "Visualization practices for goal manifestation",
+      "Self-compassion meditation for inner critic work"
+    ];
+  };
+
+  const generateSingleJourneyRelationshipExercises = (attachmentResult: any, identityResult: any): string[] => {
+    return [
+      "Practice expressing needs and boundaries clearly",
+      "Regular emotional check-ins with close relationships",
+      "Active listening and empathy building exercises",
+      "Trust-building activities and vulnerability practice",
+      "Conflict resolution and communication skills development",
+      "Self-soothing techniques for relationship anxiety",
+      "Appreciation and gratitude expression practices"
+    ];
   };
 
   const getArchetypeDescription = (archetype: string): string => {
@@ -748,6 +1621,7 @@ export default function ComprehensiveSummary() {
     try {
       const savedResults = localStorage.getItem('psychTestResults');
       const savedProgress = localStorage.getItem('psychTestProgress');
+      const currentJourneyType = localStorage.getItem('currentJourneyType') || 'single';
       
       if (savedResults && savedProgress) {
         const results: TestResult[] = JSON.parse(savedResults);
@@ -755,12 +1629,19 @@ export default function ComprehensiveSummary() {
         
         // Validate that results array is properly formed
         if (Array.isArray(results) && typeof progress === 'object') {
-          // Only generate profile if all tests are completed
-          const allCompleted = progress.shadowTest && progress.toxicityCompass && 
-                              progress.relationshipPatterns && progress.integrationGuide;
+          let allCompleted = false;
+          
+          // Check completion based on journey type
+          if (currentJourneyType === 'relationship') {
+            allCompleted = progress.shadowTest && progress.toxicityCompass && 
+                          progress.relationshipPatterns && progress.integrationGuide;
+          } else {
+            allCompleted = progress.intelligenceMap && progress.attachmentStyle && 
+                          progress.identityCompass && progress.innerDriver;
+          }
           
           if (allCompleted && results.length >= 4) {
-            const comprehensiveProfile = generateComprehensiveProfile(results);
+            const comprehensiveProfile = generateComprehensiveProfile(results, currentJourneyType);
             setProfile(comprehensiveProfile);
             setTimeout(() => setShowDetails(true), 1000);
           } else {
