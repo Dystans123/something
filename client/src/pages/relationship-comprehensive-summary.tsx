@@ -565,7 +565,7 @@ export default function RelationshipComprehensiveSummary() {
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="text-center space-y-2">
                   <div className="text-3xl font-bold text-[hsl(var(--silver-glow))]">
-                    {profileData.overallWellness}%
+                    {profileData.overallWellness}/100
                   </div>
                   <Progress value={profileData.overallWellness} className="h-2" />
                   <p className="text-sm text-[hsl(var(--metallic-silver))]">Overall Wellness</p>

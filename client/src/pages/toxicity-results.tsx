@@ -185,10 +185,10 @@ export default function ToxicityResults() {
                 transition={{ delay: 1.0, duration: 0.6 }}
               >
                 <div className="text-2xl font-bold text-[hsl(var(--metallic-silver))] mb-2">
-                  {percentage}%
+                  {score}/200
                 </div>
                 <div className="text-sm text-[hsl(var(--silver-glow))]">
-                  Score: {score} / 200
+                  Risk Level: {Math.round(percentage)}%
                 </div>
               </motion.div>
               

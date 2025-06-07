@@ -124,42 +124,75 @@ export default function ComprehensiveSummary() {
 
   // Helper functions for comprehensive analysis
   const calculatePsychologicalMaturity = (shadowResult: any, toxicityResult: any, relationshipResult: any, integrationResult: any): number => {
-    let score = 50;
-    if (shadowResult) score += 20;
-    if (toxicityResult?.zone === 'green') score += 20;
-    if (toxicityResult?.zone === 'yellow') score += 10;
-    if (relationshipResult) score += 15;
-    if (integrationResult?.integrationLevel === 'high') score += 20;
-    if (integrationResult?.integrationLevel === 'medium') score += 10;
-    return Math.min(score, 100);
+    let score = 45 + Math.floor(Math.random() * 10); // Base: 45-54
+    
+    if (shadowResult) {
+      score += 15 + Math.floor(Math.random() * 8); // +15-22
+    }
+    
+    if (toxicityResult?.zone === 'green') score += 18 + Math.floor(Math.random() * 7); // +18-24
+    else if (toxicityResult?.zone === 'yellow') score += 8 + Math.floor(Math.random() * 6); // +8-13
+    else if (toxicityResult?.zone === 'red') score += 2 + Math.floor(Math.random() * 5); // +2-6
+    
+    if (relationshipResult) {
+      score += 10 + Math.floor(Math.random() * 8); // +10-17
+    }
+    
+    if (integrationResult?.integrationLevel === 'high') score += 12 + Math.floor(Math.random() * 6); // +12-17
+    else if (integrationResult?.integrationLevel === 'medium') score += 6 + Math.floor(Math.random() * 5); // +6-10
+    else if (integrationResult?.integrationLevel === 'low') score += 2 + Math.floor(Math.random() * 4); // +2-5
+    
+    return Math.min(Math.max(score, 52), 96); // Range: 52-96
   };
 
   const calculateEmotionalIntelligence = (shadowResult: any, toxicityResult: any, relationshipResult: any, integrationResult: any): number => {
-    let score = 40;
-    if (shadowResult) score += 25;
-    if (toxicityResult?.zone === 'green') score += 25;
-    if (toxicityResult?.zone === 'yellow') score += 15;
-    if (relationshipResult) score += 20;
-    if (integrationResult) score += 15;
-    return Math.min(score, 100);
+    let score = 42 + Math.floor(Math.random() * 8); // Base: 42-49
+    
+    if (shadowResult) {
+      score += 16 + Math.floor(Math.random() * 8); // +16-23
+    }
+    
+    if (toxicityResult?.zone === 'green') score += 20 + Math.floor(Math.random() * 8); // +20-27
+    else if (toxicityResult?.zone === 'yellow') score += 10 + Math.floor(Math.random() * 6); // +10-15
+    else if (toxicityResult?.zone === 'red') score += 3 + Math.floor(Math.random() * 5); // +3-7
+    
+    if (relationshipResult) {
+      score += 12 + Math.floor(Math.random() * 7); // +12-18
+    }
+    
+    if (integrationResult) {
+      score += 8 + Math.floor(Math.random() * 6); // +8-13
+    }
+    
+    return Math.min(Math.max(score, 55), 94); // Range: 55-94
   };
 
   const calculateRelationshipHealth = (toxicityResult: any, relationshipResult: any): number => {
-    let score = 30;
-    if (toxicityResult?.zone === 'green') score += 40;
-    if (toxicityResult?.zone === 'yellow') score += 25;
-    if (toxicityResult?.zone === 'red') score += 10;
-    if (relationshipResult) score += 30;
-    return Math.min(score, 100);
+    let score = 38 + Math.floor(Math.random() * 12); // Base: 38-49
+    
+    if (toxicityResult?.zone === 'green') score += 28 + Math.floor(Math.random() * 10); // +28-37
+    else if (toxicityResult?.zone === 'yellow') score += 15 + Math.floor(Math.random() * 8); // +15-22
+    else if (toxicityResult?.zone === 'red') score += 5 + Math.floor(Math.random() * 8); // +5-12
+    
+    if (relationshipResult) {
+      score += 18 + Math.floor(Math.random() * 10); // +18-27
+    }
+    
+    return Math.min(Math.max(score, 48), 92); // Range: 48-92
   };
 
   const calculateGrowthPotential = (shadowResult: any, integrationResult: any): number => {
-    let score = 60;
-    if (shadowResult) score += 20;
-    if (integrationResult?.integrationLevel === 'high') score += 20;
-    if (integrationResult?.integrationLevel === 'medium') score += 15;
-    if (integrationResult?.integrationLevel === 'low') score += 10;
-    return Math.min(score, 100);
+    let score = 58 + Math.floor(Math.random() * 10); // Base: 58-67
+    
+    if (shadowResult) {
+      score += 12 + Math.floor(Math.random() * 8); // +12-19
+    }
+    
+    if (integrationResult?.integrationLevel === 'high') score += 15 + Math.floor(Math.random() * 6); // +15-20
+    else if (integrationResult?.integrationLevel === 'medium') score += 8 + Math.floor(Math.random() * 6); // +8-13
+    else if (integrationResult?.integrationLevel === 'low') score += 4 + Math.floor(Math.random() * 5); // +4-8
+    
+    return Math.min(Math.max(score, 65), 93); // Range: 65-93
   };
 
   const generatePsychologicalInsights = (shadowResult: any, toxicityResult: any, relationshipResult: any, integrationResult: any): string[] => {
@@ -842,19 +875,19 @@ export default function ComprehensiveSummary() {
             <CardContent className="p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">{profile.psychologicalMaturity}%</div>
+                  <div className="text-3xl font-bold text-purple-400 mb-2">{profile.psychologicalMaturity}/100</div>
                   <div className="text-gray-300">Psychological Maturity</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">{profile.emotionalIntelligence}%</div>
+                  <div className="text-3xl font-bold text-blue-400 mb-2">{profile.emotionalIntelligence}/100</div>
                   <div className="text-gray-300">Emotional Intelligence</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-emerald-400 mb-2">{profile.relationshipHealth}%</div>
+                  <div className="text-3xl font-bold text-emerald-400 mb-2">{profile.relationshipHealth}/100</div>
                   <div className="text-gray-300">Relationship Health</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-yellow-400 mb-2">{profile.personalGrowthPotential}%</div>
+                  <div className="text-3xl font-bold text-yellow-400 mb-2">{profile.personalGrowthPotential}/100</div>
                   <div className="text-gray-300">Growth Potential</div>
                 </div>
               </div>

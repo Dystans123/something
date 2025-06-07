@@ -779,6 +779,19 @@ export default function Landing() {
               </div>
             </div>
 
+            {/* Contact */}
+            <div>
+              <h4 className="font-semibold text-[hsl(var(--silver-glow))] mb-3">Kontakt</h4>
+              <div className="space-y-2">
+                <a 
+                  href="mailto:districteleven.pl@gmail.com"
+                  className="block text-[hsl(var(--metallic-silver))] hover:text-[hsl(var(--silver-glow))] text-sm transition-colors"
+                >
+                  districteleven.pl@gmail.com
+                </a>
+              </div>
+            </div>
+
             {/* Legal Links */}
             <div>
               <h4 className="font-semibold text-[hsl(var(--silver-glow))] mb-3">Legal & Privacy</h4>
